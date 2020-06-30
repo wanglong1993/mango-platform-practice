@@ -4,6 +4,8 @@ import cn.siques.mango.entity.SysUser;
 import cn.siques.mango.entity.SysUserExample;
 import cn.siques.mango.entity.SysUserKey;
 import java.util.List;
+import java.util.Set;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
@@ -196,4 +198,27 @@ public interface SysUserMapper {
 
     @Select({"select * from sys_user"})
     List<SysUser> findAll();
+
+    /**
+     * 分页查询
+     * @return
+     */
+    @Select({"select * from sys_user"})
+    List<SysUser> findPage();
+
+    /**
+     * 查找用户
+     * @param username
+     * @return
+     */
+    @Select({"select * from sys_user where name = #{username}"})
+    SysUser findByName(String username);
+
+    /**
+     * 查找用户权限
+     * @param name
+     * @return
+     */
+    @Select({"select * from sys"})
+    Set<String> findPermission(String name);
 }

@@ -1,5 +1,6 @@
 package cn.siques.mangocore.Page;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,7 +8,7 @@ import java.util.Map;
  * 分页请求
  * @author he
  */
-public class PageRequest {
+public class PageRequest implements Serializable {
     /*
     当前页码
      */
@@ -18,9 +19,19 @@ public class PageRequest {
      */
     private int pageSize=10;
 
+
+    @Override
+    public String toString() {
+        return "PageRequest{" +
+                "pageNum=" + pageNum +
+                ", pageSize=" + pageSize +
+                ", params=" + params +
+                '}';
+    }
+
     /*
-    查询参数
-     */
+        查询参数
+         */
     private Map<String,Object> params = new HashMap<>();
 
     public int getPageNum() {
