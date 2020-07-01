@@ -2,4 +2,13 @@ server:
   port: 8084
 spring:
   application:
-      name: mango-admin
+      name: mango-monitor
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 #配置Nacos地址
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
