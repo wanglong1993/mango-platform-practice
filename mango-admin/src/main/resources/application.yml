@@ -43,6 +43,12 @@ spring:
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       # 合并多个DruidDataSource的监控数据
       useGlobalDataSourceStat: true
+  boot:
+    admin:
+      client:
+        url: "http://localhost:8084"
+  application:
+    name: mango-admin
 #开启控制台打印sql
 mybatis:
   configuration:
@@ -55,4 +61,10 @@ pagehelper:
   support-methods-arguments: true
   params: count=countSql
   helper-dialect: mysql
+# 健康监控
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 #配置扫描

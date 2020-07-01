@@ -32,6 +32,24 @@ public  static  void checkAuthentication(HttpServletRequest request){
     }
 
     /**
+     * 获取当前用户名
+     * @return
+     */
+    public static String getUsername() {
+        String username = null;
+        Authentication authentication = getAuthentication();
+        if(authentication != null) {
+            Object principal = authentication.getPrincipal();
+            System.out.println(principal);
+            if(principal != null ) {
+                username =  principal.toString();
+            }
+        }
+        return username;
+    }
+
+
+    /**
      * 获取用户名
      * @return
      */
@@ -39,8 +57,8 @@ public  static  void checkAuthentication(HttpServletRequest request){
         String username = null;
         if(authentication != null) {
             Object principal = authentication.getPrincipal();
-            if(principal != null && principal instanceof UserDetails) {
-                username = ((UserDetails) principal).getUsername();
+            if(principal != null ) {
+                username =  principal.toString();
             }
         }
         return username;

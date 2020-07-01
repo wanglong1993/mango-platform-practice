@@ -62,6 +62,8 @@ public class SysLoginController {
         if(user.getStatus()==0){
             return JsonData.buildError("账号已锁定，请联系管理员");
         }
+        // 把当前验证码舍弃
+        request.getSession().setAttribute(Constants.KAPTCHA_SESSION_KEY,"");
         // 系统登陆认证
       JwtAuthenticationToken token =  SecurityUtils.login(request,username,password,authenticationManager);
         return JsonData.buildSuccess(token);
@@ -81,6 +83,7 @@ public class SysLoginController {
         //生成验证
         String text = producer.createText();
         BufferedImage image = producer.createImage(text);
+
         // 保存到session 或者redis
         request.getSession().setAttribute(Constants.KAPTCHA_SESSION_KEY,text);
         ServletOutputStream outputStream = response.getOutputStream();

@@ -72,7 +72,7 @@ public class JwtTokenUtils implements Serializable {
                 }
                 authentication = new JwtAuthenticationToken(username,null,authorityList,token);
             }else {
-                if(validateToken(token,SecurityUtils.getUsername(authentication))){
+                if(validateToken(token,SecurityUtils.getUsername())){
                     // 如果上下文中的authentication非空，且令牌合法
                     authentication = SecurityUtils.getAuthentication();
                 }
@@ -136,10 +136,11 @@ public class JwtTokenUtils implements Serializable {
         return username;
     }
 
+
     private static Claims getClaimsFromToken(String token) {
         Claims claims;
         try{
-            claims = Jwts.parser().setSigningKey(SECRET).parseClaimsJwt(token).getBody();
+            claims = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody();
         }catch(Exception e){
            claims =null;
         }
