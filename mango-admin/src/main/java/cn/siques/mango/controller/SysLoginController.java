@@ -12,6 +12,7 @@ import com.google.code.kaptcha.Producer;
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.spring.web.json.Json;
@@ -34,6 +35,13 @@ public class SysLoginController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Value("${server.port}")
+    private String port;
+    @RequestMapping("test")
+    public JsonData test(){
+        return JsonData.buildSuccess(port);
+    }
 
     @PostMapping("/login")
     public JsonData login(@RequestBody LoginDto loginDto,HttpServletRequest request){
@@ -68,6 +76,7 @@ public class SysLoginController {
       JwtAuthenticationToken token =  SecurityUtils.login(request,username,password,authenticationManager);
         return JsonData.buildSuccess(token);
     }
+
 
 
     /**
