@@ -1,0 +1,13 @@
+swagger:
+#  配置扫描swagger包
+  base-package: cn.siques.mango.controller
+spring:
+  application:
+    name: mango-admin
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yml

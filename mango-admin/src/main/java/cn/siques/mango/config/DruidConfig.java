@@ -33,6 +33,7 @@ public class DruidConfig {
        ServletRegistrationBean<Servlet> servletServletRegistrationBean = new ServletRegistrationBean<>(new StatViewServlet(), "/druid/*");
        // 白名单
        servletServletRegistrationBean.addInitParameter("allow","127.0.0.1");
+
        // 黑名单
 //       servletServletRegistrationBean.addInitParameter("deny","");
        servletServletRegistrationBean.addInitParameter("loginUsername","admin");
@@ -53,7 +54,7 @@ public class DruidConfig {
 
         Map<String,String> initParams = new HashMap<String,String>();
         //忽略过滤的形式
-        initParams.put("exclusions", "*.js,*.css,/druid/*");
+        initParams.put("exclusions", "*.js,*.css,/druid/*,/actuator/*");
 
         bean.setInitParameters(initParams);
         //设置过滤器过滤路径

@@ -38,9 +38,10 @@ public class SysLoginController {
 
     @Value("${server.port}")
     private String port;
-    @RequestMapping("test")
+    @GetMapping("test")
     public JsonData test(){
         return JsonData.buildSuccess(port);
+
     }
 
     @PostMapping("/login")

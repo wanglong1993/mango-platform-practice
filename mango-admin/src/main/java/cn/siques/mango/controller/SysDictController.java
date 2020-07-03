@@ -1,5 +1,6 @@
 package cn.siques.mango.controller;
 
+import cn.siques.mango.annotation.MyPreAuthorize;
 import cn.siques.mango.entity.JsonData;
 import cn.siques.mango.entity.SysDict;
 import cn.siques.mango.service.SysDictService;
@@ -29,6 +30,7 @@ public class SysDictController {
      * @return
      */
     @PreAuthorize("hasAuthority('sys:dict:delete')")
+    @MyPreAuthorize("sys:dict:delete")
     @PostMapping("delete")
     public JsonData delete(@RequestBody List<SysDict> records){
         return JsonData.buildSuccess(sysDictService.delete(records));

@@ -5,10 +5,6 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848 #配置Nacos地址
-    sentinel:
-      transport:
-        dashboard: localhost:8849
-        port: 8719  #默认8719，假如被占用了会自动从8719开始依次+1扫描。直至找到未被占用的端口
   datasource:
     name: druidSource
     type: com.alibaba.druid.pool.DruidDataSource
@@ -54,7 +50,7 @@ spring:
   boot:
     admin:
       client:
-        url: "http://localhost:8084"
+        url: "http://localhost:8090"
   application:
     name: mango-admin
 #开启控制台打印sql

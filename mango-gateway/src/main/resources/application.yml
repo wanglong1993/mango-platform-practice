@@ -16,6 +16,31 @@ spring:
             - Path=/consumer/api/sys/v1/pub/**    #断言，路径相匹配进行路由
           filters:
             - StripPrefix=1
+            - AddRequestHeader=X-Request-Id, heshenghao #过滤器工厂会在匹配的请求头上加上一对请求头,名称为X-Request-Id值为heshenghao
+        - id: ${siques.service.siques-admin}
+          uri: lb://${siques.service.siques-admin}
+          predicates:
+            - Path=/${siques.service.siques-admin}/**
+          filters:
+            - StripPrefix=1
     nacos:
       discovery:
         server-addr: localhost:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8849 # sentinel面板的启动端口
+        port: 8719  #默认8719，假如被占用了会自动从8719开始依次+1扫描。直至找到未被占用的端口
+      datasource: #添加Nacos数据源配置
+        flow:
+          nacos:
+            server-addr: localhost:8848  # sentinel面板端口
+            dataId: ${spring.application.name}-flow-rules
+            groupId: SENTINEL_GROUP  # nacos配置组
+            # 规则类型，取值见：
+            # org.springframework.cloud.alibaba.sentinel.datasource.RuleType
+            data-type: json
+            rule-type: flow
+# 需要配置的微服务名字
+siques:
+  service:
+    siques-admin: mango-admin

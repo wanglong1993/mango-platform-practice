@@ -1,23 +1,43 @@
 package cn.siques.mango.config.security;
 
+import cn.siques.mangocommon.constant.SecretConstants;
+
+import cn.siques.mangocore.exception.CusException;
+import cn.siques.mangocore.utils.RenderJson;
+import com.sun.deploy.net.HttpResponse;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 
 public class SecurityUtils {
+
 /**
  * 获取登陆令牌进行认证
  */
-public  static  void checkAuthentication(HttpServletRequest request){
+public  static  void checkAuthentication(HttpServletRequest request, HttpServletResponse response){
+    // 检验是否为网关调用服务
+//    String header = request.getHeader("X-Request-Id");
+//    System.out.println(header);
+//    if(SecretConstants.REQUESTHEAD !=header){
+//        throw new BadCredentialsException("未知错误");
+//    }
+
+
     // 获取令牌并获得登陆信息
     Authentication authentication = JwtTokenUtils.getAuthenticationFromToken(request);
     // 将登陆信息设置到上下文
+    // 所有接口都会调用这个过滤器，所以没有信息的时候就为空
     SecurityContextHolder.getContext().setAuthentication(authentication);
 }
+
+
 
     /**
      * 获取当前登录信息

@@ -14,27 +14,27 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
-
-@Configuration
-@EnableSwagger2
-public class SwaggerConfig {
-
-    @Bean
-    public Docket createRestApi(){
-        // 添加请求参数，把token作为请求头部
-        ParameterBuilder parameterBuilder = new ParameterBuilder();
-        ArrayList<Parameter> parameters = new ArrayList<>();
-        parameterBuilder.name("token").description("令牌")
-                .modelRef(new ModelRef("String")).parameterType("header").required(false).build();
-        parameters.add(parameterBuilder.build());
-
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.any()).build().globalOperationParameters(parameters);
-    }
-
-    private ApiInfo apiInfo(){
-        return new ApiInfoBuilder().build();
-    }
-
-}
+//
+//@Configuration
+//@EnableSwagger2
+//public class SwaggerConfig {
+//
+//    @Bean
+//    public Docket createRestApi(){
+//        // 添加请求参数，把token作为请求头部
+//        ParameterBuilder parameterBuilder = new ParameterBuilder();
+//        ArrayList<Parameter> parameters = new ArrayList<>();
+//        parameterBuilder.name("token").description("令牌")
+//                .modelRef(new ModelRef("String")).parameterType("header").required(false).build();
+//        parameters.add(parameterBuilder.build());
+//
+//        return new Docket(DocumentationType.SWAGGER_2)
+//                .apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.any())
+//                .paths(PathSelectors.any()).build().globalOperationParameters(parameters);
+//    }
+//
+//    private ApiInfo apiInfo(){
+//        return new ApiInfoBuilder().build();
+//    }
+//
+//}
