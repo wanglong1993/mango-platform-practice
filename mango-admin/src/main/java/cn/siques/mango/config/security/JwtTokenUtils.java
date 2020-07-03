@@ -1,8 +1,11 @@
 package cn.siques.mango.config.security;
 
+import cn.siques.mango.config.RedisUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -157,11 +160,21 @@ public class JwtTokenUtils implements Serializable {
         claims.put(USERNAME,SecurityUtils.getUsername(authenticate));
         claims.put(CREATED,new Date());
         claims.put(AUTHORITIES,authenticate.getAuthorities());
+
+
         return generateToken(claims);
     }
 
+
+    /**
+     * ,将令牌储存到redis
+     * @param claims
+     * @return
+     */
     private static String generateToken(Map<String, Object> claims) {
         Date expireDate = new Date(System.currentTimeMillis() + EXPIRE_TIME);
-        return Jwts.builder().setClaims(claims).setExpiration(expireDate).signWith(SignatureAlgorithm.HS512,SECRET).compact();
+        String compact = Jwts.builder().setClaims(claims).setExpiration(expireDate).signWith(SignatureAlgorithm.HS512, SECRET).compact();
+
+        return compact;
     }
 }

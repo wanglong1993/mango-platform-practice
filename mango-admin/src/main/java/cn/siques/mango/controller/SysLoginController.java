@@ -1,5 +1,6 @@
 package cn.siques.mango.controller;
 
+import cn.siques.mango.config.RedisUtils;
 import cn.siques.mango.config.security.JwtAuthenticationToken;
 import cn.siques.mango.config.security.PasswordUtils;
 import cn.siques.mango.config.security.SecurityUtils;
@@ -44,6 +45,9 @@ public class SysLoginController {
 
     }
 
+    @Autowired
+    public RedisUtils<String,String> redisUtils;
+
     @PostMapping("/login")
     public JsonData login(@RequestBody LoginDto loginDto,HttpServletRequest request){
         String username = loginDto.getAccount();
@@ -74,7 +78,9 @@ public class SysLoginController {
         // 把当前验证码舍弃
         request.getSession().setAttribute(Constants.KAPTCHA_SESSION_KEY,"");
         // 系统登陆认证
+        // token存入
       JwtAuthenticationToken token =  SecurityUtils.login(request,username,password,authenticationManager);
+        redisUtils.setKey(token.getPrincipal().toString(),token.getToken());
         return JsonData.buildSuccess(token);
     }
 

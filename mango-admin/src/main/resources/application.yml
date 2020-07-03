@@ -53,6 +53,11 @@ spring:
         url: "http://localhost:8090"
   application:
     name: mango-admin
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    expiration: 1800
 #开启控制台打印sql
 mybatis:
   configuration:
