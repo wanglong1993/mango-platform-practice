@@ -1,9 +1,8 @@
 package cn.siques.mango.service.impl;
 
 import cn.siques.mango.constant.SysConstants;
-import cn.siques.mango.dao.SysMenuMapper;
-import cn.siques.mango.entity.SysConfig;
-import cn.siques.mango.entity.SysMenu;
+import cn.siques.mangocore.dao.SysMenuMapper;
+import cn.siques.mangocore.entity.SysMenu;
 import cn.siques.mango.service.SysMenuService;
 import cn.siques.mangocore.Page.PageRequest;
 import cn.siques.mangocore.Page.PageResult;

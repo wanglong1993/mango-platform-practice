@@ -1,14 +1,13 @@
 package cn.siques.mango.controller;
 
 import cn.siques.mango.annotation.MyPreAuthorize;
-import cn.siques.mango.entity.JsonData;
-import cn.siques.mango.entity.SysDict;
+import cn.siques.mangocore.entity.JsonData;
+import cn.siques.mangocore.entity.SysDict;
 import cn.siques.mango.service.SysDictService;
 import cn.siques.mangocore.Page.PageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.spring.web.json.Json;
 
 import java.util.List;
 

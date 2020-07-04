@@ -1,13 +1,12 @@
 package cn.siques.mango.controller;
 
-import cn.siques.mango.entity.JsonData;
-import cn.siques.mango.entity.SysUser;
+import cn.siques.mangocore.entity.JsonData;
+import cn.siques.mangocore.entity.SysUser;
 import cn.siques.mango.service.SysUserService;
 import cn.siques.mangocore.Page.PageRequest;
 import cn.siques.mangocore.Page.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.spring.web.json.Json;
 
 import java.util.List;
 

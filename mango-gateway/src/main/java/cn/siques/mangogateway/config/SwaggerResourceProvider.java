@@ -2,6 +2,7 @@ package cn.siques.mangogateway.config;
 
 
 import org.springframework.cloud.gateway.config.GatewayProperties;
+import org.springframework.cloud.gateway.handler.predicate.PredicateDefinition;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.support.NameUtils;
 import org.springframework.context.annotation.Primary;
@@ -33,19 +34,23 @@ public class SwaggerResourceProvider  implements SwaggerResourcesProvider {
         //结合配置的route-路径(Path)，和route过滤，只获取有效的route节点
         gatewayProperties.getRoutes().stream().filter(routeDefinition -> routes.contains(routeDefinition.getId()))
                 .forEach(routeDefinition -> routeDefinition.getPredicates().stream()
-                        .filter(predicateDefinition -> ("Path").equalsIgnoreCase(predicateDefinition.getName()))
-                        .forEach(predicateDefinition -> resources.add(swaggerResource(routeDefinition.getId(),
+                        .filter(predicateDefinition -> ("Path").equalsIgnoreCase(predicateDefinition.getName())
+                                && predicateDefinition.getArgs().get(NameUtils.GENERATED_NAME_PREFIX+"0").split("/").length<5)
+                        .forEach(predicateDefinition ->
+                                resources.add(swaggerResource(routeDefinition.getId(),
                                 predicateDefinition.getArgs().get(NameUtils.GENERATED_NAME_PREFIX + "0")
-                                        .replace("/**", API_URI)))));
+                                        .replace("/**", API_URI),predicateDefinition))));
         return resources;
     }
 
-    private SwaggerResource swaggerResource(String name, String location) {
-        SwaggerResource swaggerResource = new SwaggerResource();
-        swaggerResource.setName(name);
-        swaggerResource.setLocation(location);
-        swaggerResource.setSwaggerVersion("2.0");
-        return swaggerResource;
+    private SwaggerResource swaggerResource(String name, String location, PredicateDefinition predicateDefinition) {
+
+
+            SwaggerResource swaggerResource = new SwaggerResource();
+            swaggerResource.setName(name);
+            swaggerResource.setLocation(location);
+            swaggerResource.setSwaggerVersion("2.0");
+            return swaggerResource;
     }
 
 }

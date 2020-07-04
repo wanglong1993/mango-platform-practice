@@ -1,8 +1,8 @@
 package cn.siques.mango.service.impl;
 
-import cn.siques.mango.dao.SysDictMapper;
-import cn.siques.mango.entity.SysDict;
-import cn.siques.mango.entity.SysDictKey;
+import cn.siques.mangocore.dao.SysDictMapper;
+import cn.siques.mangocore.entity.SysDict;
+import cn.siques.mangocore.entity.SysDictKey;
 import cn.siques.mango.service.SysDictService;
 import cn.siques.mangocore.Page.MybatisPageHelper;
 import cn.siques.mangocore.Page.PageRequest;
@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class SysDictServiceImpl implements SysDictService {

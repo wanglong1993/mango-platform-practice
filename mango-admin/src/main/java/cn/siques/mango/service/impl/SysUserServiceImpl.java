@@ -1,9 +1,8 @@
 package cn.siques.mango.service.impl;
 
-import cn.siques.mango.dao.SysMenuMapper;
-import cn.siques.mango.dao.SysUserMapper;
-import cn.siques.mango.entity.SysMenu;
-import cn.siques.mango.entity.SysUser;
+import cn.siques.mangocore.dao.SysUserMapper;
+import cn.siques.mangocore.entity.SysMenu;
+import cn.siques.mangocore.entity.SysUser;
 import cn.siques.mango.service.SysMenuService;
 import cn.siques.mango.service.SysUserService;
 import cn.siques.mangocore.Page.MybatisPageHelper;

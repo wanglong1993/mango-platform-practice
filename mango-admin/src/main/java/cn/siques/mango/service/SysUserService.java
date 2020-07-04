@@ -1,6 +1,6 @@
 package cn.siques.mango.service;
 
-import cn.siques.mango.entity.SysUser;
+import cn.siques.mangocore.entity.SysUser;
 import cn.siques.mangocore.service.CrudService;
 
 import java.util.List;

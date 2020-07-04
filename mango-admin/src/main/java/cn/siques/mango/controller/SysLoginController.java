@@ -1,22 +1,20 @@
 package cn.siques.mango.controller;
 
 import cn.siques.mango.config.RedisUtils;
-import cn.siques.mango.config.security.JwtAuthenticationToken;
-import cn.siques.mango.config.security.PasswordUtils;
-import cn.siques.mango.config.security.SecurityUtils;
+import cn.siques.mangocore.utils.JwtAuthenticationToken;
+import cn.siques.mangocore.utils.PasswordUtils;
+import cn.siques.mangocore.utils.SecurityUtils;
 import cn.siques.mango.controller.dto.LoginDto;
-import cn.siques.mango.entity.JsonData;
-import cn.siques.mango.entity.SysUser;
+import cn.siques.mangocore.entity.JsonData;
+import cn.siques.mangocore.entity.SysUser;
 import cn.siques.mango.service.SysUserService;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import org.apache.commons.compress.utils.IOUtils;
-import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.spring.web.json.Json;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -44,9 +42,9 @@ public class SysLoginController {
         return JsonData.buildSuccess(port);
 
     }
-
     @Autowired
-    public RedisUtils<String,String> redisUtils;
+    public  RedisUtils<String,String> redisUtils;
+
 
     @PostMapping("/login")
     public JsonData login(@RequestBody LoginDto loginDto,HttpServletRequest request){
@@ -56,7 +54,7 @@ public class SysLoginController {
         // 获取之前保存的验证码，与前台传来的验证码进行匹配
         Object attribute = request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
         if(attribute==null){
-            return JsonData.buildError("验证码以失效");
+            return JsonData.buildError("验证码已失效");
         }
 
         if(!captcha.equals(attribute)){
@@ -80,7 +78,8 @@ public class SysLoginController {
         // 系统登陆认证
         // token存入
       JwtAuthenticationToken token =  SecurityUtils.login(request,username,password,authenticationManager);
-        redisUtils.setKey(token.getPrincipal().toString(),token.getToken());
+      System.out.println(token.getPrincipal().toString());
+        redisUtils.init().setKey(token.getPrincipal().toString(),token.getToken());
         return JsonData.buildSuccess(token);
     }
 

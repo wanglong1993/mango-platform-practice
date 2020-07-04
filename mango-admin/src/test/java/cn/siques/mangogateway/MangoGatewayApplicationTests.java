@@ -1,7 +1,9 @@
 package cn.siques.mangogateway;
 
 import cn.siques.mango.annotation.MyPreAuthorize;
+import cn.siques.mango.config.RedisUtils;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.lang.annotation.Annotation;
@@ -24,5 +26,6 @@ class MangoGatewayApplicationTests {
          }
         }
     }
+
 
 }

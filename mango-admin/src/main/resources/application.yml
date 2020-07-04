@@ -64,7 +64,7 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: cn.siques.mango.entity
+  type-aliases-package: cn.siques.mangocore.entity
 pagehelper:
   reasonable: true
   support-methods-arguments: true
