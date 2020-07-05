@@ -5,6 +5,14 @@ spring:
     name: mango-gateway
   cloud:
     gateway:
+      #添加跨域的配置
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowCredentials: true
+            allowedOrigins: "http://localhost:3000,http://192.168.0.140"
+            allowedMethods: "*"
+            allowedHeaders: "*"
       discovery:
         locator:
           enabled: true
