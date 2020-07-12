@@ -1,9 +1,17 @@
 package cn.siques.mangomenu.service.impl;
 
+import ch.qos.logback.core.net.SyslogConstants;
+import cn.siques.mangocommon.constant.SecretConstants;
+import cn.siques.mangocommon.constant.SysConstants;
+import cn.siques.mangocore.Page.PageRequest;
+import cn.siques.mangocore.Page.PageResult;
 import cn.siques.mangocore.dao.SysMenuMapper;
 import cn.siques.mangocore.entity.SysMenu;
+import cn.siques.mangocore.entity.SysMenuKey;
 import cn.siques.mangomenu.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +24,7 @@ public class SysMenuServiceImpl implements SysMenuService {
     SysMenuMapper sysMenuMapper;
 
     @Override
+    @CacheEvict(value="findMenuTree",allEntries=true)
     public int save(SysMenu record) {
         if(record.getId() == null || record.getId() == 0) {
             return sysMenuMapper.insertSelective(record);
@@ -24,6 +33,34 @@ public class SysMenuServiceImpl implements SysMenuService {
             record.setParentId(0L);
         }
         return sysMenuMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public int delete(SysMenu record) {
+        SysMenuKey sysMenuKey = new SysMenuKey();
+        sysMenuKey.setId(record.getId());
+        return sysMenuMapper.deleteByPrimaryKey(sysMenuKey);
+    }
+
+
+
+    @Override
+    @CacheEvict(value="findMenuTree",allEntries=true)
+    public int delete(List<SysMenu> records) {
+        for(SysMenu record:records) {
+            delete(record);
+        }
+        return 1;
+    }
+
+    @Override
+    public SysMenu findById(Long id) {
+        return null;
+    }
+
+    @Override
+    public PageResult findPage(PageRequest pageRequest) {
+        return null;
     }
 
     @Override
@@ -81,7 +118,8 @@ public class SysMenuServiceImpl implements SysMenuService {
     }
 
     private List<SysMenu> findByUser(String username) {
-     if(username==null || "".equals(username)){
+        // 空或者为admin则返回所有权限
+     if(username==null || "".equals(username)|| username.equalsIgnoreCase(SysConstants.ADMIN)){
          return sysMenuMapper.findAll();
      }
      return sysMenuMapper.findByUserName(username);

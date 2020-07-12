@@ -1,6 +1,6 @@
 package cn.siques.mango.service.impl;
 
-import cn.siques.mango.constant.SysConstants;
+import cn.siques.mangocommon.constant.SysConstants;
 import cn.siques.mangocore.dao.SysMenuMapper;
 import cn.siques.mangocore.entity.SysMenu;
 import cn.siques.mango.service.SysMenuService;
@@ -43,6 +43,7 @@ public class SysMenuServiceImmpl implements SysMenuService {
     @Override
     public List<SysMenu> findByUser(String name) {
         if(name==null || "".equals(name)|| SysConstants.ADMIN.equalsIgnoreCase(name)){
+            // 如果是超级管理员返回所有权限
             return sysMenuMapper.findAll();
         }
         return sysMenuMapper.findByUserName(name);

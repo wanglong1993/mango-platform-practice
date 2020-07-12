@@ -1,27 +1,54 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">mango-frontend</h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-          >Documentation</a
-        >
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-          >GitHub</a
-        >
-      </div>
-      <el-input class="button" type="submit" value="Submit input"></el-input>
-      <el-button class="button">默认按钮</el-button>
-    </div>
+  <div style="height: 150vh;">
+    <template>
+      <chartjs :options="options" type="pie" :data="data"></chartjs>
+    </template>
+
+    <div class="px-3 pt-3 fs-6 text-primary">微服务监控</div>
+    <el-row class="pt-3 px-3" :gutter="12">
+      <el-col :span="8">
+        <el-card shadow="always">
+          <div>
+            <el-link href="http://localhost:8848/nacos" target="_blank"
+              >nacos服务监控</el-link
+            >
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="8">
+        <el-card shadow="always">
+          <div>
+            <el-link href="http://127.0.0.1:8849" target="_blank"
+              >sentinel服务限流</el-link
+            >
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="8">
+        <el-card shadow="always">
+          <div>
+            <el-link
+              href="http://127.0.0.1:9001/swagger-ui.html"
+              target="_blank"
+              >接口文档</el-link
+            >
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
+
+    <div class="px-3 pt-3 fs-6 text-primary">系统监控</div>
+    <el-row class="pt-3 px-3" :gutter="12">
+      <el-col :span="8">
+        <el-card shadow="always">
+          <div>
+            <el-link href="http://localhost:8090" target="_blank"
+              >admin服务监控</el-link
+            >
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -31,15 +58,17 @@ import { Vue, Component } from 'nuxt-property-decorator'
   components: {},
 })
 export default class index extends Vue {
-  async asyncData({ store }: any) {
-    const http = Vue.prototype.$http
-    const res = await http.get('/pri/menu/findMenuTree')
-    console.log(res)
-  }
-  head() {
-    return {
-      title: '',
-    }
+  options = {}
+
+  data = {
+    datasets: [
+      {
+        data: [10, 20, 30],
+      },
+    ],
+
+    // These labels appear in the legend and in the tooltips when hovering different arcs
+    labels: ['Red', 'Yellow', 'Blue'],
   }
 }
 </script>

@@ -10,7 +10,7 @@ spring:
         cors-configurations:
           '[/**]':
             allowCredentials: true
-            allowedOrigins: "http://localhost:3000,http://192.168.0.140"
+            allowedOrigins: "http://localhost:3000"
             allowedMethods: "*"
             allowedHeaders: "*"
       discovery:
@@ -21,7 +21,7 @@ spring:
           #          uri: http://localhost:8001 # 匹配提供服务的路由地址
           uri: lb://mango-admin
           predicates:
-            - Path=/consumer/api/sys/v1/pub/**    #断言，路径相匹配进行路由
+            - Path=/admin/api/sys/v1/**    #断言，路径相匹配进行路由
           filters:
             - StripPrefix=1
             - AddRequestHeader=X-Request-Id, heshenghao #过滤器工厂会在匹配的请求头上加上一对请求头,名称为X-Request-Id值为heshenghao
@@ -29,7 +29,7 @@ spring:
             #          uri: http://localhost:8001 # 匹配提供服务的路由地址
           uri: lb://mango-menu
           predicates:
-            - Path=/consumer/api/sys/v1/pri/**    #断言，路径相匹配进行路由
+            - Path=/menu/api/sys/v1/**    #断言，路径相匹配进行路由
           filters:
             - StripPrefix=1
             - AddRequestHeader=X-Request-Id, heshenghao #过滤器工厂会在匹配的请求头上加上一对请求头,名称为X-Request-Id值为heshenghao

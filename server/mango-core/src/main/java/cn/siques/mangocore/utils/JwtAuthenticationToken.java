@@ -11,6 +11,7 @@ public class JwtAuthenticationToken extends UsernamePasswordAuthenticationToken 
 
     private String token;
 
+
     public JwtAuthenticationToken(Object principal, Object credentials) {
         super(principal, credentials);
     }
@@ -22,10 +23,9 @@ public class JwtAuthenticationToken extends UsernamePasswordAuthenticationToken 
 
     public JwtAuthenticationToken(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities,String token) {
         super(principal, credentials, authorities);
+//        this.principal =principal;
         this.token =token;
     }
-
-
 
     public String getToken() {
         return token;
@@ -33,5 +33,9 @@ public class JwtAuthenticationToken extends UsernamePasswordAuthenticationToken 
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
     }
 }

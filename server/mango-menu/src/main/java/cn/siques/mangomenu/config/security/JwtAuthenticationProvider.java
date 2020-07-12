@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public class JwtAuthenticationProvider extends DaoAuthenticationProvider {
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
-
+    System.out.println("123123");
     }
 
     public JwtAuthenticationProvider(UserDetailsService userDetailsService) {

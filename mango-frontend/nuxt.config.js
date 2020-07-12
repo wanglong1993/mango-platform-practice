@@ -6,6 +6,7 @@ export default {
     color: '#3B8070',
     background: 'white',
   },
+
   /*
    ** Nuxt rendering mode
    ** See https://nuxtjs.org/api/configuration-mode
@@ -45,7 +46,11 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [{ src: '@/plugins/http', ssr: true }, '@/plugins/element-ui'],
+
+  router: {
+    middleware: 'authenticated',
+  },
+  plugins: ['@/plugins/axios', '@/plugins/element-ui', '@/plugins/directive'],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -62,6 +67,7 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
+    '@nuxtjs/auth',
     // Doc: https://github.com/nuxt/content
     '@nuxt/content',
   ],
@@ -69,11 +75,36 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    prefix: process.env.baseUrl,
+    credentials: true,
+  },
   /*
    ** Content module configuration
    ** See https://content.nuxtjs.org/configuration
    */
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          token: {
+            // property: 'data.data.token',
+            // required: true,
+            // type: 'Bearer'
+          },
+          login: {
+            url: 'http://localhost:9001/admin/api/sys/v1/pub/login',
+            method: 'post',
+            propertyName: 'token',
+          },
+          user: false,
+        },
+        // tokenRequired: true,
+        // tokenType: 'bearer'
+      },
+    },
+  },
+
   content: {},
   /*
    ** Build configuration

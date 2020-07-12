@@ -16,12 +16,11 @@ import java.util.concurrent.TimeUnit;
 
 
 public class JwtAuthenticationFilter  extends BasicAuthenticationFilter {
+
+    @Autowired
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }
-
-
-
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {

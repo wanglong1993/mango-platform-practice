@@ -7,5 +7,6 @@ declare module 'vue/types/vue' {
     $http: AxiosInstance
     $route: Route
     $store: Store<any>
+    $auth: any
   }
 }

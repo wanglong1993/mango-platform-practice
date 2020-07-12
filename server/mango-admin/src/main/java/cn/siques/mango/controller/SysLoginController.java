@@ -1,7 +1,9 @@
 package cn.siques.mango.controller;
 
 import cn.siques.mango.config.RedisUtils;
+import cn.siques.mango.controller.dto.RegisterDto;
 import cn.siques.mangocore.utils.JwtAuthenticationToken;
+import cn.siques.mangocore.utils.PasswordEncoder;
 import cn.siques.mangocore.utils.PasswordUtils;
 import cn.siques.mangocore.utils.SecurityUtils;
 import cn.siques.mango.controller.dto.LoginDto;
@@ -46,6 +48,22 @@ public class SysLoginController {
     public  RedisUtils<String,String> redisUtils;
 
 
+
+    @PostMapping("/register")
+    public JsonData register(@RequestBody RegisterDto registerDto){
+        String account = registerDto.getAccount();
+        String password = registerDto.getPassword();
+        SysUser sysUser = new SysUser();
+        sysUser.setName(account);
+        PasswordEncoder passwordEncoder = new PasswordEncoder("");
+        String encode = passwordEncoder.encode(password);
+        sysUser.setPassword(encode);
+        System.out.println(sysUser);
+        int save = sysUserService.save(sysUser);
+        return JsonData.buildSuccess(save);
+    }
+
+
     @PostMapping("/login")
     public JsonData login(@RequestBody LoginDto loginDto,HttpServletRequest request){
         String username = loginDto.getAccount();
@@ -78,7 +96,7 @@ public class SysLoginController {
         // 系统登陆认证
         // token存入
       JwtAuthenticationToken token =  SecurityUtils.login(request,username,password,authenticationManager);
-      System.out.println(token.getPrincipal().toString());
+
         redisUtils.init().setKey(token.getPrincipal().toString(),token.getToken());
         return JsonData.buildSuccess(token);
     }
@@ -101,6 +119,7 @@ public class SysLoginController {
 
         // 保存到session 或者redis
         request.getSession().setAttribute(Constants.KAPTCHA_SESSION_KEY,text);
+
         ServletOutputStream outputStream = response.getOutputStream();
         ImageIO.write(image,"jpg",outputStream);
         IOUtils.closeQuietly(outputStream);

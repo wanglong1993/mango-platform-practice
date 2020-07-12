@@ -165,4 +165,7 @@ public interface SysRoleMenuMapper {
         "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(SysRoleMenu record);
+
+    @Delete({"delete from sys_role_menu where role_id=#{roleId,jdbcType=BIGINT}"})
+    void deleteByRoleId(Long roleId);
 }

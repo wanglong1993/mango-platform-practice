@@ -1,129 +1,122 @@
 <template>
   <el-container>
-    <el-header>Header</el-header>
-    <el-container>
-      <el-aside width="200px">
-        <el-menu
-          default-active="1-4-1"
-          class="el-menu-vertical-demo"
-          @open="handleOpen"
-          @close="handleClose"
-          :collapse="isCollapse"
+    <el-header class="d-flex jc-between ai-center fs-8 text-white">
+      <div>
+        Mango-Admin
+        <el-button
+          @click="isCollapse = !isCollapse"
+          :icon="isCollapse ? `el-icon-s-unfold` : 'el-icon-s-fold'"
+          class="text-white fs-6 pl-2"
+          type="text"
+        ></el-button>
+      </div>
+      <div class="d-flex ai-center">
+        <i class="el-icon-thumb px-2"></i>
+        <i class="el-icon-share px-2"></i>
+        <i class="el-icon-delete px-2"></i>
+
+        <el-avatar
+          size="small"
+          src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
+        ></el-avatar>
+        <span class="fs-3 px-2">超级管理员</span>
+        <el-button type="primary" @click="logOut">退出登陆</el-button>
+      </div>
+    </el-header>
+    <el-container class="d-flex">
+      <!-- <el-aside> -->
+      <el-menu class="el-menu-vertical-demo" :collapse="isCollapse" router>
+        <el-submenu
+          v-for="(menu, index) in menus"
+          :key="index"
+          :index="`${index}`"
         >
-          <el-submenu index="1">
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span slot="title">导航一</span>
-            </template>
-            <el-menu-item-group>
-              <span slot="title">分组一</span>
-              <el-menu-item index="1-1">选项1</el-menu-item>
-              <el-menu-item index="1-2">选项2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-              <el-menu-item index="1-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="1-4">
-              <span slot="title">选项4</span>
-              <el-menu-item index="1-4-1">选项1</el-menu-item>
-            </el-submenu>
-          </el-submenu>
-          <el-menu-item index="2">
-            <i class="el-icon-menu"></i>
-            <span slot="title">导航二</span>
-          </el-menu-item>
-          <el-menu-item index="3" disabled>
-            <i class="el-icon-document"></i>
-            <span slot="title">导航三</span>
-          </el-menu-item>
-          <el-menu-item index="4">
-            <i class="el-icon-setting"></i>
-            <span slot="title">导航四</span>
-          </el-menu-item>
-        </el-menu>
-      </el-aside>
-      <el-main> <Nuxt /></el-main>
+          <template slot="title">
+            <i :class="menu.icon"></i>
+            <span slot="title">{{ menu.name }}</span>
+          </template>
+
+          <template v-for="(submenu, index1) in menu.children">
+            <el-menu-item
+              v-if="submenu.type != 2"
+              :key="`${index}-${index1}`"
+              :index="`${submenu.url}`"
+            >
+              <i :class="submenu.icon"></i>
+              <span slot="title">{{ submenu.name }}</span>
+            </el-menu-item>
+          </template>
+        </el-submenu>
+      </el-menu>
+      <!-- </el-aside -->
+      <el-main>
+        <Nuxt />
+      </el-main>
     </el-container>
   </el-container>
 </template>
+<script lang="ts">
+import { Vue, Component } from 'nuxt-property-decorator'
+@Component({
+  components: {},
+})
+export default class MenuLayOut extends Vue {
+  menus: any = []
+  isCollapse = false
+  mounted() {
+    setTimeout(() => {
+      this.fetchMenu()
+    }, 300)
+  }
 
+  handleOpen(key: any, keyPath: any) {
+    console.log(key, keyPath)
+  }
+
+  async fetchMenu() {
+    const http = Vue.prototype.$http
+    const res = await http.get('/pri/menu/findNavTree', {
+      prefix: 'menu',
+    })
+
+    this.menus = res.data.data
+  }
+
+  logOut() {
+    this.$store.commit('deleteToken')
+    this.$router.push('sys/login')
+  }
+}
+</script>
 <style>
+#__layout {
+  height: 100vh;
+}
 .el-header,
 .el-footer {
-  text-align: center;
-  line-height: 60px;
+  background-color: #1890ff;
+
+  height: 50px !important;
+}
+
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
 }
 
 .el-aside {
-  color: #333;
   text-align: center;
-  line-height: 200px;
+  /* width: 200px !important; */
+  background-color: #545c64;
 }
 
 .el-main {
   background-color: #e9eef3;
   color: #333;
-  text-align: center;
-  line-height: 160px;
+  padding: 0 !important;
 }
 
-body > .el-container {
-  margin-bottom: 40px;
-}
-
-.el-container:nth-child(5) .el-aside,
-.el-container:nth-child(6) .el-aside {
-  line-height: 260px;
-}
-
-.el-container:nth-child(7) .el-aside {
-  line-height: 320px;
-}
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+.el-container {
+  height: 100% !important;
 }
 </style>

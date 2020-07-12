@@ -1,8 +1,10 @@
 package cn.siques.mangocore.utils;
 
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +20,13 @@ public class SecurityUtils {
 
 public  static  void checkAuthentication(HttpServletRequest request, HttpServletResponse response){
 
+
+
+
     // 获取令牌并获得登陆信息
     Authentication authentication = JwtTokenUtils.getAuthenticationFromToken(request);
+
+
 
     // 如果不是网关调用，清空所有权限
    if(request.getHeader("X-Request-Id")==null||!request.getHeader("X-Request-Id").equals("heshenghao")){
@@ -61,6 +68,7 @@ public  static  void checkAuthentication(HttpServletRequest request, HttpServlet
         return null;
     }
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    System.out.println(authentication);
     return  authentication;
     }
 
@@ -74,12 +82,13 @@ public  static  void checkAuthentication(HttpServletRequest request, HttpServlet
         if(authentication != null) {
             Object principal = authentication.getPrincipal();
             System.out.println(principal);
-            if(principal != null ) {
-                username =  principal.toString();
+            if(principal != null && principal instanceof String) {
+                username = principal.toString();
             }
         }
         return username;
     }
+
 
 
     /**
@@ -90,8 +99,8 @@ public  static  void checkAuthentication(HttpServletRequest request, HttpServlet
         String username = null;
         if(authentication != null) {
             Object principal = authentication.getPrincipal();
-            if(principal != null ) {
-                username =  principal.toString();
+            if(principal != null && principal instanceof UserDetails) {
+                username = ((UserDetails) principal).getUsername();
             }
         }
         return username;

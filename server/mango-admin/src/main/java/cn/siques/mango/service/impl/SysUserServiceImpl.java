@@ -53,9 +53,15 @@ public class SysUserServiceImpl implements SysUserService {
         return perms;
     }
 
+    /**
+     * 保存用户
+     * @param record
+     * @return
+     */
     @Override
     public int save(SysUser record) {
-        return 0;
+        int insert = sysUserMapper.insert(record);
+        return insert;
     }
 
     @Override
