@@ -57,12 +57,12 @@ public interface SysDeptMapper {
      */
     @Insert({
         "insert into sys_dept (id, name, ",
-        "parent_id, order_numm, ",
+        "parent_id, order_num, ",
         "create_by, create_time, ",
         "last_update_by, last_update_time, ",
         "del_flag)",
         "values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, ",
-        "#{parentId,jdbcType=BIGINT}, #{orderNumm,jdbcType=INTEGER}, ",
+        "#{parentId,jdbcType=BIGINT}, #{orderNum,jdbcType=INTEGER}, ",
         "#{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, ",
         "#{lastUpdateBy,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}, ",
         "#{delFlag,jdbcType=TINYINT})"
@@ -89,7 +89,7 @@ public interface SysDeptMapper {
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
         @Result(column="parent_id", property="parentId", jdbcType=JdbcType.BIGINT),
-        @Result(column="order_numm", property="orderNumm", jdbcType=JdbcType.INTEGER),
+        @Result(column="order_num", property="orderNum", jdbcType=JdbcType.INTEGER),
         @Result(column="create_by", property="createBy", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="last_update_by", property="lastUpdateBy", jdbcType=JdbcType.VARCHAR),
@@ -115,7 +115,7 @@ public interface SysDeptMapper {
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
         @Result(column="parent_id", property="parentId", jdbcType=JdbcType.BIGINT),
-        @Result(column="order_numm", property="orderNumm", jdbcType=JdbcType.INTEGER),
+        @Result(column="order_num", property="orderNum", jdbcType=JdbcType.INTEGER),
         @Result(column="create_by", property="createBy", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="last_update_by", property="lastUpdateBy", jdbcType=JdbcType.VARCHAR),
@@ -161,7 +161,7 @@ public interface SysDeptMapper {
         "update sys_dept",
         "set name = #{name,jdbcType=VARCHAR},",
           "parent_id = #{parentId,jdbcType=BIGINT},",
-          "order_numm = #{orderNumm,jdbcType=INTEGER},",
+          "order_num = #{orderNum,jdbcType=INTEGER},",
           "create_by = #{createBy,jdbcType=VARCHAR},",
           "create_time = #{createTime,jdbcType=TIMESTAMP},",
           "last_update_by = #{lastUpdateBy,jdbcType=VARCHAR},",
@@ -170,4 +170,8 @@ public interface SysDeptMapper {
         "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(SysDept record);
+
+     // TODO
+    @Select({"select * from sys_dept"})
+    List<SysDept> findAll();
 }

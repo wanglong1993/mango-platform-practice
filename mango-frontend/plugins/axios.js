@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-export default ({ app, store }) => {
+export default ({ app, store, route, redirect }) => {
   const axios = app.$axios
 
   // 基本配置
@@ -27,7 +27,7 @@ export default ({ app, store }) => {
 
   // 错误回调
   axios.onError((error) => {
-    console.log(error)
+    console.log(error.response)
     switch (error.response.status) {
       case 403:
         Vue.prototype.$message({
@@ -35,7 +35,14 @@ export default ({ app, store }) => {
           type: 'info',
           showClose: true,
         })
-
+        redirect('/sys/login')
+      case 500:
+        Vue.prototype.$message({
+          message: '未授权',
+          type: 'info',
+          showClose: true,
+        })
+        redirect('/sys/login')
         break
     }
   })

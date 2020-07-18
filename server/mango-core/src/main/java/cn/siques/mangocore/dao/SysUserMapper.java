@@ -1,5 +1,6 @@
 package cn.siques.mangocore.dao;
 
+import cn.siques.mangocore.entity.SysRole;
 import cn.siques.mangocore.entity.SysUser;
 import cn.siques.mangocore.entity.SysUserExample;
 import cn.siques.mangocore.entity.SysUserKey;
@@ -65,14 +66,15 @@ public interface SysUserMapper {
         "email, mobile, status, ",
         "dept_id, create_by, ",
         "create_time, last_update_by, ",
-        "last_update_time, del_flag)",
+        "last_update_time, del_flag,order_num)",
         "values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, ",
         "#{nickName,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, ",
         "#{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, ",
         "#{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, ",
         "#{deptId,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR}, ",
         "#{createTime,jdbcType=TIMESTAMP}, #{lastUpdateBy,jdbcType=VARCHAR}, ",
-        "#{lastUpdateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=TINYINT})"
+        "#{lastUpdateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=TINYINT})",
+            "#{orderNum,jdbcType=INTEGER}"
     })
     int insert(SysUser record);
 
@@ -120,7 +122,7 @@ public interface SysUserMapper {
     @Select({
         "select",
         "id, name, nick_name, avatar, password, salt, email, mobile, status, dept_id, ",
-        "create_by, create_time, last_update_by, last_update_time, del_flag",
+        "create_by, create_time, last_update_by, last_update_time, del_flag,order_num",
         "from sys_user",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -139,7 +141,8 @@ public interface SysUserMapper {
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="last_update_by", property="lastUpdateBy", jdbcType=JdbcType.VARCHAR),
         @Result(column="last_update_time", property="lastUpdateTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="del_flag", property="delFlag", jdbcType=JdbcType.TINYINT)
+        @Result(column="del_flag", property="delFlag", jdbcType=JdbcType.TINYINT),
+            @Result(column="order_num", property="orderNum", jdbcType=JdbcType.INTEGER)
     })
     SysUser selectByPrimaryKey(SysUserKey key);
 
@@ -187,6 +190,7 @@ public interface SysUserMapper {
           "mobile = #{mobile,jdbcType=VARCHAR},",
           "status = #{status,jdbcType=TINYINT},",
           "dept_id = #{deptId,jdbcType=BIGINT},",
+            "order_num = #{order_num,jdbcType=INTEGER},",
           "create_by = #{createBy,jdbcType=VARCHAR},",
           "create_time = #{createTime,jdbcType=TIMESTAMP},",
           "last_update_by = #{lastUpdateBy,jdbcType=VARCHAR},",
@@ -221,4 +225,9 @@ public interface SysUserMapper {
      */
     @Select({"select * from sys"})
     Set<String> findPermission(String name);
+
+
+    @Select({"SELECT r.* FROM  sys_user u ,sys_user_role ur, sys_role r \n" +
+            "WHERE u.id = #{id,jdbcType=BIGINT} AND u.id= ur.`user_id` AND ur.`role_id` = r.id"})
+    List<SysRole> findUserRolesById(long id);
 }

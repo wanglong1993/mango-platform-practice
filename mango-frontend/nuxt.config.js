@@ -32,6 +32,11 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
+    script: [
+      {
+        src: 'https://cdn.staticfile.org/Sortable/1.10.0-rc2/Sortable.min.js',
+      },
+    ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   /*
@@ -48,7 +53,7 @@ export default {
    */
 
   router: {
-    middleware: 'authenticated',
+    middleware: ['authenticated', 'worktab'],
   },
   plugins: ['@/plugins/axios', '@/plugins/element-ui', '@/plugins/directive'],
   /*

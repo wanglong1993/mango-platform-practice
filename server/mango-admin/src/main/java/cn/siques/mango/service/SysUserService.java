@@ -1,5 +1,6 @@
 package cn.siques.mango.service;
 
+import cn.siques.mangocore.entity.SysRole;
 import cn.siques.mangocore.entity.SysUser;
 import cn.siques.mangocore.service.CrudService;
 
@@ -26,4 +27,11 @@ public interface SysUserService extends CrudService<SysUser> {
      * @return
      */
     Set<String> findPermission(String name);
+
+    /**
+     * 根据id查询用户角色
+     * @param id
+     * @return
+     */
+    List<SysRole> findUserRolesById(long id);
 }

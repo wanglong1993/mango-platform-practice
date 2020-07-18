@@ -26,7 +26,7 @@ public class SysRoleController {
     @Autowired
     private SysRoleMapper sysRoleMapper;
 
-    @ApiOperation(httpMethod="GET", value="查询所有角色权限(admin)")
+    @ApiOperation(httpMethod="GET", value="查询所有角色")
     @GetMapping("findAll")
     // 超级管理员接口
     @RolesAllowed("admin")
@@ -53,7 +53,7 @@ public class SysRoleController {
         return JsonData.buildSuccess(sysRoleService.save(sysRole));
     }
 
-    @ApiOperation(httpMethod="GET", value="根据id查询角色信息")
+    @ApiOperation(httpMethod="GET", value="根据id查询角色菜单")
     @GetMapping(value="findRoleMenus/{id}")
     @PreAuthorize("hasAuthority('sys:role:view')")
     public JsonData  findRoleMenus(@PathVariable("id") Long id){
@@ -61,12 +61,13 @@ public class SysRoleController {
         return JsonData.buildSuccess(sysMenus);
     }
 
+
+
     /**
      * 修改用户菜单关系
      * @param records
      * @return
      */
-
     @ApiOperation(httpMethod="POST", value="修改角色权限")
     @PreAuthorize("hasAuthority('sys:role:view')")
     @PostMapping(value="/saveRoleMenus")

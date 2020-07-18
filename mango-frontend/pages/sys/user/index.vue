@@ -1,107 +1,49 @@
 <template>
-  <div>
+  <div class="pt-3">
     <el-container>
-      <el-aside width="200px" style="background-color:white;">
-        <div class="d-flex ai-center jc-between">
-          <el-breadcrumb class="py-3 px-2" separator="/">
-            <el-breadcrumb-item>组织机构</el-breadcrumb-item>
-          </el-breadcrumb>
-          <div class="pr-2">
-            <i class="el-icon-phone"></i>
-            <i class="el-icon-user"></i>
-            <i class="el-icon-delete"></i>
-          </div>
-        </div>
-        <el-tree class="px-2" :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+      <el-aside width="200px">
+        <avue-tree :option="treeOption" :data="treeData" @node-click="nodeClick"></avue-tree>
       </el-aside>
-      <el-container>
-        <el-main>
-          <div class="px-3 py-2">
-            <el-breadcrumb class="py-2" separator-class="el-icon-arrow-right">
-              <el-breadcrumb-item>用户管理</el-breadcrumb-item>
-            </el-breadcrumb>
-            <el-table height="550" border :data="tableData" style="width: 100%;">
-              <el-table-column fixed fit label="创建时间">
-                <template slot-scope="scope">
-                  <i class="el-icon-time"></i>
-                  <span style="margin-left: 10px;">{{ scope.row.createTime }}</span>
-                </template>
-              </el-table-column>
-              <el-table-column label="创建人">
-                <template slot-scope="scope">
-                  <i class="el-icon-time"></i>
-                  <span style="margin-left: 10px;">{{ scope.row.createBy }}</span>
-                </template>
-              </el-table-column>
-              <el-table-column label="最后修改时间">
-                <template slot-scope="scope">
-                  <i class="el-icon-time"></i>
-                  <span style="margin-left: 10px;">{{ scope.row.lastUpdateTime }}</span>
-                </template>
-              </el-table-column>
-              <el-table-column label="修改人">
-                <template slot-scope="scope">
-                  <i class="el-icon-time"></i>
-                  <span style="margin-left: 10px;">{{ scope.row.lastUpdateBy }}</span>
-                </template>
-              </el-table-column>
-              <el-table-column label="姓名" width="100">
-                <template slot-scope="scope">
-                  <el-popover trigger="hover" placement="top">
-                    <p>姓名: {{ scope.row.name }}</p>
-                    <p>邮箱: {{ scope.row.email }}</p>
-                    <div slot="reference" class="name-wrapper">
-                      <el-tag size="medium">{{ scope.row.name }}</el-tag>
-                    </div>
-                  </el-popover>
-                </template>
-              </el-table-column>
-              <el-table-column label="别名" width="100">
-                <template slot-scope="scope">
-                  <i class="el-icon-user"></i>
-                  <span style="margin-left: 10px;">{{ scope.row.nickName }}</span>
-                </template>
-              </el-table-column>
-              <el-table-column label="手机号" width="100">
-                <template slot-scope="scope">
-                  <i class="el-icon-phone"></i>
-                  <span style="margin-left: 10px;">{{ scope.row.mobile }}</span>
-                </template>
-              </el-table-column>
-              <el-table-column fixed="right" label="操作">
-                <template slot-scope="scope">
-                  <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                  <el-button
-                    size="mini"
-                    type="danger"
-                    @click="handleDelete(scope.$index, scope.row)"
-                  >删除</el-button>
-                </template>
-              </el-table-column>
-            </el-table>
-            <el-pagination class="pt-3" background layout="prev, pager, next" :total="1000"></el-pagination>
-          </div>
-        </el-main>
-      </el-container>
-    </el-container>
+      <el-main>
+        <avue-crud
+          :table-loading="loading"
+          :page.sync="page"
+          @on-load="onLoad"
+          :data="tableData"
+          :option="option"
+        >
+          <template slot="orderNum" slot-scope="scope">
+            <el-input v-model="scope.row.orderNum" placeholder="请输入内容">{{scope.row.orderNum}}</el-input>
+          </template>
+          <template slot-scope="scope" slot="menu">
+            <Crudbutton
+              icon="el-icon-check"
+              size="mini"
+              type="text"
+              :data="form"
+              :option="crudOption"
+              @initData="initData(scope.row)"
+              @submit="submit"
+              :title="'授权角色'"
+            >
+              <!-- 具名插槽 -->
+              <template v-slot:extendField>
+                <avue-crud
+                  :table-loading="roleLoading"
+                  ref="roleList"
+                  @selection-change="handleSelectionChange"
+                  :permission="permission"
+                  :data="roleData"
+                  :option="roleOption"
+                ></avue-crud>
+              </template>
+            </Crudbutton>
+          </template>
+        </avue-crud>
+      </el-main>
 
-    <el-dialog title="修改用户" :visible.sync="dialogFormVisible">
-      <el-form :model="form">
-        <el-form-item label="用户名" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="活动区域" :label-width="formLabelWidth">
-          <el-select v-model="form.region" placeholder="请选择活动区域">
-            <el-option label="区域一" value="shanghai"></el-option>
-            <el-option label="区域二" value="beijing"></el-option>
-          </el-select>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
-      </div>
-    </el-dialog>
+      <template></template>
+    </el-container>
   </div>
 </template>
 <script lang="ts">
@@ -110,115 +52,232 @@ import { Vue, Component } from 'nuxt-property-decorator'
   components: {},
 })
 export default class sysUser extends Vue {
-  asyncData({ store }: any) {
-    return {}
-  }
-
-  form = {
-    name: '',
-    region: '',
-    date1: '',
-    date2: '',
-    delivery: false,
-    type: [],
-    resource: '',
-    desc: '',
-  }
-  dialogFormVisible = false
-
-  formLabelWidth = '120px'
-
-  data = [
+  // 用户角色列表需要请求获取
+  roleData: any = []
+  http = Vue.prototype.$http
+  tableData: any = []
+  loading = true
+  roleLoading = true
+  treeData = [
     {
-      label: '一级 1',
+      value: 0,
+      label: '一级部门',
       children: [
         {
-          label: '二级 1-1',
-          children: [
-            {
-              label: '三级 1-1-1',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      label: '一级 2',
-      children: [
-        {
-          label: '二级 2-1',
-          children: [
-            {
-              label: '三级 2-1-1',
-            },
-          ],
-        },
-        {
-          label: '二级 2-2',
-          children: [
-            {
-              label: '三级 2-2-1',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      label: '一级 3',
-      children: [
-        {
-          label: '二级 3-1',
-          children: [
-            {
-              label: '三级 3-1-1',
-            },
-          ],
-        },
-        {
-          label: '二级 3-2',
-          children: [
-            {
-              label: '三级 3-2-1',
-            },
-          ],
+          value: 1,
+          label: '一级部门1',
         },
       ],
     },
   ]
 
-  handleNodeClick(data: any) {
-    console.log(data)
-  }
-  defaultProps = {
-    children: 'children',
-    label: 'label',
+  roleOption = {
+    border: true,
+    selection: true,
+    selectionFixed: false,
+    title: '角色分配',
+    size: 'mini',
+    align: 'center',
+    selectable: (row: any, index: any) => {
+      return index !== 0
+    },
+    menuAlign: 'center',
+    column: [
+      {
+        label: '角色名称',
+        prop: 'remark',
+      },
+      {
+        label: '角色编码',
+        prop: 'name',
+      },
+    ],
   }
 
-  tableData: any = []
-
-  handleEdit(index: any, row: any) {
-    this.dialogFormVisible = true
-    console.log(index, row.id)
-  }
-
-  handleDelete(index: any, row: any) {
-    console.log(index, row)
-  }
   mounted() {
-    this.fetchUserList()
+    this.init()
   }
 
-  async fetchUserList() {
-    const res = await this.$http.post(
+  async init() {
+    const { data: data1 } = await this.http.get('/pri/role/findAll', {
+      prefix: 'admin',
+    })
+    this.roleData = data1.data
+  }
+
+  toggleSelection(val?: any) {
+    setTimeout(() => {
+      if (val) {
+        const ref: any = this.$refs.roleList
+
+        ref.toggleSelection(val)
+        this.roleLoading = false
+      }
+    }, 500)
+  }
+  multipleSelection = []
+
+  handleSelectionChange(val: any) {
+    this.multipleSelection = val
+    console.log(val)
+  }
+  //################### 封装的弹窗按钮的属性
+  form = {}
+
+  async initData(obj: any) {
+    this.roleLoading = true
+    this.form = obj
+
+    const { data } = await this.http.get('pri/user/findUserRoles/' + obj.id, {
+      prefix: 'admin',
+    })
+    let array: any = []
+    data.data.forEach((el: any) => {
+      let ind = this.roleData.findIndex((e: any) => e.name === el.name)
+      if (ind !== -1) {
+        array.push(this.roleData[ind])
+      }
+    })
+    this.toggleSelection(array)
+  }
+  crudOption = {
+    column: [
+      {
+        label: '姓名',
+        prop: 'name',
+        placeholder: '请输入姓名',
+        disabled: true,
+      },
+      {
+        label: '昵称',
+        prop: 'nickName',
+        disabled: true,
+      },
+    ],
+  }
+
+  //################### 封装的弹窗按钮的属性
+
+  treeOption = {
+    defaultExpandAll: true,
+    formOption: {
+      labelWidth: 100,
+      column: [
+        {
+          label: '自定义项',
+          prop: 'test',
+        },
+      ],
+    },
+  }
+
+  props = {
+    labelText: '标题',
+    label: 'label',
+    value: 'value',
+    children: 'children',
+  }
+
+  permission = {
+    delBtn: false,
+    addBtn: false,
+    menu: false,
+  }
+
+  option = {
+    height: '450',
+    // sortable: true,
+    // selection: true,
+    menuWidth: 210,
+    index: true,
+    size: 'mini',
+    dialogDrag: true,
+    column: [
+      {
+        label: '登陆账号',
+        prop: 'name',
+      },
+      {
+        label: '用户昵称',
+        prop: 'nickName',
+      },
+      {
+        label: '手机号',
+        prop: 'mobile',
+      },
+      {
+        label: '邮箱',
+        prop: 'email',
+      },
+      {
+        label: '创建时间',
+        prop: 'createTime',
+        editDisplay: false,
+      },
+      {
+        label: '排序',
+        prop: 'orderNum',
+        slot: true,
+      },
+      {
+        label: '账号状态',
+        prop: 'status',
+      },
+    ],
+  }
+
+  // 拖拽排序
+  // sortableChange(oldindex: any, newindex: any, row: any, list: any) {
+  //   const num = Math.abs(
+  //     this.tableData[newindex].orderNum - this.tableData[oldindex].orderNum
+  //   )
+  //   if (oldindex > newindex) {
+  //     this.tableData[newindex].orderNum += num + 1
+  //   } else {
+  //     this.tableData[newindex].orderNum -= num + 1
+  //   }
+  // }
+
+  page: any = {
+    total: 40,
+    pagerCount: 5,
+    currentPage: 1,
+    pageSize: 10,
+    pageSizes: [5, 10, 20],
+    layout: 'total, sizes,prev, pager, next, jumper',
+    background: false,
+  }
+
+  async onLoad() {
+    this.loading = true
+    const { data } = await this.$http.post(
       'pri/user/findPage',
       {
-        pageNum: 1,
-        pageSize: 10,
+        pageNum: this.page.currentPage,
+        pageSize: this.page.pageSize,
         params: {},
       },
       { prefix: 'admin' }
     )
-    this.tableData = res.data.data.content
+
+    this.page.total = data.data.totalSize
+
+    this.tableData = data.data.content
+    setTimeout(() => {
+      this.loading = false
+    }, 500)
+  }
+
+  submit() {
+    console.log(this.form)
+  }
+
+  nodeClick(data: any) {
+    // if (data.id == 0) {
+    //   this.data = this.data0
+    // } else if (data.id == 1) {
+    // }
+    // this.$message.success(JSON.stringify(data))
   }
 }
 </script>

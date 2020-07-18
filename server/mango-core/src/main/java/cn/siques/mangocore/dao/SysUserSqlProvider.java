@@ -230,6 +230,10 @@ public class SysUserSqlProvider {
         if (record.getDelFlag() != null) {
             SET("del_flag = #{record.delFlag,jdbcType=TINYINT}");
         }
+
+        if (record.getOrderNum() != null) {
+            SET("order_num = #{record.orderNum,jdbcType=INTEGER}");
+        }
         
         applyWhere(example, true);
         return SQL();
@@ -260,7 +264,7 @@ public class SysUserSqlProvider {
         SET("last_update_by = #{record.lastUpdateBy,jdbcType=VARCHAR}");
         SET("last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP}");
         SET("del_flag = #{record.delFlag,jdbcType=TINYINT}");
-        
+        SET("order_num = #{record.orderNum,jdbcType=INTEGER}");
         SysUserExample example = (SysUserExample) parameter.get("example");
         applyWhere(example, true);
         return SQL();
@@ -330,6 +334,10 @@ public class SysUserSqlProvider {
         
         if (record.getDelFlag() != null) {
             SET("del_flag = #{delFlag,jdbcType=TINYINT}");
+        }
+
+        if (record.getOrderNum() != null) {
+            SET("order_num = #{record.orderNum,jdbcType=INTEGER}");
         }
         
         WHERE("id = #{id,jdbcType=BIGINT}");

@@ -15,6 +15,8 @@
         <i class="el-icon-share px-2"></i>
         <i class="el-icon-delete px-2"></i>
 
+        <el-color-picker></el-color-picker>
+
         <el-avatar
           size="small"
           src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
@@ -24,13 +26,13 @@
       </div>
     </el-header>
     <el-container class="d-flex">
-      <!-- <el-aside> -->
-      <el-menu class="el-menu-vertical-demo" :collapse="isCollapse" router>
-        <el-submenu
-          v-for="(menu, index) in menus"
-          :key="index"
-          :index="`${index}`"
-        >
+      <el-menu
+        style="overflow-y: scroll;"
+        class="el-menu-vertical-demo mr-2"
+        :collapse="isCollapse"
+        router
+      >
+        <el-submenu v-for="(menu, index) in menus" :key="index" :index="`${index}`">
           <template slot="title">
             <i :class="menu.icon"></i>
             <span slot="title">{{ menu.name }}</span>
@@ -48,7 +50,10 @@
           </template>
         </el-submenu>
       </el-menu>
-      <!-- </el-aside -->
+
+      <!-- <el-header>
+          <WorkTab></WorkTab>
+      </el-header>-->
       <el-main>
         <Nuxt />
       </el-main>
@@ -57,16 +62,22 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
+import WorkTab from '~/components/worktab/WorkTab.vue'
 @Component({
-  components: {},
+  components: { WorkTab },
 })
 export default class MenuLayOut extends Vue {
   menus: any = []
   isCollapse = false
+
   mounted() {
     setTimeout(() => {
       this.fetchMenu()
     }, 300)
+  }
+
+  get closingPage() {
+    return this.$store.state.closingPage
   }
 
   handleOpen(key: any, keyPath: any) {
@@ -83,7 +94,7 @@ export default class MenuLayOut extends Vue {
   }
 
   logOut() {
-    this.$store.commit('deleteToken')
+    this.$auth.logout()
     this.$router.push('sys/login')
   }
 }
@@ -106,13 +117,11 @@ export default class MenuLayOut extends Vue {
 
 .el-aside {
   text-align: center;
-  /* width: 200px !important; */
-  background-color: #545c64;
+
+  /* background-color: #545c64; */
 }
 
 .el-main {
-  background-color: #e9eef3;
-  color: #333;
   padding: 0 !important;
 }
 

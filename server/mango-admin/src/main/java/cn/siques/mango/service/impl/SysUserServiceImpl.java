@@ -1,7 +1,11 @@
 package cn.siques.mango.service.impl;
 
+import cn.siques.mango.service.SysRoleService;
+import cn.siques.mangocore.dao.SysRoleMapper;
 import cn.siques.mangocore.dao.SysUserMapper;
 import cn.siques.mangocore.entity.SysMenu;
+import cn.siques.mangocore.entity.SysRole;
+import cn.siques.mangocore.entity.SysRoleKey;
 import cn.siques.mangocore.entity.SysUser;
 import cn.siques.mango.service.SysMenuService;
 import cn.siques.mango.service.SysUserService;
@@ -22,6 +26,8 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Autowired
     SysMenuService sysMenuService;
+
+
 
     @Override
     public List<SysUser> findAll() {
@@ -51,6 +57,13 @@ public class SysUserServiceImpl implements SysUserService {
             }
         }
         return perms;
+    }
+
+    @Override
+    public   List<SysRole> findUserRolesById(long id) {
+
+        List<SysRole> sysRole = sysUserMapper.findUserRolesById(id);
+        return sysRole;
     }
 
     /**

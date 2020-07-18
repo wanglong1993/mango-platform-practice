@@ -1,37 +1,31 @@
 <template>
   <div style="height: 150vh;">
-    <template>
+    <!-- <template>
       <chartjs :options="options" type="pie" :data="data"></chartjs>
-    </template>
+    </template>-->
+
+    <avue-data-tabs :option="option"></avue-data-tabs>
 
     <div class="px-3 pt-3 fs-6 text-primary">微服务监控</div>
     <el-row class="pt-3 px-3" :gutter="12">
       <el-col :span="8">
         <el-card shadow="always">
           <div>
-            <el-link href="http://localhost:8848/nacos" target="_blank"
-              >nacos服务监控</el-link
-            >
+            <el-link href="http://localhost:8848/nacos" target="_blank">nacos服务监控</el-link>
           </div>
         </el-card>
       </el-col>
       <el-col :span="8">
         <el-card shadow="always">
           <div>
-            <el-link href="http://127.0.0.1:8849" target="_blank"
-              >sentinel服务限流</el-link
-            >
+            <el-link href="http://127.0.0.1:8849" target="_blank">sentinel服务限流</el-link>
           </div>
         </el-card>
       </el-col>
       <el-col :span="8">
         <el-card shadow="always">
           <div>
-            <el-link
-              href="http://127.0.0.1:9001/swagger-ui.html"
-              target="_blank"
-              >接口文档</el-link
-            >
+            <el-link href="http://127.0.0.1:9001/swagger-ui.html" target="_blank">接口文档</el-link>
           </div>
         </el-card>
       </el-col>
@@ -42,9 +36,7 @@
       <el-col :span="8">
         <el-card shadow="always">
           <div>
-            <el-link href="http://localhost:8090" target="_blank"
-              >admin服务监控</el-link
-            >
+            <el-link href="http://localhost:8090" target="_blank">admin服务监控</el-link>
           </div>
         </el-card>
       </el-col>
@@ -69,6 +61,46 @@ export default class index extends Vue {
 
     // These labels appear in the legend and in the tooltips when hovering different arcs
     labels: ['Red', 'Yellow', 'Blue'],
+  }
+  option = {
+    data: [
+      {
+        click: function (item: any) {
+          alert(JSON.stringify(item))
+        },
+        title: '分类统计',
+        subtitle: '实时',
+        count: 7993,
+        allcount: 10222,
+        text: '当前分类总记录数',
+        color: 'rgb(27, 201, 142)',
+        key: '类',
+      },
+      {
+        click: function (item: any) {
+          alert(JSON.stringify(item))
+        },
+        title: '附件统计',
+        subtitle: '实时',
+        count: 3112,
+        allcount: 10222,
+        text: '当前上传的附件数',
+        color: 'rgb(230, 71, 88)',
+        key: '附',
+      },
+      {
+        click: function (item: any) {
+          alert(JSON.stringify(item))
+        },
+        title: '文章统计',
+        subtitle: '实时',
+        count: 908,
+        allcount: 10222,
+        text: '评论次数',
+        color: 'rgb(178, 159, 255)',
+        key: '评',
+      },
+    ],
   }
 }
 </script>

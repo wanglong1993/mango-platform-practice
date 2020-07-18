@@ -70,8 +70,8 @@ public class SysDeptSqlProvider {
             VALUES("parent_id", "#{parentId,jdbcType=BIGINT}");
         }
         
-        if (record.getOrderNumm() != null) {
-            VALUES("order_numm", "#{orderNumm,jdbcType=INTEGER}");
+        if (record.getOrderNum() != null) {
+            VALUES("order_num", "#{orderNum,jdbcType=INTEGER}");
         }
         
         if (record.getCreateBy() != null) {
@@ -112,7 +112,7 @@ public class SysDeptSqlProvider {
         }
         SELECT("name");
         SELECT("parent_id");
-        SELECT("order_numm");
+        SELECT("order_num");
         SELECT("create_by");
         SELECT("create_time");
         SELECT("last_update_by");
@@ -153,8 +153,8 @@ public class SysDeptSqlProvider {
             SET("parent_id = #{record.parentId,jdbcType=BIGINT}");
         }
         
-        if (record.getOrderNumm() != null) {
-            SET("order_numm = #{record.orderNumm,jdbcType=INTEGER}");
+        if (record.getOrderNum() != null) {
+            SET("order_num = #{record.orderNum,jdbcType=INTEGER}");
         }
         
         if (record.getCreateBy() != null) {
@@ -194,7 +194,7 @@ public class SysDeptSqlProvider {
         SET("id = #{record.id,jdbcType=BIGINT}");
         SET("name = #{record.name,jdbcType=VARCHAR}");
         SET("parent_id = #{record.parentId,jdbcType=BIGINT}");
-        SET("order_numm = #{record.orderNumm,jdbcType=INTEGER}");
+        SET("order_num = #{record.orderNum,jdbcType=INTEGER}");
         SET("create_by = #{record.createBy,jdbcType=VARCHAR}");
         SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         SET("last_update_by = #{record.lastUpdateBy,jdbcType=VARCHAR}");
@@ -224,8 +224,8 @@ public class SysDeptSqlProvider {
             SET("parent_id = #{parentId,jdbcType=BIGINT}");
         }
         
-        if (record.getOrderNumm() != null) {
-            SET("order_numm = #{orderNumm,jdbcType=INTEGER}");
+        if (record.getOrderNum() != null) {
+            SET("order_num = #{orderNum,jdbcType=INTEGER}");
         }
         
         if (record.getCreateBy() != null) {
