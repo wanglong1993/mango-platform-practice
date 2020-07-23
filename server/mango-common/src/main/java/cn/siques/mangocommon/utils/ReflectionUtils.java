@@ -62,6 +62,8 @@ public class ReflectionUtils {
                         if(arg == null) {
                             arg = "";
                         }
+                        System.out.println(parameterTypes[i]);
+                        System.out.println(args[i].getClass());
                         if(!parameterTypes[i].equals(args[i].getClass())) {
                             isSameMethod = false;
                         }

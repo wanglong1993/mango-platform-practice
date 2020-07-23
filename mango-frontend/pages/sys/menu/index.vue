@@ -2,98 +2,39 @@
   <div>
     <div class="d-flex jc-between ai-center pl-3 py-2">
       <el-page-header content="菜单管理"></el-page-header>
-      <div class="pr-3">
-        <el-button size="mini" @click="searchShow = !searchShow" plain
-          >查询</el-button
+    </div>
+
+    <avue-crud :table-loading="loading" :option="option" :data="tableData">
+      <template slot="icon" slot-scope="scope">
+        <i :class="scope.row.icon" style="font-size:24px"></i>
+      </template>
+      <template slot-scope="scope" slot="menu">
+        <Crudbutton
+          icon="el-icon-check"
+          size="mini"
+          type="text"
+          :data="form"
+          :option="crudOption"
+          @click="initData(scope.row)"
+          @submit="submit"
+          :title="'授权菜单'"
         >
-        <el-button size="mini" @click="refresh" plain>刷新</el-button>
-        <el-button size="mini" plain>展开</el-button>
-        <el-button size="mini" plain>折叠</el-button>
-        <el-button size="mini" plain>新增</el-button>
-      </div>
-    </div>
-    <el-form v-if="searchShow" :inline="true" :model="formInline" class="pl-3">
-      <el-form-item label="菜单名称">
-        <el-input v-model="formInline.keyword" placeholder></el-input>
-      </el-form-item>
-
-      <el-form-item>
-        <el-button size="mini" type="primary" @click="onSearch">查询</el-button>
-        <el-button size="mini" plain>重置</el-button>
-      </el-form-item>
-    </el-form>
-    <div class="px-3 py-2">
-      <el-table
-        class="tableBox"
-        :data="tableData"
-        style="width: 100%; margin-bottom: 20px;"
-        row-key="id"
-        highlight-current-row
-        height="500"
-        stripe
-        border
-        :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
-      >
-        <el-table-column
-          prop="name"
-          label="菜单名称"
-          sortable
-          width="180"
-        ></el-table-column>
-        <el-table-column
-          prop="date"
-          label="日期"
-          sortable
-          width="180"
-        ></el-table-column>
-        <el-table-column
-          prop="type"
-          label="类型"
-          sortable
-          width="180"
-        ></el-table-column>
-        <el-table-column prop="url" label="链接"></el-table-column>
-        <el-table-column prop="orderNum" label="排序"></el-table-column>
-        <el-table-column prop="perms" label="权限"></el-table-column>
-
-        <el-table-column fixed="right" label="操作">
-          <template slot-scope="scope">
-            <el-button
-              type="text"
-              icon="el-icon-edit"
-              size="mini"
-              @click="handleEdit(scope.$index, scope.row)"
-              >编辑</el-button
-            >
-            <el-button
-              class="text-danger"
-              size="mini"
-              type="text"
-              @click="handleDelete(scope.$index, scope.row)"
-              >删除</el-button
-            >
-            <el-button
-              @click="handleInsert(scope.$index, scope.row)"
-              icon="el-icon-circle-plus"
-              class="text-blue"
-              size="mini"
-              type="text"
-              >新增菜单</el-button
-            >
+          <template slot-scope="scope" slot="extendField">
+            <el-cascader :props="casProps" :options="treeData" clearable></el-cascader>
           </template>
-        </el-table-column>
-      </el-table>
-    </div>
+        </Crudbutton>
+      </template>
+    </avue-crud>
 
     <template>
-      <Menudialog
+      <!-- <Menudialog
         ref="Menudialog"
         :title="title"
         @refreshScope="refresh()"
         @closeForm="dialogFormVisible = false"
         :formLabelWidth="formLabelWidth"
         :visible="dialogFormVisible"
-      ></Menudialog>
+      ></Menudialog>-->
     </template>
   </div>
 </template>
@@ -105,22 +46,92 @@ import { Vue, Component } from 'nuxt-property-decorator'
 export default class MenuIndex extends Vue {
   title = '修改菜单信息'
   tableData = []
-  searchShow = false
+  treeData = []
+  form = {}
+  loading = true
+
   dialogFormVisible = false
   formLabelWidth = '120px'
   formInline = {
     keyword: '',
   }
 
+  casProps = {
+    value: 'id',
+    label: 'name',
+    checkStrictly: true,
+  }
+
+  initData(obj: any) {
+    this.form = obj
+  }
+
+  submit() {}
+
+  crudOption = {
+    column: [
+      { label: '上级菜单', prop: 'parentName' },
+      {
+        label: '菜单名称',
+        prop: 'name',
+      },
+      {
+        label: '链接',
+        prop: 'url',
+      },
+    ],
+  }
+
+  option = {
+    headerAlign: 'center',
+    align: 'center',
+    border: true,
+    index: true,
+    defaultExpandAll: false,
+    column: [
+      {
+        label: '菜单名称',
+        prop: 'name',
+        align: 'left',
+        width: 200,
+      },
+      {
+        label: '类型',
+        prop: 'type',
+        dicData: [
+          {
+            label: '一',
+            value: 0,
+          },
+          {
+            label: '菜单',
+            value: 1,
+          },
+          {
+            label: '权限',
+            value: 2,
+          },
+        ],
+      },
+      {
+        label: '链接',
+        prop: 'url',
+      },
+      {
+        label: '自定义图标',
+        prop: 'icon',
+        slot: true,
+      },
+      {
+        label: '权限标识',
+        prop: 'perms',
+      },
+    ],
+  }
+
   mounted() {
     this.fetchMenu()
   }
-
-  refresh() {
-    this.fetchMenu()
-  }
-
-  onSearch() {}
 
   handleOpen(key: any, keyPath: any) {
     console.log(key, keyPath)
@@ -131,8 +142,11 @@ export default class MenuIndex extends Vue {
     const res = await http.get('/pri/menu/findMenuTree', {
       prefix: 'menu',
     })
-
-    this.tableData = res.data.data
+    setTimeout(() => {
+      this.loading = false
+      this.tableData = res.data.data
+      this.treeData = res.data.data
+    }, 500)
   }
   handleInsert(index: any, row: any) {
     this.title = '新增菜单'
@@ -176,9 +190,7 @@ export default class MenuIndex extends Vue {
           type: 'success',
           message: '删除成功!',
         })
-        setTimeout(() => {
-          this.refresh()
-        }, 500)
+        setTimeout(() => {}, 500)
       })
       .catch(() => {
         this.$message({

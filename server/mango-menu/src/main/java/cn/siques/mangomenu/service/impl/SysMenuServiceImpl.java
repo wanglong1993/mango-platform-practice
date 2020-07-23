@@ -100,7 +100,12 @@ public class SysMenuServiceImpl implements SysMenuService {
                     }
                 }
             }
-            SysMenu.setChildren(children);
+
+            if(children.size()!=0){
+
+                SysMenu.setChildren(children);
+            }
+
             children.sort((o1, o2) -> o1.getOrderNum().compareTo(o2.getOrderNum()));
             findChildren(children, menus, menuType);
         }

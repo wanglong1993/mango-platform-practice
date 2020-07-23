@@ -1,7 +1,10 @@
 package cn.siques.mango.service;
 
+import cn.siques.mangocore.Page.PageRequest;
+import cn.siques.mangocore.Page.PageResult;
 import cn.siques.mangocore.entity.SysRole;
 import cn.siques.mangocore.entity.SysUser;
+import cn.siques.mangocore.entity.SysUserRole;
 import cn.siques.mangocore.service.CrudService;
 
 import java.util.List;
@@ -33,5 +36,12 @@ public interface SysUserService extends CrudService<SysUser> {
      * @param id
      * @return
      */
-    List<SysRole> findUserRolesById(long id);
+    List<SysRole> findUserRolesById(Long id);
+
+
+    int saveUserRole(SysUserRole sysUserRole);
+
+    int delUserRoleByUserId(Long id);
+
+    PageResult findUsersByDeptId(PageRequest pageRequest,Long id);
 }

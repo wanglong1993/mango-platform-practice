@@ -6,106 +6,35 @@
           <el-breadcrumb class="py-2" separator-class="el-icon-arrow-right">
             <el-breadcrumb-item>角色管理</el-breadcrumb-item>
           </el-breadcrumb>
-          <el-table height="550" border :data="tableData" style="width: 100%;">
-            <el-table-column fixed fit label="创建时间">
-              <template slot-scope="scope">
-                <i class="el-icon-time"></i>
-                <span style="margin-left: 10px;">
-                  {{ scope.row.createTime }}
-                </span>
-              </template>
-            </el-table-column>
-            <el-table-column label="创建人">
-              <template slot-scope="scope">
-                <i class="el-icon-time"></i>
-                <span style="margin-left: 10px;">{{ scope.row.createBy }}</span>
-              </template>
-            </el-table-column>
-            <el-table-column label="最后修改时间">
-              <template slot-scope="scope">
-                <i class="el-icon-time"></i>
-                <span style="margin-left: 10px;">
-                  {{ scope.row.lastUpdateTime }}
-                </span>
-              </template>
-            </el-table-column>
-            <el-table-column label="修改人">
-              <template slot-scope="scope">
-                <i class="el-icon-time"></i>
-                <span style="margin-left: 10px;">
-                  {{ scope.row.lastUpdateBy }}
-                </span>
-              </template>
-            </el-table-column>
-            <el-table-column label="备注" width="120">
-              <template slot-scope="scope">
-                <i class="el-icon-user"></i>
-                <span style="margin-left: 10px;">{{ scope.row.remark }}</span>
-              </template>
-            </el-table-column>
-            <el-table-column label="角色名称" width="100">
-              <template slot-scope="scope">
-                <i class="el-icon-user"></i>
-                <span style="margin-left: 10px;">{{ scope.row.name }}</span>
-              </template>
-            </el-table-column>
-            <el-table-column label="是否停用" width="100">
-              <template slot-scope="scope">
-                <i class="el-icon-phone"></i>
-                <span style="margin-left: 10px;">{{ scope.row.delFlag }}</span>
-              </template>
-            </el-table-column>
-            <el-table-column fixed="right" label="操作">
-              <template slot-scope="scope">
-                <el-button
-                  type="text"
-                  icon="el-icon-edit"
-                  size="mini"
-                  @click="handleEdit(scope.$index, scope.row)"
-                  >编辑</el-button
-                >
-                <el-button
-                  class="text-danger"
-                  size="mini"
-                  type="text"
-                  @click="handleDelete(scope.$index, scope.row)"
-                  >删除</el-button
-                >
-                <el-dropdown class="pointer" @command="handleCommand">
-                  <span class="el-dropdown-link">
-                    <i class="el-icon-arrow-down el-icon--right"></i>
-                  </span>
-                  <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item command="authMenu"
-                      >授权菜单</el-dropdown-item
-                    >
-                    <el-dropdown-item command="authUser"
-                      >分配用户</el-dropdown-item
-                    >
-                  </el-dropdown-menu>
-                </el-dropdown>
-              </template>
-            </el-table-column>
-          </el-table>
-          <el-pagination
-            class="pt-3"
-            background
-            layout="prev, pager, next"
-            :total="1000"
-          ></el-pagination>
+
+          <avue-crud :data="tableData" :option="option">
+            <template slot-scope="scope" slot="menu">
+              <Crudbutton
+                icon="el-icon-check"
+                size="mini"
+                type="text"
+                :data="form"
+                :option="crudOption"
+                @click="initData(scope.row)"
+                @submit="submit"
+                :title="'授权菜单'"
+              >
+                <template v-slot:extendField>
+                  <MenuTree ref="tree"></MenuTree>
+                </template>
+              </Crudbutton>
+            </template>
+
+            <template slot="delFlagForm" slot-scope="scope">
+              <el-radio-group v-model="scope.row.delFlag">
+                <el-radio :label="1">禁用</el-radio>
+                <el-radio :label="0">正常</el-radio>
+              </el-radio-group>
+            </template>
+          </avue-crud>
         </div>
       </el-main>
     </el-container>
-
-    <template>
-      <Roledialog
-        ref="dialog"
-        :title="`修改角色信息`"
-        @closeForm="dialogFormVisible = false"
-        :formLabelWidth="formLabelWidth"
-        :visible="dialogFormVisible"
-      ></Roledialog>
-    </template>
   </div>
 </template>
 
@@ -116,11 +45,125 @@ import { Vue, Component } from 'nuxt-property-decorator'
   components: {},
 })
 export default class sysRole extends Vue {
+  http = Vue.prototype.$http
   dialogFormVisible = false
+  menuTree = []
+  form: any = {}
+
+  crudOption = {
+    column: [
+      {
+        label: '角色编号',
+        prop: 'name',
+        disabled: true,
+      },
+      {
+        label: '角色名称',
+        prop: 'remark',
+        disabled: true,
+      },
+    ],
+  }
+
+  async submit() {
+    const ref: any = this.$refs.tree
+    let data: any = []
+    ref.$refs.tree.getCheckedKeys().map((e: any) => {
+      data.push({
+        roleId: this.form.id,
+        menuId: e,
+      })
+    })
+
+    const res = await this.http.post(`/pri/role/saveRoleMenus`, data, {
+      prefix: 'admin',
+    })
+    if (res.data.code === 200) {
+      this.$notify({
+        title: '',
+        message: '保存成功',
+        position: 'bottom-right',
+        type: 'success',
+      })
+    }
+  }
+
+  async initData(obj: any) {
+    this.form = obj
+    const res = await this.http.get(`/pri/role/findRoleMenus/${obj.id}`, {
+      prefix: 'admin',
+    })
+
+    let checkedKeys: any = []
+    res.data.data.sysMenuList.map((e: any) => {
+      checkedKeys.push(e.id)
+    })
+
+    this.$refs.tree.$refs.tree.setCheckedKeys(checkedKeys)
+    // this.$refs.tree.setCheckedKeys(checkedKeys)
+  }
 
   formLabelWidth = '120px'
 
   tableData: any = []
+
+  option = {
+    height: '450',
+    // sortable: true,
+    // selection: true,
+    menuWidth: 210,
+    index: true,
+    size: 'mini',
+    dialogDrag: true,
+    column: [
+      {
+        rules: [
+          {
+            required: true,
+            message: '',
+            trigger: 'blur',
+          },
+        ],
+        label: '角色编码',
+        editDisabled: true,
+        prop: 'name',
+      },
+      {
+        rules: [
+          {
+            required: true,
+            message: '',
+            trigger: 'blur',
+          },
+        ],
+        label: '角色名称',
+
+        prop: 'remark',
+      },
+      {
+        label: '创建时间',
+        prop: 'createTime',
+        editDisplay: false,
+        addDisplay: false,
+      },
+      {
+        label: '更新时间',
+        prop: 'lastUpdateTime',
+        editDisplay: false,
+        addDisplay: false,
+      },
+
+      {
+        label: '角色状态',
+        prop: 'delFlag',
+        formslot: true,
+        labelslot: true,
+        value: 1,
+        addDisplay: false,
+        // slot: true,
+      },
+    ],
+  }
 
   mounted() {
     this.fetchRoleList()
@@ -129,29 +172,6 @@ export default class sysRole extends Vue {
   async fetchRoleList() {
     const res = await this.$http.get('pri/role/findAll', { prefix: 'admin' })
     this.tableData = res.data.data
-  }
-
-  handleCommand(command: any) {
-    switch (command) {
-      case 'authMenu':
-        this.dialogFormVisible = true
-        break
-      case 'authUser':
-        break
-      default:
-        break
-    }
-  }
-
-  handleEdit(index: any, row: any) {
-    this.dialogFormVisible = true
-    const dialog: any = this.$refs.dialog
-
-    dialog.form = row
-  }
-
-  handleDelete(index: any, row: any) {
-    console.log(index, row)
   }
 }
 </script>

@@ -69,7 +69,7 @@ public class SysRoleController {
      * @return
      */
     @ApiOperation(httpMethod="POST", value="修改角色权限")
-    @PreAuthorize("hasAuthority('sys:role:view')")
+    @PreAuthorize("hasAuthority('sys:role:edit')")
     @PostMapping(value="/saveRoleMenus")
     public JsonData saveRoleMenus(@RequestBody List<SysRoleMenu> records) {
         SysRoleKey sysRoleKey = new SysRoleKey();

@@ -1,23 +1,12 @@
 package cn.siques.mangocore.dao;
 
-import cn.siques.mangocore.entity.SysRole;
-import cn.siques.mangocore.entity.SysUser;
-import cn.siques.mangocore.entity.SysUserExample;
-import cn.siques.mangocore.entity.SysUserKey;
+import cn.siques.mangocore.entity.*;
+
 import java.util.List;
 import java.util.Set;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.DeleteProvider;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.FetchType;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 
@@ -66,15 +55,14 @@ public interface SysUserMapper {
         "email, mobile, status, ",
         "dept_id, create_by, ",
         "create_time, last_update_by, ",
-        "last_update_time, del_flag,order_num)",
+        "last_update_time, del_flag,order_num,dept_tree)",
         "values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, ",
         "#{nickName,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, ",
         "#{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, ",
         "#{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, ",
         "#{deptId,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR}, ",
         "#{createTime,jdbcType=TIMESTAMP}, #{lastUpdateBy,jdbcType=VARCHAR}, ",
-        "#{lastUpdateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=TINYINT})",
-            "#{orderNum,jdbcType=INTEGER}"
+        "#{lastUpdateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=TINYINT},#{orderNum,jdbcType=INTEGER},#{deptTree,jdbcType=VARCHAR})"
     })
     int insert(SysUser record);
 
@@ -126,7 +114,7 @@ public interface SysUserMapper {
         "from sys_user",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @Results({
+    @Results(id = "userMap",value = {
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
         @Result(column="nick_name", property="nickName", jdbcType=JdbcType.VARCHAR),
@@ -210,6 +198,30 @@ public interface SysUserMapper {
     @Select({"select * from sys_user"})
     List<SysUser> findPage();
 
+    @Select({"SELECT * FROM sys_user u\n" +
+            "LEFT JOIN sys_dept d ON u.dept_id= d.id"})
+    @Results(id = "deptUser",value = {
+            @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+            @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
+            @Result(column="nick_name", property="nickName", jdbcType=JdbcType.VARCHAR),
+            @Result(column="avatar", property="avatar", jdbcType=JdbcType.VARCHAR),
+            @Result(column="password", property="password", jdbcType=JdbcType.VARCHAR),
+            @Result(column="salt", property="salt", jdbcType=JdbcType.VARCHAR),
+            @Result(column="email", property="email", jdbcType=JdbcType.VARCHAR),
+            @Result(column="mobile", property="mobile", jdbcType=JdbcType.VARCHAR),
+            @Result(column="status", property="status", jdbcType=JdbcType.TINYINT),
+            @Result(column="dept_id", property="deptId", jdbcType=JdbcType.BIGINT),
+            @Result(column="create_by", property="createBy", jdbcType=JdbcType.VARCHAR),
+            @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="last_update_by", property="lastUpdateBy", jdbcType=JdbcType.VARCHAR),
+            @Result(column="last_update_time", property="lastUpdateTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="del_flag", property="delFlag", jdbcType=JdbcType.TINYINT),
+            @Result(column="order_num", property="orderNum", jdbcType=JdbcType.INTEGER),
+            @Result(property = "sysDept" , column = "dept_id" ,
+                    one = @One(select = "cn.siques.mangocore.dao.SysDeptMapper.selectById"))
+    })
+    List<SysDeptUser> findPageWithDept();
+
     /**
      * 查找用户
      * @param username
@@ -230,4 +242,10 @@ public interface SysUserMapper {
     @Select({"SELECT r.* FROM  sys_user u ,sys_user_role ur, sys_role r \n" +
             "WHERE u.id = #{id,jdbcType=BIGINT} AND u.id= ur.`user_id` AND ur.`role_id` = r.id"})
     List<SysRole> findUserRolesById(long id);
+
+
+    @Select({"SELECT u.*,d.* FROM sys_user u,sys_dept d\n" +
+            "WHERE  d.id=#{id,jdbcType=BIGINT} AND  u.dept_tree LIKE CONCAT('%',d.id,'%')"})
+    @ResultMap("deptUser")
+    List<SysDeptUser> findUsersByDeptId(Long id);
 }

@@ -44,7 +44,7 @@ export default class Crudbutton extends Vue {
   form = this.$attrs.data
   formLabelWidth = '80px'
   buttonTapped() {
-    this.$emit('initData')
+    this.$emit('click')
 
     const ref: any = this.$refs.CrudDialog
     ref.logVisible = true

@@ -47,10 +47,14 @@ public class SysDeptServiceImpl implements SysDeptService {
         List<SysDept> sysDepts = new ArrayList<>();
         // 查出所有的机构进行排序
         List<SysDept> depts= sysDeptMapper.findAll();
+
         for (SysDept dept:depts
              ) {
             if(dept.getParentId()==null|| dept.getParentId()==0){
+                List<Long> treeDept= new ArrayList<>();
                    dept.setLevel(0);
+                   treeDept.add(dept.getId());
+                   dept.setDeptList(treeDept);
                    sysDepts.add(dept);
             }
         }
@@ -63,14 +67,29 @@ public class SysDeptServiceImpl implements SysDeptService {
     private void findChildren(List<SysDept> sysDepts, List<SysDept> depts) {
         for (SysDept sysDept : sysDepts) {
             List<SysDept> children = new ArrayList<>();
+            // 最父节点的树
+
+
             for (SysDept dept : depts) {
+                // 遍历所有节点，若该节点的父节点与最外层节点相同，则说明是子节点
+                List<Long> tree = new ArrayList<>();
                 if (sysDept.getId() != null && sysDept.getId().equals(dept.getParentId())) {
+//                    // 父节点的机构树
+                    List<Long> deptList = sysDept.getDeptList();
+                    tree.addAll(deptList);
+//                    // 添加子节点id
+                    tree.add(dept.getId());
+//                    // 将树设置到子节点
+                   dept.setDeptList(tree);
                     dept.setParentName(dept.getName());
                     dept.setLevel(sysDept.getLevel() + 1);
                     children.add(dept);
                 }
             }
-            sysDept.setChildren(children);
+            if(children.size()!=0){
+
+                sysDept.setChildren(children);
+            }
             findChildren(children, depts);
         }
     }

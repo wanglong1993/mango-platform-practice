@@ -337,7 +337,11 @@ public class SysUserSqlProvider {
         }
 
         if (record.getOrderNum() != null) {
-            SET("order_num = #{record.orderNum,jdbcType=INTEGER}");
+            SET("order_num = #{orderNum,jdbcType=INTEGER}");
+        }
+
+        if (record.getDeptTree() != null) {
+            SET("dept_tree = #{deptTree,jdbcType=INTEGER}");
         }
         
         WHERE("id = #{id,jdbcType=BIGINT}");

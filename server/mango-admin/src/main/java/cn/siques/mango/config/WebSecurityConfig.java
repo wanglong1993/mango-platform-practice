@@ -47,6 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/v2/api-docs").permitAll()
                 .antMatchers("/webjars/springfox-swagger-ui/**").permitAll()
                 .antMatchers("/api/sys/v1/pub/**").permitAll()
+                .antMatchers("/api/sys/v1/pri/**").permitAll()
+
                 .antMatchers("/app/**").permitAll()
                 // 服务监控
                 .antMatchers("/actuator/**").permitAll()

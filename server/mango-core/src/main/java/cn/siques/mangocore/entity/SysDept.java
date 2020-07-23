@@ -1,5 +1,9 @@
 package cn.siques.mangocore.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,10 +15,40 @@ public class SysDept extends SysDeptKey {
     // 非数据库字段
     private Integer level;
 
-
-
     // 非数据库字段
     private List<SysDept> children;
+
+    // 非数据库字段
+    private List<Long>  deptList;
+    // 数据库字段
+    private  String deptTree;
+
+    public String getDeptTree() {
+        return deptTree;
+    }
+
+    public void setDeptTree(String deptTree) {
+        String[] split = deptTree.split(",");
+        List<Long> list = new ArrayList<>();
+        for (String s:split
+             ) {
+            list.add(Long.valueOf(s));
+        }
+        this.deptList=list;
+        this.deptTree = deptTree;
+    }
+
+    //
+
+
+    public List<Long> getDeptList() {
+        return deptList;
+    }
+
+    public void setDeptList(List<Long> deptList) {
+        this.deptList = deptList;
+    }
+
 
     @Override
     public String toString() {
@@ -22,6 +56,8 @@ public class SysDept extends SysDeptKey {
                 "parentName='" + parentName + '\'' +
                 ", level=" + level +
                 ", children=" + children +
+                ", deptList=" + deptList +
+                ", deptTree='" + deptTree + '\'' +
                 ", name='" + name + '\'' +
                 ", parentId=" + parentId +
                 ", orderNum=" + orderNum +

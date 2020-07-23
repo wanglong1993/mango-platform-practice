@@ -5,7 +5,9 @@
     </template>-->
 
     <avue-data-tabs :option="option"></avue-data-tabs>
-
+    <div class="py-2 pr-2">
+      <avue-data-icons :option="iconsOption"></avue-data-icons>
+    </div>
     <div class="px-3 pt-3 fs-6 text-primary">微服务监控</div>
     <el-row class="pt-3 px-3" :gutter="12">
       <el-col :span="8">
@@ -41,6 +43,9 @@
         </el-card>
       </el-col>
     </el-row>
+    <div class="pt-3">
+      <avue-data-progress :option="progressOption"></avue-data-progress>
+    </div>
   </div>
 </template>
 
@@ -61,6 +66,118 @@ export default class index extends Vue {
 
     // These labels appear in the legend and in the tooltips when hovering different arcs
     labels: ['Red', 'Yellow', 'Blue'],
+  }
+
+  iconsOption = {
+    span: 4,
+    data: [
+      {
+        click: function (item: any) {
+          alert(JSON.stringify(item))
+        },
+        title: '今日注册',
+        count: 12678,
+        icon: 'el-icon-tickets',
+        href: '',
+        target: '_blank',
+      },
+      {
+        click: function (item: any) {
+          alert(JSON.stringify(item))
+        },
+        title: '今日登录',
+        count: 22139,
+        icon: 'el-icon-success',
+        href: '',
+        target: '_blank',
+      },
+      {
+        click: function (item: any) {
+          alert(JSON.stringify(item))
+        },
+        title: '今日订阅',
+        count: 35623,
+        icon: 'el-icon-info',
+        href: '',
+        target: '_blank',
+      },
+      {
+        click: function (item: any) {
+          alert(JSON.stringify(item))
+        },
+        title: '今日评论',
+        count: 16826,
+        icon: 'el-icon-message',
+        href: '',
+        target: '_blank',
+      },
+      {
+        click: function (item: any) {
+          alert(JSON.stringify(item))
+        },
+        title: '今日评论',
+        count: 16826,
+        icon: 'el-icon-message',
+        href: '',
+        target: '_blank',
+      },
+      {
+        click: function (item: any) {
+          alert(JSON.stringify(item))
+        },
+        title: '今日评论',
+        count: 16826,
+        icon: 'el-icon-message',
+        href: '',
+        target: '_blank',
+      },
+    ],
+  }
+
+  progressOption = {
+    span: 6,
+    data: [
+      {
+        click: function (item: any) {
+          alert(JSON.stringify(item))
+        },
+        title: '转化率（日同比 28%）',
+        color: 'rgb(178, 159, 255)',
+        count: 32,
+        href: '',
+        target: '_blank',
+      },
+      {
+        click: function (item: any) {
+          alert(JSON.stringify(item))
+        },
+        title: '签到率（日同比 11%）',
+        color: 'rgb(230, 71, 88)',
+        count: 32,
+        href: '',
+        target: '_blank',
+      },
+      {
+        click: function (item: any) {
+          alert(JSON.stringify(item))
+        },
+        title: 'CPU使用率',
+        color: 'rgb(27, 201, 142)',
+        count: 56,
+        href: '',
+        target: '_blank',
+      },
+      {
+        click: function (item: any) {
+          alert(JSON.stringify(item))
+        },
+        title: '使用人数',
+        color: 'red',
+        count: 56,
+        href: '',
+        target: '_blank',
+      },
+    ],
   }
   option = {
     data: [

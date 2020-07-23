@@ -1,5 +1,7 @@
 package cn.siques.mangocore.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 import java.util.List;
 
@@ -58,6 +60,7 @@ public class SysRole extends SysRoleKey {
      *
      * @mbggenerated Mon Jun 29 20:40:38 CST 2020
      */
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss",locale ="zh",timezone = "GMT+8")
     private Date createTime;
 
     /**
@@ -74,6 +77,7 @@ public class SysRole extends SysRoleKey {
      *
      * @mbggenerated Mon Jun 29 20:40:38 CST 2020
      */
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss",locale ="zh",timezone = "GMT+8")
     private Date lastUpdateTime;
 
     /**

@@ -164,4 +164,9 @@ public interface SysUserRoleMapper {
         "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(SysUserRole record);
+
+
+
+    @Delete({"delete from sys_user_role where user_id=#{id,jdbcType=BIGINT}"})
+    int deleteByUserId(Long id);
 }

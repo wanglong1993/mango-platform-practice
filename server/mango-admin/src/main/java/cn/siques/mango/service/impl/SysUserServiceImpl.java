@@ -3,10 +3,8 @@ package cn.siques.mango.service.impl;
 import cn.siques.mango.service.SysRoleService;
 import cn.siques.mangocore.dao.SysRoleMapper;
 import cn.siques.mangocore.dao.SysUserMapper;
-import cn.siques.mangocore.entity.SysMenu;
-import cn.siques.mangocore.entity.SysRole;
-import cn.siques.mangocore.entity.SysRoleKey;
-import cn.siques.mangocore.entity.SysUser;
+import cn.siques.mangocore.dao.SysUserRoleMapper;
+import cn.siques.mangocore.entity.*;
 import cn.siques.mango.service.SysMenuService;
 import cn.siques.mango.service.SysUserService;
 import cn.siques.mangocore.Page.MybatisPageHelper;
@@ -27,6 +25,8 @@ public class SysUserServiceImpl implements SysUserService {
     @Autowired
     SysMenuService sysMenuService;
 
+    @Autowired
+    SysUserRoleMapper sysUserRoleMapper;
 
 
     @Override
@@ -60,11 +60,26 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public   List<SysRole> findUserRolesById(long id) {
+    public   List<SysRole> findUserRolesById(Long id) {
 
         List<SysRole> sysRole = sysUserMapper.findUserRolesById(id);
         return sysRole;
     }
+
+    @Override
+    public int saveUserRole(SysUserRole sysUserRole) {
+        int insert = sysUserRoleMapper.insert(sysUserRole);
+        return insert;
+    }
+
+    @Override
+    public int delUserRoleByUserId(Long id) {
+
+        int i = sysUserRoleMapper.deleteByUserId(id);
+        return i;
+    }
+
+
 
     /**
      * 保存用户
@@ -73,8 +88,32 @@ public class SysUserServiceImpl implements SysUserService {
      */
     @Override
     public int save(SysUser record) {
-        int insert = sysUserMapper.insert(record);
-        return insert;
+        Long id = null;
+        if(record.getId() == null || record.getId() == 0) {
+            // 新增用户
+            sysUserMapper.insertSelective(record);
+            id = record.getId();
+        } else {
+            // 更新用户信息
+            sysUserMapper.updateByPrimaryKeySelective(record);
+        }
+        // 更新用户角色
+//        if(id != null && id == 0) {
+//            return 1;
+//        }
+//        if(id != null) {
+//            for(SysUserRole sysUserRole:record.getUserRoles()) {
+//                sysUserRole.setUserId(id);
+//            }
+//        } else {
+//            if(!record.getUserRoles().isEmpty()) {
+//                sysUserRoleMapper.deleteByUserId(record.getId());
+//            }
+//        }
+//        for(SysUserRole sysUserRole:record.getUserRoles()) {
+//            sysUserRoleMapper.insertSelective(sysUserRole);
+//        }
+        return 1;
     }
 
     @Override
@@ -89,11 +128,19 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public SysUser findById(Long id) {
-        return null;
+        SysUserKey sysUserKey = new SysUserKey();
+        sysUserKey.setId(id);
+        SysUser sysUser = sysUserMapper.selectByPrimaryKey(sysUserKey);
+        return sysUser;
     }
 
     @Override
     public PageResult findPage(PageRequest pageRequest) {
-        return MybatisPageHelper.findPage(pageRequest,sysUserMapper);
+        return MybatisPageHelper.findPage(pageRequest,sysUserMapper,"findPageWithDept");
+    }
+
+    @Override
+    public PageResult findUsersByDeptId(PageRequest pageRequest ,Long id) {
+        return MybatisPageHelper.findPage(pageRequest,sysUserMapper,"findUsersByDeptId",id);
     }
 }
