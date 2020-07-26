@@ -5,6 +5,7 @@ import cn.siques.mango.service.SysUserService;
 import cn.siques.mangocore.utils.GrantedAuthorityImpl;
 import cn.siques.mangocore.utils.JwtUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,6 +31,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
         // 用户权限列表
       Set<String> permission= sysUserService.findPermission(user.getName());
         List<GrantedAuthorityImpl> collect = permission.stream().map(GrantedAuthorityImpl::new).collect(Collectors.toList());
+
         // 把属性放进userdetails
         return new JwtUserDetails(user.getName(),user.getPassword(),user.getSalt(),collect);
         }

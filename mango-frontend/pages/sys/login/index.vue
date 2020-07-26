@@ -46,20 +46,17 @@
                   autocomplete="current-captcha"
                 />
               </el-form-item>
-              <img
-                src="http://localhost:9001/admin/api/sys/v1/pub/captcha.jpg"
-              />
+              <img src="http://localhost:9001/admin/api/sys/v1/pub/captcha.jpg" />
             </div>
 
-            <el-button @click="userLogin" class="lowin-btn login-btn"
-              >Sign In</el-button
-            >
+            <el-button @click="userLogin" class="lowin-btn login-btn">Sign In</el-button>
 
             <div class="text-foot">
               Don't have an account?
-              <a @click="showLoginPanel = false" class="register-link"
-                >Register</a
-              >
+              <a
+                @click="showLoginPanel = false"
+                class="register-link"
+              >Register</a>
             </div>
           </el-form>
         </div>
@@ -71,21 +68,11 @@
             <p>Let's create your account</p>
             <div class="lowin-group">
               <label>Name</label>
-              <input
-                type="text"
-                name="name"
-                autocomplete="name"
-                class="lowin-input"
-              />
+              <input type="text" name="name" autocomplete="name" class="lowin-input" />
             </div>
             <div class="lowin-group">
               <label>Email</label>
-              <input
-                type="email"
-                autocomplete="email"
-                name="email"
-                class="lowin-input"
-              />
+              <input type="email" autocomplete="email" name="email" class="lowin-input" />
             </div>
             <div class="lowin-group">
               <label>Password</label>
@@ -198,7 +185,7 @@ export default class login extends Vue {
           })
         } else {
           // 设置token
-          this.$store.commit('storeToken', res.data.data.token)
+          this.$store.commit('storeAuth', res.data.data)
           this.$router.push('/')
         }
       } else {

@@ -1,41 +1,93 @@
 <template>
-  <div>
-    <div class="d-flex jc-between ai-center pl-3 py-2">
-      <el-page-header content="菜单管理"></el-page-header>
-    </div>
+  <div class="bg-white h-100">
+    <el-container class="pt-3 px-2">
+      <avue-crud
+        @row-update="rowUpdate"
+        @row-save="rowSave"
+        :table-loading="loading"
+        :option="option"
+        :data="tableData"
+      >
+        <template slot="icon" slot-scope="scope">
+          <i :class="scope.row.icon" style="font-size:24px"></i>
+        </template>
 
-    <avue-crud :table-loading="loading" :option="option" :data="tableData">
-      <template slot="icon" slot-scope="scope">
-        <i :class="scope.row.icon" style="font-size:24px"></i>
-      </template>
-      <template slot-scope="scope" slot="menu">
-        <Crudbutton
-          icon="el-icon-check"
-          size="mini"
-          type="text"
-          :data="form"
-          :option="crudOption"
-          @click="initData(scope.row)"
-          @submit="submit"
-          :title="'授权菜单'"
-        >
-          <template slot-scope="scope" slot="extendField">
-            <el-cascader :props="casProps" :options="treeData" clearable></el-cascader>
-          </template>
-        </Crudbutton>
-      </template>
-    </avue-crud>
+        <template slot="iconForm" slot-scope="scope">
+          <avue-input-icon
+            :disabled="scope.row.type==2"
+            v-model="scope.row.icon"
+            placeholder="请选择图标"
+            :icon-list="iconList"
+          ></avue-input-icon>
+        </template>
 
-    <template>
-      <!-- <Menudialog
-        ref="Menudialog"
-        :title="title"
-        @refreshScope="refresh()"
-        @closeForm="dialogFormVisible = false"
-        :formLabelWidth="formLabelWidth"
-        :visible="dialogFormVisible"
-      ></Menudialog>-->
-    </template>
+        <template slot="permsForm" slot-scope="scope">
+          <el-input :disabled="scope.row.type!=2" v-model="scope.row.perms" placeholder></el-input>
+        </template>
+
+        <template slot="urlForm" slot-scope="scope">
+          <el-input
+            :disabled="scope.row.type!=1&&scope.row.type!=0"
+            v-model="scope.row.url"
+            placeholder
+          ></el-input>
+        </template>
+
+        <template slot="typeForm" slot-scope="scope">
+          <el-radio-group v-model="scope.row.type">
+            <el-radio :label="0">父菜单</el-radio>
+            <el-radio :label="1">菜单</el-radio>
+            <el-radio :label="2">权限</el-radio>
+          </el-radio-group>
+        </template>
+
+        <template slot="parentIdForm" slot-scope="scope">
+          <el-cascader
+            :disabled="scope.row.type==0"
+            v-model="scope.row.parentId"
+            collapse-tags
+            :props="casProps"
+            :options="treeData"
+            clearable
+          ></el-cascader>
+        </template>
+
+        <template slot-scope="{size,type,row}" slot="menu">
+          <el-button :size="size" :type="type" @click="initData(row)">新增下级菜单</el-button>
+        </template>
+      </avue-crud>
+
+      <Cruddialog ref="dialog" :data="form" :option="crudOption" @submit="submit" :title="'新增下级菜单'">
+        <template v-slot:urlForm>
+          <el-input :disabled="form.type!=1" v-model="form.url" placeholder></el-input>
+        </template>
+
+        <template v-slot:typeForm>
+          <el-radio-group v-model="form.type">
+            <el-radio :label="0">父菜单</el-radio>
+            <el-radio :label="1">菜单</el-radio>
+            <el-radio :label="2">权限</el-radio>
+          </el-radio-group>
+        </template>
+
+        <template slot="parentNameForm">
+          <el-cascader v-model="form.parentId" collapse-tags :props="casProps" :options="treeData"></el-cascader>
+        </template>
+
+        <template slot="iconForm">
+          <avue-input-icon
+            :disabled="form.type==2"
+            v-model="form.icon"
+            placeholder="请选择图标"
+            :icon-list="iconList"
+          ></avue-input-icon>
+        </template>
+
+        <template slot="permsForm">
+          <el-input :disabled="form.type!=2" v-model="form.perms" placeholder></el-input>
+        </template>
+      </Cruddialog>
+    </el-container>
   </div>
 </template>
 <script lang="ts">
@@ -47,37 +99,103 @@ export default class MenuIndex extends Vue {
   title = '修改菜单信息'
   tableData = []
   treeData = []
+  iconList = [
+    {
+      label: '基本图标',
+      list: [
+        'el-icon-info',
+        'el-icon-error',
+        'el-icon-error',
+        'el-icon-success',
+        'el-icon-warning',
+        'el-icon-question',
+      ],
+    },
+    {
+      label: '方向图标',
+      list: [
+        'el-icon-info',
+        'el-icon-back',
+        'el-icon-arrow-left',
+        'el-icon-arrow-down',
+        'el-icon-arrow-right',
+        'el-icon-arrow-up',
+      ],
+    },
+    {
+      label: '符号图标',
+      list: ['el-icon-plus', 'el-icon-minus', 'el-icon-close', 'el-icon-check'],
+    },
+  ]
   form = {}
   loading = true
-
-  dialogFormVisible = false
-  formLabelWidth = '120px'
-  formInline = {
-    keyword: '',
-  }
 
   casProps = {
     value: 'id',
     label: 'name',
+    emitPath: false,
     checkStrictly: true,
+    expandTrigger: 'hover',
+    // multiple: true,
   }
 
   initData(obj: any) {
-    this.form = obj
+    console.log(obj)
+    const ref: any = this.$refs.dialog
+    ref.logVisible = true
+    let dto = { type: obj.type, parentId: obj.id, orderNum: 30 }
+    this.form = dto
   }
 
-  submit() {}
+  submit() {
+    console.log(this.form)
+  }
 
   crudOption = {
     column: [
-      { label: '上级菜单', prop: 'parentName' },
       {
+        rules: [
+          {
+            message: '请添加上级菜单',
+            trigger: 'blur',
+          },
+        ],
+        label: '上级菜单',
+        prop: 'parentName',
+        formslot: true,
+      },
+      {
+        label: '类型',
+        prop: 'type',
+        formslot: true,
+      },
+      {
+        rules: [
+          {
+            required: true,
+            message: '请添加菜单名称',
+            trigger: 'blur',
+          },
+        ],
         label: '菜单名称',
         prop: 'name',
       },
+
       {
         label: '链接',
         prop: 'url',
+        formslot: true,
+      },
+
+      {
+        label: '权限标识',
+        prop: 'perms',
+        formslot: true,
+      },
+      {
+        label: '选择标签',
+        prop: 'icon',
+        formslot: true,
       },
     ],
   }
@@ -86,7 +204,8 @@ export default class MenuIndex extends Vue {
     headerAlign: 'center',
     align: 'center',
     border: true,
-    index: true,
+    // index: true,
+    dialogDrag: true,
     defaultExpandAll: false,
     column: [
       {
@@ -98,6 +217,8 @@ export default class MenuIndex extends Vue {
       {
         label: '类型',
         prop: 'type',
+        formslot: true,
+        labelslot: true,
         dicData: [
           {
             label: '一',
@@ -116,25 +237,33 @@ export default class MenuIndex extends Vue {
       {
         label: '链接',
         prop: 'url',
+        formslot: true,
+        labelslot: true,
+      },
+      {
+        label: '上级菜单',
+        prop: 'parentId',
+        formslot: true,
+        labelslot: true,
       },
       {
         label: '自定义图标',
         prop: 'icon',
+        formslot: true,
+        labelslot: true,
         slot: true,
       },
       {
         label: '权限标识',
         prop: 'perms',
+        formslot: true,
+        labelslot: true,
       },
     ],
   }
 
   mounted() {
     this.fetchMenu()
-  }
-
-  handleOpen(key: any, keyPath: any) {
-    console.log(key, keyPath)
   }
 
   async fetchMenu() {
@@ -148,56 +277,20 @@ export default class MenuIndex extends Vue {
       this.treeData = res.data.data
     }, 500)
   }
-  handleInsert(index: any, row: any) {
-    this.title = '新增菜单'
-    this.dialogFormVisible = true
 
-    const dialog: any = this.$refs.Menudialog
-    let newone = {
-      parentName: row.name,
-      parentId: row.id,
-      level: row.level + 1,
-      type: '1',
-      children: [null],
-    }
-
-    dialog.form = newone
+  async rowSave(form: any, done: any, loading: any) {
+    setTimeout(() => {
+      done(form)
+    }, 500)
+    console.log(form)
   }
 
-  handleEdit(index: any, row: any) {
-    this.title = '修改菜单'
-    this.dialogFormVisible = true
+  async rowUpdate(form: any, index: any, done: any, loading: any) {
+    setTimeout(() => {
+      done(form)
+    }, 500)
 
-    const dialog: any = this.$refs.Menudialog
-
-    dialog.form = row
-  }
-  handleDelete(index: any, row: any) {
-    this.$confirm('此操作将删除该菜单权限, 是否继续?', '提示', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
-      type: 'warning',
-    })
-      .then(() => {
-        let data = []
-        data.push({ id: row.id })
-
-        const res = this.$http.post('/pri/menu/delete', data, {
-          prefix: 'menu',
-        })
-
-        this.$message({
-          type: 'success',
-          message: '删除成功!',
-        })
-        setTimeout(() => {}, 500)
-      })
-      .catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消删除',
-        })
-      })
+    console.log(form)
   }
 }
 </script>

@@ -36,6 +36,12 @@ export default {
       {
         src: 'https://cdn.staticfile.org/Sortable/1.10.0-rc2/Sortable.min.js',
       },
+      // {
+      //   src: 'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js',
+      // },
+      // {
+      //   src: 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.1/xlsx.full.min.js',
+      // },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
@@ -100,6 +106,11 @@ export default {
           login: {
             url: 'http://localhost:9001/admin/api/sys/v1/pub/login',
             method: 'post',
+            propertyName: 'token',
+          },
+          logout: {
+            url: 'http://localhost:9001/admin/api/sys/v1/pub/logout',
+            method: 'get',
             propertyName: 'token',
           },
           user: false,

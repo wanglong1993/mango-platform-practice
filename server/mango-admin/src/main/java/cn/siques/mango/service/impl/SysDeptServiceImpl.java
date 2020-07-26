@@ -1,10 +1,12 @@
 package cn.siques.mango.service.impl;
 
 import cn.siques.mango.service.SysDeptService;
+import cn.siques.mangocore.Page.MybatisPageHelper;
 import cn.siques.mangocore.Page.PageRequest;
 import cn.siques.mangocore.Page.PageResult;
 import cn.siques.mangocore.dao.SysDeptMapper;
 import cn.siques.mangocore.entity.SysDept;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +41,8 @@ public class SysDeptServiceImpl implements SysDeptService {
 
     @Override
     public PageResult findPage(PageRequest pageRequest) {
-        return null;
+        PageResult page = MybatisPageHelper.findPage(pageRequest, sysDeptMapper);
+        return page;
     }
 
     @Override

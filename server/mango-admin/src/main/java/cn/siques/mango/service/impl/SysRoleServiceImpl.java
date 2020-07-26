@@ -11,6 +11,7 @@ import cn.siques.mangocore.entity.SysRole;
 import cn.siques.mangocore.entity.SysRoleKey;
 import cn.siques.mangocore.entity.SysRoleMenu;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -80,12 +81,13 @@ public class SysRoleServiceImpl implements SysRoleService {
     }
 
     /**
-     * 修改角色权限
+     * 修改角色菜单权限，需要同时清空该用户的菜单缓存
      * @param records
      * @return
      */
     @Transactional
     @Override
+    @CacheEvict(value="findMenuTree",key = "",allEntries=true)
     public int saveRoleMenus(List<SysRoleMenu> records) {
         if(records == null || records.isEmpty()) {
             return 1;

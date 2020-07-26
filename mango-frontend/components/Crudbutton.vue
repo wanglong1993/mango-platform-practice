@@ -7,51 +7,75 @@
       @click="buttonTapped"
     >{{$attrs.title||'测试'}}</el-button>
 
-    <CrudDialog :title="$attrs.title" @submit="submit" ref="CrudDialog">
-      <slot>
-        <el-form label-position="right" class="demo-form-inline" :model="$attrs.data">
-          <el-row>
-            <template v-for="(column,index ) in $attrs.option.column">
-              <el-col :key="index" :span="12">
-                <el-form-item
-                  :label="column.label"
-                  :prop="column.prop"
-                  :label-width="formLabelWidth"
-                >
-                  <el-input
-                    :disabled="column.disabled||false"
-                    v-model="$attrs.data[column.prop]"
-                    :placeholder="column.placeholder||''"
-                  ></el-input>
-                </el-form-item>
-              </el-col>
-            </template>
-          </el-row>
-        </el-form>
-      </slot>
+    <el-dialog
+      :modal-append-to-body="false"
+      v-dialogdrag
+      :title="$attrs.title||''"
+      :visible.sync="logVisible"
+      width="60%"
+    >
+      <div slot="title">
+        <div class="d-flex jc-between ai-baseline pr-5">
+          <div>{{$attrs.title}}</div>
+        </div>
+      </div>
+
+      <el-form label-position="right" class="demo-form-inline" :model="$attrs.data">
+        <el-row>
+          <template v-for="(column,index) in $attrs.option.column">
+            <el-col :key="index" :span="12">
+              <el-form-item
+                :label="column.label"
+                :prop="column.prop"
+                :value="column.value"
+                :label-width="formLabelWidth"
+              >
+                <el-input
+                  v-if="!column.formslot"
+                  :disabled="column.disabled||false"
+                  v-model="$attrs.data[column.prop]"
+                  :placeholder="column.placeholder||''"
+                ></el-input>
+                <slot v-else :name="column.prop+`Form`"></slot>
+              </el-form-item>
+            </el-col>
+          </template>
+        </el-row>
+      </el-form>
 
       <slot name="extendField"></slot>
-    </CrudDialog>
+
+      <span slot="footer">
+        <el-button @click=" logVisible= false">取 消</el-button>
+        <el-button type="primary" @click="submit">确 定</el-button>
+      </span>
+    </el-dialog>
+
+    <!-- <CrudDialog :title="$attrs.title" @submit="submit" ref="CrudDialog"> -->
+
+    <!-- </CrudDialog> -->
   </span>
 </template>
 <script lang='ts'>
-import { Vue, Component } from 'nuxt-property-decorator'
-import CrudDialog from './Cruddialog/Cruddialog.vue'
+import { Vue, Component, Prop } from 'nuxt-property-decorator'
+
 @Component({
-  components: { CrudDialog },
+  components: {},
 })
 export default class Crudbutton extends Vue {
-  form = this.$attrs.data
+  form = {}
   formLabelWidth = '80px'
+  logVisible = false
+  // @Prop() form: any
+
   buttonTapped() {
     this.$emit('click')
-
-    const ref: any = this.$refs.CrudDialog
-    ref.logVisible = true
+    this.logVisible = true
   }
 
   submit() {
     this.$emit('submit')
+    this.logVisible = false
   }
 }
 </script>

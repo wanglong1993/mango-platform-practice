@@ -2,20 +2,24 @@ package cn.siques.mango.controller;
 
 import cn.siques.mango.config.RedisUtils;
 import cn.siques.mango.controller.dto.RegisterDto;
-import cn.siques.mangocore.utils.JwtAuthenticationToken;
-import cn.siques.mangocore.utils.PasswordEncoder;
-import cn.siques.mangocore.utils.PasswordUtils;
-import cn.siques.mangocore.utils.SecurityUtils;
+import cn.siques.mango.service.SysLoginLogService;
+import cn.siques.mangocore.Page.PageRequest;
+import cn.siques.mangocore.Page.PageResult;
+import cn.siques.mangocore.utils.*;
 import cn.siques.mango.controller.dto.LoginDto;
 import cn.siques.mangocore.entity.JsonData;
 import cn.siques.mangocore.entity.SysUser;
 import cn.siques.mango.service.SysUserService;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
+import jdk.nashorn.internal.runtime.regexp.JoniRegExp;
 import org.apache.commons.compress.utils.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
@@ -24,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Collection;
 
 @RestController()
 @RequestMapping("/api/sys/v1/pub/")
@@ -37,6 +42,9 @@ public class SysLoginController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private SysLoginLogService sysLoginLogService;
+
     @Value("${server.port}")
     private String port;
     @GetMapping("test")
@@ -47,6 +55,14 @@ public class SysLoginController {
     @Autowired
     public  RedisUtils<String,String> redisUtils;
 
+
+
+
+    @PostMapping("/online")
+    public JsonData onLine(@RequestBody PageRequest pageRequest){
+        PageResult page = sysLoginLogService.findPage(pageRequest);
+        return JsonData.buildSuccess(page);
+    }
 
 
     @PostMapping("/register")
@@ -61,6 +77,14 @@ public class SysLoginController {
         System.out.println(sysUser);
         int save = sysUserService.save(sysUser);
         return JsonData.buildSuccess(save);
+    }
+
+
+    @GetMapping("/logout")
+    public JsonData logout(HttpServletRequest request){
+        String username = SecurityUtils.getUsername();
+        sysLoginLogService.loginOutLog(username, IPUtils.getIpAddr(request));
+        return JsonData.buildSuccess(1);
     }
 
 
@@ -98,6 +122,8 @@ public class SysLoginController {
       JwtAuthenticationToken token =  SecurityUtils.login(request,username,password,authenticationManager);
 
         redisUtils.init().setKey(token.getPrincipal().toString(),token.getToken());
+        sysLoginLogService.writeLoginLog(username, IPUtils.getIpAddr(request));
+
         return JsonData.buildSuccess(token);
     }
 

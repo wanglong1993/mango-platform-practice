@@ -177,7 +177,7 @@ public class SysLoginLogSqlProvider {
         if (record.getRemarks() != null) {
             SET("remarks = #{record.remarks,jdbcType=VARCHAR}");
         }
-        
+
         applyWhere(example, true);
         return SQL();
     }

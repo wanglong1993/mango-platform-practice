@@ -4,12 +4,14 @@
       <chartjs :options="options" type="pie" :data="data"></chartjs>
     </template>-->
 
-    <avue-data-tabs :option="option"></avue-data-tabs>
-    <div class="py-2 pr-2">
+    <div class="basic-container">
+      <avue-data-tabs :option="option"></avue-data-tabs>
+    </div>
+    <div class="basic-container">
       <avue-data-icons :option="iconsOption"></avue-data-icons>
     </div>
-    <div class="px-3 pt-3 fs-6 text-primary">微服务监控</div>
-    <el-row class="pt-3 px-3" :gutter="12">
+    <div class="px-2 pt-2 fs-6 text-primary">微服务监控</div>
+    <el-row class="pt-2 px-2" :gutter="12">
       <el-col :span="8">
         <el-card shadow="always">
           <div>
@@ -33,8 +35,8 @@
       </el-col>
     </el-row>
 
-    <div class="px-3 pt-3 fs-6 text-primary">系统监控</div>
-    <el-row class="pt-3 px-3" :gutter="12">
+    <div class="px-2 pt-2 fs-6 text-primary">系统监控</div>
+    <el-row class="py-2 px-2" :gutter="12">
       <el-col :span="8">
         <el-card shadow="always">
           <div>
@@ -43,7 +45,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <div class="pt-3">
+    <div class="basic-container">
       <avue-data-progress :option="progressOption"></avue-data-progress>
     </div>
   </div>

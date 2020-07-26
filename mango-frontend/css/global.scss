@@ -1,6 +1,7 @@
 // @import '~bulma/sass/utilities/_all.sass';
 // @import 'bulma/sass/elements/button.sass';
 @import "./variables/variables";
+@import "./tags.scss";
 * {
   margin: 0;
   padding: 0;
@@ -18,6 +19,13 @@
   display: flex;
 }
 
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
 html,
 body {
   // height: 100%;
@@ -46,4 +54,11 @@ body {
 
 .el-button:focus {
   color: inherit !important;
+}
+
+.basic-container {
+  margin: 10px 6px;
+  padding: 10px 6px;
+  border: 15px;
+  background-color: white;
 }

@@ -9,6 +9,10 @@ public class SysLoginLog extends SysLoginLogKey {
      *
      * @mbggenerated Mon Jun 29 20:40:38 CST 2020
      */
+    public static final String STATUS_LOGIN = "login";
+    public static final String STATUS_LOGOUT = "logout";
+    public static final String STATUS_ONLINE = "online";
+
     private String userName;
 
     /**

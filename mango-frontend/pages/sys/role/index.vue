@@ -1,13 +1,18 @@
 <template>
-  <div>
-    <el-container>
+  <div class="bg-white h-100">
+    <el-container class="pt-3 px-2">
       <el-main>
         <div class="px-3 py-2">
           <el-breadcrumb class="py-2" separator-class="el-icon-arrow-right">
             <el-breadcrumb-item>角色管理</el-breadcrumb-item>
           </el-breadcrumb>
 
-          <avue-crud :data="tableData" :option="option">
+          <avue-crud
+            :permission="permission"
+            :table-loading="loading"
+            :data="tableData"
+            :option="option"
+          >
             <template slot-scope="scope" slot="menu">
               <Crudbutton
                 icon="el-icon-check"
@@ -49,7 +54,13 @@ export default class sysRole extends Vue {
   dialogFormVisible = false
   menuTree = []
   form: any = {}
-
+  loading = true
+  //########### 表格按钮权限
+  permission = {
+    // delBtn: false,
+    // addBtn: false,
+    // menu: false,
+  }
   crudOption = {
     column: [
       {
@@ -68,12 +79,14 @@ export default class sysRole extends Vue {
   async submit() {
     const ref: any = this.$refs.tree
     let data: any = []
-    ref.$refs.tree.getCheckedKeys().map((e: any) => {
+    ref.$refs.tree.getCheckedNodes(false, true).map((e: any) => {
       data.push({
         roleId: this.form.id,
-        menuId: e,
+        menuId: e.id,
       })
     })
+
+    console.log(data)
 
     const res = await this.http.post(`/pri/role/saveRoleMenus`, data, {
       prefix: 'admin',
@@ -96,10 +109,10 @@ export default class sysRole extends Vue {
 
     let checkedKeys: any = []
     res.data.data.sysMenuList.map((e: any) => {
-      checkedKeys.push(e.id)
+      checkedKeys.push(e)
     })
 
-    this.$refs.tree.$refs.tree.setCheckedKeys(checkedKeys)
+    this.$refs.tree.$refs.tree.setCheckedNodes(checkedKeys)
     // this.$refs.tree.setCheckedKeys(checkedKeys)
   }
 
@@ -170,8 +183,13 @@ export default class sysRole extends Vue {
   }
 
   async fetchRoleList() {
+    this.loading = true
     const res = await this.$http.get('pri/role/findAll', { prefix: 'admin' })
-    this.tableData = res.data.data
+
+    setTimeout(() => {
+      this.loading = false
+      this.tableData = res.data.data
+    }, 500)
   }
 }
 </script>

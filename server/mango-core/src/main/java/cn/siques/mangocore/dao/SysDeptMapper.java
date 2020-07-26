@@ -174,4 +174,7 @@ public interface SysDeptMapper {
      // TODO
     @Select({"select * from sys_dept"})
     List<SysDept> findAll();
+
+    @Select({"select * from sys_dept"})
+    List<SysDept> findPage();
 }

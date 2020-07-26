@@ -1,7 +1,7 @@
 <template>
-  <div class="pt-3">
-    <el-container>
-      <el-aside width="200px">
+  <div class="bg-white h-100">
+    <el-container class="pt-3 px-2">
+      <el-aside width="200px" class="pr-2" style="border-right:1px solid  #ececec;">
         <avue-tree ref="tree" :option="treeOption" :data="treeData" @node-click="nodeClick"></avue-tree>
       </el-aside>
       <el-main>
@@ -9,6 +9,7 @@
           :table-loading="loading"
           :page.sync="page"
           @on-load="onLoad"
+          :permission="permission"
           :data="tableData"
           :option="option"
           @row-update="rowUpdate"
@@ -31,12 +32,6 @@
             ></el-cascader>
           </template>
 
-          <!-- <template slot-scope="{}" slot="sysDeptLabel">
-            <span>机构名称&nbsp;&nbsp;</span>
-            <el-tooltip class="item" effect="dark" content="文字提示" placement="top-start">
-              <i class="el-icon-warning"></i>
-            </el-tooltip>
-          </template>-->
           <template slot="orderNum" slot-scope="scope">
             <el-input v-model="scope.row.orderNum" placeholder="请输入内容">{{scope.row.orderNum}}</el-input>
           </template>
@@ -69,7 +64,7 @@
                   :table-loading="roleLoading"
                   ref="roleList"
                   @selection-change="handleSelectionChange"
-                  :permission="permission"
+                  :permission="roleTablePermission"
                   :data="roleData"
                   :option="roleOption"
                 ></avue-crud>
@@ -109,6 +104,7 @@ export default class sysUser extends Vue {
     },
     menuAlign: 'center',
     column: [
+      { label: '上级菜单', prop: 'parentMe' },
       {
         label: '角色名称',
         prop: 'remark',
@@ -135,7 +131,29 @@ export default class sysUser extends Vue {
       },
     ],
   }
-  //########### 弹出窗口表格按钮
+  //########### 表格按钮权限
+
+  async checkAuth() {
+    this.permission.delBtn = await this.$store.dispatch(
+      'checkAuth',
+      'sys:user:edit'
+    )
+    this.permission.addBtn = await this.$store.dispatch(
+      'checkAuth',
+      'sys:user:add'
+    )
+    this.permission.menu = await this.$store.dispatch(
+      'checkAuth',
+      'sys:user:edit'
+    )
+  }
+  // 弹窗默认没有任何按钮
+  roleTablePermission = {
+    delBtn: false,
+    addBtn: false,
+    menu: false,
+  }
+
   permission = {
     delBtn: false,
     addBtn: false,
@@ -143,6 +161,7 @@ export default class sysUser extends Vue {
   }
   //########### 展示表格选项
   option = {
+    excelBtn: true,
     height: '450',
     // sortable: true,
     // selection: true,
@@ -257,6 +276,7 @@ export default class sysUser extends Vue {
     value: 'id',
     label: 'name',
     checkStrictly: true,
+    expandTrigger: 'hover',
   }
 
   //########### data
@@ -280,6 +300,7 @@ export default class sysUser extends Vue {
   //########### 生命周期初始化
   mounted() {
     this.init()
+    this.checkAuth()
   }
   async init() {
     const { data } = await this.http.get('/pri/role/findAll', {
@@ -369,9 +390,9 @@ export default class sysUser extends Vue {
 
     this.page.total = data.data.totalSize
 
-    this.tableData = data.data.content
     setTimeout(() => {
       this.loading = false
+      this.tableData = data.data.content
     }, 500)
   }
 
@@ -402,7 +423,7 @@ export default class sysUser extends Vue {
     return data
   }
   // 角色授权表单提交
-  submit() {
+  async submit() {
     const data: any = []
     this.multipleSelection.forEach((e: any) => {
       data.push({
@@ -410,8 +431,17 @@ export default class sysUser extends Vue {
         userId: this.form.id,
       })
     })
-    this.http.post('/pri/user/saveRole', data, { prefix: 'admin' })
-    console.log(data)
+    const res = await this.http.post('/pri/user/saveRole', data, {
+      prefix: 'admin',
+    })
+    if (res.data.code === 200) {
+      this.$notify({
+        title: '',
+        message: '保存成功',
+        position: 'bottom-right',
+        type: 'success',
+      })
+    }
   }
 
   // 节点点击

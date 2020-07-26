@@ -1,68 +1,99 @@
 import createPersistedState from 'vuex-persistedstate'
-import router from 'vue-router'
+import { diff } from '~/plugins/util/util.js'
+import { setStore, getStore } from '~/plugins/util/store'
+import website from '~/plugins/config/website'
+
+const isFirstPage = website.isFirstPage
+const tagWel = website.fistPage
+
+const tagObj = {
+  label: '', //标题名称
+  value: '', //标题的路径
+  params: '', //标题的路径参数
+  query: '', //标题的参数
+  meta: {}, //额外参数
+  group: [], //分组
+}
+//处理首个标签
+function setFistTag(list) {
+  if (list.length == 1) {
+    list[0].close = false
+  } else {
+    list.forEach((ele) => {
+      if (ele.value === tagWel.value && isFirstPage === false) {
+        ele.close = false
+      } else {
+        ele.close = true
+      }
+    })
+  }
+}
+
 export const state = () => ({
-  token: '',
+  tagList: [],
+  tag: tagObj,
+  tagWel: tagWel,
+  Auth: {},
   closingPage: '',
-  worktab: {
-    list: [
-      {
-        name: 'home',
-        tabname: '仪表盘',
-        path: '/',
-      },
-    ],
-    current: {
-      name: 'home',
-      tabname: '仪表盘',
-      path: '/',
-    },
-  },
 })
 
 export const mutations = {
-  storeToken(state, data) {
-    state.token = data
+  ADD_TAG: (state, action) => {
+    state.tag = action
+
+    setStore({ name: 'tag', content: state.tag })
+    if (state.tagList.some((ele) => diff(ele, action))) return
+    state.tagList.push(action)
+    setFistTag(state.tagList)
+    setStore({ name: 'tagList', content: state.tagList })
   },
-  deleteToken(state) {
-    state.token = ''
+  DEL_TAG: (state, action) => {
+    state.tagList = state.tagList.filter((item) => {
+      return !diff(item, action)
+    })
+    setFistTag(state.tagList)
+    setStore({ name: 'tagList', content: state.tagList })
   },
-  worktabRoute(state, p) {
-    let ind = state.worktab.list.findIndex((s) => s.path === p.path)
-    if (ind > -1) {
-      // 标签已存在
-      state.worktab.current = state.worktab.list[ind]
-    } else {
-      // 标签不存在，现在新建
-      state.worktab.list.push(p)
-      state.worktab.current = p
-    }
-    state.closingPage = ''
+  DEL_ALL_TAG: (state) => {
+    state.tagList = [state.tagWel]
+    setStore({ name: 'tagList', content: state.tagList })
   },
-  worktabRemove(state, p) {
-    // 关闭标签
-    let ind = state.worktab.list.findIndex((s) => s.path === p)
-    console.log(ind)
-    if (ind > -1) {
-      // 清理 keep alive - start
-      state.closingPage = state.worktab.list[ind].path
-      // 清理 keep alive - end
-      state.worktab.list.splice(ind, 1)
-    }
-    if (p === state.worktab.current.path) {
-      // 是当前页，返回上一页
-      // window.location.href = 'javascript:history.go(-1)'
-    }
+  DEL_TAG_OTHER: (state) => {
+    state.tagList = state.tagList.filter((item) => {
+      if (item.value === state.tag.value) {
+        return true
+      } else if (
+        !website.isFirstPage &&
+        item.value === website.fistPage.value
+      ) {
+        return true
+      }
+    })
+    setFistTag(state.tagList)
+    setStore({ name: 'tagList', content: state.tagList })
+  },
+  SET_TAG_LIST(state, tagList) {
+    state.tagList = tagList
+    setStore({ name: 'tagList', content: state.tagList })
+  },
+  storeAuth(state, data) {
+    state.Auth = data
+  },
+  deleteAuth(state) {
+    state.Auth = ''
   },
 }
 
 export const getters = {}
 
 export const actions = {
-  worktabRemove({ commit }, p) {
-    commit('worktabRemove', p)
-  },
-  worktabRoute({ commit }, p) {
-    commit('worktabRoute', p)
+  async checkAuth({ state }, permission) {
+    const statu = await state.Auth.authorities.findIndex(
+      (e) => e.authority === permission
+    )
+
+    console.log(statu)
+    return statu === -1 ? false : true
   },
 }
 

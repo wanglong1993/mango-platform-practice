@@ -87,6 +87,22 @@ public class SysLogSqlProvider {
         if (record.getIp() != null) {
             VALUES("ip", "#{ip,jdbcType=VARCHAR}");
         }
+
+        if (record.getCreateBy() != null) {
+            VALUES("create_by", "#{createBy,jdbcType=VARCHAR}");
+        }
+
+        if (record.getCreateTime() != null) {
+            VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
+        }
+
+        if (record.getLastUpdateBy() != null) {
+            VALUES("last_update_by", "#{lastUpdateBy,jdbcType=VARCHAR}");
+        }
+
+        if (record.getLastUpdateTime() != null) {
+            VALUES("last_update_time", "#{lastUpdateTime,jdbcType=TIMESTAMP}");
+        }
         
         return SQL();
     }
@@ -110,6 +126,11 @@ public class SysLogSqlProvider {
         SELECT("params");
         SELECT("time");
         SELECT("ip");
+        SELECT("create_by");
+        SELECT("create_time");
+        SELECT("last_update_by");
+        SELECT("last_update_time");
+
         FROM("sys_log");
         applyWhere(example, false);
         
@@ -160,6 +181,22 @@ public class SysLogSqlProvider {
         if (record.getIp() != null) {
             SET("ip = #{record.ip,jdbcType=VARCHAR}");
         }
+
+        if (record.getCreateBy() != null) {
+            VALUES("create_by", "#{record.createBy,jdbcType=VARCHAR}");
+        }
+
+        if (record.getCreateTime() != null) {
+            VALUES("create_time", "#{record.createTime,jdbcType=TIMESTAMP}");
+        }
+
+        if (record.getLastUpdateBy() != null) {
+            VALUES("last_update_by", "#{record.lastUpdateBy,jdbcType=VARCHAR}");
+        }
+
+        if (record.getLastUpdateTime() != null) {
+            VALUES("last_update_time", "#{record.lastUpdateTime,jdbcType=TIMESTAMP}");
+        }
         
         applyWhere(example, true);
         return SQL();
@@ -182,7 +219,12 @@ public class SysLogSqlProvider {
         SET("params = #{record.params,jdbcType=VARCHAR}");
         SET("time = #{record.time,jdbcType=BIGINT}");
         SET("ip = #{record.ip,jdbcType=VARCHAR}");
-        
+        SET("create_by = #{record.createBy,jdbcType=VARCHAR}");
+       SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
+        SET("last_update_by =  #{record.lastUpdateBy,jdbcType=VARCHAR}");
+         SET("last_update_time = {record.lastUpdateTime,jdbcType=TIMESTAMP}");
+
+
         SysLogExample example = (SysLogExample) parameter.get("example");
         applyWhere(example, true);
         return SQL();
@@ -220,6 +262,22 @@ public class SysLogSqlProvider {
         
         if (record.getIp() != null) {
             SET("ip = #{ip,jdbcType=VARCHAR}");
+        }
+
+        if (record.getCreateBy() != null) {
+            SET("create_by = #{createBy,jdbcType=VARCHAR}");
+        }
+
+        if (record.getCreateTime() != null) {
+            SET("create_time = #{createTime,jdbcType=TIMESTAMP}");
+        }
+
+        if (record.getLastUpdateBy() != null) {
+            SET("last_update_by =  #{lastUpdateBy,jdbcType=VARCHAR}");
+        }
+
+        if (record.getLastUpdateTime() != null) {
+            SET("last_update_time = {lastUpdateTime,jdbcType=TIMESTAMP}");
         }
         
         WHERE("id = #{id,jdbcType=BIGINT}");

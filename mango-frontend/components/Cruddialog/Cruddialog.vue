@@ -1,25 +1,55 @@
 <template >
-  <el-dialog
-    :modal-append-to-body="false"
-    v-dialogdrag
-    :title="$attrs.title||''"
-    :visible.sync="logVisible"
-    width="60%"
-  >
-    <div slot="title">
-      <div class="d-flex jc-between ai-baseline pr-5">
-        <div>{{$attrs.title}}</div>
+  <span>
+    <el-dialog
+      :modal-append-to-body="false"
+      v-dialogdrag
+      :title="$attrs.title||''"
+      :visible.sync="logVisible"
+      width="60%"
+    >
+      <div slot="title">
+        <div class="d-flex jc-between ai-baseline pr-5">
+          <div>{{$attrs.title}}</div>
+        </div>
       </div>
-    </div>
-    <slot></slot>
 
-    <slot name="extendField"></slot>
+      <el-form
+        ref="ruleForm"
+        :rules="rules"
+        label-position="right"
+        class="demo-form-inline"
+        :model="$attrs.data"
+      >
+        <el-row>
+          <template v-for="(column,index) in $attrs.option.column">
+            <el-col :key="index" :span="24">
+              <el-form-item
+                :label="column.label"
+                :prop="column.prop"
+                :value="column.value"
+                :label-width="formLabelWidth"
+              >
+                <el-input
+                  v-if="!column.formslot"
+                  :disabled="column.disabled||false"
+                  v-model="$attrs.data[column.prop]"
+                  :placeholder="column.placeholder||''"
+                ></el-input>
+                <slot v-else :name="column.prop+`Form`"></slot>
+              </el-form-item>
+            </el-col>
+          </template>
+        </el-row>
+      </el-form>
 
-    <span slot="footer">
-      <el-button @click=" logVisible= false">取 消</el-button>
-      <el-button type="primary" @click="submit">确 定</el-button>
-    </span>
-  </el-dialog>
+      <slot name="extendField"></slot>
+
+      <span slot="footer">
+        <el-button @click=" logVisible= false">取 消</el-button>
+        <el-button type="primary" @click="submit">确 定</el-button>
+      </span>
+    </el-dialog>
+  </span>
 </template>
 <script lang='ts'>
 import { Vue, Component } from 'nuxt-property-decorator'
@@ -28,10 +58,31 @@ import { Vue, Component } from 'nuxt-property-decorator'
 })
 export default class Cruddialog extends Vue {
   logVisible = false
+  formLabelWidth = '80px'
+  rules: any = {}
+
+  mounted() {
+    const attr: any = this.$attrs.option
+    attr.column.forEach((e: any) => {
+      if (e.rules) {
+        this.rules[e.prop] = e.rules[0]
+      }
+    })
+
+    console.log(this.rules)
+  }
 
   submit() {
-    this.logVisible = false
-    this.$emit('submit')
+    this.$refs['ruleForm'].validate((valid: any) => {
+      if (valid) {
+        this.$emit('submit')
+        alert('submit!')
+        this.logVisible = false
+      } else {
+        console.log('error submit!!')
+        return false
+      }
+    })
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
-  <div class="pt-3">
-    <el-container>
-      <el-aside width="200px">
+  <div class="bg-white h-100">
+    <el-container class="pt-3 px-2">
+      <el-aside width="200px" class="pr-2" style="border-right:1px solid  #ececec;">
         <avue-tree ref="tree" :option="treeOption" :data="treeData" @node-click="nodeClick"></avue-tree>
       </el-aside>
       <el-main>
@@ -11,38 +11,23 @@
           @on-load="onLoad"
           :data="tableData"
           :option="option"
+          @row-update="rowUpdate"
+          @row-save="rowSave"
         >
+          <template slot-scope="scope" slot="parentIdForm">
+            <el-cascader
+              v-model="scope.row.parentId"
+              :props="casProps"
+              :options="treeData"
+              clearable
+            ></el-cascader>
+          </template>
+
           <template slot="orderNum" slot-scope="scope">
             <el-input v-model="scope.row.orderNum" placeholder="请输入内容">{{scope.row.orderNum}}</el-input>
           </template>
-          <template slot-scope="scope" slot="menu">
-            <Crudbutton
-              icon="el-icon-check"
-              size="mini"
-              type="text"
-              :data="form"
-              :option="crudOption"
-              @initData="initData(scope.row)"
-              @submit="submit"
-              :title="'授权角色'"
-            >
-              <!-- 具名插槽 -->
-              <template v-slot:extendField>
-                <avue-crud
-                  :table-loading="roleLoading"
-                  ref="roleList"
-                  @selection-change="handleSelectionChange"
-                  :permission="permission"
-                  :data="roleData"
-                  :option="roleOption"
-                ></avue-crud>
-              </template>
-            </Crudbutton>
-          </template>
         </avue-crud>
       </el-main>
-
-      <template></template>
     </el-container>
   </div>
 </template>
@@ -52,100 +37,15 @@ import { Vue, Component } from 'nuxt-property-decorator'
   components: {},
 })
 export default class sysDept extends Vue {
-  // 用户角色列表需要请求获取
-  roleData: any = []
+  // vue挂载
   http = Vue.prototype.$http
+
+  //########### 请求数据
+
   tableData: any = []
-  loading = true
-  roleLoading = true
-  treeData = [
-    {
-      value: 0,
-      label: '一级部门',
-      children: [
-        {
-          value: 1,
-          label: '一级部门1',
-        },
-      ],
-    },
-  ]
+  treeData: any = []
 
-  roleOption = {
-    border: true,
-    selection: true,
-    selectionFixed: false,
-    title: '角色分配',
-    size: 'mini',
-    align: 'center',
-    selectable: (row: any, index: any) => {
-      return index !== 0
-    },
-    menuAlign: 'center',
-    column: [
-      {
-        label: '角色名称',
-        prop: 'remark',
-      },
-      {
-        label: '角色编码',
-        prop: 'name',
-      },
-    ],
-  }
-
-  mounted() {
-    this.init()
-  }
-
-  async init() {
-    const { data } = await this.http.get('/pri/role/findAll', {
-      prefix: 'admin',
-    })
-    this.roleData = data.data
-
-    const { data: data1 } = await this.http.get('/pri/dept/findDeptTree', {
-      prefix: 'admin',
-    })
-    this.treeData = data1.data
-  }
-
-  toggleSelection(val?: any) {
-    const ref: any = this.$refs.roleList
-    ref.toggleSelection()
-    setTimeout(() => {
-      if (val) {
-        ref.toggleSelection(val)
-        this.roleLoading = false
-      }
-    }, 500)
-  }
-  multipleSelection: any = []
-
-  handleSelectionChange(val: any) {
-    this.multipleSelection = val
-    // console.log(val)
-  }
-  //################### 封装的弹窗按钮的属性
-  form: any = {}
-
-  async initData(obj: any) {
-    this.roleLoading = true
-    this.form = obj
-
-    const { data } = await this.http.get('pri/user/findUserRoles/' + obj.id, {
-      prefix: 'admin',
-    })
-    let array: any = []
-    data.data.forEach((el: any) => {
-      let ind = this.roleData.findIndex((e: any) => e.name === el.name)
-      if (ind !== -1) {
-        array.push(this.roleData[ind])
-      }
-    })
-    // 初始选中按钮
-    this.toggleSelection(array)
-  }
+  //########### 弹出窗口选项
   crudOption = {
     column: [
       {
@@ -162,8 +62,71 @@ export default class sysDept extends Vue {
     ],
   }
 
-  //################### 封装的弹窗按钮的属性
+  //########### 展示表格选项
+  option = {
+    height: '450',
+    // sortable: true,
+    // selection: true,
+    menuWidth: 210,
+    // index: true,
+    size: 'mini',
+    dialogDrag: true,
+    column: [
+      {
+        rules: [
+          {
+            required: true,
+            message: '',
+            trigger: 'blur',
+          },
+        ],
+        label: '机构名称',
+        prop: 'name',
+      },
+      {
+        label: '机构代码',
+        prop: 'id',
+        editDisplay: false,
+        addDisplay: false,
+      },
 
+      {
+        label: '上级机构',
+        prop: 'parentId',
+        formslot: true,
+        labelslot: true,
+      },
+
+      {
+        label: '创建时间',
+        prop: 'createTime',
+        editDisplay: false,
+        overHidden: true,
+        addDisplay: false,
+      },
+      {
+        label: '创建人',
+        prop: 'createBy',
+        editDisplay: false,
+        addDisplay: false,
+      },
+      {
+        label: '排序',
+        prop: 'orderNum',
+        value: 80,
+        slot: true,
+      },
+      {
+        label: '机构状态',
+        prop: 'delFlag',
+        value: 1,
+        addDisplay: false,
+        editDisplay: false,
+        // slot: true,
+      },
+    ],
+  }
+  //########### 机构树选项 右键属性
   treeOption = {
     defaultExpandAll: true,
     props: {
@@ -180,73 +143,19 @@ export default class sysDept extends Vue {
     },
   }
 
-  props = {
-    labelText: '标题',
-    label: 'label',
-    value: 'value',
-    children: 'children',
+  //########### 级联选择器属性
+  casProps = {
+    value: 'id',
+    label: 'name',
+    checkStrictly: true,
+    expandTrigger: 'hover',
   }
 
-  permission = {
-    delBtn: false,
-    addBtn: false,
-    menu: false,
-  }
+  //########### data
+  loading = true
 
-  option = {
-    height: '450',
-    // sortable: true,
-    // selection: true,
-    menuWidth: 210,
-    index: true,
-    size: 'mini',
-    dialogDrag: true,
-    column: [
-      {
-        label: '登陆账号',
-        prop: 'name',
-      },
-      {
-        label: '用户昵称',
-        prop: 'nickName',
-      },
-      {
-        label: '手机号',
-        prop: 'mobile',
-      },
-      {
-        label: '邮箱',
-        prop: 'email',
-      },
-      {
-        label: '创建时间',
-        prop: 'createTime',
-        editDisplay: false,
-      },
-      {
-        label: '排序',
-        prop: 'orderNum',
-        slot: true,
-      },
-      {
-        label: '账号状态',
-        prop: 'status',
-      },
-    ],
-  }
-
-  // 拖拽排序
-  // sortableChange(oldindex: any, newindex: any, row: any, list: any) {
-  //   const num = Math.abs(
-  //     this.tableData[newindex].orderNum - this.tableData[oldindex].orderNum
-  //   )
-  //   if (oldindex > newindex) {
-  //     this.tableData[newindex].orderNum += num + 1
-  //   } else {
-  //     this.tableData[newindex].orderNum -= num + 1
-  //   }
-  // }
-
+  form: any = {}
+  // 分页属性
   page: any = {
     total: 40,
     pagerCount: 5,
@@ -256,30 +165,53 @@ export default class sysDept extends Vue {
     layout: 'total, sizes,prev, pager, next, jumper',
     background: false,
   }
+  // 请求方法变更
 
-  fetchDeptUser = false
+  //########### 生命周期初始化
+  mounted() {
+    this.init()
+  }
+  async init() {
+    //
+    const { data } = await this.http.get('/pri/role/findAll', {
+      prefix: 'admin',
+    })
+    this.roleData = data.data
 
-  async onLoad(id: any) {
-    this.loading = true
+    const { data: data1 } = await this.http.get('/pri/dept/findDeptTree', {
+      prefix: 'admin',
+    })
+    this.treeData = data1.data
+  }
+  //########### 方法
 
-    let data: any = []
-    if (this.fetchDeptUser) {
-      data = await this.findDeptUser(id)
-    } else {
-      data = await this.findUser()
-    }
-
-    this.page.total = data.data.totalSize
-
-    this.tableData = data.data.content
+  async rowSave(form: any, done: any, loading: any) {
     setTimeout(() => {
-      this.loading = false
+      done(form)
     }, 500)
   }
 
-  async findUser() {
-    const { data } = await this.http.post(
-      'pri/user/findPage',
+  async rowUpdate(form: any, index: any, done: any, loading: any) {
+    setTimeout(() => {
+      done(form)
+      this.onLoad()
+    }, 500)
+  }
+
+  //################### 封装的弹窗按钮的弹出数据初始化
+
+  //################### 封装的弹窗按钮的属性
+
+  // 表格加载
+  async onLoad(id?: any) {
+    this.loading = true
+
+    //
+
+    // 查找所有机构
+
+    const { data: data } = await this.http.post(
+      'pri/dept/findPage',
       {
         pageNum: this.page.currentPage,
         pageSize: this.page.pageSize,
@@ -288,43 +220,18 @@ export default class sysDept extends Vue {
       { prefix: 'admin' }
     )
 
-    return data
+    this.page.total = data.totalSize
+
+    setTimeout(() => {
+      this.loading = false
+      this.tableData = data.data.content
+    }, 500)
   }
 
-  async findDeptUser(id: any) {
-    const { data } = await this.http.post(
-      'pri/user/findDeptUser/' + id,
-      {
-        pageNum: this.page.currentPage,
-        pageSize: this.page.pageSize,
-        params: {},
-      },
-      { prefix: 'admin' }
-    )
-    return data
-  }
-
-  submit() {
-    const data: any = []
-    this.multipleSelection.forEach((e: any) => {
-      data.push({
-        roleId: e.id,
-        userId: this.form.id,
-      })
-    })
-    this.http.post('/pri/user/saveRole', data, { prefix: 'admin' })
-    console.log(data)
-  }
-
+  // 节点点击
   nodeClick(data: any) {
     console.log(data)
-    this.fetchDeptUser = true
     this.onLoad(data.id)
-    // if (data.id == 0) {
-    //   this.data = this.data0
-    // } else if (data.id == 1) {
-    // }
-    // this.$message.success(JSON.stringify(data))
   }
 }
 </script>

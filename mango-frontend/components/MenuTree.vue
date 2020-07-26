@@ -5,6 +5,7 @@
       show-checkbox
       :default-expand-all="false"
       node-key="id"
+      check-strictly
       ref="tree"
       :indent="20"
       highlight-current

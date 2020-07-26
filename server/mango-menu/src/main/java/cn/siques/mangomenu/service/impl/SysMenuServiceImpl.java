@@ -43,7 +43,11 @@ public class SysMenuServiceImpl implements SysMenuService {
     }
 
 
-
+    /**
+     * 删除菜单是刷新所有菜单缓存
+     * @param records
+     * @return
+     */
     @Override
     @CacheEvict(value="findMenuTree",allEntries=true)
     public int delete(List<SysMenu> records) {

@@ -1,75 +1,83 @@
 <template>
   <el-container>
-    <el-header class="d-flex jc-between ai-center fs-8 text-white">
-      <div>
-        Mango-Admin
-        <el-button
-          @click="isCollapse = !isCollapse"
-          :icon="isCollapse ? `el-icon-s-unfold` : 'el-icon-s-fold'"
-          class="text-white fs-6 pl-2"
-          type="text"
-        ></el-button>
-      </div>
-      <div class="d-flex ai-center">
-        <i class="el-icon-thumb px-2"></i>
-        <i class="el-icon-share px-2"></i>
-        <i class="el-icon-delete px-2"></i>
+    <el-menu
+      background-color="#20222A"
+      text-color="hsla(0,0%,100%,.7)"
+      active-text-color="#ffd04b"
+      style="overflow-y: scroll"
+      class="el-menu-vertical-demo"
+      :collapse="isCollapse"
+      :unique-opened="true"
+    >
+      <el-menu-item class="fs-4 text-white">
+        <i class="el-icon-menu text-white"></i>
+        <span slot="title">Mango-admin</span>
+      </el-menu-item>
+      <el-submenu v-for="(menu, index) in menus" :key="index" :index="`${index}`">
+        <template slot="title">
+          <i :class="menu.icon"></i>
+          <span slot="title">{{ menu.name }}</span>
+        </template>
 
-        <el-color-picker></el-color-picker>
+        <template v-for="(submenu, index1) in menu.children">
+          <el-menu-item
+            v-if="submenu.type != 2"
+            :key="`${index}-${index1}`"
+            :index="`${submenu.url}`"
+            @click="$router.push({path:submenu.url,query:{label: submenu.name }})"
+          >
+            <i :class="submenu.icon"></i>
+            <span slot="title">{{ submenu.name }}</span>
+          </el-menu-item>
+        </template>
+      </el-submenu>
+    </el-menu>
 
-        <el-avatar
-          size="small"
-          src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
-        ></el-avatar>
-        <span class="fs-3 px-2">超级管理员</span>
-        <el-button type="primary" @click="logOut">退出登陆</el-button>
-      </div>
-    </el-header>
-    <el-container class="d-flex">
-      <el-menu
-        style="overflow-y: scroll;"
-        class="el-menu-vertical-demo mr-2"
-        :collapse="isCollapse"
-        router
-      >
-        <el-submenu v-for="(menu, index) in menus" :key="index" :index="`${index}`">
-          <template slot="title">
-            <i :class="menu.icon"></i>
-            <span slot="title">{{ menu.name }}</span>
-          </template>
-
-          <template v-for="(submenu, index1) in menu.children">
-            <el-menu-item
-              v-if="submenu.type != 2"
-              :key="`${index}-${index1}`"
-              :index="`${submenu.url}`"
-            >
-              <i :class="submenu.icon"></i>
-              <span slot="title">{{ submenu.name }}</span>
-            </el-menu-item>
-          </template>
-        </el-submenu>
-      </el-menu>
-
-      <!-- <el-header>
-          <WorkTab></WorkTab>
-      </el-header>-->
-      <el-main>
-        <Nuxt />
-      </el-main>
+    <el-container class="h-100">
+      <el-header class="d-flex jc-between ai-center fs-8">
+        <div>
+          <el-button
+            @click="isCollapse = !isCollapse"
+            :icon="isCollapse ? `el-icon-s-unfold` : 'el-icon-s-fold'"
+            class="fs-8 pl-3"
+            type="text"
+          ></el-button>
+        </div>
+        <div class="d-flex ai-center pr-4">
+          <el-color-picker class="pr-2" v-model="color" size="mini"></el-color-picker>
+          <div>{{this.$store.state.Auth.name}}</div>
+          <el-dropdown @command="handleCommand">
+            <span class="el-dropdown-link">
+              <i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="logout">退出</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
+      </el-header>
+      <el-container class="d-flex flex-column bg-light">
+        <div class="bg-white mb-2" style="z-index:1;">
+          <Menutags></Menutags>
+        </div>
+        <el-main class="h-100">
+          <Nuxt :keep-alive="true" class />
+        </el-main>
+      </el-container>
     </el-container>
   </el-container>
 </template>
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import WorkTab from '~/components/worktab/WorkTab.vue'
+
 @Component({
-  components: { WorkTab },
+  components: {},
 })
 export default class MenuLayOut extends Vue {
   menus: any = []
+  http = Vue.prototype.$http
   isCollapse = false
-
+  color = ''
   mounted() {
     setTimeout(() => {
       this.fetchMenu()
@@ -93,8 +101,20 @@ export default class MenuLayOut extends Vue {
     this.menus = res.data.data
   }
 
+  handleCommand(command: any) {
+    switch (command) {
+      case 'logout':
+        this.logOut()
+        break
+
+      default:
+        break
+    }
+  }
+
   logOut() {
     this.$auth.logout()
+
     this.$router.push('sys/login')
   }
 }
@@ -105,18 +125,17 @@ export default class MenuLayOut extends Vue {
 }
 .el-header,
 .el-footer {
-  background-color: #1890ff;
-
+  padding: 0 !important;
   height: 50px !important;
 }
 
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 200px;
+  width: 240px !important;
   min-height: 400px;
 }
 
 .el-aside {
-  text-align: center;
+  text-align: left;
 
   /* background-color: #545c64; */
 }

@@ -110,6 +110,12 @@ $flex-ai: (
   }
 }
 
+@each $value in (relative, absolute, fixed) {
+  .#{$value} {
+    position: $value;
+  }
+}
+
 @each $key, $value in $flex-ai {
   .ai-#{$key} {
     align-items: $value;
@@ -118,7 +124,7 @@ $flex-ai: (
 //第一个参数为键值及键名 第二个为对象
 @each $colorkey, $color in $colors {
   .text-#{$colorkey} {
-    color: $color;
+    color: $color !important;
   }
   .bg-#{$colorkey} {
     background-color: $color !important;

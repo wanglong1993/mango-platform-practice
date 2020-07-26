@@ -14,7 +14,7 @@ import java.util.Collection;
  */
 public class JwtUserDetails implements UserDetails {
 
-    private static final long serialVersionUID =2L;
+    private static final long serialVersionUID =1L;
 
     private String username;
     private String password;
@@ -29,6 +29,8 @@ public class JwtUserDetails implements UserDetails {
         this.salt = salt;
         this.authorities = authorities;
     }
+
+
 
     @Override
     public String getUsername() {

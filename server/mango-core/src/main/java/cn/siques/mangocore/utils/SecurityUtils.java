@@ -3,13 +3,14 @@ package cn.siques.mangocore.utils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import java.util.Collection;
 
 
 public class SecurityUtils {
@@ -120,15 +121,23 @@ public  static  void checkAuthentication(HttpServletRequest request, HttpServlet
     public static JwtAuthenticationToken login(HttpServletRequest request,
                                                String username, String password, AuthenticationManager authenticationManager) {
 
-        JwtAuthenticationToken token = new JwtAuthenticationToken(username, password);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+
+
+
+        JwtAuthenticationToken token = new JwtAuthenticationToken(username, password,authorities);
         token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
         // 执行登陆过程
         Authentication authenticate = authenticationManager.authenticate(token);
-        // 认证成功
+
+//         认证成功
         SecurityContextHolder.getContext().setAuthentication(authenticate);
         // 生成令牌并返回
         token.setToken(JwtTokenUtils.generateToken(authenticate));
-        System.out.println(token);
+        token.eraseCredentials();
+
         return  token;
     }
 }
