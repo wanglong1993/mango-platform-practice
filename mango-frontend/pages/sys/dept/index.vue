@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white h-100">
-    <el-container class="pt-3 px-2">
+    <el-container class="pt-3 px-3">
       <el-aside width="200px" class="pr-2" style="border-right:1px solid  #ececec;">
         <avue-tree ref="tree" :option="treeOption" :data="treeData" @node-click="nodeClick"></avue-tree>
       </el-aside>
@@ -8,6 +8,7 @@
         <avue-crud
           :table-loading="loading"
           :page.sync="page"
+          :permission="permission"
           @on-load="onLoad"
           :data="tableData"
           :option="option"
@@ -44,6 +45,12 @@ export default class sysDept extends Vue {
 
   tableData: any = []
   treeData: any = []
+  // 权限控制
+  permission = {
+    delBtn: '',
+    addBtn: '',
+    menu: '',
+  }
 
   //########### 弹出窗口选项
   crudOption = {
@@ -170,13 +177,30 @@ export default class sysDept extends Vue {
   //########### 生命周期初始化
   mounted() {
     this.init()
+    this.checkAuth()
   }
+
+  async checkAuth() {
+    this.permission.delBtn = await this.$store.dispatch(
+      'checkAuth',
+      'sys:dept:edit'
+    )
+    this.permission.addBtn = await this.$store.dispatch(
+      'checkAuth',
+      'sys:dept:add'
+    )
+    this.permission.menu = await this.$store.dispatch(
+      'checkAuth',
+      'sys:dept:edit'
+    )
+  }
+
   async init() {
     //
     const { data } = await this.http.get('/pri/role/findAll', {
       prefix: 'admin',
     })
-    this.roleData = data.data
+    // this.roleData = data.data
 
     const { data: data1 } = await this.http.get('/pri/dept/findDeptTree', {
       prefix: 'admin',

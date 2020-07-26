@@ -35,6 +35,7 @@ export const state = () => ({
   tagWel: tagWel,
   Auth: {},
   closingPage: '',
+  primaryColor: '',
 })
 
 export const mutations = {
@@ -81,6 +82,9 @@ export const mutations = {
   },
   deleteAuth(state) {
     state.Auth = ''
+  },
+  deleteAll(state) {
+    state = ''
   },
 }
 

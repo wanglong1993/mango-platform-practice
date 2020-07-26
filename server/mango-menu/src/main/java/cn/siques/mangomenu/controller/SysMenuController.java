@@ -1,7 +1,8 @@
 package cn.siques.mangomenu.controller;
 
+import cn.siques.mangocore.entity.JsonData;
 import cn.siques.mangocore.entity.SysMenu;
-import cn.siques.mangocore.http.JsonData;
+
 import cn.siques.mangocore.utils.SecurityUtils;
 import cn.siques.mangomenu.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;

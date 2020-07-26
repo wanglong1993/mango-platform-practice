@@ -34,35 +34,49 @@
     </el-menu>
 
     <el-container class="h-100">
-      <el-header class="d-flex jc-between ai-center fs-8">
-        <div>
+      <el-header class="d-flex jc-between ai-center">
+        <div class="fs-8 pl-3">
           <el-button
             @click="isCollapse = !isCollapse"
             :icon="isCollapse ? `el-icon-s-unfold` : 'el-icon-s-fold'"
-            class="fs-8 pl-3"
             type="text"
+            size="medium"
           ></el-button>
         </div>
         <div class="d-flex ai-center pr-4">
-          <el-color-picker class="pr-2" v-model="color" size="mini"></el-color-picker>
-          <div>{{this.$store.state.Auth.name}}</div>
+          <Themepicker></Themepicker>
+          <div class="pl-3">
+            <el-tooltip content="全屏" placement="bottom" effect="dark">
+              <el-button icon="el-icon-full-screen" @click="fullScreen" type="text"></el-button>
+            </el-tooltip>
+          </div>
+
+          <div class="pl-3">
+            <el-tooltip content="切换语言" placement="bottom" effect="dark">
+              <el-button @click="changeLanguage()" class="fa fa-language" type="text"></el-button>
+            </el-tooltip>
+          </div>
+
+          <div class="pl-3">{{this.$store.state.Auth.name}}</div>
           <el-dropdown @command="handleCommand">
             <span class="el-dropdown-link">
               <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="logout">退出</el-dropdown-item>
+              <el-dropdown-item command="logout">{{$t("navbar.logOut")}}</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </div>
       </el-header>
-      <el-container class="d-flex flex-column bg-light">
-        <div class="bg-white mb-2" style="z-index:1;">
-          <Menutags></Menutags>
+      <el-container>
+        <div class="bg-light h-100">
+          <div class="bg-white mb-2" style="z-index:1;">
+            <Menutags></Menutags>
+          </div>
+          <el-main class="h-100">
+            <Nuxt :keep-alive="true" class />
+          </el-main>
         </div>
-        <el-main class="h-100">
-          <Nuxt :keep-alive="true" class />
-        </el-main>
       </el-container>
     </el-container>
   </el-container>
@@ -114,8 +128,30 @@ export default class MenuLayOut extends Vue {
 
   logOut() {
     this.$auth.logout()
-
+    this.$store.commit('deleteAll')
     this.$router.push('sys/login')
+  }
+  fullscreen = false
+  fullScreen() {
+    let element = document.documentElement
+
+    if (element.requestFullscreen) {
+      element.requestFullscreen()
+    }
+  }
+
+  lang = 'en'
+  changeLanguage() {
+    this.lang === 'en' ? (this.lang = 'zh') : (this.lang = 'en')
+    console.log(this.$i18n)
+    const i18: any = this.$i18n
+    i18.locale = this.lang
+    this.$notify({
+      title: '',
+      message: '切换成功',
+      position: 'bottom-right',
+      type: 'success',
+    })
   }
 }
 </script>

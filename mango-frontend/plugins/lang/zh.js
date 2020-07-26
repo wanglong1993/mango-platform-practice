@@ -8,9 +8,8 @@ export default {
   menuTip: '没有发现菜单',
   feedback: '意见反馈',
   submit: '提交',
-  wel: {
-    info: '早安，Smallwei，Avue一款超乎你想象的框架！',
-    dept: '我是avue团队下的一个部门-哈皮部门-哈皮职位',
+  mango: {
+    info: '早安',
     team: '团队内排名',
     project: '项目访问',
     count: '项目数',
@@ -24,30 +23,41 @@ export default {
       key3: '评',
       text1: '当前分类总记录数',
       text2: '当前上传的附件数',
-      text3: '评论次数'
+      text3: '评论次数',
     },
     data2: {
       column1: '今日注册',
       column2: '今日登录',
       column3: '今日订阅',
-      column4: '今日评论'
+      column4: '今日评论',
     },
     data3: {
       column1: '转化率（日同比 28%）',
       column2: '签到率（日同比 11%）',
-      column3: '签到率（日同比 11%）'
+      column3: 'CPU使用率',
+	  column4: '使用人数',
     },
     data4: {
       column1: '错误日志',
       column2: '数据展示',
       column3: '权限管理',
-      column4: '用户管理'
+      column4: '用户管理',
+    },
+	data5: {
+		title: '微服务监控',
+      column1: 'Nacos服务监控',
+      column2: 'Sentinel服务限流',
+      column3: '接口文档',
+    },
+	data6: {
+		title: '系统监控',
+      column1: 'Admin服务监控',
     },
     table: {
       rw: '工作任务',
       nr: '工作内容',
-      sj: '工作时间'
-    }
+      sj: '工作时间',
+    },
   },
   route: {
     setting: '个人设置',
@@ -70,7 +80,7 @@ export default {
     crudForm: '表格表单',
     cache: '页面缓冲',
     error: '异常页面',
-    test: '测试页面'
+    test: '测试页面',
   },
   login: {
     title: '登录 ',
@@ -102,12 +112,16 @@ export default {
     language: '中英文',
     notice: '消息通知',
     theme: '主题',
-    color: '换色'
+    color: '换色',
   },
   tagsView: {
     search: '搜索',
     menu: '更多',
     closeOthers: '关闭其它',
-    closeAll: '关闭所有'
+    closeAll: '关闭所有',
+  },
+  error:{
+	  title:'抱歉，你访问的页面不存在',
+	  back:'返回首页'
   }
 }

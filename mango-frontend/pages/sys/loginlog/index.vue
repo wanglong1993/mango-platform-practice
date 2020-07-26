@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white h-100">
-    <el-container class="pt-3 px-2">
+    <el-container class="pt-3 px-3">
       <el-main>
         <div class="px-3 py-2">
           <el-breadcrumb class="py-2" separator-class="el-icon-arrow-right">
@@ -10,6 +10,7 @@
           <avue-crud
             :page.sync="page"
             :table-loading="loading"
+            @refresh-change="rowRefresh"
             @on-load="onLoad"
             :permission="permission"
             :data="tableData"
@@ -77,6 +78,10 @@ export default class sysRole extends Vue {
   }
 
   mounted() {}
+
+  rowRefresh() {
+    this.onLoad()
+  }
 
   async onLoad() {
     this.loading = true

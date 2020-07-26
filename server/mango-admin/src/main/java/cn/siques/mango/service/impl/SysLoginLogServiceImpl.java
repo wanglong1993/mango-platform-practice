@@ -6,10 +6,13 @@ import cn.siques.mangocore.Page.PageRequest;
 import cn.siques.mangocore.Page.PageResult;
 import cn.siques.mangocore.dao.SysLoginLogMapper;
 import cn.siques.mangocore.entity.SysLoginLog;
+import cn.siques.mangocore.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,6 +30,15 @@ public class SysLoginLogServiceImpl implements SysLoginLogService {
             sysLoginLog.setStatus(SysLoginLog.STATUS_ONLINE);
             sysLoginLogMapper.updateByPrimaryKey(sysLoginLog);
         }
+        if(sysLoginLogs.size()==0){
+            SysLoginLog sysLoginLog = new SysLoginLog();
+            sysLoginLog.setStatus(SysLoginLog.STATUS_ONLINE);
+            sysLoginLog.setIp(ip);
+            sysLoginLog.setUserName(userName);
+            sysLoginLog.setCreateTime(new Date());
+            sysLoginLog.setCreateBy(SecurityUtils.getUsername());
+            this.save(sysLoginLog);
+        }
     }
 
     @Override
@@ -40,7 +52,8 @@ public class SysLoginLogServiceImpl implements SysLoginLogService {
 
     @Override
     public int save(SysLoginLog record) {
-        return 0;
+        int insert = sysLoginLogMapper.insert(record);
+        return insert;
     }
 
     @Override

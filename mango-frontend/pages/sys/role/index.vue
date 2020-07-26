@@ -1,44 +1,36 @@
 <template>
   <div class="bg-white h-100">
-    <el-container class="pt-3 px-2">
-      <el-main>
-        <div class="px-3 py-2">
-          <el-breadcrumb class="py-2" separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item>角色管理</el-breadcrumb-item>
-          </el-breadcrumb>
-
-          <avue-crud
-            :permission="permission"
-            :table-loading="loading"
-            :data="tableData"
-            :option="option"
+    <el-container class="pt-3 px-3">
+      <avue-crud
+        :permission="permission"
+        :table-loading="loading"
+        :data="tableData"
+        :option="option"
+      >
+        <template slot-scope="scope" slot="menu">
+          <Crudbutton
+            icon="el-icon-check"
+            size="mini"
+            type="text"
+            :data="form"
+            :option="crudOption"
+            @click="initData(scope.row)"
+            @submit="submit"
+            :title="'授权菜单'"
           >
-            <template slot-scope="scope" slot="menu">
-              <Crudbutton
-                icon="el-icon-check"
-                size="mini"
-                type="text"
-                :data="form"
-                :option="crudOption"
-                @click="initData(scope.row)"
-                @submit="submit"
-                :title="'授权菜单'"
-              >
-                <template v-slot:extendField>
-                  <MenuTree ref="tree"></MenuTree>
-                </template>
-              </Crudbutton>
+            <template v-slot:extendField>
+              <MenuTree ref="tree"></MenuTree>
             </template>
+          </Crudbutton>
+        </template>
 
-            <template slot="delFlagForm" slot-scope="scope">
-              <el-radio-group v-model="scope.row.delFlag">
-                <el-radio :label="1">禁用</el-radio>
-                <el-radio :label="0">正常</el-radio>
-              </el-radio-group>
-            </template>
-          </avue-crud>
-        </div>
-      </el-main>
+        <template slot="delFlagForm" slot-scope="scope">
+          <el-radio-group v-model="scope.row.delFlag">
+            <el-radio :label="1">禁用</el-radio>
+            <el-radio :label="0">正常</el-radio>
+          </el-radio-group>
+        </template>
+      </avue-crud>
     </el-container>
   </div>
 </template>
@@ -112,7 +104,8 @@ export default class sysRole extends Vue {
       checkedKeys.push(e)
     })
 
-    this.$refs.tree.$refs.tree.setCheckedNodes(checkedKeys)
+    const tree: any = this.$refs.tree
+    tree.$refs.tree.setCheckedNodes(checkedKeys)
     // this.$refs.tree.setCheckedKeys(checkedKeys)
   }
 
@@ -184,7 +177,7 @@ export default class sysRole extends Vue {
 
   async fetchRoleList() {
     this.loading = true
-    const res = await this.$http.get('pri/role/findAll', { prefix: 'admin' })
+    const res = await this.http.get('pri/role/findAll', { prefix: 'admin' })
 
     setTimeout(() => {
       this.loading = false

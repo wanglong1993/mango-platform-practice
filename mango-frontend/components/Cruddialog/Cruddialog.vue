@@ -73,7 +73,9 @@ export default class Cruddialog extends Vue {
   }
 
   submit() {
-    this.$refs['ruleForm'].validate((valid: any) => {
+    const ref: any = this.$refs['ruleForm']
+
+    ref.validate((valid: any) => {
       if (valid) {
         this.$emit('submit')
         alert('submit!')

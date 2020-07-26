@@ -12,6 +12,7 @@
 
     <modules>
         <module>../mango-admin</module>
+        <module>../mango-menu</module>
         <module>../mango-core</module>
         <module>../mango-common</module>
     </modules>

@@ -2,7 +2,7 @@
  * 全局配置文件
  */
 export default {
-  title: 'Avue',
+  title: '',
   logo: 'A',
   key: 'state', //配置主键,目前用于存储
   indexTitle: '后台快速开发模版',

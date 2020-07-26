@@ -8,5 +8,6 @@ declare module 'vue/types/vue' {
     $route: Route
     $store: Store<any>
     $auth: any
+    $i18n1: any
   }
 }

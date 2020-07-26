@@ -3,6 +3,7 @@
     <!-- <template>
       <chartjs :options="options" type="pie" :data="data"></chartjs>
     </template>-->
+    <!-- <div>{{$t('mango.data.column1')}}</div> -->
 
     <div class="basic-container">
       <avue-data-tabs :option="option"></avue-data-tabs>
@@ -10,37 +11,43 @@
     <div class="basic-container">
       <avue-data-icons :option="iconsOption"></avue-data-icons>
     </div>
-    <div class="px-2 pt-2 fs-6 text-primary">微服务监控</div>
+    <div class="px-2 pt-2 fs-6 text-primary">{{$t("mango.data5.title")}}</div>
     <el-row class="pt-2 px-2" :gutter="12">
       <el-col :span="8">
         <el-card shadow="always">
           <div>
-            <el-link href="http://localhost:8848/nacos" target="_blank">nacos服务监控</el-link>
+            <el-link
+              href="http://localhost:8848/nacos"
+              target="_blank"
+            >{{$t("mango.data5.column1")}}</el-link>
           </div>
         </el-card>
       </el-col>
       <el-col :span="8">
         <el-card shadow="always">
           <div>
-            <el-link href="http://127.0.0.1:8849" target="_blank">sentinel服务限流</el-link>
+            <el-link href="http://127.0.0.1:8849" target="_blank">{{$t("mango.data5.column2")}}</el-link>
           </div>
         </el-card>
       </el-col>
       <el-col :span="8">
         <el-card shadow="always">
           <div>
-            <el-link href="http://127.0.0.1:9001/swagger-ui.html" target="_blank">接口文档</el-link>
+            <el-link
+              href="http://127.0.0.1:9001/swagger-ui.html"
+              target="_blank"
+            >{{$t("mango.data5.column3")}}</el-link>
           </div>
         </el-card>
       </el-col>
     </el-row>
 
-    <div class="px-2 pt-2 fs-6 text-primary">系统监控</div>
+    <div class="px-2 pt-2 fs-6 text-primary">{{$t("mango.data6.title")}}</div>
     <el-row class="py-2 px-2" :gutter="12">
       <el-col :span="8">
         <el-card shadow="always">
           <div>
-            <el-link href="http://localhost:8090" target="_blank">admin服务监控</el-link>
+            <el-link href="http://localhost:8090" target="_blank">{{$t("mango.data6.column1")}}</el-link>
           </div>
         </el-card>
       </el-col>
@@ -52,7 +59,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator'
+import { Vue, Component, Watch } from 'nuxt-property-decorator'
 @Component({
   components: {},
 })
@@ -69,157 +76,158 @@ export default class index extends Vue {
     // These labels appear in the legend and in the tooltips when hovering different arcs
     labels: ['Red', 'Yellow', 'Blue'],
   }
-
-  iconsOption = {
-    span: 4,
-    data: [
-      {
-        click: function (item: any) {
-          alert(JSON.stringify(item))
+  get iconsOption() {
+    return {
+      span: 4,
+      data: [
+        {
+          click: function (item: any) {
+            alert(JSON.stringify(item))
+          },
+          title: this.$t('mango.data2.column1'),
+          count: 12678,
+          icon: 'el-icon-tickets',
+          href: '',
+          target: '_blank',
         },
-        title: '今日注册',
-        count: 12678,
-        icon: 'el-icon-tickets',
-        href: '',
-        target: '_blank',
-      },
-      {
-        click: function (item: any) {
-          alert(JSON.stringify(item))
+        {
+          click: function (item: any) {
+            alert(JSON.stringify(item))
+          },
+          title: this.$t('mango.data2.column2'),
+          count: 22139,
+          icon: 'el-icon-success',
+          href: '',
+          target: '_blank',
         },
-        title: '今日登录',
-        count: 22139,
-        icon: 'el-icon-success',
-        href: '',
-        target: '_blank',
-      },
-      {
-        click: function (item: any) {
-          alert(JSON.stringify(item))
+        {
+          click: function (item: any) {
+            alert(JSON.stringify(item))
+          },
+          title: this.$t('mango.data2.column3'),
+          count: 35623,
+          icon: 'el-icon-info',
+          href: '',
+          target: '_blank',
         },
-        title: '今日订阅',
-        count: 35623,
-        icon: 'el-icon-info',
-        href: '',
-        target: '_blank',
-      },
-      {
-        click: function (item: any) {
-          alert(JSON.stringify(item))
+        {
+          click: function (item: any) {
+            alert(JSON.stringify(item))
+          },
+          title: this.$t('mango.data2.column4'),
+          count: 16826,
+          icon: 'el-icon-message',
+          href: '',
+          target: '_blank',
         },
-        title: '今日评论',
-        count: 16826,
-        icon: 'el-icon-message',
-        href: '',
-        target: '_blank',
-      },
-      {
-        click: function (item: any) {
-          alert(JSON.stringify(item))
+        {
+          click: function (item: any) {
+            alert(JSON.stringify(item))
+          },
+          title: this.$t('mango.data2.column4'),
+          count: 16826,
+          icon: 'el-icon-message',
+          href: '',
+          target: '_blank',
         },
-        title: '今日评论',
-        count: 16826,
-        icon: 'el-icon-message',
-        href: '',
-        target: '_blank',
-      },
-      {
-        click: function (item: any) {
-          alert(JSON.stringify(item))
+        {
+          click: function (item: any) {
+            alert(JSON.stringify(item))
+          },
+          title: this.$t('mango.data2.column4'),
+          count: 16826,
+          icon: 'el-icon-message',
+          href: '',
+          target: '_blank',
         },
-        title: '今日评论',
-        count: 16826,
-        icon: 'el-icon-message',
-        href: '',
-        target: '_blank',
-      },
-    ],
+      ],
+    }
   }
 
-  progressOption = {
-    span: 6,
-    data: [
-      {
-        click: function (item: any) {
-          alert(JSON.stringify(item))
+  // 签到转化
+  get progressOption() {
+    return {
+      span: 6,
+      data: [
+        {
+          click: function (item: any) {
+            alert(JSON.stringify(item))
+          },
+          title: this.$t('mango.data3.column1'),
+          color: 'rgb(178, 159, 255)',
+          count: 32,
+          href: '',
+          target: '_blank',
         },
-        title: '转化率（日同比 28%）',
-        color: 'rgb(178, 159, 255)',
-        count: 32,
-        href: '',
-        target: '_blank',
-      },
-      {
-        click: function (item: any) {
-          alert(JSON.stringify(item))
+        {
+          click: function (item: any) {
+            alert(JSON.stringify(item))
+          },
+          title: this.$t('mango.data3.column2'),
+          color: 'rgb(230, 71, 88)',
+          count: 32,
+          href: '',
+          target: '_blank',
         },
-        title: '签到率（日同比 11%）',
-        color: 'rgb(230, 71, 88)',
-        count: 32,
-        href: '',
-        target: '_blank',
-      },
-      {
-        click: function (item: any) {
-          alert(JSON.stringify(item))
+        {
+          click: function (item: any) {
+            alert(JSON.stringify(item))
+          },
+          title: this.$t('mango.data3.column3'),
+          color: 'rgb(27, 201, 142)',
+          count: 56,
+          href: '',
+          target: '_blank',
         },
-        title: 'CPU使用率',
-        color: 'rgb(27, 201, 142)',
-        count: 56,
-        href: '',
-        target: '_blank',
-      },
-      {
-        click: function (item: any) {
-          alert(JSON.stringify(item))
+        {
+          click: function (item: any) {
+            alert(JSON.stringify(item))
+          },
+          title: this.$t('mango.data3.column4'),
+          color: 'red',
+          count: 56,
+          href: '',
+          target: '_blank',
         },
-        title: '使用人数',
-        color: 'red',
-        count: 56,
-        href: '',
-        target: '_blank',
-      },
-    ],
+      ],
+    }
   }
-  option = {
-    data: [
-      {
-        click: function (item: any) {
-          alert(JSON.stringify(item))
+
+  get option() {
+    return {
+      data: [
+        {
+          click: function (item: any) {
+            alert(JSON.stringify(item))
+          },
+          title: this.$t('mango.data.column1'),
+          subtitle: this.$t('mango.data.subtitle'),
+          count: 7993,
+          allcount: 10222,
+          text: this.$t('mango.data.text1'),
+          color: 'rgb(27, 201, 142)',
+          key: this.$t('mango.data.key1'),
         },
-        title: '分类统计',
-        subtitle: '实时',
-        count: 7993,
-        allcount: 10222,
-        text: '当前分类总记录数',
-        color: 'rgb(27, 201, 142)',
-        key: '类',
-      },
-      {
-        click: function (item: any) {
-          alert(JSON.stringify(item))
+        {
+          title: this.$t('mango.data.column2'),
+          subtitle: this.$t('mango.data.subtitle'),
+          count: 3112,
+          allcount: 10222,
+          text: this.$t('mango.data.text2'),
+          color: 'rgb(230, 71, 88)',
+          key: this.$t('mango.data.key2'),
         },
-        title: '附件统计',
-        subtitle: '实时',
-        count: 3112,
-        allcount: 10222,
-        text: '当前上传的附件数',
-        color: 'rgb(230, 71, 88)',
-        key: '附',
-      },
-      {
-        click: function (item: any) {
-          alert(JSON.stringify(item))
+        {
+          title: this.$t('mango.data.column3'),
+          subtitle: this.$t('mango.data.subtitle'),
+          count: 908,
+          allcount: 10222,
+          text: this.$t('mango.data.text3'),
+          color: 'rgb(56, 161, 242)',
+          key: this.$t('mango.data.key3'),
         },
-        title: '文章统计',
-        subtitle: '实时',
-        count: 908,
-        allcount: 10222,
-        text: '评论次数',
-        color: 'rgb(178, 159, 255)',
-        key: '评',
-      },
-    ],
+      ],
+    }
   }
 }
 </script>

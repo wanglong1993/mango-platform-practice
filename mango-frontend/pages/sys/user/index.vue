@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white h-100">
-    <el-container class="pt-3 px-2">
+    <el-container class="pt-3 px-3">
       <el-aside width="200px" class="pr-2" style="border-right:1px solid  #ececec;">
         <avue-tree ref="tree" :option="treeOption" :data="treeData" @node-click="nodeClick"></avue-tree>
       </el-aside>
@@ -12,6 +12,7 @@
           :permission="permission"
           :data="tableData"
           :option="option"
+          @refresh-change="rowRefresh"
           @row-update="rowUpdate"
           @row-save="rowSave"
         >
@@ -155,9 +156,9 @@ export default class sysUser extends Vue {
   }
 
   permission = {
-    delBtn: false,
-    addBtn: false,
-    menu: false,
+    delBtn: '',
+    addBtn: '',
+    menu: '',
   }
   //########### 展示表格选项
   option = {
@@ -281,6 +282,7 @@ export default class sysUser extends Vue {
 
   //########### data
   loading = true
+  id = ''
   roleLoading = true
   multipleSelection: any = []
   form: any = {}
@@ -295,7 +297,6 @@ export default class sysUser extends Vue {
     background: false,
   }
   // 请求方法变更
-  fetchDeptUser = false
 
   //########### 生命周期初始化
   mounted() {
@@ -377,13 +378,16 @@ export default class sysUser extends Vue {
 
   //################### 封装的弹窗按钮的属性
 
+  rowRefresh() {
+    this.onLoad()
+  }
   // 表格加载
-  async onLoad(id?: any) {
+  async onLoad() {
     this.loading = true
 
     let data: any = []
-    if (this.fetchDeptUser) {
-      data = await this.findDeptUser(id)
+    if (this.id) {
+      data = await this.findDeptUser(this.id)
     } else {
       data = await this.findUser()
     }
@@ -446,9 +450,9 @@ export default class sysUser extends Vue {
 
   // 节点点击
   nodeClick(data: any) {
-    console.log(data)
-    this.fetchDeptUser = true
-    this.onLoad(data.id)
+    this.id = data.id
+
+    this.onLoad()
   }
 }
 </script>

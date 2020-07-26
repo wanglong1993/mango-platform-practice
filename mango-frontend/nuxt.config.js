@@ -43,7 +43,14 @@ export default {
       //   src: 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.1/xlsx.full.min.js',
       // },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
+      },
+    ],
   },
   /*
    ** Global CSS
@@ -61,7 +68,12 @@ export default {
   router: {
     middleware: ['authenticated', 'worktab'],
   },
-  plugins: ['@/plugins/axios', '@/plugins/element-ui', '@/plugins/directive'],
+  plugins: [
+    '@/plugins/axios',
+    '@/plugins/element-ui',
+    '@/plugins/directive',
+    '@/plugins/lang/index.js',
+  ],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components

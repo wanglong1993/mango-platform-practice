@@ -1,6 +1,7 @@
 package cn.siques.mangocore.utils;
 
-import cn.siques.mangocore.http.JsonData;
+
+import cn.siques.mangocore.entity.JsonData;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

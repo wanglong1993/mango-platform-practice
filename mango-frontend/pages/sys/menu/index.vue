@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white h-100">
-    <el-container class="pt-3 px-2">
+    <el-container class="pt-3 px-3">
       <avue-crud
         @row-update="rowUpdate"
         @row-save="rowSave"
@@ -205,6 +205,7 @@ export default class MenuIndex extends Vue {
     align: 'center',
     border: true,
     // index: true,
+    size: 'mini',
     dialogDrag: true,
     defaultExpandAll: false,
     column: [

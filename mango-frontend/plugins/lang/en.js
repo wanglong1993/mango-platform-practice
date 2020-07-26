@@ -8,9 +8,8 @@ export default {
   menuTip: 'none menu list',
   feedback: 'feedback',
   submit: 'submit',
-  wel: {
+  mango: {
     info: 'Good morning, Smallwei, Avue is a framework',
-    dept: 'a certain technology department',
     team: 'Team ranking',
     project: 'Project access',
     count: 'Item number',
@@ -24,30 +23,41 @@ export default {
       key3: 'A',
       text1: 'Total Record Number of Classifications',
       text2: 'Number of attachments Uploaded',
-      text3: 'Comment frequency'
+      text3: 'Comment frequency',
     },
     data2: {
       column1: 'Registration today',
       column2: 'Login today',
       column3: 'Subscription today',
-      column4: 'Todays review'
+      column4: 'Todays review',
     },
     data3: {
       column1: 'Conversion rate（Day 28%）',
       column2: 'Attendance rate（Day 11%）',
-      column3: 'Attendance rate（Day 33%）'
+      column3: 'CPU utilization',
+	  column4: 'Number of users',
     },
     data4: {
       column1: 'Error log',
       column2: 'Data display',
       column3: 'Privilege management',
-      column4: 'user management'
+      column4: 'user management',
+    },
+	data5: {
+		title: 'Micro service monitoring',
+      column1: 'Nacos service monitoring',
+      column2: 'Sentinel service flow limiting',
+      column3: 'Interface documentation',
+    },
+	data6: {
+		title: 'System monitoring',
+      column1: 'Admin service monitoring',
     },
     table: {
       rw: 'Work Tasks',
       nr: 'Work content',
       sj: 'Working hours',
-    }
+    },
   },
   route: {
     setting: 'setting',
@@ -70,7 +80,7 @@ export default {
     data: 'data',
     cache: 'cache',
     error: 'error',
-    test: 'test'
+    test: 'test',
   },
   login: {
     title: 'Login ',
@@ -103,12 +113,16 @@ export default {
     language: 'language',
     notice: 'notice',
     theme: 'theme',
-    color: 'color'
+    color: 'color',
   },
   tagsView: {
     search: 'Search',
     menu: 'menu',
     closeOthers: 'Close Others',
-    closeAll: 'Close All'
+    closeAll: 'Close All',
+  },
+  error:{
+	  title:"Sorry, the page you visited doesn't exist",
+	  back:'backHome'
   }
 }
