@@ -35,7 +35,7 @@ export default {
       column1: '转化率（日同比 28%）',
       column2: '签到率（日同比 11%）',
       column3: 'CPU使用率',
-	  column4: '使用人数',
+      column4: '使用人数',
     },
     data4: {
       column1: '错误日志',
@@ -43,15 +43,16 @@ export default {
       column3: '权限管理',
       column4: '用户管理',
     },
-	data5: {
-		title: '微服务监控',
+    data5: {
+      title: '微服务监控',
       column1: 'Nacos服务监控',
       column2: 'Sentinel服务限流',
       column3: '接口文档',
     },
-	data6: {
-		title: '系统监控',
+    data6: {
+      title: '系统监控',
       column1: 'Admin服务监控',
+      column2: 'Druid数据源',
     },
     table: {
       rw: '工作任务',
@@ -120,8 +121,8 @@ export default {
     closeOthers: '关闭其它',
     closeAll: '关闭所有',
   },
-  error:{
-	  title:'抱歉，你访问的页面不存在',
-	  back:'返回首页'
-  }
+  error: {
+    title: '抱歉，你访问的页面不存在',
+    back: '返回首页',
+  },
 }

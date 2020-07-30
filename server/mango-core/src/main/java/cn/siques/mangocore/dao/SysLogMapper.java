@@ -158,4 +158,9 @@ public interface SysLogMapper {
         "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(SysLog record);
+
+
+    @Select({"select * from sys_log"})
+    List<SysLog> findPage();
+
 }

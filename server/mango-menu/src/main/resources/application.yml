@@ -4,10 +4,10 @@ spring:
   boot:
     admin:
       client:
-        url: "http://localhost:8090"
+        url: "http://106.54.247.224:8090"
   datasource:
     type: com.mysql.cj.jdbc.MysqlDataSource
-    url: jdbc:mysql://localhost:3306/mango?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://106.54.247.224:3306/mango?useUnicode=true&characterEncoding=utf-8&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: l1itdhjaoiqw32kwqe$5asasd*a21
@@ -16,11 +16,12 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8848
+        server-addr: 106.54.247.224:8848
   redis:
-    host: 127.0.0.1
+    host: 106.54.247.224
     port: 6379
     database: 0
+    password: heshenghao
 mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

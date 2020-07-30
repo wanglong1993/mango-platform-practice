@@ -4,7 +4,7 @@
       <img src="~/static/kodinger.jpg" alt="logo" />
     </div>
     <div class="lowin-wrapper">
-      <div v-if="showLoginPanel" class="lowin-box lowin-login">
+      <div v-if="showLoginPanel" v-loading="loading" class="lowin-box lowin-login">
         <div class="lowin-box-inner">
           <el-form ref="loginForm" :rules="rules" :model="loginForm">
             <p>Sign in to continue</p>
@@ -39,14 +39,14 @@
             <div class="lowin-group password-group">
               <label>Captcha</label>
               <el-form-item prop="captcha">
-                <el-input
-                  v-model="loginForm.captcha"
-                  type="captcha"
-                  name="captcha"
-                  autocomplete="current-captcha"
-                />
+                <el-input v-model="loginForm.captcha" type="captcha" name="captcha" />
               </el-form-item>
-              <img src="http://localhost:9001/admin/api/sys/v1/pub/captcha.jpg" />
+              <img
+                v-if="isRefresh"
+                class="pointer"
+                @click="refreshCaptcha"
+                :src="`http://localhost:9001/admin/api/sys/v1/pub/captcha.jpg`"
+              />
             </div>
 
             <el-button @click="userLogin" class="lowin-btn login-btn">Sign In</el-button>
@@ -99,6 +99,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
+
 @Component({
   components: {},
 })
@@ -106,6 +107,10 @@ export default class login extends Vue {
   layout(context: any) {
     return 'login'
   }
+
+  isRefresh = true
+
+  loading = false
   http = Vue.prototype.$http
   showLoginPanel = true
   loginForm = { account: '', password: '', captcha: '' }
@@ -170,7 +175,15 @@ export default class login extends Vue {
     }
   }
 
+  refreshCaptcha() {
+    this.isRefresh = false
+    setTimeout(() => {
+      this.isRefresh = true
+    }, 300)
+  }
+
   userLogin() {
+    this.loading = true
     const ref: any = this.$refs.loginForm
 
     ref.validate(async (valid: any) => {
@@ -193,6 +206,9 @@ export default class login extends Vue {
         console.log('error submit!!')
         return false
       }
+      setTimeout(() => {
+        this.loading = false
+      }, 500)
     })
   }
 }

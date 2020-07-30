@@ -16,6 +16,7 @@
           @row-update="rowUpdate"
           @row-save="rowSave"
         >
+          <!-- TODO 有问题 -->
           <template slot-scope="scope" slot="sysDeptForm">
             <el-cascader
               v-if="scope.row.sysDept"
@@ -163,6 +164,7 @@ export default class sysUser extends Vue {
   //########### 展示表格选项
   option = {
     excelBtn: true,
+    dialogClickModal: false,
     height: '450',
     // sortable: true,
     // selection: true,
@@ -288,8 +290,8 @@ export default class sysUser extends Vue {
   form: any = {}
   // 分页属性
   page: any = {
-    total: 40,
-    pagerCount: 5,
+    total: 0,
+    pageCount: 5,
     currentPage: 1,
     pageSize: 10,
     pageSizes: [5, 10, 20],
@@ -397,7 +399,7 @@ export default class sysUser extends Vue {
     setTimeout(() => {
       this.loading = false
       this.tableData = data.data.content
-    }, 500)
+    }, 200)
   }
 
   async findUser() {

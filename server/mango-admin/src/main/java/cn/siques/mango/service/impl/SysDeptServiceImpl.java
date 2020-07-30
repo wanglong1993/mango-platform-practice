@@ -1,16 +1,19 @@
 package cn.siques.mango.service.impl;
 
+import cn.siques.mango.annotation.SaveDate;
 import cn.siques.mango.service.SysDeptService;
 import cn.siques.mangocore.Page.MybatisPageHelper;
 import cn.siques.mangocore.Page.PageRequest;
 import cn.siques.mangocore.Page.PageResult;
 import cn.siques.mangocore.dao.SysDeptMapper;
 import cn.siques.mangocore.entity.SysDept;
+import cn.siques.mangocore.utils.SecurityUtils;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,8 +23,12 @@ public class SysDeptServiceImpl implements SysDeptService {
 
 
     @Override
+    @SaveDate(SysDept.class)
     public int save(SysDept record) {
-        return 0;
+        record.setCreateBy(SecurityUtils.getUsername());
+        record.setCreateTime(new Date());
+        int insert = sysDeptMapper.insert(record);
+        return insert;
     }
 
     @Override
@@ -64,6 +71,12 @@ public class SysDeptServiceImpl implements SysDeptService {
 
         findChildren(sysDepts, depts);
         return sysDepts;
+    }
+
+    @Override
+    public PageResult findPageById(PageRequest pageRequest, Long id) {
+        PageResult page = MybatisPageHelper.findPage(pageRequest, sysDeptMapper,"findPageById",id);
+        return page;
     }
 
     // TODO 逻辑

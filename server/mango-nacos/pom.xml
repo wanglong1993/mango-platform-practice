@@ -5,12 +5,13 @@
 
     <parent>
         <groupId>com.jeesite</groupId>
-        <artifactId>jeesite-cloud-parent</artifactId>
-        <version>4.2.0-SNAPSHOT</version>
-        <relativePath>../parent/pom.xml</relativePath>
+		<artifactId>jeesite-cloud-parent</artifactId>
+		<version>4.2.0-SNAPSHOT</version>
+<!--        <relativePath>../parent/pom.xml</relativePath>-->
     </parent>
 
-    <artifactId>jeesite-cloud-nacos</artifactId>
+
+    <artifactId>mango-nacos</artifactId>
     <packaging>jar</packaging>
 
     <name>JeeSite Cloud Nacos</name>
@@ -18,10 +19,10 @@
     <inceptionYear>2019-Now</inceptionYear>
 
 	<properties>
-		
+		<docker.image.prefix>mango-nacos</docker.image.prefix>
 		<finalName>web</finalName><!-- jar or war 包的名称 -->
 		<start-class>com.jeesite.modules.NacosApplication</start-class>
-		
+
 		<!-- environment setting -->
 		<eclipse-plugin-download-sources>false</eclipse-plugin-download-sources>
 		<eclipse-plugin-download-javadocs>false</eclipse-plugin-download-javadocs>
@@ -127,6 +128,23 @@
             </resource>
         </resources>
         <plugins>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.4.13</version>
+				<configuration>
+					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+					<dockerDirectory>${basedir}/docker</dockerDirectory> <!-- 指定 Dockerfile 路径-->
+					<!-- 这里是复制 jar 包到 docker 容器指定目录配置，也可以写到 Docokerfile 中 -->
+					<resources>
+						<resource>
+							<targetPath>/ROOT</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -134,28 +152,7 @@
         </plugins>
     </build>
 	
-    <developers>
-        <developer>
-            <id>thinkgem</id>
-            <name>WangZhen</name>
-            <email>thinkgem at 163.com</email>
-            <roles><role>Project lead</role></roles>
-            <timezone>+8</timezone>
-        </developer>
-        <developer>
-            <id>长春叭哥</id>
-            <name>YaoHailu</name>
-            <email>admin at jeegit.com</email>
-            <roles><role>Project member</role></roles>
-            <timezone>+8</timezone>
-        </developer>
-    </developers>
 
-    <organization>
-        <name>jeesite</name>
-        <url>http://www.jeesite.com</url>
-    </organization>
-    
 	<repositories>
 		<repository>
 			<id>aliyun-repos</id>

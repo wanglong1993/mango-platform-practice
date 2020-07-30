@@ -13,6 +13,8 @@
     <modules>
         <module>../mango-admin</module>
         <module>../mango-menu</module>
+        <module>../mango-gateway</module>
+        <module>../mango-nacos</module>
         <module>../mango-core</module>
         <module>../mango-common</module>
     </modules>

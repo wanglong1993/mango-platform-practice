@@ -36,9 +36,13 @@ export const state = () => ({
   Auth: {},
   closingPage: '',
   primaryColor: '',
+  themeColor: '#20222A',
 })
 
 export const mutations = {
+  ON_THEME_CHANGE: (state, action) => {
+    state.themeColor = action
+  },
   ADD_TAG: (state, action) => {
     state.tag = action
 
@@ -92,7 +96,7 @@ export const getters = {}
 
 export const actions = {
   async checkAuth({ state }, permission) {
-    const statu = await state.Auth.authorities.findIndex(
+    const statu = await state.Auth.permissions.findIndex(
       (e) => e.authority === permission
     )
 

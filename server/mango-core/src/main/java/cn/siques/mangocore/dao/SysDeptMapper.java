@@ -47,12 +47,12 @@ public interface SysDeptMapper {
      */
     @Insert({
         "insert into sys_dept (id, name, ",
-        "parent_id, order_num, ",
+        "parent_id, order_num,dept_tree, ",
         "create_by, create_time, ",
         "last_update_by, last_update_time, ",
         "del_flag)",
         "values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, ",
-        "#{parentId,jdbcType=BIGINT}, #{orderNum,jdbcType=INTEGER}, ",
+        "#{parentId,jdbcType=BIGINT}, #{orderNum,jdbcType=INTEGER},#{deptTree,jdbcType=VARCHAR}, ",
         "#{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, ",
         "#{lastUpdateBy,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}, ",
         "#{delFlag,jdbcType=TINYINT})"
@@ -177,4 +177,8 @@ public interface SysDeptMapper {
 
     @Select({"select * from sys_dept"})
     List<SysDept> findPage();
-}
+
+    @Select({"SELECT d.* FROM sys_dept d " +
+            " WHERE  d.dept_tree LIKE CONCAT('%',#{id,jdbcType=BIGINT},'%') OR d.id=#{id,jdbcType=BIGINT}"})
+    List<SysDept> findPageById(Long id);
+ }

@@ -1,6 +1,8 @@
 <template>
   <el-container>
     <el-menu
+      v-loading="loading"
+      element-loading-background="hsla(0,0%,28%,1)"
       background-color="#20222A"
       text-color="hsla(0,0%,100%,.7)"
       active-text-color="#ffd04b"
@@ -44,7 +46,7 @@
           ></el-button>
         </div>
         <div class="d-flex ai-center pr-4">
-          <Themepicker></Themepicker>
+          <Themepicker @onThemeChange="onThemeChange" :default="themeColor"></Themepicker>
           <div class="pl-3">
             <el-tooltip content="全屏" placement="bottom" effect="dark">
               <el-button icon="el-icon-full-screen" @click="fullScreen" type="text"></el-button>
@@ -88,7 +90,9 @@ import { Vue, Component } from 'nuxt-property-decorator'
   components: {},
 })
 export default class MenuLayOut extends Vue {
+  themeColor = this.$store.state.themeColor
   menus: any = []
+  loading = true
   http = Vue.prototype.$http
   isCollapse = false
   color = ''
@@ -106,13 +110,21 @@ export default class MenuLayOut extends Vue {
     console.log(key, keyPath)
   }
 
+  onThemeChange(val: any) {
+    this.$store.commit('ON_THEME_CHANGE', val)
+  }
+
   async fetchMenu() {
+    this.loading = true
     const http = Vue.prototype.$http
     const res = await http.get('/pri/menu/findNavTree', {
       prefix: 'menu',
     })
 
-    this.menus = res.data.data
+    setTimeout(() => {
+      this.loading = false
+      this.menus = res.data.data
+    }, 500)
   }
 
   handleCommand(command: any) {

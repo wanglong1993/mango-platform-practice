@@ -11,6 +11,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Collection;
+import java.util.List;
 
 
 public class SecurityUtils {
@@ -121,12 +122,7 @@ public  static  void checkAuthentication(HttpServletRequest request, HttpServlet
     public static JwtAuthenticationToken login(HttpServletRequest request,
                                                String username, String password, AuthenticationManager authenticationManager) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-
-
-
-        JwtAuthenticationToken token = new JwtAuthenticationToken(username, password,authorities);
+        JwtAuthenticationToken token = new JwtAuthenticationToken(username, password);
         token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
         // 执行登陆过程
@@ -137,6 +133,9 @@ public  static  void checkAuthentication(HttpServletRequest request, HttpServlet
         // 生成令牌并返回
         token.setToken(JwtTokenUtils.generateToken(authenticate));
         token.eraseCredentials();
+        Collection<? extends GrantedAuthority> authorities = authenticate.getAuthorities();
+
+        token.setPermissions((List<GrantedAuthorityImpl>) authorities);
 
         return  token;
     }

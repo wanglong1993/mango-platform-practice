@@ -341,7 +341,7 @@ public class SysUserSqlProvider {
         }
 
         if (record.getDeptTree() != null) {
-            SET("dept_tree = #{deptTree,jdbcType=INTEGER}");
+            SET("dept_tree = #{deptTree,jdbcType=VARCHAR}");
         }
         
         WHERE("id = #{id,jdbcType=BIGINT}");

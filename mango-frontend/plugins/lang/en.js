@@ -35,7 +35,7 @@ export default {
       column1: 'Conversion rate（Day 28%）',
       column2: 'Attendance rate（Day 11%）',
       column3: 'CPU utilization',
-	  column4: 'Number of users',
+      column4: 'Number of users',
     },
     data4: {
       column1: 'Error log',
@@ -43,15 +43,16 @@ export default {
       column3: 'Privilege management',
       column4: 'user management',
     },
-	data5: {
-		title: 'Micro service monitoring',
+    data5: {
+      title: 'Micro service monitoring',
       column1: 'Nacos service monitoring',
       column2: 'Sentinel service flow limiting',
       column3: 'Interface documentation',
     },
-	data6: {
-		title: 'System monitoring',
+    data6: {
+      title: 'System monitoring',
       column1: 'Admin service monitoring',
+      column2: 'Druid DataSource',
     },
     table: {
       rw: 'Work Tasks',
@@ -121,8 +122,8 @@ export default {
     closeOthers: 'Close Others',
     closeAll: 'Close All',
   },
-  error:{
-	  title:"Sorry, the page you visited doesn't exist",
-	  back:'backHome'
-  }
+  error: {
+    title: "Sorry, the page you visited doesn't exist",
+    back: 'backHome',
+  },
 }

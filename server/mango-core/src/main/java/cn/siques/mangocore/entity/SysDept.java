@@ -27,13 +27,16 @@ public class SysDept extends SysDeptKey {
         return deptTree;
     }
 
+    // 设置list
     public void setDeptTree(String deptTree) {
+        Long id = this.getId();
         String[] split = deptTree.split(",");
         List<Long> list = new ArrayList<>();
         for (String s:split
              ) {
             list.add(Long.valueOf(s));
         }
+        list.add(id);
         this.deptList=list;
         this.deptTree = deptTree;
     }

@@ -12,6 +12,7 @@
           @on-load="onLoad"
           :data="tableData"
           :option="option"
+          @refresh-change="rowRefresh"
           @row-update="rowUpdate"
           @row-save="rowSave"
         >
@@ -91,6 +92,13 @@ export default class sysDept extends Vue {
         prop: 'name',
       },
       {
+        label: '机构全程',
+        prop: 'fullName',
+        editDisplay: false,
+        addDisplay: false,
+      },
+
+      {
         label: '机构代码',
         prop: 'id',
         editDisplay: false,
@@ -126,7 +134,7 @@ export default class sysDept extends Vue {
       {
         label: '机构状态',
         prop: 'delFlag',
-        value: 1,
+        value: 0,
         addDisplay: false,
         editDisplay: false,
         // slot: true,
@@ -136,6 +144,7 @@ export default class sysDept extends Vue {
   //########### 机构树选项 右键属性
   treeOption = {
     defaultExpandAll: true,
+    dialogDrag: true,
     props: {
       label: 'name',
     },
@@ -143,8 +152,8 @@ export default class sysDept extends Vue {
       labelWidth: 100,
       column: [
         {
-          label: 'name',
-          prop: 'label',
+          label: '上级机构',
+          prop: 'parentId',
         },
       ],
     },
@@ -196,46 +205,53 @@ export default class sysDept extends Vue {
   }
 
   async init() {
-    //
-    const { data } = await this.http.get('/pri/role/findAll', {
+    const { data: data } = await this.http.get('/pri/dept/findDeptTree', {
       prefix: 'admin',
     })
-    // this.roleData = data.data
-
-    const { data: data1 } = await this.http.get('/pri/dept/findDeptTree', {
-      prefix: 'admin',
-    })
-    this.treeData = data1.data
+    this.treeData = data.data
   }
   //########### 方法
 
   async rowSave(form: any, done: any, loading: any) {
+    if (form.parentId !== null) {
+      form.deptTree = form.parentId.toString()
+      form.parentId = form.parentId[form.parentId.length - 1]
+    }
+    await this.http.post('/pri/dept/save', form, {
+      prefix: 'admin',
+    })
+
     setTimeout(() => {
+      this.onLoad()
+
+      setTimeout(() => {
+        this.init()
+      }, 300)
       done(form)
-    }, 500)
+    }, 300)
   }
 
   async rowUpdate(form: any, index: any, done: any, loading: any) {
     setTimeout(() => {
       done(form)
       this.onLoad()
-    }, 500)
+    }, 300)
   }
 
   //################### 封装的弹窗按钮的弹出数据初始化
 
   //################### 封装的弹窗按钮的属性
 
+  deptId = ''
   // 表格加载
-  async onLoad(id?: any) {
+  async onLoad() {
     this.loading = true
 
-    //
-
     // 查找所有机构
+    let url = 'pri/dept/findPage/' + this.deptId
 
     const { data: data } = await this.http.post(
-      'pri/dept/findPage',
+      url,
       {
         pageNum: this.page.currentPage,
         pageSize: this.page.pageSize,
@@ -244,18 +260,24 @@ export default class sysDept extends Vue {
       { prefix: 'admin' }
     )
 
-    this.page.total = data.totalSize
+    this.page.total = data.data.totalSize
 
     setTimeout(() => {
       this.loading = false
       this.tableData = data.data.content
-    }, 500)
+    }, 300)
   }
 
   // 节点点击
   nodeClick(data: any) {
-    console.log(data)
-    this.onLoad(data.id)
+    this.page.currentPage = 1
+    this.page.pageSize = 10
+    this.deptId = data.id
+    this.onLoad()
+  }
+
+  rowRefresh() {
+    this.onLoad()
   }
 }
 </script>

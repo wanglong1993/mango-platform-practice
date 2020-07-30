@@ -4,6 +4,7 @@
       <avue-crud
         @row-update="rowUpdate"
         @row-save="rowSave"
+        @refresh-change="rowRefresh"
         :table-loading="loading"
         :option="option"
         :data="tableData"
@@ -96,6 +97,7 @@ import { Vue, Component } from 'nuxt-property-decorator'
   components: {},
 })
 export default class MenuIndex extends Vue {
+  http = Vue.prototype.$http
   title = '修改菜单信息'
   tableData = []
   treeData = []
@@ -219,6 +221,7 @@ export default class MenuIndex extends Vue {
         label: '类型',
         prop: 'type',
         formslot: true,
+        value: 0,
         labelslot: true,
         dicData: [
           {
@@ -268,30 +271,36 @@ export default class MenuIndex extends Vue {
   }
 
   async fetchMenu() {
-    const http = Vue.prototype.$http
-    const res = await http.get('/pri/menu/findMenuTree', {
+    this.loading = true
+    const res = await this.http.get('/pri/menu/findMenuTree', {
       prefix: 'menu',
     })
     setTimeout(() => {
       this.loading = false
       this.tableData = res.data.data
       this.treeData = res.data.data
-    }, 500)
+    }, 300)
   }
 
   async rowSave(form: any, done: any, loading: any) {
     setTimeout(() => {
       done(form)
-    }, 500)
+    }, 300)
     console.log(form)
   }
 
+  rowRefresh() {
+    this.fetchMenu()
+  }
   async rowUpdate(form: any, index: any, done: any, loading: any) {
-    setTimeout(() => {
-      done(form)
-    }, 500)
+    const res = await this.http.post('/pri/menu/save', form, {
+      prefix: 'menu',
+    })
 
-    console.log(form)
+    setTimeout(() => {
+      this.fetchMenu()
+      done(form)
+    }, 300)
   }
 }
 </script>

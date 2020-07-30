@@ -4,12 +4,12 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8848 #配置Nacos地址
+        server-addr: 106.54.247.224:8848 #配置Nacos地址
   datasource:
     name: druidSource
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
-      url: jdbc:mysql://localhost:3306/mango?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      url: jdbc:mysql://106.54.247.224:3306/mango?useUnicode=true&characterEncoding=utf-8&useSSL=false
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
       password: l1itdhjaoiqw32kwqe$5asasd*a21
@@ -54,10 +54,11 @@ spring:
   application:
     name: mango-admin
   redis:
-    host: 127.0.0.1
+    host: 106.54.247.224
     port: 6379
     database: 0
     expiration: 1800
+    password: heshenghao
 #开启控制台打印sql
 mybatis:
   configuration:

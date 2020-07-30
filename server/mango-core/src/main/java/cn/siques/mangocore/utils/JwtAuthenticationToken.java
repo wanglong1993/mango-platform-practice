@@ -5,11 +5,14 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 public class JwtAuthenticationToken extends UsernamePasswordAuthenticationToken implements Serializable {
     private static  final long serialVersionUID =1l;
 
     private String token;
+
+    private List<GrantedAuthorityImpl> permissions;
 
 
     public JwtAuthenticationToken(Object principal, Object credentials) {
@@ -41,5 +44,13 @@ public class JwtAuthenticationToken extends UsernamePasswordAuthenticationToken 
 
     public static long getSerialversionuid() {
         return serialVersionUID;
+    }
+
+    public List<GrantedAuthorityImpl> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<GrantedAuthorityImpl> permissions) {
+        this.permissions = permissions;
     }
 }

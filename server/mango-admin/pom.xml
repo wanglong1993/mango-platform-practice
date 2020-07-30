@@ -9,13 +9,15 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.siques</groupId>
-    <artifactId>mango</artifactId>
+    <artifactId>mango-admin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mango-admin</name>
     <description>用户管理模块</description>
 
     <properties>
+        <docker.repostory>registry.cn-hangzhou.aliyuncs.com</docker.repostory>
         <java.version>1.8</java.version>
+        <docker.image.prefix>mango-admin</docker.image.prefix>
     </properties>
 
     <dependencies>
@@ -28,10 +30,12 @@
             <groupId>cn.siques</groupId>
             <artifactId>mango-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
 
 
-<!--        <dependency>-->
+
+        <!--        <dependency>-->
 <!--            <groupId>mysql</groupId>-->
 <!--            <artifactId>mysql-connector-java</artifactId>-->
 <!--            <scope>runtime</scope>-->
@@ -68,16 +72,16 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
         <!--        服务配置-->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-alibaba-nacos-config</artifactId>-->
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>com.google.guava</groupId>-->
-<!--                    <artifactId>guava</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-nacos-config</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <!--        服务监控-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -128,11 +132,11 @@
         </dependency>
 
 
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-devtools</artifactId>-->
-<!--            <optional>true</optional>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -177,11 +181,7 @@
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
         </dependency>
-        <dependency>
-            <groupId>cn.siques</groupId>
-            <artifactId>mango-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+
 
     </dependencies>
 
@@ -205,9 +205,66 @@
         </dependencies>
     </dependencyManagement>
 
+
+
+
     <build>
         <plugins>
-            <!--        自动生成-->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.13</version>
+                <configuration>
+
+                    <imageName>registry.cn-hangzhou.aliyuncs.com/eric-heshenghao/${project.artifactId}:${project.version}</imageName>
+                    <dockerDirectory>${basedir}/docker</dockerDirectory> <!-- 指定 Dockerfile 路径-->
+                    <!-- 这里是复制 jar 包到 docker 容器指定目录配置，也可以写到 Docokerfile 中 -->
+                    <resources>
+                        <resource>
+                            <targetPath>/ROOT</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                    <serverId>docker-aliyun</serverId>
+
+                    <registryUrl>${docker.repostory}</registryUrl>
+                    <pushImage>true</pushImage>
+                </configuration>
+               <executions>
+                   <execution>
+                       <id>build-image</id>
+                       <phase>package</phase>
+                       <goals>
+                           <goal>build</goal>
+                       </goals>
+                   </execution>
+<!--                   <execution>-->
+<!--                       <id>tag-image</id>-->
+<!--                       <phase>package</phase>-->
+<!--                       <goals>-->
+<!--                           <goal>tag</goal>-->
+<!--                       </goals>-->
+<!--                       <configuration>-->
+<!--                           <image>registry.cn-hangzhou.aliyuncs.com/eric-heshenghao/${project.artifactId}</image>-->
+<!--                           <newName>registry.cn-hangzhou.aliyuncs.com/eric-heshenghao/${project.artifactId}:${project.version}</newName>-->
+<!--                       </configuration>-->
+<!--                   </execution>-->
+                   <execution>
+                       <id>push-image</id>
+                       <phase>deploy</phase>
+                       <goals>
+                           <goal>push</goal>
+                       </goals>
+
+                       <configuration>
+
+                           <imageName>registry.cn-hangzhou.aliyuncs.com/eric-heshenghao/${project.artifactId}:${project.version}</imageName>
+                       </configuration>
+                   </execution>
+               </executions>
+            </plugin>
+            <!--        代码生成器-->
 <!--            <plugin>-->
 <!--                <groupId>org.mybatis.generator</groupId>-->
 <!--                <artifactId>mybatis-generator-maven-plugin</artifactId>-->
@@ -241,5 +298,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>

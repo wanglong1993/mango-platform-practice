@@ -1,6 +1,7 @@
 package cn.siques.mango.service.impl;
 
 import cn.siques.mango.service.SysLogService;
+import cn.siques.mangocore.Page.MybatisPageHelper;
 import cn.siques.mangocore.Page.PageRequest;
 import cn.siques.mangocore.Page.PageResult;
 import cn.siques.mangocore.dao.SysLogMapper;
@@ -39,6 +40,7 @@ public class SysLogServiceImpl implements SysLogService {
 
     @Override
     public PageResult findPage(PageRequest pageRequest) {
-        return null;
+        PageResult page = MybatisPageHelper.findPage(pageRequest, sysLogMapper);
+        return page;
     }
 }

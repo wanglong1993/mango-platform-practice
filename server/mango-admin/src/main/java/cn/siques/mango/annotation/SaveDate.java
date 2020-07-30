@@ -6,6 +6,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
-public @interface MyPreAuthorize {
-    String value();
+public @interface SaveDate {
+    Class value();
 }

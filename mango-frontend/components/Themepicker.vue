@@ -12,7 +12,7 @@
 <script>
 
 const version = require('element-ui/package.json').version // element-ui
-const ORIGINAL_THEME = '#20222A' // default color
+const ORIGINAL_THEME = '#409EFF' // default color
 
 export default {
   name: 'ThemePicker',

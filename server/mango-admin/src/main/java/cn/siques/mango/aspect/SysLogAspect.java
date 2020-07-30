@@ -9,6 +9,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,16 @@ public class SysLogAspect {
    // 切入所有方法
    @Pointcut("execution(* cn.siques.mango.service.SysUserService.*(..))")
    public void logPointCut(){}
+
+
+    @Pointcut("execution(* cn.siques.mango.service.SysUserService.save(..))")
+    public void savePointCut(){}
+
+//    @Before("savePointCut()")
+//    public Object beforeSave(ProceedingJoinPoint point){
+//       point.getSignature()
+//
+//    }
 
    @Around("logPointCut()")
    public Object around(ProceedingJoinPoint point) throws Throwable {
