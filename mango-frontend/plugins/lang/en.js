@@ -53,6 +53,7 @@ export default {
       title: 'System monitoring',
       column1: 'Admin service monitoring',
       column2: 'Druid DataSource',
+      column3: 'RabitMQ',
     },
     table: {
       rw: 'Work Tasks',

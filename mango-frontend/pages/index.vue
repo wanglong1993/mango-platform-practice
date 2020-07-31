@@ -51,10 +51,24 @@
           </div>
         </el-card>
       </el-col>
-          <el-col :span="8">
+      <el-col :span="8">
         <el-card shadow="always">
           <div>
-            <el-link href="http://localhost:8083/druid/index.html" target="_blank">{{$t("mango.data6.column2")}}</el-link>
+            <el-link
+              href="http://localhost:8083/druid/index.html"
+              target="_blank"
+            >{{$t("mango.data6.column2")}}</el-link>
+          </div>
+        </el-card>
+      </el-col>
+
+      <el-col :span="8">
+        <el-card shadow="always">
+          <div>
+            <el-link
+              href="http://106.54.247.224:15672"
+              target="_blank"
+            >{{$t("mango.data6.column3")}}</el-link>
           </div>
         </el-card>
       </el-col>
