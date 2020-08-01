@@ -47,13 +47,15 @@ public class MybatisPageHelper {
         return getPageResult(pageRequest, new PageInfo((List) result));
     }
 
+
+
     /**
      * 将分页信息封装到统一的接口
      * @param pageRequest
 //     * @param PageInfo
      * @return
      */
-    private static PageResult getPageResult(PageRequest pageRequest, PageInfo<?> pageInfo) {
+    public static PageResult getPageResult(PageRequest pageRequest, PageInfo<?> pageInfo) {
         PageResult pageResult = new PageResult();
         pageResult.setPageNum(pageInfo.getPageNum());
         pageResult.setPageSize(pageInfo.getPageSize());

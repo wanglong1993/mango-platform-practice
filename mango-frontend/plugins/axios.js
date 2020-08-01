@@ -16,6 +16,7 @@ export default ({ app, store, route, redirect }) => {
     if (store.state.Auth.token) {
       config.headers.Authorization = store.state.Auth.token || ''
     }
+    console.log(config)
   })
 
   // 返回回调

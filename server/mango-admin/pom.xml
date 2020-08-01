@@ -30,7 +30,7 @@
             <groupId>cn.siques</groupId>
             <artifactId>mango-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
+<!--            <scope>compile</scope>-->
         </dependency>
 
 
@@ -180,6 +180,16 @@
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
+            <version>2.1</version>
         </dependency>
 
 
