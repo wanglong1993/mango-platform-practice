@@ -2,8 +2,9 @@ package ${package}.${moduleName}.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.xkcoding.common.R;
-import com.xkcoding.scaffold.log.annotations.ApiLog;
+import cn.siques.mangocore.entity.JsonData;
+import cn.siques.mangocore.Page.PageRequest;
+import cn.siques.mangocore.Page.PageResult;
 import ${package}.${moduleName}.entity.${className};
 import ${package}.${moduleName}.service.${className}Service;
 import lombok.AllArgsConstructor;
@@ -34,78 +35,72 @@ public class ${className}Controller {
 
     private final ${className}Service ${classname}Service;
 
+
     /**
-     * 分页查询${comments}
-     * @param page 分页对象
-     * @param ${classname} ${comments}
-     * @return R
-     */
-    @GetMapping("")
+   * 分页查询${comments}
+   * @param pageRequest
+   * @return
+   */
+    @GetMapping("findPage")
     @ApiOperation(value = "分页查询${comments}", notes = "分页查询${comments}")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "page", value = "分页参数", required = true),
-            @ApiImplicitParam(name = "${classname}", value = "查询条件", required = true)
-    })
-    public R list${className}(Page page, ${className} ${classname}) {
-      return new R<>(${classname}Service.page(page,Wrappers.query(${classname})));
+    public JsonData listSysRoleMenu(@RequestBody PageRequest pageRequest) {
+        PageResult page = ${classname}Service.findPage(pageRequest);
+        return JsonData.buildSuccess(page);
     }
 
 
     /**
      * 通过id查询${comments}
      * @param ${pk.lowerAttrName} id
-     * @return R
+     * @return JsonData
      */
     @GetMapping("/{${pk.lowerAttrName}}")
     @ApiOperation(value = "通过id查询${comments}", notes = "通过id查询${comments}")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "${pk.lowerAttrName}", value = "主键id", required = true)
     })
-    public R get${className}(@PathVariable("${pk.lowerAttrName}") ${pk.attrType} ${pk.lowerAttrName}){
-      return new R<>(${classname}Service.getById(${pk.lowerAttrName}));
+    public JsonData get${className}(@PathVariable("${pk.lowerAttrName}") ${pk.attrType} ${pk.lowerAttrName}){
+      return  JsonData.buildSuccess(${classname}Service.getById(${pk.lowerAttrName}));
     }
 
     /**
      * 新增${comments}
      * @param ${classname} ${comments}
-     * @return R
+     * @return JsonData
      */
-    @ApiLog("新增${comments}")
     @PostMapping
     @ApiOperation(value = "新增${comments}", notes = "新增${comments}")
-    public R save${className}(@RequestBody ${className} ${classname}){
-      return new R<>(${classname}Service.save(${classname}));
+    public JsonData save${className}(@RequestBody ${className} ${classname}){
+      return  JsonData.buildSuccess(${classname}Service.save(${classname}));
     }
 
     /**
      * 修改${comments}
      * @param ${pk.lowerAttrName} id
      * @param ${classname} ${comments}
-     * @return R
+     * @return JsonData
      */
-    @ApiLog("修改${comments}")
     @PutMapping("/{${pk.lowerAttrName}}")
     @ApiOperation(value = "修改${comments}", notes = "修改${comments}")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "${pk.lowerAttrName}", value = "主键id", required = true)
     })
-    public R update${className}(@PathVariable ${pk.attrType} ${pk.lowerAttrName}, @RequestBody ${className} ${classname}){
-      return new R<>(${classname}Service.updateById(${classname}));
+    public JsonData update${className}(@PathVariable ${pk.attrType} ${pk.lowerAttrName}, @RequestBody ${className} ${classname}){
+      return  JsonData.buildSuccess(${classname}Service.updateById(${classname}));
     }
 
     /**
      * 通过id删除${comments}
      * @param ${pk.lowerAttrName} id
-     * @return R
+     * @return JsonData
      */
-    @ApiLog("删除${comments}")
     @DeleteMapping("/{${pk.lowerAttrName}}")
     @ApiOperation(value = "删除${comments}", notes = "删除${comments}")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "${pk.lowerAttrName}", value = "主键id", required = true)
     })
-    public R delete${className}(@PathVariable ${pk.attrType} ${pk.lowerAttrName}){
-      return new R<>(${classname}Service.removeById(${pk.lowerAttrName}));
+    public JsonData delete${className}(@PathVariable ${pk.attrType} ${pk.lowerAttrName}){
+      return  JsonData.buildSuccess(${classname}Service.removeById(${pk.lowerAttrName}));
     }
 
 }

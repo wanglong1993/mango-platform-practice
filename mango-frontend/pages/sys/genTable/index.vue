@@ -11,6 +11,7 @@
             :page.sync="page"
             :table-loading="loading"
             @on-load="onLoad"
+            @refresh-change="rowRefresh"
             :permission="permission"
             :data="tableData"
             :option="option"
@@ -41,7 +42,7 @@ import { Vue, Component } from 'nuxt-property-decorator'
 export default class genTable extends Vue {
   loading = true
   tableData = []
-  form = {}
+  form: any = {}
   http = Vue.prototype.$http
   page: any = {
     total: 10,
@@ -73,6 +74,7 @@ export default class genTable extends Vue {
 
         prop: 'tablename',
       },
+
       {
         label: '描述',
 
@@ -94,28 +96,46 @@ export default class genTable extends Vue {
       {
         label: '表名',
         disabled: true,
+        autocomplete: true,
         prop: 'tablename',
       },
       {
         label: '作者',
-
+        autocomplete: true,
         prop: 'author',
       },
       {
         label: '描述',
+        autocomplete: true,
         prop: 'comments',
       },
       {
         label: '模块名',
+        autocomplete: true,
         prop: 'moduleName',
       },
       {
         label: '包名',
+        autocomplete: true,
         prop: 'packageName',
       },
       {
         label: '表前缀',
+        autocomplete: true,
         prop: 'tablePrefix',
+      },
+      {
+        rules: [
+          {
+            required: true,
+            message: '',
+            trigger: 'blur',
+          },
+        ],
+        label: '生成路径',
+        autocomplete: true,
+        prop: 'path',
+        col: 24,
       },
     ],
   }
@@ -124,16 +144,15 @@ export default class genTable extends Vue {
     this.form = row
   }
 
-  async submit(row: any) {
-    console.log(row)
-    const data = { tableName: row.tablename }
+  async submit() {
+    const data = { tableName: this.form.tablename, path: this.form.path }
     const res = await this.http.post('pri/codeGen/generate', data, {
       prefix: 'admin',
       responseType: 'arraybuffer',
     })
 
     let blob: any = new Blob([res.data], { type: 'application/zip' })
-    let filename = row.tablename + '.zip'
+    let filename = this.form.tablename + '.zip'
     let link = document.createElement('a')
     link.href = URL.createObjectURL(blob)
     link.download = filename
@@ -143,6 +162,10 @@ export default class genTable extends Vue {
       URL.revokeObjectURL(blob)
       document.body.removeChild(link)
     }, 0)
+  }
+
+  rowRefresh() {
+    this.onLoad()
   }
 
   async onLoad() {
@@ -162,8 +185,7 @@ export default class genTable extends Vue {
     setTimeout(() => {
       this.loading = false
       this.tableData = data.data.content
-    }, 500)
-    console.log(data)
+    }, 100)
   }
 }
 </script>

@@ -51,6 +51,7 @@ spring:
     admin:
       client:
         url: "http://localhost:8090"
+
   application:
     name: mango-admin
   redis:

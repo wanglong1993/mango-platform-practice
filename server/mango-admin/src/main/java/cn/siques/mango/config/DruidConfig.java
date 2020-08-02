@@ -37,7 +37,7 @@ public class DruidConfig {
        // 黑名单
 //       servletServletRegistrationBean.addInitParameter("deny","");
        servletServletRegistrationBean.addInitParameter("loginUsername","admin");
-       servletServletRegistrationBean.addInitParameter("loginPassword","admin");
+       servletServletRegistrationBean.addInitParameter("loginPassword","heshenghao");
         servletServletRegistrationBean.addInitParameter("resetEnable","true");
         return servletServletRegistrationBean;
    }

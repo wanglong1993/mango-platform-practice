@@ -53,7 +53,7 @@ export default {
       title: '系统监控',
       column1: 'Admin服务监控',
       column2: 'Druid数据源',
-      column2: 'RabitMQ',
+      column3: 'RabitMQ',
     },
     table: {
       rw: '工作任务',

@@ -13,6 +13,7 @@
                             @on-load="onLoad"
                             @row-update="rowUpdate"
                             @row-save="rowSave"
+                            @row-del="rowDel"
                             :permission="permission"
                             :data="tableData"
                             :option="option"
@@ -82,9 +83,13 @@
                 done(form)
                 this.onLoad()
             }, 500)
-            const res = await this.http.post('pri/${pathName}/save', form, { prefix: 'admin' })
+            const res = await this.http.put('pri/${pathName}/'+form.id, form, { prefix: 'admin' })
         }
 
+
+        async rowDel(form: any,index: any){
+            await this.http.delete('pri/${pathName}/'+form.id, { prefix: 'admin' })
+        }
 
         async onLoad() {
             this.loading = true

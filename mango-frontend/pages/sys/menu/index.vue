@@ -149,8 +149,14 @@ export default class MenuIndex extends Vue {
     this.form = dto
   }
 
-  submit() {
-    console.log(this.form)
+  async submit() {
+    const res = await this.http.post('/pri/menu/save', this.form, {
+      prefix: 'menu',
+    })
+
+    setTimeout(() => {
+      this.fetchMenu()
+    }, 300)
   }
 
   crudOption = {

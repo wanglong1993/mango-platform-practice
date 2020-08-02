@@ -16,27 +16,21 @@
       <el-col :span="8">
         <el-card shadow="always">
           <div>
-            <el-link
-              href="http://106.54.247.224:8848/nacos"
-              target="_blank"
-            >{{$t("mango.data5.column1")}}</el-link>
+            <el-link :href="config.NACOS_SERVICE" target="_blank">{{$t("mango.data5.column1")}}</el-link>
           </div>
         </el-card>
       </el-col>
       <el-col :span="8">
         <el-card shadow="always">
           <div>
-            <el-link href="http://127.0.0.1:8849" target="_blank">{{$t("mango.data5.column2")}}</el-link>
+            <el-link :href="config.SENTINEL_SERVICE" target="_blank">{{$t("mango.data5.column2")}}</el-link>
           </div>
         </el-card>
       </el-col>
       <el-col :span="8">
         <el-card shadow="always">
           <div>
-            <el-link
-              href="http://127.0.0.1:9001/swagger-ui.html"
-              target="_blank"
-            >{{$t("mango.data5.column3")}}</el-link>
+            <el-link :href="config.SWAGGER_SERVICE" target="_blank">{{$t("mango.data5.column3")}}</el-link>
           </div>
         </el-card>
       </el-col>
@@ -47,17 +41,14 @@
       <el-col :span="8">
         <el-card shadow="always">
           <div>
-            <el-link href="http://localhost:8090" target="_blank">{{$t("mango.data6.column1")}}</el-link>
+            <el-link :href="config.MONITOR_SERVICE" target="_blank">{{$t("mango.data6.column1")}}</el-link>
           </div>
         </el-card>
       </el-col>
       <el-col :span="8">
         <el-card shadow="always">
           <div>
-            <el-link
-              href="http://localhost:8083/druid/index.html"
-              target="_blank"
-            >{{$t("mango.data6.column2")}}</el-link>
+            <el-link :href="config.DRUID_SERVICE" target="_blank">{{$t("mango.data6.column2")}}</el-link>
           </div>
         </el-card>
       </el-col>
@@ -65,10 +56,7 @@
       <el-col :span="8">
         <el-card shadow="always">
           <div>
-            <el-link
-              href="http://106.54.247.224:15672"
-              target="_blank"
-            >{{$t("mango.data6.column3")}}</el-link>
+            <el-link :href="config.RTBOARD_SERVICE" target="_blank">{{$t("mango.data6.column3")}}</el-link>
           </div>
         </el-card>
       </el-col>
@@ -81,11 +69,13 @@
 
 <script lang="ts">
 import { Vue, Component, Watch } from 'nuxt-property-decorator'
+import config from '~/plugins/config/website.js'
 @Component({
   components: {},
 })
 export default class index extends Vue {
   options = {}
+  config = config
 
   data = {
     datasets: [

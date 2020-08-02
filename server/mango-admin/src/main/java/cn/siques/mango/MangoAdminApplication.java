@@ -14,7 +14,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @EnableSwagger2Doc
 @RefreshScope
 //@EnableAspectJAutoProxy
-@MapperScan("cn.siques.mangocore.dao")
+@MapperScan({"cn.siques.mangocore.dao","cn.siques.mango.mapper"})
 public class MangoAdminApplication {
 
     public static void main(String[] args) {

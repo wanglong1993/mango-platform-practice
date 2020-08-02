@@ -21,5 +21,5 @@ export default function ({ route, store, redirect }) {
       // group: router.$avueRouter.group || [],
     })
   }
-  console.log(route)
+  // console.log(route)
 }

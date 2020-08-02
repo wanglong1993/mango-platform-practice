@@ -23,7 +23,7 @@
       <el-form label-position="right" class="demo-form-inline" :model="$attrs.data">
         <el-row>
           <template v-for="(column,index) in $attrs.option.column">
-            <el-col :key="index" :span="12">
+            <el-col :key="index" :span="column.col||12">
               <el-form-item
                 :label="column.label"
                 :prop="column.prop"
@@ -33,6 +33,7 @@
                 <el-input
                   v-if="!column.formslot"
                   :disabled="column.disabled||false"
+                  :autocomplete="`${column.autocomplete||false}`"
                   v-model="$attrs.data[column.prop]"
                   :placeholder="column.placeholder||''"
                 ></el-input>

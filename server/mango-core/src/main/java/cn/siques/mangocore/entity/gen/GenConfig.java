@@ -45,4 +45,9 @@ public class GenConfig {
      * 表备注
      */
     private String comments;
+
+    /**
+     * 生成路径
+     */
+    private  String path;
 }

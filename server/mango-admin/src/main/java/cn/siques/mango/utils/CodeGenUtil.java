@@ -16,6 +16,7 @@ import com.google.common.collect.Lists;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.WordUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -185,10 +186,17 @@ public class CodeGenUtil {
 
             try {
                 //添加到zip
-                zip.putNextEntry(new ZipEntry(Objects.requireNonNull(getFileName(template, tableEntity.getCaseClassName(), map
-                        .get("package")
+                zip.putNextEntry(new ZipEntry(Objects.requireNonNull(getFileName(template, tableEntity.getCaseClassName(),
+                        genConfig.getPath(),
+                        map.get("package")
                         .toString(), map.get("moduleName").toString()))));
                 IoUtil.write(zip, StandardCharsets.UTF_8, false, sw.toString());
+
+                File file = new File(getFileName(template, tableEntity.getCaseClassName(),genConfig.getPath(),map
+                        .get("package")
+                        .toString(), map.get("moduleName").toString()));
+                FileUtils.writeStringToFile(file,sw.toString());
+
                 IoUtil.close(sw);
                 zip.closeEntry();
             } catch (IOException e) {
@@ -227,15 +235,15 @@ public class CodeGenUtil {
     /**
      * 获取文件名
      */
-    private String getFileName(String template, String className, String packageName, String moduleName) {
+    private String getFileName(String template, String className, String path,String packageName, String moduleName) {
         // 包路径
-        String packagePath = GenConstants.SIGNATURE + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator;
+        String packagePath =path + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator;
         // 资源路径
-        String resourcePath = GenConstants.SIGNATURE + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
+        String resourcePath = path + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
         // api路径
-        String apiPath = GenConstants.SIGNATURE + File.separator + "api" + File.separator;
+        String apiPath = path + File.separator + "api" + File.separator;
         // index.vue路径
-        String indexPath = GenConstants.SIGNATURE + File.separator + "vue" + File.separator;
+        String indexPath = path + File.separator + "vue" + File.separator;
 
         if (StrUtil.isNotBlank(packageName)) {
             packagePath += packageName.replace(".", File.separator) + File.separator + moduleName + File.separator;
