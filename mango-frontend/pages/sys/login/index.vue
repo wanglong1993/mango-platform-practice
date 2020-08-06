@@ -4,7 +4,7 @@
       <img src="~/static/kodinger.jpg" alt="logo" />
     </div>
     <div class="lowin-wrapper">
-      <div v-if="showLoginPanel" v-loading="loading" class="lowin-box lowin-login">
+      <div v-loading="loading" class="lowin-box lowin-login">
         <div class="lowin-box-inner">
           <el-form ref="loginForm" :rules="rules" :model="loginForm">
             <p>Sign in to continue</p>
@@ -45,51 +45,14 @@
                 v-if="isRefresh"
                 class="pointer"
                 @click="refreshCaptcha"
-                :src="`http://localhost:9001/admin/api/sys/v1/pub/captcha.jpg`"
+                :src="config.CAPTCHA_SERVICE"
               />
             </div>
 
             <el-button @click="userLogin" class="lowin-btn login-btn">Sign In</el-button>
 
-            <div class="text-foot">
-              Don't have an account?
-              <a
-                @click="showLoginPanel = false"
-                class="register-link"
-              >Register</a>
-            </div>
+            <div class="text-foot"></div>
           </el-form>
-        </div>
-      </div>
-
-      <div v-else class="lowin-box lowin-register">
-        <div class="lowin-box-inner">
-          <form>
-            <p>Let's create your account</p>
-            <div class="lowin-group">
-              <label>Name</label>
-              <input type="text" name="name" autocomplete="name" class="lowin-input" />
-            </div>
-            <div class="lowin-group">
-              <label>Email</label>
-              <input type="email" autocomplete="email" name="email" class="lowin-input" />
-            </div>
-            <div class="lowin-group">
-              <label>Password</label>
-              <input
-                type="password"
-                name="password"
-                autocomplete="current-password"
-                class="lowin-input"
-              />
-            </div>
-            <button class="lowin-btn">Sign Up</button>
-
-            <div class="text-foot">
-              Already have an account?
-              <a @click="login = true" class="login-link">Login</a>
-            </div>
-          </form>
         </div>
       </div>
     </div>
@@ -99,7 +62,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-
+import config from '~/plugins/config/website.js'
 @Component({
   components: {},
 })
@@ -107,12 +70,13 @@ export default class login extends Vue {
   layout(context: any) {
     return 'login'
   }
+  config: any = config
 
   isRefresh = true
 
   loading = false
   http = Vue.prototype.$http
-  showLoginPanel = true
+
   loginForm = { account: '', password: '', captcha: '' }
 
   rules = {
@@ -144,6 +108,10 @@ export default class login extends Vue {
     // } else {
     //   callback(new Error('密码必须包含数字、字母，区分大小写'))
     // }
+  }
+
+  mounted() {
+    this.$store.commit('DEL_ALL')
   }
 
   validateCatcha(rule: any, value: any, callback: any) {
@@ -191,24 +159,31 @@ export default class login extends Vue {
         const res = await this.$auth.loginWith('local', {
           data: this.loginForm,
         })
-        if (res.data.code == 402) {
-          this.$notify.error({
-            title: '错误',
-            message: res.data.msg,
-          })
-        } else {
+        setTimeout(() => {
+          this.loading = false
+        }, 500)
+
+        if (res.data.code == 200) {
           // 设置token
           this.$store.commit('storeAuth', res.data.data)
+
           this.$router.push('/')
+        } else {
+          this.$notify({
+            title: '',
+            message: res.data.msg,
+            position: 'top-right',
+            type: 'error',
+          })
         }
       } else {
         // eslint-disable-next-line
+        setTimeout(() => {
+          this.loading = false
+        }, 500)
         console.log('error submit!!')
         return false
       }
-      setTimeout(() => {
-        this.loading = false
-      }, 500)
     })
   }
 }

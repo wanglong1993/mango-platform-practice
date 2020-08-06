@@ -1,5 +1,6 @@
 import dotenv from 'dotenv'
 dotenv.config()
+import config from './plugins/config/website.js'
 export default {
   loadingIndicator: {
     name: 'circle',
@@ -33,9 +34,9 @@ export default {
       },
     ],
     script: [
-      {
-        src: 'https://cdn.staticfile.org/Sortable/1.10.0-rc2/Sortable.min.js',
-      },
+      // {
+      //   src: 'https://cdn.staticfile.org/Sortable/1.10.0-rc2/Sortable.min.js',
+      // },
       // {
       //   src: 'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js',
       // },
@@ -73,6 +74,7 @@ export default {
     '@/plugins/element-ui',
     '@/plugins/directive',
     '@/plugins/lang/index.js',
+    // '@/plugins/config/website.js',
   ],
   /*
    ** Auto import components
@@ -99,7 +101,6 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    prefix: process.env.baseUrl,
     credentials: true,
   },
   /*
@@ -107,6 +108,12 @@ export default {
    ** See https://content.nuxtjs.org/configuration
    */
   auth: {
+    redirect: {
+      login: false,
+
+      callback: false,
+      home: false,
+    },
     strategies: {
       local: {
         endpoints: {
@@ -116,12 +123,12 @@ export default {
             // type: 'Bearer'
           },
           login: {
-            url: 'http://localhost:9001/admin/api/sys/v1/pub/login',
+            url: config.LOGIN_URL,
             method: 'post',
             propertyName: 'token',
           },
           logout: {
-            url: 'http://localhost:9001/admin/api/sys/v1/pub/logout',
+            url: config.LOGOUT_URL,
             method: 'get',
             propertyName: 'token',
           },
@@ -141,7 +148,5 @@ export default {
   build: {
     transpile: [/^element-ui/],
   },
-  env: {
-    baseUrl: process.env.API_URL,
-  },
+  env: {},
 }

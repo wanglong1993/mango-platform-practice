@@ -1,5 +1,5 @@
 import Vue from 'vue'
-
+import configs from './config/website.js'
 export default ({ app, store, route, redirect }) => {
   const axios = app.$axios
 
@@ -7,16 +7,17 @@ export default ({ app, store, route, redirect }) => {
   axios.defaults.timeout = 10000
   axios.defaults.headers.post['Content-Type'] = 'application/json'
   axios.defaults.withCredentials = true
+  axios.defaults.baseURL = configs.API_URL
 
   // 请求回调
   axios.onRequest((config) => {
+    console.log(config)
     const newUrl = config.baseURL.replace('*', config.prefix)
     config.baseURL = newUrl
     //设置token
     if (store.state.Auth.token) {
       config.headers.Authorization = store.state.Auth.token || ''
     }
-    // console.log(config)
   })
 
   // 返回回调
@@ -24,6 +25,9 @@ export default ({ app, store, route, redirect }) => {
     //   if (res.headers.refreshtoken) {
     //     Cookie.set('token', res.headers.refreshtoken)
     //   }
+    // if (res.data.code == 402) {
+    //   redirect('/sys/login')
+    // }
   })
 
   // 错误回调

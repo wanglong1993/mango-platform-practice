@@ -1,8 +1,10 @@
 // @import '~bulma/sass/utilities/_all.sass';
 // @import 'bulma/sass/elements/button.sass';
-@import "./variables/variables";
-@import "./variables/element-variables.scss";
-@import "./tags.scss";
+@import './variables/variables';
+@import './variables/element-variables.scss';
+@import './tags.scss';
+@import './login.scss';
+@import './style.scss';
 * {
   margin: 0;
   padding: 0;
@@ -30,8 +32,9 @@
 html,
 body {
   // height: 100%;
-  font-family: Helvetica Neue, NotoSansHans-Regular, AvenirNext-Regular, arial, Hiragino Sans GB, Microsoft Yahei,
-    WenQuanYi Micro Hei, Arial, Helvetica, sans-serif;
+  font-family: Helvetica Neue, NotoSansHans-Regular, AvenirNext-Regular, arial,
+    Hiragino Sans GB, Microsoft Yahei, WenQuanYi Micro Hei, Arial, Helvetica,
+    sans-serif;
   -webkit-text-size-adjust: none;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;

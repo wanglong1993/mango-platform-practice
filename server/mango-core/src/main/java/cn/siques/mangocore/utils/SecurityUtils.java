@@ -83,8 +83,10 @@ public  static  void checkAuthentication(HttpServletRequest request, HttpServlet
         Authentication authentication = getAuthentication();
         if(authentication != null) {
             Object principal = authentication.getPrincipal();
-            System.out.println(principal);
-            if(principal != null && principal instanceof String) {
+            System.out.println(principal.toString());
+            if(principal instanceof UserDetails){
+                username = ((UserDetails) principal).getUsername();
+            }else if(principal != null){
                 username = principal.toString();
             }
         }

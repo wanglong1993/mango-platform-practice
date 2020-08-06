@@ -41,7 +41,7 @@ export default class Roledialog extends Vue {
 
   async init() {
     const res = await this.http.get('/pri/menu/findMenuTree', {
-      prefix: 'menu',
+      prefix: 'admin',
     })
     this.data = res.data.data
   }

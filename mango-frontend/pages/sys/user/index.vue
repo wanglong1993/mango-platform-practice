@@ -106,7 +106,7 @@ export default class sysUser extends Vue {
     },
     menuAlign: 'center',
     column: [
-      { label: '上级菜单', prop: 'parentMe' },
+      // { label: '上级菜单', prop: 'parentMe' },
       {
         label: '角色名称',
         prop: 'remark',

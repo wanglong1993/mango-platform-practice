@@ -4,6 +4,7 @@
       <avue-crud
         @row-update="rowUpdate"
         @row-save="rowSave"
+        @row-del="rowDel"
         @refresh-change="rowRefresh"
         :table-loading="loading"
         :option="option"
@@ -151,7 +152,7 @@ export default class MenuIndex extends Vue {
 
   async submit() {
     const res = await this.http.post('/pri/menu/save', this.form, {
-      prefix: 'menu',
+      prefix: 'admin',
     })
 
     setTimeout(() => {
@@ -279,7 +280,7 @@ export default class MenuIndex extends Vue {
   async fetchMenu() {
     this.loading = true
     const res = await this.http.get('/pri/menu/findMenuTree', {
-      prefix: 'menu',
+      prefix: 'admin',
     })
     setTimeout(() => {
       this.loading = false
@@ -298,15 +299,41 @@ export default class MenuIndex extends Vue {
   rowRefresh() {
     this.fetchMenu()
   }
+
+  rowDel(form: any, index: any) {
+    this.$confirm('此操作将删除' + form.name + ', 是否继续?', '提示', {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning',
+    })
+      .then(async () => {
+        let data: any = []
+        data.push(form)
+        const res = await this.http.post('/pri/menu/delete', data, {
+          prefix: 'admin',
+        })
+
+        this.fetchMenu()
+
+        this.$message({
+          type: 'success',
+          message: '删除成功!',
+        })
+      })
+      .catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除',
+        })
+      })
+  }
+
   async rowUpdate(form: any, index: any, done: any, loading: any) {
     const res = await this.http.post('/pri/menu/save', form, {
-      prefix: 'menu',
+      prefix: 'admin',
     })
 
-    setTimeout(() => {
-      this.fetchMenu()
-      done(form)
-    }, 300)
+    this.fetchMenu()
   }
 }
 </script>

@@ -139,6 +139,8 @@ public class SysLoginController {
     public void captcha(HttpServletResponse response,HttpServletRequest request) throws IOException {
         response.setHeader("Cache-Control","no-store, no-cache");
         response.setContentType("image/jpeg");
+
+//        response.setHeader("Access-Control-allow-credentials","true");
         //生成验证
         String text = producer.createText();
         BufferedImage image = producer.createImage(text);

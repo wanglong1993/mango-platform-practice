@@ -28,8 +28,7 @@ public class SysRoleController {
 
     @ApiOperation(httpMethod="GET", value="查询所有角色")
     @GetMapping("findAll")
-    // 超级管理员接口
-    @RolesAllowed("admin")
+    @PreAuthorize("hasAuthority('sys:role:view')")
     public JsonData findAll(){
         return JsonData.buildSuccess(sysRoleService.findAll());
     }

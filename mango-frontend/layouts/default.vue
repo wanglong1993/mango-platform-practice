@@ -116,9 +116,9 @@ export default class MenuLayOut extends Vue {
 
   async fetchMenu() {
     this.loading = true
-    const http = Vue.prototype.$http
-    const res = await http.get('/pri/menu/findNavTree', {
-      prefix: 'menu',
+    
+    const res = await this.http.get('/pri/menu/findNavTree', {
+      prefix: 'admin',
     })
 
     setTimeout(() => {

@@ -19,7 +19,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import './style.scss';
 .img {
   background: url(../static/bg/404.svg) no-repeat;
 }

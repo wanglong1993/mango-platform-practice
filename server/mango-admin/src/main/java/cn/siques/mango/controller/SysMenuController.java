@@ -1,19 +1,11 @@
-package cn.siques.mangomenu.controller;
+package cn.siques.mango.controller;
 
+import cn.siques.mango.service.SysMenuService;
 import cn.siques.mangocore.entity.JsonData;
 import cn.siques.mangocore.entity.SysMenu;
-
 import cn.siques.mangocore.utils.SecurityUtils;
-import cn.siques.mangomenu.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.prepost.PreAuthorize;
-
-
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,12 +27,11 @@ public class SysMenuController {
     }
 
     /**
-     * 查询导航菜单树
-     * 这里所有人可查，去auth上下文里拿name
+     * 查询导航菜单
      * @param
      * @return
      */
-//    @PreAuthorize("hasAuthority('sys:menu:view')")
+    @PreAuthorize("hasAuthority('sys:menu:view')")
     @GetMapping(value="/findNavTree")
     public JsonData findNavTree() {
         String username = SecurityUtils.getUsername();

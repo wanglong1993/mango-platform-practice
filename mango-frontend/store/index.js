@@ -63,6 +63,10 @@ export const mutations = {
     state.tagList = [state.tagWel]
     setStore({ name: 'tagList', content: state.tagList })
   },
+  DEL_ALL: (state) => {
+    state.tagList = []
+    setStore({ name: 'tagList', content: [] })
+  },
   DEL_TAG_OTHER: (state) => {
     state.tagList = state.tagList.filter((item) => {
       if (item.value === state.tag.value) {

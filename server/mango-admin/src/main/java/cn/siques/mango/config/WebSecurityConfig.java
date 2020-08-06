@@ -32,9 +32,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // 禁用csrf
-        http.cors().and().csrf().disable().authorizeRequests()
+        http.cors().disable().csrf().disable().authorizeRequests()
                 // 跨域预检请求
-//        .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
+        .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
                 //web jars
         .antMatchers("/webjars/**").permitAll()
                 // sql监控druid
