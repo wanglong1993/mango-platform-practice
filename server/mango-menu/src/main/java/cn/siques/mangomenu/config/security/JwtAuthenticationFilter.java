@@ -1,7 +1,8 @@
 package cn.siques.mangomenu.config.security;
 
 import ch.qos.logback.core.util.TimeUtil;
-import cn.siques.mangocore.utils.SecurityUtils;
+
+import cn.siques.mangocommon.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;

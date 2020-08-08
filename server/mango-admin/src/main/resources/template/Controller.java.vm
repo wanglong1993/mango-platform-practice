@@ -2,9 +2,9 @@ package ${package}.${moduleName}.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import cn.siques.mangocore.entity.JsonData;
-import cn.siques.mangocore.Page.PageRequest;
-import cn.siques.mangocore.Page.PageResult;
+import cn.siques.mangocommon.entity.JsonData;
+import cn.siques.mangocommon.Page.PageRequest;
+import cn.siques.mangocommon.Page.PageResult;
 import ${package}.${moduleName}.entity.${className};
 import ${package}.${moduleName}.service.${className}Service;
 import lombok.AllArgsConstructor;
@@ -33,7 +33,8 @@ import io.swagger.annotations.ApiImplicitParams;
 @Api(description = "${className}Controller", tags = {"${comments}"})
 public class ${className}Controller {
 
-    private final ${className}Service ${classname}Service;
+    @Autowired
+    ${className}Service ${classname}Service;
 
 
     /**
@@ -41,7 +42,7 @@ public class ${className}Controller {
    * @param pageRequest
    * @return
    */
-    @GetMapping("findPage")
+    @PostMapping("findPage")
     @ApiOperation(value = "分页查询${comments}", notes = "分页查询${comments}")
     public JsonData listSysRoleMenu(@RequestBody PageRequest pageRequest) {
         PageResult page = ${classname}Service.findPage(pageRequest);

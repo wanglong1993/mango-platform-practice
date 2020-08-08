@@ -1,9 +1,11 @@
 package cn.siques.mango.controller;
 
 import cn.siques.mango.service.SysMenuService;
-import cn.siques.mangocore.entity.JsonData;
+
+import cn.siques.mangocommon.dto.JsonData;
+import cn.siques.mangocommon.utils.SecurityUtils;
 import cn.siques.mangocore.entity.SysMenu;
-import cn.siques.mangocore.utils.SecurityUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

@@ -2,13 +2,15 @@ package cn.siques.mango.service.impl;
 
 import cn.siques.mango.annotation.SaveDate;
 import cn.siques.mango.service.SysDeptService;
-import cn.siques.mangocore.Page.MybatisPageHelper;
-import cn.siques.mangocore.Page.PageRequest;
-import cn.siques.mangocore.Page.PageResult;
+
+import cn.siques.mangocommon.Page.MybatisPageHelper;
+import cn.siques.mangocommon.Page.PageRequest;
+import cn.siques.mangocommon.Page.PageResult;
+import cn.siques.mangocommon.utils.SecurityUtils;
 import cn.siques.mangocore.dao.SysDeptMapper;
 import cn.siques.mangocore.entity.SysDept;
-import cn.siques.mangocore.utils.SecurityUtils;
-import com.github.pagehelper.PageHelper;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

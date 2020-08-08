@@ -1,15 +1,16 @@
 package cn.siques.mango.service.impl;
 
 import cn.siques.mango.service.SysRoleService;
+import cn.siques.mangocommon.Page.MybatisPageHelper;
+import cn.siques.mangocommon.Page.PageRequest;
+import cn.siques.mangocommon.Page.PageResult;
 import cn.siques.mangocore.dao.SysRoleMapper;
 import cn.siques.mangocore.dao.SysUserMapper;
 import cn.siques.mangocore.dao.SysUserRoleMapper;
 import cn.siques.mangocore.entity.*;
 import cn.siques.mango.service.SysMenuService;
 import cn.siques.mango.service.SysUserService;
-import cn.siques.mangocore.Page.MybatisPageHelper;
-import cn.siques.mangocore.Page.PageRequest;
-import cn.siques.mangocore.Page.PageResult;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

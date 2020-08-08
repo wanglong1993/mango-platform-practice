@@ -1,8 +1,9 @@
 package cn.siques.mango.aspect;
 
 import cn.siques.mango.service.SysLogService;
+import cn.siques.mangocommon.utils.SecurityUtils;
 import cn.siques.mangocore.entity.SysLog;
-import cn.siques.mangocore.utils.SecurityUtils;
+
 import com.alibaba.fastjson.JSONObject;
 
 import org.aspectj.lang.ProceedingJoinPoint;

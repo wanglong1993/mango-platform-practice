@@ -1,4 +1,4 @@
-package cn.siques.mangocore.utils;
+package cn.siques.mangocommon.utils;
 
 import org.springframework.security.core.GrantedAuthority;
 

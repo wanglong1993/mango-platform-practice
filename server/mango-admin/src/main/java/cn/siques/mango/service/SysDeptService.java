@@ -1,7 +1,8 @@
 package cn.siques.mango.service;
 
-import cn.siques.mangocore.Page.PageRequest;
-import cn.siques.mangocore.Page.PageResult;
+
+import cn.siques.mangocommon.Page.PageRequest;
+import cn.siques.mangocommon.Page.PageResult;
 import cn.siques.mangocore.entity.SysDept;
 import cn.siques.mangocore.service.CrudService;
 

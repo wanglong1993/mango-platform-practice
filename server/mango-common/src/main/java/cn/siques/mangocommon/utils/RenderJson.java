@@ -1,14 +1,12 @@
-package cn.siques.mangocore.utils;
+package cn.siques.mangocommon.utils;
 
 
-import cn.siques.mangocore.entity.JsonData;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
+import cn.siques.mangocommon.dto.JsonData;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class RenderJson {
 

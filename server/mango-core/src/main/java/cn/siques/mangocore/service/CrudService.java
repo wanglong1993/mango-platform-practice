@@ -1,7 +1,9 @@
 package cn.siques.mangocore.service;
 
-import cn.siques.mangocore.Page.PageRequest;
-import cn.siques.mangocore.Page.PageResult;
+
+
+import cn.siques.mangocommon.Page.PageRequest;
+import cn.siques.mangocommon.Page.PageResult;
 
 import java.util.List;
 

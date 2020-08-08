@@ -1,9 +1,10 @@
 package cn.siques.mango.service.impl;
 
 import cn.siques.mango.service.SysLogService;
-import cn.siques.mangocore.Page.MybatisPageHelper;
-import cn.siques.mangocore.Page.PageRequest;
-import cn.siques.mangocore.Page.PageResult;
+
+import cn.siques.mangocommon.Page.MybatisPageHelper;
+import cn.siques.mangocommon.Page.PageRequest;
+import cn.siques.mangocommon.Page.PageResult;
 import cn.siques.mangocore.dao.SysLogMapper;
 import cn.siques.mangocore.entity.SysLog;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,9 +1,10 @@
 package cn.siques.mango.config.security;
 
+import cn.siques.mangocommon.utils.GrantedAuthorityImpl;
+import cn.siques.mangocommon.utils.JwtUserDetails;
 import cn.siques.mangocore.entity.SysUser;
 import cn.siques.mango.service.SysUserService;
-import cn.siques.mangocore.utils.GrantedAuthorityImpl;
-import cn.siques.mangocore.utils.JwtUserDetails;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,10 +1,9 @@
-package cn.siques.mangocore.utils;
+package cn.siques.mangocommon.utils;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
 import java.util.Collection;
 
 /**

@@ -1,6 +1,6 @@
 package cn.siques.mango.config.security;
 
-import cn.siques.mangocore.utils.SecurityUtils;
+import cn.siques.mangocommon.utils.SecurityUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 

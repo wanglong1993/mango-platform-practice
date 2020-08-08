@@ -1,8 +1,8 @@
 package ${package}.${moduleName}.service;
 
 
-import cn.siques.mangocore.Page.PageRequest;
-import cn.siques.mangocore.Page.PageResult;
+import cn.siques.mangocommon.Page.PageRequest;
+import cn.siques.mangocommon.Page.PageResult;
 import com.baomidou.mybatisplus.extension.service.IService;
 import ${package}.${moduleName}.entity.${className};
 

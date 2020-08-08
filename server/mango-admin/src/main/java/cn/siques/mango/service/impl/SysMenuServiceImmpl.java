@@ -1,11 +1,12 @@
 package cn.siques.mango.service.impl;
 
+import cn.siques.mangocommon.Page.PageRequest;
+import cn.siques.mangocommon.Page.PageResult;
 import cn.siques.mangocommon.constant.SysConstants;
 import cn.siques.mangocore.dao.SysMenuMapper;
 import cn.siques.mangocore.entity.SysMenu;
 import cn.siques.mango.service.SysMenuService;
-import cn.siques.mangocore.Page.PageRequest;
-import cn.siques.mangocore.Page.PageResult;
+
 import cn.siques.mangocore.entity.SysMenuKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;

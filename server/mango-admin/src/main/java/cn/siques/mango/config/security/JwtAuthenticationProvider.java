@@ -1,7 +1,8 @@
 package cn.siques.mango.config.security;
 
-import cn.siques.mangocore.utils.JwtUserDetails;
-import cn.siques.mangocore.utils.PasswordEncoder;
+
+import cn.siques.mangocommon.utils.JwtUserDetails;
+import cn.siques.mangocommon.utils.PasswordEncoder;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;

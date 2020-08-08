@@ -2,9 +2,10 @@ package cn.siques.mango.service.impl;
 
 
 import cn.siques.mango.service.SysRoleService;
+import cn.siques.mangocommon.Page.PageRequest;
+import cn.siques.mangocommon.Page.PageResult;
 import cn.siques.mangocommon.constant.SysConstants;
-import cn.siques.mangocore.Page.PageRequest;
-import cn.siques.mangocore.Page.PageResult;
+
 import cn.siques.mangocore.dao.SysMenuMapper;
 import cn.siques.mangocore.dao.SysRoleMapper;
 import cn.siques.mangocore.dao.SysRoleMenuMapper;

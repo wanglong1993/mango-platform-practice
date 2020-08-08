@@ -1,4 +1,4 @@
-package cn.siques.mangocore.entity;
+package cn.siques.mangocommon.dto;
 
 import java.io.Serializable;
 

@@ -3,11 +3,14 @@ package cn.siques.mango.controller;
 import cn.siques.mango.config.RedisUtils;
 import cn.siques.mango.controller.dto.RegisterDto;
 import cn.siques.mango.service.SysLoginLogService;
-import cn.siques.mangocore.Page.PageRequest;
-import cn.siques.mangocore.Page.PageResult;
-import cn.siques.mangocore.utils.*;
+
+
 import cn.siques.mango.controller.dto.LoginDto;
-import cn.siques.mangocore.entity.JsonData;
+
+import cn.siques.mangocommon.Page.PageRequest;
+import cn.siques.mangocommon.Page.PageResult;
+import cn.siques.mangocommon.dto.JsonData;
+import cn.siques.mangocommon.utils.*;
 import cn.siques.mangocore.entity.SysUser;
 import cn.siques.mango.service.SysUserService;
 import com.google.code.kaptcha.Constants;

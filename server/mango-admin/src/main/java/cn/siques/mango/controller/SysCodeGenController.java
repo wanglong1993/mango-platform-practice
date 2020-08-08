@@ -3,9 +3,10 @@ package cn.siques.mango.controller;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.db.Entity;
 import cn.siques.mango.service.SysCodeGenService;
-import cn.siques.mangocore.Page.PageRequest;
-import cn.siques.mangocore.Page.PageResult;
-import cn.siques.mangocore.entity.JsonData;
+
+import cn.siques.mangocommon.Page.PageRequest;
+import cn.siques.mangocommon.Page.PageResult;
+import cn.siques.mangocommon.dto.JsonData;
 import cn.siques.mangocore.entity.gen.GenConfig;
 import io.swagger.annotations.Api;
 import lombok.SneakyThrows;

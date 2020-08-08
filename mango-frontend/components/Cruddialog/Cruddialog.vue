@@ -31,6 +31,7 @@
               >
                 <el-input
                   v-if="!column.formslot"
+                  :autocomplete="column.autocomplete||'off'"
                   :disabled="column.disabled||false"
                   v-model="$attrs.data[column.prop]"
                   :placeholder="`${column.placeholder||''}`"

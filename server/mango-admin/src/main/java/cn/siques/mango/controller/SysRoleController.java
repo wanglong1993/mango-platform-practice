@@ -2,8 +2,12 @@ package cn.siques.mango.controller;
 
 import cn.siques.mangocommon.constant.SysConstants;
 import cn.siques.mango.service.SysRoleService;
+import cn.siques.mangocommon.dto.JsonData;
 import cn.siques.mangocore.dao.SysRoleMapper;
-import cn.siques.mangocore.entity.*;
+
+import cn.siques.mangocore.entity.SysRole;
+import cn.siques.mangocore.entity.SysRoleKey;
+import cn.siques.mangocore.entity.SysRoleMenu;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +17,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.Collection;
 import java.util.List;
 

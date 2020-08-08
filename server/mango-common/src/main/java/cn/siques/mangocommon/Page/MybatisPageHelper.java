@@ -1,11 +1,10 @@
-package cn.siques.mangocore.Page;
-
-import java.util.List;
-
+package cn.siques.mangocommon.Page;
 
 import cn.siques.mangocommon.utils.ReflectionUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+
+import java.util.List;
 
 
 /**

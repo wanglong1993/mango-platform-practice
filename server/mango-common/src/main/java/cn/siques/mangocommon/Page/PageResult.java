@@ -1,4 +1,4 @@
-package cn.siques.mangocore.Page;
+package cn.siques.mangocommon.Page;
 
 import java.util.List;
 

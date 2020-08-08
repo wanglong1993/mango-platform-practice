@@ -1,7 +1,8 @@
 package cn.siques.mangomenu.controller;
 
 
-import cn.siques.mangocore.entity.JsonData;
+
+import cn.siques.mangocommon.dto.JsonData;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;

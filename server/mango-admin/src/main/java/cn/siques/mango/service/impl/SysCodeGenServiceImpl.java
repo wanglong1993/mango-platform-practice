@@ -7,8 +7,9 @@ import cn.hutool.db.Entity;
 import cn.siques.mango.service.SysCodeGenService;
 import cn.siques.mango.utils.CodeGenUtil;
 import cn.siques.mango.utils.DbUtil;
-import cn.siques.mangocore.Page.PageRequest;
-import cn.siques.mangocore.Page.PageResult;
+
+import cn.siques.mangocommon.Page.PageRequest;
+import cn.siques.mangocommon.Page.PageResult;
 import cn.siques.mangocore.entity.gen.GenConfig;
 import com.github.pagehelper.PageHelper;
 import com.zaxxer.hikari.HikariDataSource;

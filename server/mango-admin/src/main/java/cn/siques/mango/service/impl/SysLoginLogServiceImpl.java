@@ -1,12 +1,14 @@
 package cn.siques.mango.service.impl;
 
 import cn.siques.mango.service.SysLoginLogService;
-import cn.siques.mangocore.Page.MybatisPageHelper;
-import cn.siques.mangocore.Page.PageRequest;
-import cn.siques.mangocore.Page.PageResult;
+
+import cn.siques.mangocommon.Page.MybatisPageHelper;
+import cn.siques.mangocommon.Page.PageRequest;
+import cn.siques.mangocommon.Page.PageResult;
+import cn.siques.mangocommon.utils.SecurityUtils;
 import cn.siques.mangocore.dao.SysLoginLogMapper;
 import cn.siques.mangocore.entity.SysLoginLog;
-import cn.siques.mangocore.utils.SecurityUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;

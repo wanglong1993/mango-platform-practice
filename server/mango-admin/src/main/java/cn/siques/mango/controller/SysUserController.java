@@ -1,16 +1,17 @@
 package cn.siques.mango.controller;
 
 import cn.siques.mango.controller.dto.UserRoleDto;
+import cn.siques.mangocommon.Page.PageRequest;
+import cn.siques.mangocommon.Page.PageResult;
 import cn.siques.mangocommon.constant.SysConstants;
-import cn.siques.mangocore.entity.JsonData;
+
+import cn.siques.mangocommon.dto.JsonData;
+import cn.siques.mangocommon.utils.PasswordUtils;
+import cn.siques.mangocommon.utils.SecurityUtils;
 import cn.siques.mangocore.entity.SysRole;
 import cn.siques.mangocore.entity.SysUser;
 import cn.siques.mango.service.SysUserService;
-import cn.siques.mangocore.Page.PageRequest;
-import cn.siques.mangocore.Page.PageResult;
 import cn.siques.mangocore.entity.SysUserRole;
-import cn.siques.mangocore.utils.PasswordUtils;
-import cn.siques.mangocore.utils.SecurityUtils;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -41,7 +42,7 @@ public class SysUserController {
              ) {
 
             SysUserRole sysUserRole = new SysUserRole(ur.getUserId(),
-                    ur.getRoleId(),SecurityUtils.getUsername(),new Date(),SecurityUtils.getUsername(),new Date(),"");
+                    ur.getRoleId(), SecurityUtils.getUsername(),new Date(),SecurityUtils.getUsername(),new Date(),"");
 
              sysUserService.saveUserRole(sysUserRole);
         }
