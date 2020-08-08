@@ -1,6 +1,14 @@
 server:
   port: 8083
 spring:
+  rabbitmq:
+    host: 106.54.247.224
+    username: admin
+    password: heshenghao
+    port: 5672
+    virtual-host: my_vhost
+    #    解决消息到达中心之前出现问题的情况
+    publisher-confirm-type: simple
   cloud:
     nacos:
       discovery:
@@ -47,10 +55,14 @@ spring:
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       # 合并多个DruidDataSource的监控数据
       useGlobalDataSourceStat: true
+  datasource1:
+      url: jdbc:mysql://localhost:3306/sound?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: root
+      password: l1itdhjaoiqw32kwqe$5asasd*a21
   boot:
-    admin:
-      client:
-        url: "http://localhost:8090"
+#    admin:
+#      client:
+#        url: "http://localhost:8090"
 
   application:
     name: mango-admin

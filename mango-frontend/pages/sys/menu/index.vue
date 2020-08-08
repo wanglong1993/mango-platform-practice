@@ -28,11 +28,7 @@
         </template>
 
         <template slot="urlForm" slot-scope="scope">
-          <el-input
-            :disabled="scope.row.type!=1&&scope.row.type!=0"
-            v-model="scope.row.url"
-            placeholder
-          ></el-input>
+          <el-input :disabled="scope.row.type!=1&&scope.row.type!=0" v-model="scope.row.url"></el-input>
         </template>
 
         <template slot="typeForm" slot-scope="scope">
@@ -59,9 +55,10 @@
         </template>
       </avue-crud>
 
+      <!-- 自己的弹窗 -->
       <Cruddialog ref="dialog" :data="form" :option="crudOption" @submit="submit" :title="'新增下级菜单'">
         <template v-slot:urlForm>
-          <el-input :disabled="form.type!=1" v-model="form.url" placeholder></el-input>
+          <el-input :disabled="form.type!=1" v-model="form.url" placeholder="链接形式：/sys/***"></el-input>
         </template>
 
         <template v-slot:typeForm>
@@ -93,7 +90,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator'
+import { Vue, Component, Watch } from 'nuxt-property-decorator'
 @Component({
   components: {},
 })
@@ -130,7 +127,7 @@ export default class MenuIndex extends Vue {
       list: ['el-icon-plus', 'el-icon-minus', 'el-icon-close', 'el-icon-check'],
     },
   ]
-  form = {}
+  form: any = { type: '' }
   loading = true
 
   casProps = {
@@ -191,6 +188,14 @@ export default class MenuIndex extends Vue {
       },
 
       {
+        // rules: [
+        //   {
+        //     required: true,
+        //     pattern: /.*?/ ,
+        //     message: '请添加菜单名称',
+        //     trigger: 'blur',
+        //   },
+        // ],
         label: '链接',
         prop: 'url',
         formslot: true,
@@ -223,6 +228,13 @@ export default class MenuIndex extends Vue {
         prop: 'name',
         align: 'left',
         width: 200,
+        rules: [
+          {
+            required: true,
+            message: '',
+            trigger: 'blur',
+          },
+        ],
       },
       {
         label: '类型',
@@ -248,6 +260,7 @@ export default class MenuIndex extends Vue {
       {
         label: '链接',
         prop: 'url',
+        overHidden: true,
         formslot: true,
         labelslot: true,
       },
@@ -256,6 +269,10 @@ export default class MenuIndex extends Vue {
         prop: 'parentId',
         formslot: true,
         labelslot: true,
+      },
+      {
+        label: '排序',
+        prop: 'orderNum',
       },
       {
         label: '自定义图标',
@@ -267,6 +284,7 @@ export default class MenuIndex extends Vue {
       {
         label: '权限标识',
         prop: 'perms',
+        overHidden: true,
         formslot: true,
         labelslot: true,
       },
@@ -275,6 +293,11 @@ export default class MenuIndex extends Vue {
 
   mounted() {
     this.fetchMenu()
+  }
+
+  @Watch('form')
+  doValueChanged(newVal: any, oldVal: any) {
+    console.log(newVal)
   }
 
   async fetchMenu() {
@@ -290,10 +313,14 @@ export default class MenuIndex extends Vue {
   }
 
   async rowSave(form: any, done: any, loading: any) {
+    const res = await this.http.post('/pri/menu/save', form, {
+      prefix: 'admin',
+    })
     setTimeout(() => {
       done(form)
     }, 300)
-    console.log(form)
+
+    this.fetchMenu()
   }
 
   rowRefresh() {
@@ -332,7 +359,9 @@ export default class MenuIndex extends Vue {
     const res = await this.http.post('/pri/menu/save', form, {
       prefix: 'admin',
     })
-
+    setTimeout(() => {
+      done(form)
+    }, 300)
     this.fetchMenu()
   }
 }

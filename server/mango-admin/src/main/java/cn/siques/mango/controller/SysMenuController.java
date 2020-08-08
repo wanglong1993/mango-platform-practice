@@ -31,8 +31,9 @@ public class SysMenuController {
      * @param
      * @return
      */
-    @PreAuthorize("hasAuthority('sys:menu:view')")
+//    @PreAuthorize("hasAuthority('sys:menu:view')")
     @GetMapping(value="/findNavTree")
+
     public JsonData findNavTree() {
         String username = SecurityUtils.getUsername();
         System.out.println(username);
@@ -45,7 +46,7 @@ public class SysMenuController {
         return JsonData.buildSuccess(sysMenuService.delete(records));
     }
 
-    @PreAuthorize("hasAuthority('sys:menu:view')")
+//    @PreAuthorize("hasAuthority('sys:menu:view')")
     @GetMapping(value="/findMenuTree")
     public JsonData findMenuTree() {
         return JsonData.buildSuccess(sysMenuService.findTree(null, 0));

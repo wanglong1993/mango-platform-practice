@@ -17,13 +17,13 @@ import java.util.List;
 public class DbUtil {
 
 
-    @Value("${spring.datasource.druid.url}")
+    @Value("${spring.datasource1.url}")
      String jdbcUrl;
 
-    @Value("${spring.datasource.druid.username}")
+    @Value("${spring.datasource1.username}")
     String username;
 
-    @Value("${spring.datasource.druid.password}")
+    @Value("${spring.datasource1.password}")
     String password;
 
     public HikariDataSource buildDb()  {

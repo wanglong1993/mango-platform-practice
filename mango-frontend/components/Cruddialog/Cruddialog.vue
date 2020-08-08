@@ -33,7 +33,7 @@
                   v-if="!column.formslot"
                   :disabled="column.disabled||false"
                   v-model="$attrs.data[column.prop]"
-                  :placeholder="column.placeholder||''"
+                  :placeholder="`${column.placeholder||''}`"
                 ></el-input>
                 <slot v-else :name="column.prop+`Form`"></slot>
               </el-form-item>

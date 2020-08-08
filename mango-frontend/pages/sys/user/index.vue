@@ -14,8 +14,16 @@
           :option="option"
           @refresh-change="rowRefresh"
           @row-update="rowUpdate"
+          @search-change="searchChange"
           @row-save="rowSave"
+          :search.sync="search"
         >
+          <template slot="searchMenu" slot-scope="{row,size}">
+            <el-button :size="size" @click="searchSubmit(row)">自定义提交</el-button>
+          </template>
+          <!-- <template slot="search" slot-scope="{row,size}">
+            <el-input placeholder="自定义输入框" :size="size" style="width:200px" v-model="search.slot"></el-input>
+          </template>-->
           <!-- TODO 有问题 -->
           <template slot-scope="scope" slot="sysDeptForm">
             <el-cascader
@@ -56,6 +64,7 @@
               type="text"
               :data="form"
               :option="crudOption"
+              v-if="!(scope.row.name==='admin')"
               @click="initData(scope.row)"
               @submit="submit"
               :title="'授权角色'"
@@ -91,6 +100,7 @@ export default class sysUser extends Vue {
 
   //########### 请求数据
   roleData: any = []
+  search: any = {}
   tableData: any = []
   treeData: any = []
   //########### 弹出窗口角色表格的选项
@@ -172,6 +182,7 @@ export default class sysUser extends Vue {
     index: true,
     size: 'mini',
     dialogDrag: true,
+    searchShow: false,
     column: [
       {
         rules: [
@@ -183,6 +194,15 @@ export default class sysUser extends Vue {
         ],
         label: '登陆账号',
         prop: 'name',
+        searchSpan: 8,
+        search: true,
+        searchRules: [
+          {
+            required: true,
+            message: '请输入手机号',
+            trigger: 'blur',
+          },
+        ],
       },
       {
         rules: [
@@ -213,6 +233,15 @@ export default class sysUser extends Vue {
         label: '手机号',
         overHidden: true,
         prop: 'mobile',
+        searchSpan: 8,
+        search: true,
+        searchRules: [
+          {
+            required: true,
+            message: '请输入手机号',
+            trigger: 'blur',
+          },
+        ],
       },
       {
         // rules: [
@@ -448,6 +477,13 @@ export default class sysUser extends Vue {
         type: 'success',
       })
     }
+  }
+
+  searchSubmit(row: any) {}
+
+  searchChange(params: any, done: any) {
+    done()
+    this.$message.success(JSON.stringify(params))
   }
 
   // 节点点击

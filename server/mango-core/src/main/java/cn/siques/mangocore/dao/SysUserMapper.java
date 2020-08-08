@@ -199,7 +199,7 @@ public interface SysUserMapper {
     List<SysUser> findPage();
 
     @Select({"SELECT * FROM sys_user u\n" +
-            "LEFT JOIN sys_dept d ON u.dept_id= d.id"})
+            "LEFT JOIN sys_dept d ON u.dept_id= d.id order by u.order_num DESC"})
     @Results(id = "deptUser",value = {
             @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
             @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
