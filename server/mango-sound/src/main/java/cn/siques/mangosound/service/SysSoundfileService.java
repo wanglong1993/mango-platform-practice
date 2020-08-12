@@ -4,8 +4,11 @@ package cn.siques.mangosound.service;
 
 import cn.siques.mangocommon.Page.PageRequest;
 import cn.siques.mangocommon.Page.PageResult;
+import com.aliyun.oss.model.OSSObject;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.siques.mangosound.entity.SysSoundfile;
+
+import java.util.List;
 
 /**
  * <p>
@@ -23,4 +26,8 @@ import cn.siques.mangosound.entity.SysSoundfile;
 public interface SysSoundfileService extends IService<SysSoundfile> {
 
     PageResult findPage(PageRequest pageRequest);
+
+    OSSObject getIsFromOss(Integer id);
+
+    PageResult searchSoundfile(SysSoundfile sysSoundfile, PageRequest pageRequest);
 }

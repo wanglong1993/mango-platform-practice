@@ -42,6 +42,7 @@ public class SysCodeGenServiceImpl implements SysCodeGenService {
        PageHelper.startPage(page.getPageNum(),page.getPageSize());
 
        Db db = new Db(dataSource);
+
        String paramSql = StrUtil.EMPTY;
        String sql = String.format(TABLE_SQL_TEMPLATE,paramSql);
        String countSql = String.format(COUNT_SQL_TEMPLATE, sql);

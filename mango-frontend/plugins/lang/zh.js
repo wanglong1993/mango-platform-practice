@@ -1,6 +1,6 @@
 export default {
   tip: '提示',
-  title: 'Avue 通用管理 系统快速开发框架',
+  title: ' 通用管理 系统快速开发框架',
   logoutTip: '退出系统, 是否继续?',
   submitText: '确定',
   cancelText: '取消',
@@ -13,6 +13,9 @@ export default {
     team: '团队内排名',
     project: '项目访问',
     count: '项目数',
+    sound: {
+      openMap: '声音地图',
+    },
     data: {
       subtitle: '实时',
       column1: '分类统计',

@@ -99,13 +99,15 @@ export default class sysRole extends Vue {
       prefix: 'admin',
     })
 
-    let checkedKeys: any = []
-    res.data.data.sysMenuList.map((e: any) => {
-      checkedKeys.push(e)
-    })
+    setTimeout(() => {
+      let checkedKeys: any = []
+      res.data.data.sysMenuList.map((e: any) => {
+        checkedKeys.push(e)
+      })
 
-    const tree: any = this.$refs.tree
-    tree.$refs.tree.setCheckedNodes(checkedKeys)
+      const tree: any = this.$refs.tree
+      tree.$refs.tree.setCheckedNodes(checkedKeys)
+    }, 500)
     // this.$refs.tree.setCheckedKeys(checkedKeys)
   }
 

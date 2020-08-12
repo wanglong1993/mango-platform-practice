@@ -3,7 +3,11 @@ package cn.siques.mangosound.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Component;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import cn.siques.mangosound.entity.SysSoundfile;
 
 /**
@@ -28,4 +32,16 @@ public interface SysSoundfileMapper extends BaseMapper<SysSoundfile> {
    */
     @Select({"select * from sys_soundfile"})
     List<SysSoundfile> findPage();
+
+    @Select({"<script> SELECT * FROM sys_soundfile" +
+            "<where>" +
+            "<if test='name != null' >" +
+            " name like concat('%',#{name},'%')" +
+            "</if>" +
+            "<if test='classification != null' >" +
+            "or classification like concat('%',#{classification},'%')" +
+            "</if>" +
+            "</where>"+
+            " </script>" })
+    List<SysSoundfile> searchSoundfile(HashMap<String, String> map);
 }

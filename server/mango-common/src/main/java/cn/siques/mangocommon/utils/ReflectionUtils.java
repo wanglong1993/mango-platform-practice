@@ -1,7 +1,10 @@
 package cn.siques.mangocommon.utils;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 反射相关辅助方法
@@ -64,7 +67,10 @@ public class ReflectionUtils {
                         }
                         System.out.println(parameterTypes[i]);
                         System.out.println(args[i].getClass());
-                        if(!parameterTypes[i].equals(args[i].getClass())) {
+
+
+
+                        if(!parameterTypes[i].equals(args[i].getClass()) ) {
                             isSameMethod = false;
                         }
                     }
@@ -77,4 +83,41 @@ public class ReflectionUtils {
         }
         return queryMethod;
     }
+
+    public static Map<String,String> getMap(Object build)  {
+        Field[] declaredFields = build.getClass().getDeclaredFields();
+
+        Map<String,String> fieldMap = new HashMap<>();
+
+        for ( Field  field : declaredFields) {
+            String me = "get" + upperFirstLatter(field.getName());
+            Method method = null;
+            Object invoke = null;
+            try {
+                method = build.getClass().getMethod(me);
+
+             invoke = method.invoke(build);
+            } catch (NoSuchMethodException e) {
+                System.out.println("这个方法可能没有"+e.getMessage());
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+            if(invoke!=null){
+                fieldMap.put(field.getName(),invoke.toString());
+            }
+        }
+        return fieldMap;
+    }
+
+    public static String upperFirstLatter(String letter){
+        char[] chars = letter.toCharArray();
+        if(chars[0]>='a' && chars[0]<='z'){
+            chars[0] = (char) (chars[0]-32);
+        }
+        return new String(chars);
+    }
+
+
 }

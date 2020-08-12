@@ -36,8 +36,13 @@ export default {
     script: [
       {
         src:
-          'https://webapi.amap.com/maps?v=1.4.11&key=7ab53b28352e55dc5754699add0ad862&plugin=AMap.PlaceSearch',
+          'https://webapi.amap.com/maps?v=1.4.11&key=20bc75bcb6199e0a85986de691a4e5d6&plugin=AMap.PlaceSearch',
       },
+      {
+        src:
+          'https://webapi.amap.com/maps?v=1.4.15&key=20bc75bcb6199e0a85986de691a4e5d6&plugin=AMap.MarkerClusterer',
+      },
+
       {
         src: 'https://webapi.amap.com/ui/1.0/main.js?v=1.0.11',
       },

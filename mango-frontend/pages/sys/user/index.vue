@@ -199,7 +199,7 @@ export default class sysUser extends Vue {
         searchRules: [
           {
             required: true,
-            message: '请输入手机号',
+            message: '请输入账号名称',
             trigger: 'blur',
           },
         ],
@@ -212,7 +212,7 @@ export default class sysUser extends Vue {
             trigger: 'blur',
           },
         ],
-        value: 123456,
+        value: '123456',
         label: '登陆密码',
         overHidden: true,
         editDisplay: false,
@@ -351,8 +351,8 @@ export default class sysUser extends Vue {
     setTimeout(() => {
       done(form)
     }, 500)
-
-    if (form.deptTree !== null) {
+    console.log(form.deptTree)
+    if (form.deptTree) {
       form.deptId = form.deptTree[form.deptTree.length - 1]
       form.deptTree = form.deptTree.toString()
     }

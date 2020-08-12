@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import java.io.Serializable;
@@ -86,5 +87,15 @@ public class SysSoundfile extends Model<SysSoundfile> {
      */
     @ApiModelProperty(value = "封面图")
     private String cover;
+
+    @ApiModelProperty(value = "上传时间")
+    private String uploadTime;
+
+
+    @ApiModelProperty(value = "删除状态")
+    private String delFlag;
+
+    @ApiModelProperty(value = "oss地址")
+    private String ossUrl;
 
 }

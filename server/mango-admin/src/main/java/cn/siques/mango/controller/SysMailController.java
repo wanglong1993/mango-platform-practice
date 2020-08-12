@@ -7,6 +7,7 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ public class SysMailController {
     RabbitTemplate rabbitTemplate;
 
     @PostMapping("send")
+    @PreAuthorize("hasAuthority('sys:mail:send')")
     public void sendMail(@RequestBody MailDto mailDto){
 //        MessageProperties messageProperties = new MessageProperties();
 //        messageProperties.setContentType("application/json");

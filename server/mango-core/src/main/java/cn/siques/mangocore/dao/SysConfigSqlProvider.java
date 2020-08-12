@@ -57,7 +57,8 @@ public class SysConfigSqlProvider {
     public String insertSelective(SysConfigWithBLOBs record) {
         BEGIN();
         INSERT_INTO("sys_config");
-        
+
+
         if (record.getId() != null) {
             VALUES("id", "#{id,jdbcType=BIGINT}");
         }

@@ -13,6 +13,9 @@ export default {
     team: 'Team ranking',
     project: 'Project access',
     count: 'Item number',
+    sound: {
+      openMap: 'Voice Map',
+    },
     data: {
       subtitle: 'real time',
       column1: 'Classified statistics',

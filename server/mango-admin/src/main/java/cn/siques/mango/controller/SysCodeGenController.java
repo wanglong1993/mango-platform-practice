@@ -35,8 +35,6 @@ public class SysCodeGenController {
     public void generate(@RequestBody GenConfig genConfig, HttpServletResponse response){
         byte[] data = sysCodeGenService.generatorCode(genConfig);
 
-
-
         response.reset();
         response.setHeader(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment; filename=%s.zip", genConfig.getTableName()));
         response.addHeader(HttpHeaders.CONTENT_LENGTH, String.valueOf(data.length));
