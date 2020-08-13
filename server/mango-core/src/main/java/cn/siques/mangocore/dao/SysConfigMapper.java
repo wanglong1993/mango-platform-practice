@@ -22,6 +22,7 @@ public interface SysConfigMapper {
      *
      * @mbggenerated Mon Jun 29 20:40:38 CST 2020
      */
+
     @SelectProvider(type=SysConfigSqlProvider.class, method="countByExample")
     int countByExample(SysConfigExample example);
 

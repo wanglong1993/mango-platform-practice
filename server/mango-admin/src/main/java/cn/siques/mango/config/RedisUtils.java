@@ -35,7 +35,6 @@ public class RedisUtils<K,V> {
      * @param value
      */
     public void setKey(K key,V value){
-
         ValueOperations<K, V> ops = redisTemplate.opsForValue();
         ops.set(key,value,EXPIRATION,TimeUnit.SECONDS);
     }

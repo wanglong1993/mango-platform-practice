@@ -3,7 +3,7 @@
     <el-amap class="amap-box" vid="map" :zoom="zoom" :center="center" :events="events">
       <!-- <el-amap-marker vid="marker" :position="center" :label="label"></el-amap-marker> -->
       <el-amap-marker
-        v-for="(marker,index) in markers"
+        v-for="(marker, index) in markers"
         :key="index"
         :content="marker.content"
         :position="marker.location"
@@ -11,7 +11,15 @@
       >
         <div
           @click="markerClick(marker)"
-          style="text-align:center; background-color: hsla(180, 100%, 50%, 0.7); height: 24px; width: 24px; border: 1px solid hsl(180, 100%, 40%); border-radius: 12px; box-shadow: hsl(180, 100%, 50%) 0px 0px 1px;"
+          style="
+            text-align: center;
+            background-color: hsla(180, 100%, 50%, 0.7);
+            height: 24px;
+            width: 24px;
+            border: 1px solid hsl(180, 100%, 40%);
+            border-radius: 12px;
+            box-shadow: hsl(180, 100%, 50%) 0px 0px 1px;
+          "
         ></div>
       </el-amap-marker>
       <el-drawer
@@ -24,20 +32,20 @@
         <!-- <el-row>
         <el-col :span="24">-->
         <div
-          style="background-color:#20222A"
+          style="background-color: #20222a;"
           class="pl-4 d-flex flex-column ai-left jc-center h-100"
         >
           <div class="d-flex">
             <el-image
-              style="width: 120px; height: 120px"
+              style="width: 120px; height: 120px;"
               :src="target.cover"
               :preview-src-list="[target.cover]"
             ></el-image>
             <div class="text-light pl-3">
-              <div class="fs-6">{{target.name}}</div>
-              <div class="pt-2 fs-3">{{target.description}}</div>
-              <div class="pt-2 fs-3">分类: {{target.classification}}</div>
-              <div class="pt-2 fs-3" v-if="target.distrition!=''">来自：{{target.distrition}}</div>
+              <div class="fs-6">{{ target.name }}</div>
+              <div class="pt-2 fs-3">{{ target.description }}</div>
+              <div class="pt-2 fs-3">分类: {{ target.classification }}</div>
+              <div class="pt-2 fs-3" v-if="target.distrition != ''">来自：{{ target.distrition }}</div>
             </div>
           </div>
           <vue-plyr>
@@ -52,7 +60,7 @@
     </el-amap>
   </div>
 </template>
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
 import { AMapManager, lazyAMapApiLoaderInstance } from 'vue-amap'
 import config from '~/plugins/config/website.js'
@@ -75,29 +83,6 @@ export default class index extends Vue {
   label = {
     content: '',
     offset: [10, 12],
-  }
-  plugin = [
-    {
-      pName: 'ToolBar',
-      events: {
-        init(instance: any) {
-          console.log(instance)
-        },
-      },
-    },
-  ]
-
-  pluginInit(o: any) {
-    // o 是高德地图定位插件实例
-    o.getCurrentPosition((status: any, result: any) => {
-      if (result && result.position) {
-        this.lng = result.position.lng
-        this.lat = result.position.lat
-        this.center = [this.lng, this.lat]
-        this.loaded = true
-        this.$nextTick()
-      }
-    })
   }
 
   events = {
@@ -122,7 +107,7 @@ export default class index extends Vue {
         gridSize: 80,
         renderCluserMarker: this._renderCluserMarker,
       })
-    }, 1000)
+    }, 3000)
   }
   center = [121.406051, 31.179695]
 
@@ -192,7 +177,7 @@ export default class index extends Vue {
   }
 }
 </script>
-<style lang='scss' >
+<style lang="scss">
 .plyr--audio .plyr__controls {
   background-color: #20222a !important;
 }

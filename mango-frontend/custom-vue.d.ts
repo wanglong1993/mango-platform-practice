@@ -7,7 +7,7 @@ declare module 'vue/types/vue' {
   interface Vue {
     $http: AxiosInstance
     $route: Route
-    $dayjs: Dayjs
+    $dayjs: any
     $store: Store<any>
     $auth: any
     $i18n1: any

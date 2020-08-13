@@ -5,8 +5,6 @@
         <div class="px-2 py-3">
           <avue-crud
             ref="crud"
-            :uploadBefore="uploadBefore"
-            :upload-after="uploadAfter"
             :page.sync="page"
             :table-loading="loading"
             :cell-style="cellStyle"
@@ -183,13 +181,6 @@ export default class index extends Vue {
       {
         label: '类型',
 
-        rules: [
-          {
-            required: true,
-            message: '',
-            trigger: 'blur',
-          },
-        ],
         prop: 'classification',
         search: true,
         searchRules: [
@@ -202,13 +193,7 @@ export default class index extends Vue {
       },
       {
         label: '描述',
-        rules: [
-          {
-            required: true,
-            message: '',
-            trigger: 'blur',
-          },
-        ],
+
         overHidden: true,
         formslot: true,
         labelslot: true,
@@ -239,13 +224,7 @@ export default class index extends Vue {
       },
       {
         label: '地图位置',
-        rules: [
-          {
-            required: true,
-            message: '',
-            trigger: 'blur',
-          },
-        ],
+
         prop: 'location',
         type: 'array',
         span: 24,
@@ -258,13 +237,7 @@ export default class index extends Vue {
       {
         label: '封面图',
         prop: 'cover',
-        rules: [
-          {
-            required: true,
-            message: '',
-            trigger: 'blur',
-          },
-        ],
+
         type: 'upload',
         listType: 'picture-img',
         span: 12,
@@ -278,13 +251,7 @@ export default class index extends Vue {
       {
         label: '音频上传',
         prop: 'audio',
-        rules: [
-          {
-            required: true,
-            message: '',
-            trigger: 'blur',
-          },
-        ],
+
         // type: 'upload',
 
         // span: 12,
@@ -324,8 +291,8 @@ export default class index extends Vue {
 
       this.page.currentPage = 1
     }
-
-    this.$refs.crud.$refs.headerSearch.searchShow = false
+    const crud: any = this.$refs.crud
+    crud.$refs.headerSearch.searchShow = false
     params ? params : (params = this.params)
 
     const { data } = await this.http.post(
@@ -418,10 +385,10 @@ export default class index extends Vue {
     // this.avatorUrl = URL.createObjectURL(file.raw)
   }
 
-  getObjectInfo(path: String) {
-    const res = store.get(path)
-    console.log(res)
-  }
+  // getObjectInfo(path: String) {
+  //   const res = store.get(path)
+  //   console.log(res)
+  // }
 
   openMap() {
     this.$router.push({ path: '/sys/map', query: { label: '声音地图' } })
@@ -458,27 +425,21 @@ export default class index extends Vue {
     // await this.http.delete('pri/sysSoundfile/' + form.id, { prefix: 'sound' })
   }
 
-  async uploadBefore(file: any, done: any, loading: any, column: any) {
-    //如果你想修改file文件,由于上传的file是只读文件，必须复制新的file才可以修改名字，完后赋值到done函数里,如果不修改的话直接写done()即可
+  // async uploadBefore(file: any, done: any, loading: any, column: any) {
+  //   //如果你想修改file文件,由于上传的file是只读文件，必须复制新的file才可以修改名字，完后赋值到done函数里,如果不修改的话直接写done()即可
 
-    const date = this.$dayjs().format('YYYY-MM-DD')
+  //   const date = this.$dayjs().format('YYYY-MM-DD')
 
-    await store
-      .put('soundFile/' + date + '/' + file.name, file)
-      .then((result) => {
-        console.log(result)
-      })
-    // var newFile = new File([file], '1234', { type: file.type })
-    // console.log(file, column)
-    done(file)
-    this.$message.success('上传前的方法')
-  }
-
-  uploadAfter(res, done, loading, column) {
-    console.log(res, column)
-    done()
-    this.$message.success('上传后的方法')
-  }
+  //   await store
+  //     .put('soundFile/' + date + '/' + file.name, file)
+  //     .then((result) => {
+  //       console.log(result)
+  //     })
+  //   // var newFile = new File([file], '1234', { type: file.type })
+  //   // console.log(file, column)
+  //   done(file)
+  //   this.$message.success('上传前的方法')
+  // }
 
   rowRefresh() {
     this.onLoad()
