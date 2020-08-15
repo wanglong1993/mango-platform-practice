@@ -35,7 +35,7 @@ public class SysSoundfile extends Model<SysSoundfile> {
      * ID
      */
     @TableId
-    @ApiModelProperty(value = "ID")
+    @ApiModelProperty(value = "Id")
     private Integer id;
     /**
      * 文件名

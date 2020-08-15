@@ -36,7 +36,7 @@
                   v-model="$attrs.data[column.prop]"
                   :placeholder="`${column.placeholder||''}`"
                 ></el-input>
-                <slot v-else :name="column.prop+`Form`"></slot>
+                <slot v-else :row="$attrs.data" :name="column.prop+`Form`"></slot>
               </el-form-item>
             </el-col>
           </template>
@@ -46,7 +46,7 @@
       <slot name="extendField"></slot>
 
       <span slot="footer">
-        <el-button @click=" logVisible= false">取 消</el-button>
+        <el-button @click="resetForm">取 消</el-button>
         <el-button type="primary" @click="submit">确 定</el-button>
       </span>
     </el-dialog>
@@ -81,11 +81,18 @@ export default class Cruddialog extends Vue {
         this.$emit('submit')
         alert('submit!')
         this.logVisible = false
+        // ref.resetFields()
       } else {
         console.log('error submit!!')
         return false
       }
     })
+  }
+
+  resetForm() {
+    this.logVisible = false
+    const ref: any = this.$refs['ruleForm']
+    ref.resetFields()
   }
 }
 </script>

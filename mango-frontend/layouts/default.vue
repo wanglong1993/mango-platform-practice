@@ -76,7 +76,7 @@
             <Menutags></Menutags>
           </div>
           <el-main class="h-100">
-            <Nuxt :keep-alive="true" class />
+            <Nuxt :keep-alive="true" max="10" />
           </el-main>
         </div>
       </el-container>
@@ -116,7 +116,7 @@ export default class MenuLayOut extends Vue {
 
   async fetchMenu() {
     this.loading = true
-    
+
     const res = await this.http.get('/pri/menu/findNavTree', {
       prefix: 'admin',
     })

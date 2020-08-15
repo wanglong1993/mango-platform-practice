@@ -44,4 +44,6 @@ public interface SysSoundfileMapper extends BaseMapper<SysSoundfile> {
             "</where>"+
             " </script>" })
     List<SysSoundfile> searchSoundfile(HashMap<String, String> map);
+
+    List<SysSoundfile> findAll();
 }

@@ -9,6 +9,7 @@ import com.aliyun.oss.model.OSSObject;
 
 import cn.siques.mangosound.entity.SysSoundfile;
 import cn.siques.mangosound.service.SysSoundfileService;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import lombok.AllArgsConstructor;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,6 @@ public class SysSoundfileController {
     @ApiOperation(value = "分页查询", notes = "分页查询")
     public JsonData listSysSoundPage(@RequestBody PageRequest pageRequest) {
         PageResult page = sysSoundfileService.findPage(pageRequest);
-
         return JsonData.buildSuccess(page);
     }
 
@@ -117,6 +117,7 @@ public class SysSoundfileController {
             @ApiImplicitParam(name = "id", value = "主键id", required = true)
     })
     public JsonData updateSysSoundfile(@PathVariable Integer id, @RequestBody SysSoundfile sysSoundfile){
+
       return  JsonData.buildSuccess(sysSoundfileService.updateById(sysSoundfile));
     }
 

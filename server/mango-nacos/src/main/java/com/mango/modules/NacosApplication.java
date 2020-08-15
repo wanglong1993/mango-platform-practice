@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.jeesite.modules;
+package com.mango.modules;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;

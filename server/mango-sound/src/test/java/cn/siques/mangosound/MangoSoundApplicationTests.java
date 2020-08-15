@@ -32,7 +32,15 @@ class MangoSoundApplicationTests {
 
     @Autowired
     SysSoundfileService sysSoundfileService;
+        
+    
+    @Test
+    void test1(){
+//        List<SysSoundfile> all = sysSoundfileMapper.findAll();
+//        System.out.println(all);
 
+    }
+    
     @Test
     void test(){
 //        SysSoundfile build = SysSoundfile.builder().name("湖水").classification("自然").build();

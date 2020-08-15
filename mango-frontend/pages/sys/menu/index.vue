@@ -6,6 +6,7 @@
         @row-save="rowSave"
         @row-del="rowDel"
         @refresh-change="rowRefresh"
+        :before-close="beforeClose"
         :table-loading="loading"
         :option="option"
         :data="tableData"
@@ -28,11 +29,11 @@
         </template>
 
         <template slot="urlForm" slot-scope="scope">
-          <el-input :disabled="scope.row.type!=1&&scope.row.type!=0" v-model="scope.row.url"></el-input>
+          <el-input :disabled="scope.row.type!=1" v-model="scope.row.url"></el-input>
         </template>
 
         <template slot="typeForm" slot-scope="scope">
-          <el-radio-group v-model="scope.row.type">
+          <el-radio-group @change="radioChange(scope.row)" v-model="scope.row.type">
             <el-radio :label="0">父菜单</el-radio>
             <el-radio :label="1">菜单</el-radio>
             <el-radio :label="2">权限</el-radio>
@@ -57,33 +58,41 @@
 
       <!-- 自己的弹窗 -->
       <Cruddialog ref="dialog" :data="form" :option="crudOption" @submit="submit" :title="'新增下级菜单'">
-        <template v-slot:urlForm>
-          <el-input :disabled="form.type!=1" v-model="form.url" placeholder="链接形式：/sys/***"></el-input>
+        <template slot="urlForm" slot-scope="scope">
+          <el-input
+            :disabled="scope.row.type!=1"
+            v-model="scope.row.url"
+            placeholder="链接形式：/sys/***"
+          ></el-input>
         </template>
 
-        <template v-slot:typeForm>
-          <el-radio-group v-model="form.type">
-            <el-radio :label="0">父菜单</el-radio>
+        <template slot="typeForm" slot-scope="scope">
+          <el-radio-group @change="radioChange(scope.row)" v-model="scope.row.type">
             <el-radio :label="1">菜单</el-radio>
             <el-radio :label="2">权限</el-radio>
           </el-radio-group>
         </template>
 
-        <template slot="parentNameForm">
-          <el-cascader v-model="form.parentId" collapse-tags :props="casProps" :options="treeData"></el-cascader>
+        <template slot="parentNameForm" slot-scope="scope">
+          <el-cascader
+            v-model="scope.row.parentId"
+            collapse-tags
+            :props="casProps"
+            :options="treeData"
+          ></el-cascader>
         </template>
 
-        <template slot="iconForm">
+        <template slot="iconForm" slot-scope="scope">
           <avue-input-icon
-            :disabled="form.type==2"
-            v-model="form.icon"
+            :disabled="scope.row.type==2"
+            v-model="scope.row.icon"
             placeholder="请选择图标"
             :icon-list="iconList"
           ></avue-input-icon>
         </template>
 
-        <template slot="permsForm">
-          <el-input :disabled="form.type!=2" v-model="form.perms" placeholder></el-input>
+        <template slot="permsForm" slot-scope="scope">
+          <el-input :disabled="scope.row.type!=2" v-model="scope.row.perms" placeholder></el-input>
         </template>
       </Cruddialog>
     </el-container>
@@ -99,6 +108,7 @@ export default class MenuIndex extends Vue {
   title = '修改菜单信息'
   tableData = []
   treeData = []
+  formType = 0
   iconList = [
     {
       label: '基本图标',
@@ -139,11 +149,29 @@ export default class MenuIndex extends Vue {
     // multiple: true,
   }
 
+  radioChange(row: any) {
+    this.formType = row.type
+
+    if (row.type == 0) {
+      row.parentId = ''
+    }
+    row.url = ''
+
+    row.icon = ''
+    row.perms = ''
+  }
+
   initData(obj: any) {
     console.log(obj)
     const ref: any = this.$refs.dialog
     ref.logVisible = true
-    let dto = { type: obj.type, parentId: obj.id, orderNum: 30 }
+    let dto = {
+      type: obj.type == 0 ? 1 : obj.type,
+      parentId: obj.id,
+      orderNum: 30,
+      url: '',
+      perms: '',
+    }
     this.form = dto
   }
 
@@ -157,13 +185,46 @@ export default class MenuIndex extends Vue {
     }, 300)
   }
 
+  beforeClose(done: any) {
+    this.formType = 0
+    done()
+  }
+
+  validateParentId(rule: any, value: any, callback: any) {
+    console.log(this.formType)
+    if (this.formType == 1 || this.formType == 2) {
+      if (value == '') {
+        callback(new Error('请选择上级菜单'))
+      } else {
+        callback()
+      }
+    } else {
+      callback()
+    }
+  }
+
+  validatePermission(rule: any, value: any, callback: any) {
+    console.log(value)
+    if (this.formType == 2) {
+      if (value == '') {
+        callback(new Error('请输入权限信息'))
+      } else {
+        callback()
+      }
+    } else {
+      callback()
+    }
+  }
+
   crudOption = {
     column: [
       {
         rules: [
           {
-            message: '请添加上级菜单',
+            required: true,
+            message: '',
             trigger: 'blur',
+            validator: this.validateParentId,
           },
         ],
         label: '上级菜单',
@@ -188,20 +249,20 @@ export default class MenuIndex extends Vue {
       },
 
       {
-        // rules: [
-        //   {
-        //     required: true,
-        //     pattern: /.*?/ ,
-        //     message: '请添加菜单名称',
-        //     trigger: 'blur',
-        //   },
-        // ],
         label: '链接',
         prop: 'url',
         formslot: true,
       },
 
       {
+        rules: [
+          {
+            required: true,
+            message: '',
+            trigger: 'blur',
+            validator: this.validatePermission,
+          },
+        ],
         label: '权限标识',
         prop: 'perms',
         formslot: true,
@@ -241,6 +302,7 @@ export default class MenuIndex extends Vue {
         prop: 'type',
         formslot: true,
         value: 0,
+        editDisplay: false,
         labelslot: true,
         dicData: [
           {
@@ -265,6 +327,14 @@ export default class MenuIndex extends Vue {
         labelslot: true,
       },
       {
+        rules: [
+          {
+            required: true,
+            message: '',
+            trigger: 'blur',
+            validator: this.validateParentId,
+          },
+        ],
         label: '上级菜单',
         prop: 'parentId',
         formslot: true,
@@ -273,6 +343,7 @@ export default class MenuIndex extends Vue {
       {
         label: '排序',
         prop: 'orderNum',
+        value: 60,
       },
       {
         label: '自定义图标',
@@ -282,6 +353,14 @@ export default class MenuIndex extends Vue {
         slot: true,
       },
       {
+        rules: [
+          {
+            required: true,
+            message: '',
+            trigger: 'blur',
+            validator: this.validatePermission,
+          },
+        ],
         label: '权限标识',
         prop: 'perms',
         overHidden: true,
@@ -293,11 +372,6 @@ export default class MenuIndex extends Vue {
 
   mounted() {
     this.fetchMenu()
-  }
-
-  @Watch('form')
-  doValueChanged(newVal: any, oldVal: any) {
-    console.log(newVal)
   }
 
   async fetchMenu() {

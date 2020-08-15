@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white h-100">
     <el-container class="pt-3 px-3">
-      <el-aside width="200px" class="pr-2" style="border-right:1px solid  #ececec;">
+      <el-aside width="200px" class="pr-2" style="border-right: 1px solid #ececec;">
         <avue-tree ref="tree" :option="treeOption" :data="treeData" @node-click="nodeClick"></avue-tree>
       </el-aside>
       <el-main>
@@ -18,7 +18,7 @@
           @row-save="rowSave"
           :search.sync="search"
         >
-          <template slot="searchMenu" slot-scope="{row,size}">
+          <template slot="searchMenu" slot-scope="{ row, size }">
             <el-button :size="size" @click="searchSubmit(row)">自定义提交</el-button>
           </template>
           <!-- <template slot="search" slot-scope="{row,size}">
@@ -43,7 +43,11 @@
           </template>
 
           <template slot="orderNum" slot-scope="scope">
-            <el-input v-model="scope.row.orderNum" placeholder="请输入内容">{{scope.row.orderNum}}</el-input>
+            <el-input v-model="scope.row.orderNum" placeholder="请输入内容">
+              {{
+              scope.row.orderNum
+              }}
+            </el-input>
           </template>
 
           <template slot="statusForm" slot-scope="scope">
@@ -53,10 +57,11 @@
             </el-radio-group>
           </template>
 
-          <template
-            slot="sysDept"
-            slot-scope="scope"
-          >{{scope.row.sysDept?scope.row.sysDept.name:''}}</template>
+          <template slot="sysDept" slot-scope="scope">
+            {{
+            scope.row.sysDept ? scope.row.sysDept.name : ''
+            }}
+          </template>
           <template slot-scope="scope" slot="menu">
             <Crudbutton
               icon="el-icon-check"
@@ -64,7 +69,7 @@
               type="text"
               :data="form"
               :option="crudOption"
-              v-if="!(scope.row.name==='admin')"
+              v-if="!(scope.row.name === 'admin')"
               @click="initData(scope.row)"
               @submit="submit"
               :title="'授权角色'"
@@ -175,7 +180,7 @@ export default class sysUser extends Vue {
   option = {
     excelBtn: true,
     dialogClickModal: false,
-    height: '450',
+    height: '60vh',
     // sortable: true,
     // selection: true,
     menuWidth: 210,

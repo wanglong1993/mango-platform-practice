@@ -10,7 +10,7 @@
             :cell-style="cellStyle"
             :permission="permission"
             @search-change="searchChange"
-            @on-load="search==true?searchChange():onLoad()"
+            @on-load="search == true ? searchChange() : onLoad()"
             @refresh-change="rowRefresh"
             @row-update="rowUpdate"
             @row-save="rowSave"
@@ -20,7 +20,9 @@
             :option="option"
           >
             <template slot="menuLeft">
-              <el-button type="primary" size="mini" @click="openMap">{{$t('mango.sound.openMap')}}</el-button>
+              <el-button type="primary" size="mini" @click="openMap">{{
+                $t('mango.sound.openMap')
+              }}</el-button>
             </template>
 
             <template slot-scope="scope" slot="audioForm">
@@ -36,18 +38,24 @@
                 :file-list="scope.row.fileList"
               >
                 <el-button size="small" type="primary">点击上传</el-button>
-                <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                <div slot="tip" class="el-upload__tip">
+                  只能上传jpg/png文件，且不超过500kb
+                </div>
               </el-upload>
             </template>
 
             <template slot-scope="scope" slot="uploadTimeForm">
-              <el-date-picker v-model="scope.row.uploadTime" type="date" placeholder="选择日期"></el-date-picker>
+              <el-date-picker
+                v-model="scope.row.uploadTime"
+                type="date"
+                placeholder="选择日期"
+              ></el-date-picker>
             </template>
 
             <template slot-scope="scope" slot="descriptionForm">
               <el-input
                 type="textarea"
-                :autosize="{ minRows: 2, maxRows: 4}"
+                :autosize="{ minRows: 2, maxRows: 4 }"
                 placeholder="请输入内容"
                 v-model="scope.row.description"
               ></el-input>
@@ -61,7 +69,10 @@
             </template>
 
             <template slot-scope="scope" slot="locationForm">
-              <avue-input-map placeholder="请选择地图" v-model="scope.row.location"></avue-input-map>
+              <avue-input-map
+                placeholder="请选择地图"
+                v-model="scope.row.location"
+              ></avue-input-map>
             </template>
 
             <!-- <template slot="cover" slot-scope="scope">
@@ -80,7 +91,7 @@
     </el-container>
   </div>
 </template>
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
 import config from '~/plugins/config/website.js'
 import store from '~/plugins/oss.js'
@@ -128,7 +139,7 @@ export default class index extends Vue {
 
   option = {
     viewBtn: true,
-    height: '450',
+    height: '60vh',
     dialogClickModal: false,
     index: true,
     searchShow: false,
@@ -496,5 +507,4 @@ export default class index extends Vue {
   }
 }
 </script>
-<style lang='scss' scoped>
-</style>
+<style lang="scss" scoped></style>

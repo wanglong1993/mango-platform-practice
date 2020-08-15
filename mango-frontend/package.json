@@ -17,7 +17,6 @@
     "@nuxtjs/pwa": "^3.0.0-beta.20",
     "@smallwei/avue": "^2.6.12",
     "ali-oss": "^6.10.0",
-    "chart.js": "^2.9.3",
     "dayjs": "^1.8.33",
     "element-ui": "^2.13.2",
     "net": "^1.0.2",
