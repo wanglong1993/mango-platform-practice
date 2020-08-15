@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 150vh;">
+  <div style="height: 150vh;" class="h-100">
     <!-- <template>
       <chartjs :options="options" type="pie" :data="data"></chartjs>
     </template>-->

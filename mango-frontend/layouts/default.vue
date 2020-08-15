@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+  <el-container style="display:-webkit-box!important;">
     <el-menu
       v-loading="loading"
       element-loading-background="hsla(0,0%,28%,1)"
@@ -75,7 +75,11 @@
           <div class="bg-white mb-2" style="z-index:1;">
             <Menutags></Menutags>
           </div>
-          <el-main class="h-100">
+
+          <el-main class="h-100 d-flex">
+            <!-- <div ref="drag" class="resize">
+              <div class="resize-bar"></div>
+            </div>-->
             <Nuxt :keep-alive="true" max="10" />
           </el-main>
         </div>
@@ -167,7 +171,7 @@ export default class MenuLayOut extends Vue {
   }
 }
 </script>
-<style>
+<style lang="scss">
 #__layout {
   height: 100vh;
 }
@@ -178,7 +182,7 @@ export default class MenuLayOut extends Vue {
 }
 
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 240px !important;
+  width: 200px;
   min-height: 400px;
 }
 
@@ -194,5 +198,28 @@ export default class MenuLayOut extends Vue {
 
 .el-container {
   height: 100% !important;
+}
+
+.resize {
+  background-color: white;
+  transform: translateZ(0px);
+  width: 10px;
+  z-index: 3;
+  height: 100%;
+  position: relative;
+  cursor: e-resize;
+  &-bar {
+    background-color: rgb(76, 154, 255);
+    opacity: 0;
+    height: 100%;
+    width: 2px;
+    transition: opacity 200ms ease 0s;
+  }
+
+  &:hover {
+    .resize-bar {
+      opacity: 1;
+    }
+  }
 }
 </style>

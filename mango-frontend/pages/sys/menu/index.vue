@@ -3,6 +3,8 @@
     <el-container class="pt-3 px-3">
       <avue-crud
         @row-update="rowUpdate"
+        :cell-style="cellStyle"
+        :row-style="rowStyle"
         @row-save="rowSave"
         @row-del="rowDel"
         @refresh-change="rowRefresh"
@@ -99,6 +101,7 @@
   </div>
 </template>
 <script lang="ts">
+import config from '~/plugins/config/website.js'
 import { Vue, Component, Watch } from 'nuxt-property-decorator'
 @Component({
   components: {},
@@ -112,14 +115,7 @@ export default class MenuIndex extends Vue {
   iconList = [
     {
       label: '基本图标',
-      list: [
-        'el-icon-info',
-        'el-icon-error',
-        'el-icon-error',
-        'el-icon-success',
-        'el-icon-warning',
-        'el-icon-question',
-      ],
+      list: config.icon,
     },
     {
       label: '方向图标',
@@ -279,7 +275,7 @@ export default class MenuIndex extends Vue {
     headerAlign: 'center',
     align: 'center',
     border: true,
-    // index: true,
+    height: '70vh',
     size: 'mini',
     dialogDrag: true,
     defaultExpandAll: false,
@@ -339,6 +335,7 @@ export default class MenuIndex extends Vue {
         prop: 'parentId',
         formslot: true,
         labelslot: true,
+        showColumn: false,
       },
       {
         label: '排序',
@@ -437,6 +434,36 @@ export default class MenuIndex extends Vue {
       done(form)
     }, 300)
     this.fetchMenu()
+  }
+
+  cellStyle({ row, column, rowIndex, columnIndex }: any) {
+    if (columnIndex == 1 || columnIndex == 5) {
+      switch (row.type) {
+        case 2:
+          return {
+            color: 'red',
+            fontWeight: 'bold',
+            fontSize: '20',
+          }
+          break
+        case 1:
+          return {
+            color: 'green',
+            fontWeight: 'bold',
+            fontSize: '20',
+          }
+        default:
+          break
+      }
+    }
+  }
+
+  rowStyle({ row, column, rowIndex }: any) {
+    // if (row.type == 2) {
+    //   return {
+    //     backgroundColor: 'rgba(103, 194, 58, 0.07)',
+    //   }
+    // }
   }
 }
 </script>

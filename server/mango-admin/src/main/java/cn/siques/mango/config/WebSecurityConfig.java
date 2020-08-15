@@ -2,6 +2,8 @@ package cn.siques.mango.config;
 
 import cn.siques.mango.config.security.JwtAuthenticationFilter;
 import cn.siques.mango.config.security.JwtAuthenticationProvider;
+import cn.siques.mango.service.SysUserService;
+import cn.siques.mangocore.entity.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +30,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Qualifier("myService")
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    SysUserService sysUserService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

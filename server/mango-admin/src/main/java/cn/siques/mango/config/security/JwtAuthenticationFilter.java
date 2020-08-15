@@ -1,5 +1,6 @@
 package cn.siques.mango.config.security;
 
+import cn.siques.mango.service.SysUserService;
 import cn.siques.mangocommon.utils.SecurityUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class JwtAuthenticationFilter  extends BasicAuthenticationFilter {
+
+
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);

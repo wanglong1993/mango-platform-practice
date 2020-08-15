@@ -13,6 +13,18 @@ export default {
     team: 'Team ranking',
     project: 'Project access',
     count: 'Item number',
+    user: {
+      menu: {
+        auth: 'auth',
+        resetPass: {
+          title: 'reset password',
+          contentPre: 'Are you sure you want to reset ',
+          contentPro: '`s password?',
+          cancel: 'cancel',
+          confirm: 'confirm',
+        },
+      },
+    },
     sound: {
       openMap: 'Voice Map',
     },

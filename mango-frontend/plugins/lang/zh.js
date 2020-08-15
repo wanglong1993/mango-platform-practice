@@ -13,6 +13,18 @@ export default {
     team: '团队内排名',
     project: '项目访问',
     count: '项目数',
+    user: {
+      menu: {
+        auth: '授权',
+        resetPass: {
+          title: '重置密码',
+          contentPre: '你确定要重置 ',
+          contentPro: ' 密码吗?',
+          cancel: '取消',
+          confirm: '确定',
+        },
+      },
+    },
     sound: {
       openMap: '声音地图',
     },

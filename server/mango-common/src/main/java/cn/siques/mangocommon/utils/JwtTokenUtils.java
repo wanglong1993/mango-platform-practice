@@ -94,7 +94,7 @@ public class JwtTokenUtils implements Serializable {
                     return null;
                 }
                 Object authors = claims.get(AUTHORITIES);
-                List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+                List<GrantedAuthority> authorities = new ArrayList<>();
                 if (authors != null && authors instanceof List) {
                     for (Object object : (List) authors) {
                         authorities.add(new GrantedAuthorityImpl((String) ((Map) object).get("authority")));
@@ -142,7 +142,7 @@ public class JwtTokenUtils implements Serializable {
     }
 
     /**
-     * 刷新令牌
+     * 刷新令牌 只刷新了时间
      * @param token
      * @return
      */
