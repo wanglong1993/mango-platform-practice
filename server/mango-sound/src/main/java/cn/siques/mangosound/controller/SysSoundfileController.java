@@ -56,7 +56,7 @@ public class SysSoundfileController {
    */
     @PostMapping("findPage")
     @PreAuthorize("hasAuthority('sys:sound:view')")
-    @ApiOperation(value = "分页查询", notes = "分页查询")
+    @ApiOperation(value = "分页查询", notes = "分页查询"):
     public JsonData listSysSoundPage(@RequestBody PageRequest pageRequest) {
         PageResult page = sysSoundfileService.findPage(pageRequest);
         return JsonData.buildSuccess(page);

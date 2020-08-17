@@ -1,54 +1,59 @@
 <template>
   <div style="height: 150vh;">
-    <!-- <template>
-      <chartjs :options="options" type="pie" :data="data"></chartjs>
-    </template>-->
-    <!-- <div>{{$t('mango.data.column1')}}</div> -->
-
     <div class="basic-container">
       <avue-data-tabs :option="option"></avue-data-tabs>
     </div>
     <div class="basic-container">
       <avue-data-icons :option="iconsOption"></avue-data-icons>
     </div>
-    <div class="px-2 pt-2 fs-6 text-primary">{{$t("mango.data5.title")}}</div>
+    <div class="px-2 pt-2 fs-6 text-primary">{{ $t('mango.data5.title') }}</div>
     <el-row class="pt-2 px-2" :gutter="12">
       <el-col :span="8">
         <el-card shadow="always">
           <div>
-            <el-link :href="config.NACOS_SERVICE" target="_blank">{{$t("mango.data5.column1")}}</el-link>
+            <el-link :href="config.NACOS_SERVICE" target="_blank">{{
+              $t('mango.data5.column1')
+            }}</el-link>
           </div>
         </el-card>
       </el-col>
       <el-col :span="8">
         <el-card shadow="always">
           <div>
-            <el-link :href="config.SENTINEL_SERVICE" target="_blank">{{$t("mango.data5.column2")}}</el-link>
+            <el-link :href="config.SENTINEL_SERVICE" target="_blank">{{
+              $t('mango.data5.column2')
+            }}</el-link>
           </div>
         </el-card>
       </el-col>
       <el-col :span="8">
         <el-card shadow="always">
           <div>
-            <el-link :href="config.SWAGGER_SERVICE" target="_blank">{{$t("mango.data5.column3")}}</el-link>
+            <el-link :href="config.SWAGGER_SERVICE" target="_blank">{{
+              $t('mango.data5.column3')
+            }}</el-link>
           </div>
         </el-card>
       </el-col>
     </el-row>
 
-    <div class="px-2 pt-2 fs-6 text-primary">{{$t("mango.data6.title")}}</div>
+    <div class="px-2 pt-2 fs-6 text-primary">{{ $t('mango.data6.title') }}</div>
     <el-row class="py-2 px-2" :gutter="12">
       <el-col :span="8">
         <el-card shadow="always">
           <div>
-            <el-link :href="config.MONITOR_SERVICE" target="_blank">{{$t("mango.data6.column1")}}</el-link>
+            <el-link :href="config.MONITOR_SERVICE" target="_blank">{{
+              $t('mango.data6.column1')
+            }}</el-link>
           </div>
         </el-card>
       </el-col>
       <el-col :span="8">
         <el-card shadow="always">
           <div>
-            <el-link :href="config.DRUID_SERVICE" target="_blank">{{$t("mango.data6.column2")}}</el-link>
+            <el-link :href="config.DRUID_SERVICE" target="_blank">{{
+              $t('mango.data6.column2')
+            }}</el-link>
           </div>
         </el-card>
       </el-col>
@@ -56,7 +61,9 @@
       <el-col :span="8">
         <el-card shadow="always">
           <div>
-            <el-link :href="config.RTBOARD_SERVICE" target="_blank">{{$t("mango.data6.column3")}}</el-link>
+            <el-link :href="config.RTBOARD_SERVICE" target="_blank">{{
+              $t('mango.data6.column3')
+            }}</el-link>
           </div>
         </el-card>
       </el-col>

@@ -39,6 +39,8 @@ public  static  void checkAuthentication(HttpServletRequest request, HttpServlet
 
     // 将登陆信息设置到上下文
     // 所有接口都会调用这个过滤器，所以没有信息的时候就为空
+    // 在这里刷新？
+
     SecurityContextHolder.getContext().setAuthentication(authentication);
 }
 
@@ -69,6 +71,7 @@ public  static  void checkAuthentication(HttpServletRequest request, HttpServlet
         return null;
     }
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
     System.out.println(authentication);
     return  authentication;
     }

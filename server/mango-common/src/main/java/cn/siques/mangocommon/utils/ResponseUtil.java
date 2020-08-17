@@ -8,7 +8,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class RenderJson {
+public class ResponseUtil {
 
 
     public  static  void renderJson(HttpServletResponse response, String msg) {
