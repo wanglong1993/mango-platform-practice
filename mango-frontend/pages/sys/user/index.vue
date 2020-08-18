@@ -6,6 +6,7 @@
       </el-aside>
       <el-main>
         <avue-crud
+          :cell-style="cellStyle"
           :table-loading="loading"
           :page.sync="page"
           @on-load="onLoad"
@@ -62,17 +63,17 @@
             scope.row.sysDept ? scope.row.sysDept.name : ''
             }}
           </template>
-          <template slot-scope="scope" slot="menu">
+          <template v-if="!(scope.row.name === 'admin')" slot-scope="scope" slot="menu">
             <Crudbutton
+              class="pl-1"
               icon="el-icon-check"
               size="mini"
               type="text"
               :data="form"
               :option="crudOption"
-              v-if="!(scope.row.name === 'admin')"
               @click="initData(scope.row)"
               @submit="submit"
-              :title="'授权角色'"
+              :title=" $t('mango.user.menu.auth')"
             >
               <!-- 具名插槽 -->
               <template v-slot:extendField>
@@ -86,6 +87,14 @@
                 ></avue-crud>
               </template>
             </Crudbutton>
+            <el-dropdown @command="handleCommand">
+              <span class="el-dropdown-link">
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item :command="scope.row">{{$t('mango.user.menu.resetPass.title')}}</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
           </template>
         </avue-crud>
       </el-main>
@@ -151,10 +160,10 @@ export default class sysUser extends Vue {
   //########### 表格按钮权限
 
   async checkAuth() {
-    this.permission.delBtn = await this.$store.dispatch(
-      'checkAuth',
-      'sys:user:edit'
-    )
+    // this.permission.delBtn = await this.$store.dispatch(
+    //   'checkAuth',
+    //   'sys:user:edit'
+    // )
     this.permission.addBtn = await this.$store.dispatch(
       'checkAuth',
       'sys:user:add'
@@ -172,13 +181,14 @@ export default class sysUser extends Vue {
   }
 
   permission = {
-    delBtn: '',
+    delBtn: false,
     addBtn: '',
     menu: '',
   }
   //########### 展示表格选项
   option = {
     excelBtn: true,
+    viewBtn: true,
     dialogClickModal: false,
     height: '60vh',
     // sortable: true,
@@ -221,6 +231,8 @@ export default class sysUser extends Vue {
         label: '登陆密码',
         overHidden: true,
         editDisplay: false,
+        showColumn: false,
+        viewDisplay: false,
         prop: 'password',
       },
       {
@@ -287,6 +299,10 @@ export default class sysUser extends Vue {
         labelslot: true,
         value: 1,
         addDisplay: false,
+        dicData: [
+          { label: '禁用', value: 0 },
+          { label: '正常', value: 1 },
+        ],
         // slot: true,
       },
     ],
@@ -322,6 +338,7 @@ export default class sysUser extends Vue {
   roleLoading = true
   multipleSelection: any = []
   form: any = {}
+  i18Pre = 'mango.user.menu.'
   // 分页属性
   page: any = {
     total: 0,
@@ -352,11 +369,30 @@ export default class sysUser extends Vue {
   }
   //########### 方法
 
+  handleCommand(row: any) {
+    this.$confirm(
+      `${this.$t(
+        this.i18Pre + 'resetPass.contentPre'
+      )}<strong style="color:red;"> <i>${row.name}</i> </strong>${this.$t(
+        this.i18Pre + 'resetPass.contentPro'
+      )}`,
+      `${this.$t(this.i18Pre + 'resetPass.title')}`,
+      {
+        confirmButtonText: `${this.$t(this.i18Pre + 'resetPass.confirm')}`,
+        cancelButtonText: `${this.$t(this.i18Pre + 'resetPass.cancel')}`,
+        type: 'warning',
+        dangerouslyUseHTMLString: true,
+      }
+    )
+      .then(() => {})
+      .catch(() => {})
+  }
+
   async rowSave(form: any, done: any, loading: any) {
     setTimeout(() => {
       done(form)
     }, 500)
-    console.log(form.deptTree)
+    // 如果机构树存在要转化下格式
     if (form.deptTree) {
       form.deptId = form.deptTree[form.deptTree.length - 1]
       form.deptTree = form.deptTree.toString()
@@ -393,6 +429,25 @@ export default class sysUser extends Vue {
     this.multipleSelection = val
     // console.log(val)
   }
+
+  cellStyle({ row, column, rowIndex, columnIndex }: any) {
+    if (columnIndex == 8) {
+      if (row.statu === 0) {
+        return {
+          color: 'red',
+          fontWeight: 'bold',
+          fontSize: '20',
+        }
+      } else {
+        return {
+          color: 'green',
+          fontWeight: 'bold',
+          fontSize: '20',
+        }
+      }
+    }
+  }
+
   //################### 封装的弹窗按钮的弹出数据初始化
   async initData(obj: any) {
     this.roleLoading = true

@@ -1,5 +1,10 @@
 <template>
-  <div style="height: 150vh;">
+  <div style="height: 150vh;" class="h-100">
+    <!-- <template>
+      <chartjs :options="options" type="pie" :data="data"></chartjs>
+    </template>-->
+    <!-- <div>{{$t('mango.data.column1')}}</div> -->
+
     <div class="basic-container">
       <avue-data-tabs :option="option"></avue-data-tabs>
     </div>

@@ -9,8 +9,7 @@ import com.aliyun.oss.model.OSSObject;
 
 import cn.siques.mangosound.entity.SysSoundfile;
 import cn.siques.mangosound.service.SysSoundfileService;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import lombok.AllArgsConstructor;
+
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -40,7 +39,6 @@ import java.util.List;
  * @modified: Shenghao.He
  */
 @RestController
-@AllArgsConstructor
 @RequestMapping("/api/sys/v1/pri/sysSoundfile")
 @Api(description = "声音文件控制器", tags = {""})
 public class SysSoundfileController {
@@ -56,7 +54,7 @@ public class SysSoundfileController {
    */
     @PostMapping("findPage")
     @PreAuthorize("hasAuthority('sys:sound:view')")
-    @ApiOperation(value = "分页查询", notes = "分页查询"):
+    @ApiOperation(value = "分页查询", notes = "分页查询")
     public JsonData listSysSoundPage(@RequestBody PageRequest pageRequest) {
         PageResult page = sysSoundfileService.findPage(pageRequest);
         return JsonData.buildSuccess(page);
