@@ -102,10 +102,11 @@ export default class sysRole extends Vue {
     setTimeout(() => {
       let checkedKeys: any = []
       res.data.data.sysMenuList.map((e: any) => {
-        if (e.type != 0) {
+        if (e.type == 2) {
           checkedKeys.push(e)
         }
       })
+      console.log(res.data.data)
 
       const tree: any = this.$refs.tree
       tree.$refs.tree.setCheckedNodes(checkedKeys)

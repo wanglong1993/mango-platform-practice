@@ -248,4 +248,8 @@ public interface SysUserMapper {
             "WHERE  d.id=#{id,jdbcType=BIGINT} AND  u.dept_tree LIKE CONCAT('%',d.id,'%')"})
     @ResultMap("deptUser")
     List<SysDeptUser> findUsersByDeptId(Long id);
+
+
+    @Select({"select u.* from  sys_user u ,sys_user_role ur where ur.`role_id`=#{id,jdbcType=BIGINT} and ur.`user_id`=u.`id`\n"})
+    List<SysUser> findUsersByRoleId(Long id);
 }

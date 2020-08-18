@@ -74,10 +74,9 @@ public class JwtTokenUtils implements Serializable {
     }
 
 
-    public static Authentication getAuthenticationFromToken(HttpServletRequest request) {
+    public static Authentication getAuthenticationFromToken(String token) {
         Authentication authentication = null;
         // 获取请求携带的令牌
-        String token = JwtTokenUtils.getToken(request);
         if(token != null) {
             // 请求令牌不能为空
             if(SecurityUtils.getAuthentication() == null) {
@@ -111,6 +110,16 @@ public class JwtTokenUtils implements Serializable {
         return authentication;
     }
 
+
+
+    public static Authentication getAuthenticationFromRequest(HttpServletRequest request) {
+        Authentication authentication = null;
+        // 获取请求携带的令牌
+        String token = JwtTokenUtils.getToken(request);
+         authentication = getAuthenticationFromToken(token);
+        return authentication;
+    }
+
     /**
      * 从令牌中获取数据声明
      *
@@ -133,6 +142,7 @@ public class JwtTokenUtils implements Serializable {
      * @param username
      * @return
      */
+    // token中的用户名test 上下文的是admin
     public static Boolean validateToken(String token, String username) {
         String userName = getUsernameFromToken(token);
         if(userName==null){
@@ -192,5 +202,6 @@ public class JwtTokenUtils implements Serializable {
         }
         return token;
     }
+
 
 }

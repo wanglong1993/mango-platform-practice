@@ -144,4 +144,9 @@ public class SysUserServiceImpl implements SysUserService {
     public PageResult findUsersByDeptId(PageRequest pageRequest ,Long id) {
         return MybatisPageHelper.findPage(pageRequest,sysUserMapper,"findUsersByDeptId",id);
     }
+
+    @Override
+    public List<SysUser> findUsersByRoleId(Long id) {
+        return sysUserMapper.findUsersByRoleId(id);
+    }
 }

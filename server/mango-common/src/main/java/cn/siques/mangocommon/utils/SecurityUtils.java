@@ -25,7 +25,7 @@ public  static  void checkAuthentication(HttpServletRequest request, HttpServlet
 
 
     // 获取令牌并获得登陆信息
-    Authentication authentication = JwtTokenUtils.getAuthenticationFromToken(request);
+    Authentication authentication = JwtTokenUtils.getAuthenticationFromRequest(request);
 
 
 

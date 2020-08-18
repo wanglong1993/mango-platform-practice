@@ -1,21 +1,25 @@
 <template>
-  <el-container style="display:-webkit-box!important;">
+  <el-container style="display: -webkit-box !important;">
     <el-menu
       v-loading="loading"
       element-loading-background="hsla(0,0%,28%,1)"
       background-color="#20222A"
       text-color="hsla(0,0%,100%,.7)"
       active-text-color="#ffd04b"
-      style="overflow-y: scroll"
+      style="overflow-y: scroll;"
       class="el-menu-vertical-demo"
       :collapse="isCollapse"
       :unique-opened="true"
     >
       <el-menu-item class="fs-4 text-white">
         <i class="el-icon-menu text-white"></i>
-        <span slot="title">Mango-admin</span>
+        <span slot="title">Mango-Admin</span>
       </el-menu-item>
-      <el-submenu v-for="(menu, index) in menus" :key="index" :index="`${index}`">
+      <el-submenu
+        v-for="(menu, index) in menus"
+        :key="index"
+        :index="`${index}`"
+      >
         <template slot="title">
           <i :class="menu.icon"></i>
           <span slot="title">{{ menu.name }}</span>
@@ -26,7 +30,12 @@
             v-if="submenu.type != 2"
             :key="`${index}-${index1}`"
             :index="`${submenu.url}`"
-            @click="$router.push({path:submenu.url,query:{label: submenu.name }})"
+            @click="
+              $router.push({
+                path: submenu.url,
+                query: { label: submenu.name },
+              })
+            "
           >
             <i :class="submenu.icon"></i>
             <span slot="title">{{ submenu.name }}</span>
@@ -46,33 +55,46 @@
           ></el-button>
         </div>
         <div class="d-flex ai-center pr-4">
-          <Themepicker @onThemeChange="onThemeChange" :default="themeColor"></Themepicker>
+          <Themepicker
+            @onThemeChange="onThemeChange"
+            :default="themeColor"
+          ></Themepicker>
           <div class="pl-3">
             <el-tooltip content="全屏" placement="bottom" effect="dark">
-              <el-button icon="el-icon-full-screen" @click="fullScreen" type="text"></el-button>
+              <el-button
+                icon="el-icon-full-screen"
+                @click="fullScreen"
+                type="text"
+              ></el-button>
             </el-tooltip>
           </div>
 
           <div class="pl-3">
             <el-tooltip content="切换语言" placement="bottom" effect="dark">
-              <el-button @click="changeLanguage()" class="fa fa-language" type="text"></el-button>
+              <el-button
+                @click="changeLanguage()"
+                class="fa fa-language"
+                type="text"
+              ></el-button>
             </el-tooltip>
           </div>
 
-          <div class="pl-3">{{this.$store.state.Auth.name}}</div>
+          <div class="pl-3">{{ this.$store.state.Auth.name }}</div>
           <el-dropdown @command="handleCommand">
             <span class="el-dropdown-link">
               <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="logout">{{$t("navbar.logOut")}}</el-dropdown-item>
+              <el-dropdown-item command="logout">{{
+                $t('navbar.logOut')
+              }}</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </div>
       </el-header>
       <el-container>
         <div class="bg-light h-100">
-          <div class="bg-white mb-2" style="z-index:1;">
+          <div class="bg-white mb-2" style="z-index: 1;">
             <Menutags></Menutags>
           </div>
 

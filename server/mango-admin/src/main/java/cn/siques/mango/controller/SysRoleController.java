@@ -1,5 +1,7 @@
 package cn.siques.mango.controller;
 
+import cn.siques.mango.config.RedisUtils;
+import cn.siques.mango.service.SysUserService;
 import cn.siques.mangocommon.constant.SysConstants;
 import cn.siques.mango.service.SysRoleService;
 import cn.siques.mangocommon.dto.JsonData;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @Api(value="角色管理接口")
@@ -28,6 +31,12 @@ public class SysRoleController {
     SysRoleService sysRoleService;
     @Autowired
     private SysRoleMapper sysRoleMapper;
+
+    @Autowired
+    private SysUserService sysUserService;
+
+    @Autowired
+    private RedisUtils<String,String> redisUtils;
 
     @ApiOperation(httpMethod="GET", value="查询所有角色")
     @GetMapping("findAll")
@@ -83,6 +92,10 @@ public class SysRoleController {
              ) {
             sysRoleKey.setId(record.getRoleId());
             SysRole role = sysRoleMapper.selectByPrimaryKey(sysRoleKey);
+
+            List<String> collect = sysUserService.findUsersByRoleId(role.getId()).stream().map(sysUser -> sysUser.getName())
+                    .collect(Collectors.toList());
+            redisUtils.deleteKey(collect);
             if(SysConstants.ADMIN.equalsIgnoreCase(role.getName())){
                 // 如果是admin 不修改
                 return JsonData.buildError("超级管理员拥有所有权限，不可修改");

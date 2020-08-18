@@ -45,4 +45,6 @@ public interface SysUserService extends CrudService<SysUser> {
     int delUserRoleByUserId(Long id);
 
     PageResult findUsersByDeptId(PageRequest pageRequest, Long id);
+
+    List<SysUser> findUsersByRoleId(Long id);
 }

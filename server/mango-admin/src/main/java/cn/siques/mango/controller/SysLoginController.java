@@ -19,6 +19,7 @@ import jdk.nashorn.internal.runtime.regexp.JoniRegExp;
 import org.apache.commons.compress.utils.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -86,6 +87,11 @@ public class SysLoginController {
     @GetMapping("/logout")
     public JsonData logout(HttpServletRequest request){
         String username = SecurityUtils.getUsername();
+        try {
+            redisUtils.deleteKey(username);
+        } catch (SecurityException e) {
+            throw new SecurityException(HttpStatus.UNAUTHORIZED.toString());
+        }
         sysLoginLogService.loginOutLog(username, IPUtils.getIpAddr(request));
         return JsonData.buildSuccess(1);
     }
@@ -124,7 +130,7 @@ public class SysLoginController {
         // token存入
       JwtAuthenticationToken token =  SecurityUtils.login(request,username,password,authenticationManager);
 
-        redisUtils.init().setKey(token.getPrincipal().toString(),token.getToken());
+        redisUtils.setKey(token.getPrincipal().toString(),token.getToken());
         sysLoginLogService.writeLoginLog(username, IPUtils.getIpAddr(request));
 
         return JsonData.buildSuccess(token);
