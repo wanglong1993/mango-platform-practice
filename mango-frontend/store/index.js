@@ -33,7 +33,7 @@ export const state = () => ({
   tagList: [],
   tag: tagObj,
   tagWel: tagWel,
-  Auth: {},
+  // Auth: { token: '' },
   closingPage: '',
   primaryColor: '',
   themeColor: '#20222A',
@@ -85,14 +85,14 @@ export const mutations = {
     state.tagList = tagList
     setStore({ name: 'tagList', content: state.tagList })
   },
-  storeAuth(state, data) {
+  storeAuth: (state, data) => {
     state.Auth = data
   },
   deleteAuth(state) {
-    state.Auth = ''
+    state.Auth.token = null
   },
   deleteAll(state) {
-    state = ''
+    state.Auth.token = null
   },
 }
 
@@ -100,6 +100,7 @@ export const getters = {}
 
 export const actions = {
   async checkAuth({ state }, permission) {
+    console.log(state)
     const statu = await state.Auth.permissions.findIndex(
       (e) => e.authority === permission
     )
@@ -111,7 +112,7 @@ export const actions = {
 
 const vuexSession = new createPersistedState({
   key: 'state',
-  storage: window.sessionStorage,
+  storage: window.localStorage,
 })
 
 export const plugins = [vuexSession]

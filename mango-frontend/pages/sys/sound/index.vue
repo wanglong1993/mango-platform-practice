@@ -121,6 +121,7 @@ export default class index extends Vue {
     //   'checkAuth',
     //   'sys:sound:edit'
     // )
+
     this.permission.addBtn = await this.$store.dispatch(
       'checkAuth',
       'sys:sound:add'
@@ -456,7 +457,9 @@ export default class index extends Vue {
     this.onLoad()
   }
   mounted() {
-    this.checkAuth()
+    setTimeout(() => {
+      this.checkAuth()
+    }, 500)
   }
 
   async onLoad() {

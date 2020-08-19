@@ -33,6 +33,14 @@ spring:
           filters:
             - StripPrefix=1
             - AddRequestHeader=X-Request-Id, heshenghao #过滤器工厂会在匹配的请求头上加上一对请求头,名称为X-Request-Id值为heshenghao
+        - id: mango_processing   #路由id 没有固定规则但要求唯一，配合服务名
+            #          uri: http://localhost:8001 # 匹配提供服务的路由地址
+          uri: lb://mango-processing
+          predicates:
+            - Path=/processing/api/sys/v1/**
+          filters:
+            - StripPrefix=1
+            - AddRequestHeader=X-Request-Id, heshenghao
         - id: ${service.admin}
           uri: lb://${service.admin}
           predicates:
@@ -43,6 +51,12 @@ spring:
           uri: lb://${service.sound}
           predicates:
             - Path=/${service.sound}/**
+          filters:
+            - StripPrefix=1
+        - id: ${service.processing}
+          uri: lb://${service.processing}
+          predicates:
+            - Path=/${service.processing}/**
           filters:
             - StripPrefix=1
     nacos:
@@ -67,3 +81,4 @@ spring:
 service:
   admin: mango-admin
   sound: mango-sound
+  processing: mango-processing

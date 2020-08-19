@@ -67,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 其他所有请求需要身份认证
                 // 取消session管理？？
         .anyRequest().authenticated().and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) ;
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) ;
         // 退出登陆处理器
         http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
         // token 验证过滤器

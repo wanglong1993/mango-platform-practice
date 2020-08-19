@@ -17,7 +17,7 @@ export default {
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
    */
-  target: 'server',
+  target: 'static',
   /*
    ** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
@@ -86,6 +86,7 @@ export default {
     '@/plugins/element-ui',
     '@/plugins/directive',
     '@/plugins/lang/index.js',
+    // '@/plugins/localStorage.js',
     // '@/plugins/config/website.js',
   ],
   /*

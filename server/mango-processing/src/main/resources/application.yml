@@ -1,0 +1,16 @@
+server:
+  port: 8091
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 106.54.247.224:8848 #配置Nacos地址
+  application:
+    name: mango-processing
+# 健康监控
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#配置扫描

@@ -15,7 +15,7 @@ export default ({ app, store, route, redirect }) => {
     const newUrl = config.baseURL.replace('*', config.prefix)
     config.baseURL = newUrl
     //设置token
-    if (store.state.Auth.token) {
+    if (store.state.Auth) {
       config.headers.Authorization = store.state.Auth.token || ''
     }
   })
@@ -33,21 +33,21 @@ export default ({ app, store, route, redirect }) => {
   // 错误回调
   axios.onError((error) => {
     console.log(error)
-    switch (error.response.status) {
-      case 403:
-        Vue.prototype.$message({
-          message: '未授权',
-          type: 'info',
-          showClose: true,
-        })
-        redirect('/sys/login')
-      case 500:
-        redirect('/sys/500')
-        break
-      case 404:
-        redirect('/sys/404')
-        break
-    }
+    // switch (error.response.status) {
+    //   case 403:
+    //     Vue.prototype.$message({
+    //       message: '未授权',
+    //       type: 'info',
+    //       showClose: true,
+    //     })
+    //     redirect('/sys/login')
+    //   case 500:
+    //     redirect('/sys/500')
+    //     break
+    //   case 404:
+    //     redirect('/sys/404')
+    //     break
+    // }
   })
   Vue.prototype.$http = axios
 }

@@ -2,6 +2,7 @@
   <div class="bg-white h-100">
     <el-container class="pt-3 px-3">
       <avue-crud
+        :cell-style="cellStyle"
         :permission="permission"
         :table-loading="loading"
         :data="tableData"
@@ -69,6 +70,7 @@ export default class sysRole extends Vue {
   }
 
   async submit() {
+    this.loading = true
     const ref: any = this.$refs.tree
     let data: any = []
     ref.$refs.tree.getCheckedNodes(false, true).map((e: any) => {
@@ -78,19 +80,21 @@ export default class sysRole extends Vue {
       })
     })
 
-    console.log(data)
-
     const res = await this.http.post(`/pri/role/saveRoleMenus`, data, {
       prefix: 'admin',
     })
-    if (res.data.code === 200) {
-      this.$notify({
-        title: '',
-        message: '保存成功',
-        position: 'bottom-right',
-        type: 'success',
-      })
-    }
+
+    setTimeout(() => {
+      this.loading = false
+      if (res.data.code === 200) {
+        this.$notify({
+          title: '',
+          message: '保存成功',
+          position: 'bottom-right',
+          type: 'success',
+        })
+      }
+    }, 500)
   }
 
   async initData(obj: any) {
@@ -106,12 +110,10 @@ export default class sysRole extends Vue {
           checkedKeys.push(e)
         }
       })
-      console.log(res.data.data)
 
       const tree: any = this.$refs.tree
       tree.$refs.tree.setCheckedNodes(checkedKeys)
     }, 500)
-    // this.$refs.tree.setCheckedKeys(checkedKeys)
   }
 
   formLabelWidth = '120px'
@@ -167,6 +169,10 @@ export default class sysRole extends Vue {
       {
         label: '角色状态',
         prop: 'delFlag',
+        dicData: [
+          { label: '禁用', value: 1 },
+          { label: '正常', value: 0 },
+        ],
         formslot: true,
         labelslot: true,
         value: 1,
@@ -174,6 +180,40 @@ export default class sysRole extends Vue {
         // slot: true,
       },
     ],
+  }
+
+  cellStyle({ row, column, rowIndex, columnIndex }: any) {
+    if (columnIndex == 2) {
+      if (row.remark !== '超级管理员') {
+        return {
+          color: 'green',
+          fontWeight: 'bold',
+          fontSize: '20',
+        }
+      } else {
+        return {
+          color: 'red',
+          fontWeight: 'bold',
+          fontSize: '20',
+        }
+      }
+    }
+
+    if (columnIndex == 5) {
+      if (row.delFlag == 0) {
+        return {
+          color: 'green',
+          fontWeight: 'bold',
+          fontSize: '20',
+        }
+      } else {
+        return {
+          color: 'red',
+          fontWeight: 'bold',
+          fontSize: '20',
+        }
+      }
+    }
   }
 
   mounted() {

@@ -7,14 +7,18 @@ import cn.siques.mangocommon.utils.JwtTokenUtils;
 import cn.siques.mangocommon.utils.SecurityUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Collection;
 
 public class JwtAuthenticationFilter  extends BasicAuthenticationFilter {
 
@@ -28,9 +32,14 @@ public class JwtAuthenticationFilter  extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         // 相当于拦截器的作用，获取token，并且检查登陆状态
-//        SecurityUtils.checkAuthentication(request,response);
+
+//        HttpSession session = request.getSession();
+//        String id = session.getId();
+//        System.out.println(id);
+
+
         String token = JwtTokenUtils.getToken(request);
-        if(StrUtil.isNotBlank(token) && !JwtTokenUtils.isTokenExpired(token)){
+        if(StrUtil.isNotEmpty(token) && !JwtTokenUtils.isTokenExpired(token)){
             String username = JwtTokenUtils.getUsernameFromToken(token);
             String tokenValue = redisUtils.getValue(username);
 
@@ -39,6 +48,7 @@ public class JwtAuthenticationFilter  extends BasicAuthenticationFilter {
                 // 上下文非空
                 Authentication authentication = JwtTokenUtils.getAuthenticationFromToken(tokenValue);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+
             }
             // 若为空，不在验证，需重新登录
         }

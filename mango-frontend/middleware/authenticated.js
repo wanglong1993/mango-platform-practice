@@ -5,4 +5,9 @@ export default function ({ route, store, redirect }) {
   if (route.path != '/sys/login' && !store.state.auth.loggedIn) {
     return redirect('/sys/login')
   }
+
+  // 用户已存在想访问登录页面
+  if (route.path == '/sys/login' && store.state.auth.loggedIn) {
+    return redirect('/')
+  }
 }

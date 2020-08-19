@@ -1,17 +1,21 @@
 package cn.siques.mangosound.config;
 
 
+
+
 import cn.siques.mangosound.config.security.JwtAuthenticationFilter;
-import cn.siques.mangosound.config.security.JwtAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -22,16 +26,14 @@ import org.springframework.security.web.authentication.logout.HttpStatusReturnin
 @Configuration
 @EnableWebSecurity // 开启spring security
 @EnableGlobalMethodSecurity(prePostEnabled = true) // 开启权限注解@PreAuthorize
-
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-
-    @Qualifier("myService")
     @Autowired
-    private UserDetailsService userDetailsService;
+    RedisUtils<String,String> redisUtils;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        // 禁用csrf
         http.csrf().disable()
                 .formLogin().disable()
                 .httpBasic().disable()
@@ -56,24 +58,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/actuator/**").permitAll()
 
                 // 其他所有请求需要身份认证
+                // 取消session管理？？
                 .anyRequest().authenticated().and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) ;
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) ;
         // 退出登陆处理器
         http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
         // token 验证过滤器
-        http.addFilterBefore(new JwtAuthenticationFilter(authenticationManager()), UsernamePasswordAuthenticationFilter.class);
-
-
-    }
-
-
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // 使用自定义身份验证组件
-        auth.authenticationProvider(new JwtAuthenticationProvider(userDetailsService));
+        http.addFilterBefore(new JwtAuthenticationFilter(authenticationManager(),redisUtils), UsernamePasswordAuthenticationFilter.class);
 
     }
+
+//    @Autowired
+//    RedisTemplate<String,String> redisTemplate;
+//
+//    @Bean
+//    RedisUtils<String,String> redisUtils(){
+//        return new RedisUtils(redisTemplate);
+//    }
+
 
     @Bean
     @Override
