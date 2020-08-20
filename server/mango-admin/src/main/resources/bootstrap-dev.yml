@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: mango-admin-dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 106.54.247.224:8848
+      config:
+        server-addr: 106.54.247.224:8848
+        file-extension: yml
+        namespace: 5642eb84-60d0-42f3-83d7-1fb41c965cf2
+        group: DEV_GROUP
+  profiles:
+    active: dev

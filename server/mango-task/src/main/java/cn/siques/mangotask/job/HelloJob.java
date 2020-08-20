@@ -6,6 +6,7 @@ import cn.siques.mangotask.job.base.BaseJob;
 import lombok.extern.slf4j.Slf4j;
 
 import org.quartz.JobExecutionContext;
+import org.springframework.stereotype.Component;
 
 /**
  * <p>
@@ -13,6 +14,7 @@ import org.quartz.JobExecutionContext;
  * </p>
  */
 @Slf4j
+@Component
 public class HelloJob implements BaseJob {
 
     @Override

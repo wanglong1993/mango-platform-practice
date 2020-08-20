@@ -1,8 +1,17 @@
 <template>
   <div class="bg-white h-100">
     <el-container class="pt-3 px-3">
-      <el-aside width="200px" class="pr-2" style="border-right: 1px solid #ececec;">
-        <avue-tree ref="tree" :option="treeOption" :data="treeData" @node-click="nodeClick"></avue-tree>
+      <el-aside
+        width="200px"
+        class="pr-2"
+        style="border-right: 1px solid #ececec;"
+      >
+        <avue-tree
+          ref="tree"
+          :option="treeOption"
+          :data="treeData"
+          @node-click="nodeClick"
+        ></avue-tree>
       </el-aside>
       <el-main>
         <avue-crud
@@ -20,7 +29,9 @@
           :search.sync="search"
         >
           <template slot="searchMenu" slot-scope="{ row, size }">
-            <el-button :size="size" @click="searchSubmit(row)">自定义提交</el-button>
+            <el-button :size="size" @click="searchSubmit(row)"
+              >自定义提交</el-button
+            >
           </template>
           <!-- <template slot="search" slot-scope="{row,size}">
             <el-input placeholder="自定义输入框" :size="size" style="width:200px" v-model="search.slot"></el-input>
@@ -45,9 +56,7 @@
 
           <template slot="orderNum" slot-scope="scope">
             <el-input v-model="scope.row.orderNum" placeholder="请输入内容">
-              {{
-              scope.row.orderNum
-              }}
+              {{ scope.row.orderNum }}
             </el-input>
           </template>
 
@@ -59,11 +68,13 @@
           </template>
 
           <template slot="sysDept" slot-scope="scope">
-            {{
-            scope.row.sysDept ? scope.row.sysDept.name : ''
-            }}
+            {{ scope.row.sysDept ? scope.row.sysDept.name : '' }}
           </template>
-          <template v-if="!(scope.row.name === 'admin')" slot-scope="scope" slot="menu">
+          <template
+            v-if="!(scope.row.name === 'admin')"
+            slot-scope="scope"
+            slot="menu"
+          >
             <Crudbutton
               class="pl-1"
               icon="el-icon-check"
@@ -73,7 +84,7 @@
               :option="crudOption"
               @click="initData(scope.row)"
               @submit="submit"
-              :title=" $t('mango.user.menu.auth')"
+              :title="$t('mango.user.menu.auth')"
             >
               <!-- 具名插槽 -->
               <template v-slot:extendField>
@@ -92,7 +103,9 @@
                 <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item :command="scope.row">{{$t('mango.user.menu.resetPass.title')}}</el-dropdown-item>
+                <el-dropdown-item :command="scope.row">{{
+                  $t('mango.user.menu.resetPass.title')
+                }}</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </template>
@@ -182,8 +195,8 @@ export default class sysUser extends Vue {
 
   permission = {
     delBtn: false,
-    addBtn: '',
-    menu: '',
+    addBtn: false,
+    menu: false,
   }
   //########### 展示表格选项
   option = {

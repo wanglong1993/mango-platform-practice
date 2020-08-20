@@ -7,6 +7,18 @@
             <el-breadcrumb-item>代码生成器</el-breadcrumb-item>
           </el-breadcrumb>
 
+          <div>
+            <el-select v-model="dbUrl" placeholder="数据源选择">
+              <el-option
+                v-for="(item, id) in dbList"
+                :key="id"
+                :label="item.url"
+                :value="item.url"
+              >
+              </el-option>
+            </el-select>
+          </div>
+
           <avue-crud
             :page.sync="page"
             :table-loading="loading"
@@ -16,7 +28,7 @@
             :data="tableData"
             :option="option"
           >
-            <template slot-scope="{type,size,row}" slot="menu">
+            <template slot-scope="{ type, size, row }" slot="menu">
               <Crudbutton
                 icon="el-icon-check"
                 :size="size"
@@ -34,8 +46,8 @@
     </el-container>
   </div>
 </template>
-<script lang='ts'>
-import { Vue, Component } from 'nuxt-property-decorator'
+<script lang="ts">
+import { Vue, Component, Watch } from 'nuxt-property-decorator'
 @Component({
   components: {},
 })
@@ -43,6 +55,8 @@ export default class genTable extends Vue {
   loading = true
   tableData = []
   form: any = {}
+  dbList = []
+  dbUrl = ''
   http = Vue.prototype.$http
   page: any = {
     total: 10,
@@ -52,6 +66,35 @@ export default class genTable extends Vue {
     pageSizes: [5, 10, 20],
     layout: 'total, sizes,prev, pager, next, jumper',
     background: false,
+  }
+
+  @Watch('dbUrl')
+  async isUrlChanged(newval: any, oldval: any) {
+    if (newval != oldval) {
+      this.loading =true
+      const { data } = await this.http.post(
+        '/pri/codeGen/changeSource',
+        { url: newval },
+        { prefix: 'admin' }
+      )
+
+      this.page.total = data.data.totalSize
+
+      setTimeout(() => {
+        this.loading = false
+        this.tableData = data.data.content
+      }, 100)
+    }
+  }
+
+  mounted() {
+    this.getDbList()
+  }
+
+  async getDbList() {
+    const res = await this.http.get('/pri/codeGen/dblist', { prefix: 'admin' })
+
+    this.dbList = res.data.data
   }
 
   permission = {
@@ -191,5 +234,4 @@ export default class genTable extends Vue {
   }
 }
 </script>
-<style lang='scss' scoped>
-</style>
+<style lang="scss" scoped></style>

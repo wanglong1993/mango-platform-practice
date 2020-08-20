@@ -1,6 +1,8 @@
 package ${package}.${moduleName}.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import org.springframework.beans.factory.annotation.Autowired;
+import cn.siques.mangocommon.dto.JsonData;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.siques.mangocommon.entity.JsonData;
 import cn.siques.mangocommon.Page.PageRequest;

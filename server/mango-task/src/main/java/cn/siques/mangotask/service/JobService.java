@@ -18,7 +18,7 @@ public interface JobService {
 
 
 
-    PageInfo<JobForm> getJobList(PageRequest pageRequest);
+    List<JobForm> getJobList();
 
 
     /**

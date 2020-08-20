@@ -8,6 +8,7 @@ import cn.siques.mangocommon.utils.SecurityUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
@@ -36,6 +37,9 @@ public class JwtAuthenticationFilter  extends BasicAuthenticationFilter {
 //        HttpSession session = request.getSession();
 //        String id = session.getId();
 //        System.out.println(id);
+
+        SecurityContext context = SecurityContextHolder.getContext();
+
 
 
         String token = JwtTokenUtils.getToken(request);

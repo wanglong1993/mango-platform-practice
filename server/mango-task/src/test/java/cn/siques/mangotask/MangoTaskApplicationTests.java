@@ -25,8 +25,7 @@ class MangoTaskApplicationTests {
         PageRequest pageRequest = new PageRequest();
         pageRequest.setPageNum(1);
         pageRequest.setPageSize(10);
-        PageInfo<JobForm> jobList = jobService.getJobList(pageRequest);
-        System.out.println(jobList);
+
     }
 
 }

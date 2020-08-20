@@ -44,10 +44,30 @@
             background: false,
         }
 
+
+        async checkAuth() {
+            this.permission.delBtn = await this.$store.dispatch(
+              'checkAuth',
+               'sys:',${pathName},':edit'
+             )
+            this.permission.addBtn = await this.$store.dispatch(
+                'checkAuth',
+                'sys:',${pathName},':add'
+            )
+                    this.permission.menu = await this.$store.dispatch(
+                'checkAuth',
+                'sys:',${pathName},':edit'
+            )
+        }
+
         permission = {
             delBtn: true,
             addBtn: true,
             menu: true,
+        }
+
+        mounted() {
+            this.checkAuth()
         }
 
         option = {

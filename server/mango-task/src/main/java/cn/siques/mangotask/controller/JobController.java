@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -28,7 +29,7 @@ import java.util.ArrayList;
  *
  */
 @RestController
-@RequestMapping("/job")
+@RequestMapping("/api/sys/v1/pri/job")
 @Slf4j
 public class JobController {
     private final JobService jobService;
@@ -39,24 +40,19 @@ public class JobController {
     }
 
 
-    @PostMapping("list")
-    public JsonData getJobList(@RequestBody PageRequest pageRequest){
-        PageInfo<JobForm> jobList = jobService.getJobList(pageRequest);
-        Dict set = Dict.create().set("total", jobList.getTotal()).set("data", jobList.getList());
-        return JsonData.buildSuccess(set,HttpStatus.OK.value());
+    @GetMapping("jobList")
+    public JsonData jobList(){
+        List<JobForm> jobList = jobService.getJobList();
+        return JsonData.buildSuccess(jobList,HttpStatus.OK.value());
     }
 
 
-    @GetMapping("test")
-    public JsonData test(){
-        return JsonData.buildSuccess("成功");
-    }
 
     /**
      * 保存定时任务
      */
     @PostMapping
-    public JsonData addJob(@Valid JobForm form) {
+    public JsonData addJob(@Valid @RequestBody JobForm form) {
         try {
             jobService.addJob(form);
         } catch (Exception e) {
@@ -118,16 +114,11 @@ public class JobController {
         return  JsonData.buildSuccess("修改成功", HttpStatus.OK.value());
     }
 
-    @GetMapping
-    public JsonData jobList(Integer currentPage, Integer pageSize) {
-        if (ObjectUtil.isNull(currentPage)) {
-            currentPage = 1;
-        }
-        if (ObjectUtil.isNull(pageSize)) {
-            pageSize = 10;
-        }
-        PageInfo<JobAndTrigger> all = jobService.list(currentPage, pageSize);
-        Dict set = Dict.create().set("total", all.getTotal()).set("data", all.getList());
+    @PostMapping("findPage")
+    public JsonData jobList(@RequestBody PageRequest pageRequest) {
+
+        PageInfo<JobAndTrigger> all = jobService.list(pageRequest.getPageNum(), pageRequest.getPageSize());
+        Dict set = Dict.create().set("totalSize", all.getTotal()).set("content", all.getList());
         return  JsonData.buildSuccess(set,HttpStatus.OK.value());
 
     }

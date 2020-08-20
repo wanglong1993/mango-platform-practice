@@ -1,9 +1,12 @@
 package cn.siques.mango.controller;
 
 import cn.hutool.core.io.IoUtil;
+;
 import cn.hutool.db.Entity;
+import cn.siques.mango.controller.dto.DbConfig;
 import cn.siques.mango.service.SysCodeGenService;
 
+import cn.siques.mango.utils.DbUtil;
 import cn.siques.mangocommon.Page.PageRequest;
 import cn.siques.mangocommon.Page.PageResult;
 import cn.siques.mangocommon.dto.JsonData;
@@ -13,6 +16,7 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.spring.web.json.Json;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -30,6 +34,9 @@ public class SysCodeGenController {
         return  JsonData.buildSuccess(page);
     }
 
+    @Autowired
+    DbUtil dbUtil;
+
     @SneakyThrows
     @PostMapping("generate")
     public void generate(@RequestBody GenConfig genConfig, HttpServletResponse response){
@@ -41,7 +48,21 @@ public class SysCodeGenController {
         response.setContentType("application/octet-stream; charset=UTF-8");
 
         IoUtil.write(response.getOutputStream(), Boolean.TRUE, data);
-
     }
+
+    @GetMapping("dblist")
+    public JsonData queryDbList(){
+      return JsonData.buildSuccess(sysCodeGenService.queryDbList());
+    }
+
+    @PostMapping("changeSource")
+    public JsonData changeSource(@RequestBody DbConfig dbConfig){
+
+        dbUtil.setDbSource(dbConfig);
+        PageRequest pageRequest = new PageRequest();
+        PageResult page = sysCodeGenService.findPage(pageRequest);
+        return JsonData.buildSuccess(page);
+    }
+
 
 }

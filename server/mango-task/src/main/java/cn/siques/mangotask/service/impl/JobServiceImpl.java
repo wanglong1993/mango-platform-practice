@@ -3,6 +3,7 @@ package cn.siques.mangotask.service.impl;
 import cn.siques.mangocommon.Page.PageRequest;
 import cn.siques.mangotask.entity.JobAndTrigger;
 import cn.siques.mangotask.entity.JobForm;
+import cn.siques.mangotask.job.base.BaseJob;
 import cn.siques.mangotask.mapper.JobMapper;
 import cn.siques.mangotask.service.JobService;
 import cn.siques.mangotask.util.JobUtil;
@@ -13,12 +14,16 @@ import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -35,6 +40,9 @@ public class JobServiceImpl implements JobService {
     private final JobMapper jobMapper;
 
     @Autowired
+    private ApplicationContext applicationContext;
+
+    @Autowired
     public JobServiceImpl(Scheduler scheduler, JobMapper jobMapper) {
         this.scheduler = scheduler;
         this.jobMapper = jobMapper;
@@ -42,29 +50,15 @@ public class JobServiceImpl implements JobService {
 
     @Override
     // todo 空指针异常
-    public PageInfo<JobForm> getJobList(PageRequest pageRequest){
+    public List<JobForm> getJobList(){
 
-        File file = new File("src/main/java/cn/siques/mangotask/job");
-        FileFilter fileFilter = file1 -> file1.getName().endsWith(".java");
-        File[] files = file.listFiles();
+        Map<String, BaseJob> beansOfType = applicationContext.getBeansOfType(BaseJob.class);
 
-        for (File file1 : files) {
-            System.out.println(file1.getName());
-        }
+        List<JobForm> collect = beansOfType.entrySet().stream().map((stringBaseJobEntry ->
+           new JobForm().setJobClassName(  stringBaseJobEntry.getValue().getClass().getName())
+        )).collect(Collectors.toList());
 
-        List<JobForm> collect = Arrays.stream(Objects.requireNonNull(file.listFiles(fileFilter)))
-                .map(file1 -> {
-                    System.out.println(file1.getPath());
-                    JobForm jobForm = new JobForm().setJobClassName(file1.getPath().replace("src\\main\\java\\", ""));
-
-                    return jobForm;
-                }).collect(Collectors.toList());
-        System.out.println(collect);
-        PageHelper.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());
-
-
-        return new PageInfo<>(collect);
-
+        return collect;
     }
 
     /**

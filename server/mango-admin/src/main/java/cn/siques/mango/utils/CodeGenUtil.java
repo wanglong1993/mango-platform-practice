@@ -240,7 +240,7 @@ public class CodeGenUtil {
         // 资源路径
         String resourcePath = path + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
         // api路径
-        String apiPath = path + File.separator + "api" + File.separator;
+//        String apiPath = path + File.separator + "api" + File.separator;
         // index.vue路径
         String indexPath = path + File.separator + "vue" + File.separator;
 
@@ -272,9 +272,9 @@ public class CodeGenUtil {
             return resourcePath + "mapper" + File.separator + className + "Mapper.xml";
         }
 
-        if (template.contains(API_JS_VM)) {
-            return apiPath + className.toLowerCase() + ".js";
-        }
+//        if (template.contains(API_JS_VM)) {
+//            return apiPath + className.toLowerCase() + ".js";
+//        }
 
         if(template.contains(INDEX_VUE_VM)){
             return indexPath +"index.vue";

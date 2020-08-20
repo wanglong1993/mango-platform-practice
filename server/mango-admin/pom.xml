@@ -205,6 +205,13 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+
     </dependencies>
 
     <dependencyManagement>
@@ -259,7 +266,7 @@
                     <baseImage>java</baseImage>
                     <workdir>/ROOT</workdir>
                     <cmd>["java", "-version"]</cmd>
-                    <entryPoint>["java", "-jar", "${project.build.finalName}.jar"]</entryPoint>
+                    <entryPoint>["java", "-jar", "${project.build.finalName}.jar","--spring.profiles.active=prod"]</entryPoint>
                     <resources>
                         <resource>
                             <targetPath>/ROOT</targetPath>

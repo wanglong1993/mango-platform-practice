@@ -12,6 +12,8 @@ import cn.siques.mangosound.service.SysSoundfileService;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;
@@ -69,6 +71,7 @@ public class SysSoundfileController {
     @GetMapping("findAll")
     @PreAuthorize("hasAuthority('sys:sound:view')")
     @ApiOperation(value = "查询所有", notes = "查询所有")
+    @Cacheable("findAllSoundFile")
     public JsonData listSysSoundFiles() {
         List<SysSoundfile> list = sysSoundfileService.list();
         return JsonData.buildSuccess(list);
@@ -98,6 +101,7 @@ public class SysSoundfileController {
     @PostMapping
     @PreAuthorize("hasAuthority('sys:sound:add')")
     @ApiOperation(value = "新增", notes = "新增")
+    @CacheEvict(cacheNames = "findAllSoundFile",allEntries = true)
     public JsonData saveSysSoundfile(@RequestBody SysSoundfile sysSoundfile){
       return  JsonData.buildSuccess(sysSoundfileService.save(sysSoundfile));
     }
@@ -114,6 +118,7 @@ public class SysSoundfileController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "主键id", required = true)
     })
+    @CacheEvict(cacheNames = "findAllSoundFile",allEntries = true)
     public JsonData updateSysSoundfile(@PathVariable Integer id, @RequestBody SysSoundfile sysSoundfile){
 
       return  JsonData.buildSuccess(sysSoundfileService.updateById(sysSoundfile));
@@ -130,6 +135,7 @@ public class SysSoundfileController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "主键id", required = true)
     })
+    @CacheEvict(cacheNames = "findAllSoundFile",allEntries = true)
     public JsonData deleteSysSoundfile(@PathVariable Integer id){
       return  JsonData.buildSuccess(sysSoundfileService.removeById(id));
     }

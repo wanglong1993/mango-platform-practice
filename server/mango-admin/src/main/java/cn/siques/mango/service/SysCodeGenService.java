@@ -2,6 +2,7 @@ package cn.siques.mango.service;
 
 import cn.hutool.db.Entity;
 
+import cn.siques.mango.controller.dto.DbConfig;
 import cn.siques.mangocommon.Page.PageRequest;
 import cn.siques.mangocommon.Page.PageResult;
 import cn.siques.mangocore.entity.gen.GenConfig;
@@ -14,5 +15,7 @@ public interface SysCodeGenService  {
 
     PageResult findPage(PageRequest pageRequest);
 
+
+    List<DbConfig> queryDbList();
 
 }

@@ -12,7 +12,7 @@ public class PageRequest implements Serializable {
     /*
     当前页码
      */
-    private int pageNum;
+    private int pageNum=1;
 
     /*
     每页数量

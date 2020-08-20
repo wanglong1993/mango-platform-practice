@@ -1,6 +1,12 @@
 server:
-  port: 8085
+  port: 8086
 spring:
+  application:
+    name: mango-task
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 106.54.247.224:8848 #配置Nacos地址
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/quartz?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false
     username: root

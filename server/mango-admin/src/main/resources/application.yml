@@ -55,10 +55,14 @@ spring:
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       # 合并多个DruidDataSource的监控数据
       useGlobalDataSourceStat: true
-  datasource1:
-      url: jdbc:mysql://106.54.247.224:3306/mango-sound?useUnicode=true&characterEncoding=utf-8&useSSL=false
+  multiplesource:
+    - url: jdbc:mysql://106.54.247.224:3306/mango-sound?useUnicode=true&characterEncoding=utf-8&useSSL=false
       username: root
       password: l1itdhjaoiqw32kwqe$5asasd*a21
+    - url: jdbc:mysql://127.0.0.1:3306/quartz?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: root
+      password: l1itdhjaoiqw32kwqe$5asasd*a21
+
   boot:
 #    admin:
 #      client:
@@ -90,4 +94,7 @@ management:
     web:
       exposure:
         include: "*"
+swagger:
+  #  配置扫描swagger包
+  base-package: cn.siques.mango.controller
 #配置扫描

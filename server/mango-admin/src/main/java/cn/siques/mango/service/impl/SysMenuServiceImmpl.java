@@ -21,7 +21,7 @@ public class SysMenuServiceImmpl implements SysMenuService {
     SysMenuMapper sysMenuMapper;
 
     @Override
-//    @CacheEvict(value="findMenuTree",allEntries=true)
+    @CacheEvict(value="findMenuTree",allEntries=true)
     public int save(SysMenu record) {
         if(record.getId() == null || record.getId() == 0) {
             return sysMenuMapper.insertSelective(record);
@@ -46,7 +46,7 @@ public class SysMenuServiceImmpl implements SysMenuService {
      * @return
      */
     @Override
-//    @CacheEvict(value="findMenuTree",allEntries=true)
+    @CacheEvict(value="findMenuTree",allEntries=true)
     public int delete(List<SysMenu> records) {
         for(SysMenu record:records) {
             delete(record);
@@ -65,7 +65,7 @@ public class SysMenuServiceImmpl implements SysMenuService {
     }
 
     @Override
-//    @Cacheable(cacheNames = {"findMenuTree"})
+    @Cacheable(cacheNames = {"findMenuTree"})
     public List<SysMenu> findTree(String username, int menuType) {
         List<SysMenu> sysMenus = new ArrayList<>();
         // 用户所有的

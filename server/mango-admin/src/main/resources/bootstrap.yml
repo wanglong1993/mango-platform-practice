@@ -1,6 +1,4 @@
-swagger:
-#  配置扫描swagger包
-  base-package: cn.siques.mango.controller
+
 spring:
   application:
     name: mango-admin

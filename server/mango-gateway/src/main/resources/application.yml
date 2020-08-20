@@ -41,6 +41,14 @@ spring:
           filters:
             - StripPrefix=1
             - AddRequestHeader=X-Request-Id, heshenghao
+        - id: mango_task  #路由id 没有固定规则但要求唯一，配合服务名
+            #          uri: http://localhost:8001 # 匹配提供服务的路由地址
+          uri: lb://mango-task
+          predicates:
+            - Path=/task/api/sys/v1/**
+          filters:
+            - StripPrefix=1
+            - AddRequestHeader=X-Request-Id, heshenghao
         - id: ${service.admin}
           uri: lb://${service.admin}
           predicates:
@@ -53,12 +61,18 @@ spring:
             - Path=/${service.sound}/**
           filters:
             - StripPrefix=1
-        - id: ${service.processing}
-          uri: lb://${service.processing}
-          predicates:
-            - Path=/${service.processing}/**
-          filters:
-            - StripPrefix=1
+#        - id: ${service.processing}
+#          uri: lb://${service.processing}
+#          predicates:
+#            - Path=/${service.processing}/**
+#          filters:
+#            - StripPrefix=1
+#        - id: ${service.task}
+#          uri: lb://${service.task}
+#          predicates:
+#            - Path=/${service.task}/**
+#          filters:
+#            - StripPrefix=1
     nacos:
       discovery:
         server-addr: 106.54.247.224:8848
@@ -82,3 +96,5 @@ service:
   admin: mango-admin
   sound: mango-sound
   processing: mango-processing
+  task: mango-task
+

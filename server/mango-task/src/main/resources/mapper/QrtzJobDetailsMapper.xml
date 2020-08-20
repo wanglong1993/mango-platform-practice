@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.siques.mangosound.mapper.QrtzJobDetailsMapper">
+  <resultMap id="qrtzJobDetailsMap" type="cn.siques.mangosound.entity.QrtzJobDetails">
+    <id property="schedName" jdbcType="varchar" column="SCHED_NAME"/>
+    <result property="jobName" jdbcType="varchar" column="JOB_NAME"/>
+    <result property="jobGroup" jdbcType="varchar" column="JOB_GROUP"/>
+    <result property="description" jdbcType="varchar" column="DESCRIPTION"/>
+    <result property="jobClassName" jdbcType="varchar" column="JOB_CLASS_NAME"/>
+    <result property="isDurable" jdbcType="varchar" column="IS_DURABLE"/>
+    <result property="isNonconcurrent" jdbcType="varchar" column="IS_NONCONCURRENT"/>
+    <result property="isUpdateData" jdbcType="varchar" column="IS_UPDATE_DATA"/>
+    <result property="requestsRecovery" jdbcType="varchar" column="REQUESTS_RECOVERY"/>
+    <result property="jobData" jdbcType="blob" column="JOB_DATA"/>
+  </resultMap>
+</mapper>

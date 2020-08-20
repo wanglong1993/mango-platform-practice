@@ -4,6 +4,7 @@ import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
+import cn.siques.mango.controller.dto.DbConfig;
 import cn.siques.mango.service.SysCodeGenService;
 import cn.siques.mango.utils.CodeGenUtil;
 import cn.siques.mango.utils.DbUtil;
@@ -59,6 +60,13 @@ public class SysCodeGenServiceImpl implements SysCodeGenService {
 
        return  pageResult;
    }
+
+    @Override
+    public List<DbConfig> queryDbList() {
+
+        return   dbUtill.getDbList();
+    }
+
 
     /**
      * 生成代码
