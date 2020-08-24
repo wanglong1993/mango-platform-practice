@@ -53,6 +53,8 @@ public class JwtAuthenticationFilter  extends BasicAuthenticationFilter {
                 Authentication authentication = JwtTokenUtils.getAuthenticationFromToken(tokenValue);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 
+            }else{
+                SecurityContextHolder.clearContext();
             }
             // 若为空，不在验证，需重新登录
         }

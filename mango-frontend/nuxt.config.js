@@ -83,7 +83,7 @@ export default {
   },
   plugins: [
     '@/plugins/axios',
-    '@/plugins/element-ui',
+    '@/plugins/main',
     '@/plugins/directive',
     '@/plugins/lang/index.js',
     // '@/plugins/localStorage.js',
@@ -106,9 +106,19 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/auth',
+    'nuxt-socket-io',
     // Doc: https://github.com/nuxt/content
     '@nuxt/content',
   ],
+  io: {
+    // module options
+    sockets: [
+      {
+        name: 'main',
+        url: 'http://localhost:8091',
+      },
+    ],
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options

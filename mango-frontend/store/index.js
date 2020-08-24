@@ -37,6 +37,7 @@ export const state = () => ({
   closingPage: '',
   primaryColor: '',
   themeColor: '#20222A',
+  socketName: '',
 })
 
 export const mutations = {
@@ -93,6 +94,12 @@ export const mutations = {
   },
   deleteAll(state) {
     state.Auth.token = null
+  },
+  logOut(state) {
+    state.auth.loggedIn = false
+  },
+  SET_SOCKET_NAME(state, name) {
+    state.socketName = name
   },
 }
 

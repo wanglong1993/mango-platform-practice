@@ -3,6 +3,7 @@ package cn.siques.mangosound.config;
 
 
 
+import cn.siques.mangocommon.utils.RedisUtils;
 import cn.siques.mangosound.config.security.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,9 +30,14 @@ import org.springframework.security.web.authentication.logout.HttpStatusReturnin
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    RedisUtils<String,String> redisUtils;
+    RedisTemplate<String ,String > redisTemplate;
 
-    @Override
+    @Bean
+    public RedisUtils redisUtils() {
+        return new RedisUtils(redisTemplate);
+    }
+
+        @Override
     protected void configure(HttpSecurity http) throws Exception {
         // 禁用csrf
         http.csrf().disable()
@@ -64,7 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // 退出登陆处理器
         http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
         // token 验证过滤器
-        http.addFilterBefore(new JwtAuthenticationFilter(authenticationManager(),redisUtils), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new JwtAuthenticationFilter(authenticationManager(),redisUtils()), UsernamePasswordAuthenticationFilter.class);
 
     }
 

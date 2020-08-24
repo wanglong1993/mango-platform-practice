@@ -5,7 +5,11 @@ import cn.hutool.core.util.StrUtil;
 import cn.siques.mangocommon.utils.JwtTokenUtils;
 
 
-import cn.siques.mangosound.config.RedisUtils;
+import cn.siques.mangocommon.utils.RedisUtils;
+import org.apache.poi.hssf.record.pivottable.PageItemRecord;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,7 +27,9 @@ import java.util.Collection;
 
 public class JwtAuthenticationFilter  extends BasicAuthenticationFilter {
 
+
     private RedisUtils<String,String > redisUtils;
+
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager, RedisUtils redisUtils) {
         super(authenticationManager);

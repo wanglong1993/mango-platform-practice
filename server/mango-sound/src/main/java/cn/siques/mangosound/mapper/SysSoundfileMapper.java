@@ -41,6 +41,9 @@ public interface SysSoundfileMapper extends BaseMapper<SysSoundfile> {
             "<if test='classification != null' >" +
             "or classification like concat('%',#{classification},'%')" +
             "</if>" +
+            "<if test='statu != null' >" +
+            "or statu = #{statu}" +
+            "</if>" +
             "</where>"+
             " </script>" })
     List<SysSoundfile> searchSoundfile(HashMap<String, String> map);

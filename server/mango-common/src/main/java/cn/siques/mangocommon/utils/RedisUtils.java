@@ -18,9 +18,12 @@ public class RedisUtils<K,V> {
 
 
     public RedisUtils(RedisTemplate<K, V> redisTemplate) {
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        StringRedisSerializer serializer = new StringRedisSerializer();
+        redisTemplate.setKeySerializer(serializer);
+        redisTemplate.setValueSerializer(serializer);
         this.redisTemplate = redisTemplate;
     }
+
 
 
 

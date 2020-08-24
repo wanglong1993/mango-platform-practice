@@ -1,9 +1,6 @@
 package cn.siques.mango.controller;
 
 
-
-
-
 import cn.siques.mangocommon.dto.JsonData;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,8 +15,7 @@ public class CustomExceptionHandler {
     @ResponseBody
     public JsonData handle(Exception e){
 
-
-            return JsonData.buildError(e.getMessage());
+        return JsonData.buildError(e.getMessage());
 
     }
 }

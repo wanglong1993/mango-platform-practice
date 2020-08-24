@@ -11,5 +11,6 @@ declare module 'vue/types/vue' {
     $store: Store<any>
     $auth: any
     $i18n1: any
+    $nuxtSocket: any
   }
 }

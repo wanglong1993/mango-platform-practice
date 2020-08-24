@@ -92,7 +92,7 @@ export default class sysDept extends Vue {
         prop: 'name',
       },
       {
-        label: '机构全程',
+        label: '机构全称',
         prop: 'fullName',
         editDisplay: false,
         addDisplay: false,

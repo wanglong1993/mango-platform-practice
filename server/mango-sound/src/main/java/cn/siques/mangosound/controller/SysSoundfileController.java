@@ -1,5 +1,7 @@
 package cn.siques.mangosound.controller;
 
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.siques.mangocommon.Page.PageRequest;
 import cn.siques.mangocommon.Page.PageResult;
 import cn.siques.mangocommon.dto.JsonData;
@@ -20,6 +22,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import springfox.documentation.spring.web.json.Json;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -49,17 +52,28 @@ public class SysSoundfileController {
      SysSoundfileService sysSoundfileService;
 
 
+//
+//    @PostMapping("findPage")
+//    @PreAuthorize("hasAuthority('sys:sound:view')")
+//    @ApiOperation(value = "分页查询", notes = "分页查询")
+//    public JsonData listSysSoundPage(@RequestBody PageRequest pageRequest) {
+//        PageResult page =
+//        return JsonData.buildSuccess(page);
+//    }
+
+
     /**
-   * 分页查询
-   * @param pageRequest
-   * @return
-   */
-    @PostMapping("findPage")
+     * 分页查询
+     * @param searchPage
+     * @return
+     */
+    @PostMapping("/findPage")
     @PreAuthorize("hasAuthority('sys:sound:view')")
-    @ApiOperation(value = "分页查询", notes = "分页查询")
-    public JsonData listSysSoundPage(@RequestBody PageRequest pageRequest) {
-        PageResult page = sysSoundfileService.findPage(pageRequest);
-        return JsonData.buildSuccess(page);
+    @ApiOperation(value = "分页查询及搜索", notes = "分页查询及搜索")
+    public JsonData searchSysSoundfile(@RequestBody SearchPage searchPage){
+        if(ObjectUtil.isNull(searchPage.getSysSoundfile())) return JsonData.buildSuccess(sysSoundfileService.findPage(searchPage.getPageRequest()));
+        else   return  JsonData.buildSuccess(sysSoundfileService.searchSoundfile(searchPage.getSysSoundfile(),searchPage.getPageRequest()));
+
     }
 
 
@@ -142,13 +156,6 @@ public class SysSoundfileController {
 
 
 
-    @PostMapping("/search")
-    @PreAuthorize("hasAuthority('sys:sound:view')")
-    @ApiOperation(value = "搜索", notes = "搜索")
-    public JsonData searchSysSoundfile(@RequestBody SearchPage searchPage){
-
-        return  JsonData.buildSuccess(sysSoundfileService.searchSoundfile(searchPage.getSysSoundfile(),searchPage.getPageRequest()));
-    }
 
     /**
      * 音频流
