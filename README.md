@@ -16,7 +16,7 @@ This project can be used as a starter for spring cloud micro services developmen
 
 ## Microservice Architecture
 
-![架构图](https://eric-he.oss-cn-beijing.aliyuncs.com/git/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84sy.jpg)
+![架构图](https://shuxie.oss-cn-hangzhou.aliyuncs.com/public/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84sy.jpg)
 ### With Token
 
 ![spring-cloud-micro-service-architecture](https://user-images.githubusercontent.com/1255011/80553599-06adb500-89fd-11ea-9cf8-f887e156e51b.png)
