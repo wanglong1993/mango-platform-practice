@@ -1,19 +1,19 @@
 <template>
-  <el-container style="display: -webkit-box !important;">
+  <el-container style="display: -webkit-box !important">
     <el-menu
       v-loading="loading"
       element-loading-background="hsla(0,0%,28%,1)"
       background-color="#20222A"
       text-color="hsla(0,0%,100%,.7)"
       active-text-color="#ffd04b"
-      style="overflow-y: scroll;"
+      style="overflow-y: scroll"
       class="el-menu-vertical-demo"
       :collapse="isCollapse"
       :unique-opened="true"
     >
       <el-menu-item class="fs-4 text-white">
         <i class="el-icon-menu text-white"></i>
-        <span slot="title">Mango-Admin</span>
+        <span slot="title">Siques-Admin</span>
       </el-menu-item>
       <el-submenu
         v-for="(menu, index) in menus"
@@ -30,12 +30,7 @@
             v-if="submenu.type != 2"
             :key="`${index}-${index1}`"
             :index="`${submenu.url}`"
-            @click="
-              $router.push({
-                path: submenu.url,
-                query: { label: submenu.name },
-              })
-            "
+            @click="changeRoute(submenu.url, submenu.name)"
           >
             <i :class="submenu.icon"></i>
             <span slot="title">{{ submenu.name }}</span>
@@ -94,7 +89,7 @@
       </el-header>
       <el-container>
         <div class="bg-light h-100">
-          <div class="bg-white mb-2" style="z-index: 1;">
+          <div class="bg-white mb-2" style="z-index: 1">
             <Menutags></Menutags>
           </div>
 
@@ -190,6 +185,18 @@ export default class MenuLayOut extends Vue {
       position: 'bottom-right',
       type: 'success',
     })
+  }
+
+  changeRoute(url: string, name: string) {
+    console.log(url)
+    if (url.indexOf('http') != -1) {
+      window.open(url, '_blank')
+    } else {
+      this.$router.push({
+        path: url,
+        query: { label: name },
+      })
+    }
   }
 }
 </script>

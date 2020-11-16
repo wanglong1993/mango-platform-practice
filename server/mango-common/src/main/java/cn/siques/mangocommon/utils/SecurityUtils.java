@@ -1,5 +1,6 @@
 package cn.siques.mangocommon.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,12 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Collection;
 import java.util.List;
 
-
+@Slf4j
 public class SecurityUtils {
 
 /**
  * 获取登陆令牌进行认证
  */
+
 
 public  static  void checkAuthentication(HttpServletRequest request, HttpServletResponse response){
 
@@ -72,7 +74,7 @@ public  static  void checkAuthentication(HttpServletRequest request, HttpServlet
     }
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-    System.out.println(authentication);
+    log.info("authentication:{}",authentication);
     return  authentication;
     }
 

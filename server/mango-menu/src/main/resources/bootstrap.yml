@@ -1,10 +1,10 @@
-spring:
-  application:
-    name: mango-menu
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 106.54.247.224:8848
-      config:
-        server-addr: 106.54.247.224:8848
-        file-extension: yml
+#spring:
+#  application:
+#    name: mango-menu
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: 106.54.247.224:8848
+#      config:
+#        server-addr: 106.54.247.224:8848
+#        file-extension: yml

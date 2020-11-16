@@ -1,0 +1,27 @@
+version: "3.0"
+services:
+  microservice-gateway1:
+    image: registry.cn-hangzhou.aliyuncs.com/eric-heshenghao/mango-gateway:0.0.1-SNAPSHOT
+    ports:
+      - 9001:9001
+    container_name: microservice-gateway1
+  microservice-gateway2:
+    image: registry.cn-hangzhou.aliyuncs.com/eric-heshenghao/mango-gateway:0.0.1-SNAPSHOT
+    ports:
+      - 9002:9001
+    container_name: microservice-gateway2
+  microservice-admin:
+    image: registry.cn-hangzhou.aliyuncs.com/eric-heshenghao/mango-admin:0.0.1-SNAPSHOT
+    ports:
+      - 8082-8085:8083
+    container_name: microservice-admin
+  microservice-sound:
+    image: registry.cn-hangzhou.aliyuncs.com/eric-heshenghao/mango-sound:0.0.1-SNAPSHOT
+    ports:
+      - 8086-8088:8084
+    container_name: microservice-sound
+  microservice-task:
+    image: registry.cn-hangzhou.aliyuncs.com/eric-heshenghao/mango-task:0.0.1-SNAPSHOT
+    ports:
+      - 8089-8091:8086
+    container_name: microservice-task

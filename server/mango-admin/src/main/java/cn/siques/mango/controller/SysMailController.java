@@ -22,6 +22,7 @@ public class SysMailController {
     @PostMapping("send")
     @PreAuthorize("hasAuthority('sys:mail:send')")
     public void sendMail(@RequestBody MailDto mailDto){
+        System.out.println(mailDto);
 //        MessageProperties messageProperties = new MessageProperties();
 //        messageProperties.setContentType("application/json");
 //        Message message = new Message(mailDto.toString().getBytes(), messageProperties);

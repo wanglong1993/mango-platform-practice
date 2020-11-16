@@ -7,6 +7,7 @@
 		job_details.`JOB_NAME`,
 		job_details.`JOB_GROUP`,
 		job_details.`JOB_CLASS_NAME`,
+		job_details.`DESCRIPTION`,
 		cron_triggers.`CRON_EXPRESSION`,
 		cron_triggers.`TIME_ZONE_ID`,
 		qrtz_triggers.`TRIGGER_NAME`,

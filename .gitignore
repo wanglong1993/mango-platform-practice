@@ -4,6 +4,7 @@ target/
 !**/src/main/**
 !**/src/test/**
 
+/server/apache-skywalking-apm-bin-es7/
 ### STS ###
 .apt_generated
 .classpath

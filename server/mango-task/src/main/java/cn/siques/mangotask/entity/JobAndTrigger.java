@@ -58,4 +58,6 @@ public class JobAndTrigger {
      * 定时任务状态
      */
     private String triggerState;
+
+    private String description;
 }

@@ -1,6 +1,7 @@
 package cn.siques.mango.service.impl;
 
 
+import cn.siques.mango.controller.dto.RoleMenuDto;
 import cn.siques.mango.service.SysRoleService;
 import cn.siques.mangocommon.Page.PageRequest;
 import cn.siques.mangocommon.Page.PageResult;
@@ -10,51 +11,29 @@ import cn.siques.mangocore.dao.SysMenuMapper;
 import cn.siques.mangocore.dao.SysRoleMapper;
 import cn.siques.mangocore.dao.SysRoleMenuMapper;
 import cn.siques.mangocore.entity.SysRole;
-import cn.siques.mangocore.entity.SysRoleKey;
+
 import cn.siques.mangocore.entity.SysRoleMenu;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class SysRoleServiceImpl implements SysRoleService {
+public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper,SysRole> implements SysRoleService {
 
-    @Autowired
+    @Resource
     SysRoleMapper sysRoleMapper;
 
-    @Autowired
+    @Resource
     SysMenuMapper sysMenuMapper;
 
-    @Autowired
+    @Resource
     SysRoleMenuMapper sysRoleMenuMapper;
 
-    @Override
-    public int save(SysRole record) {
-        return 0;
-    }
-
-    @Override
-    public int delete(SysRole record) {
-        return 0;
-    }
-
-    @Override
-    public int delete(List<SysRole> records) {
-        return 0;
-    }
-
-    @Override
-    public SysRole findById(Long id) {
-        return null;
-    }
-
-    @Override
-    public PageResult findPage(PageRequest pageRequest) {
-        return null;
-    }
 
     @Override
     public List<SysRole> findAll() {
@@ -64,9 +43,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Override
     public SysRole findRoleMenus(Long roleId) {
-        SysRoleKey sysRoleKey = new SysRoleKey();
-        sysRoleKey.setId(roleId);
-        SysRole sysRole = sysRoleMapper.selectByPrimaryKey(sysRoleKey);
+        SysRole sysRole = sysRoleMapper.selectByPrimaryKey(roleId);
         if(SysConstants.ADMIN.equalsIgnoreCase(sysRole.getName())) {
             // 如果是超级管理员，返回全部的权限
             sysRole.setSysMenuList(sysMenuMapper.findAll());
@@ -84,24 +61,21 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     /**
      * 修改角色菜单权限，需要同时清空该用户的菜单缓存
-     * @param records
+     * @param
      * @return
      */
     @Transactional
     @Override
-    @CacheEvict(value="findMenuTree",key = "",allEntries=true)
-    public int saveRoleMenus(List<SysRoleMenu> records) {
-        if(records == null || records.isEmpty()) {
-            return 1;
-        }
-        Long roleId = records.get(0).getRoleId();
-        // 清除已有的
-        sysRoleMenuMapper.deleteByRoleId(roleId);
-        for(SysRoleMenu record:records) {
-            sysRoleMenuMapper.insertSelective(record);
+    @CacheEvict(value="findMenuTree",key="#roleName")
+    public int saveRoleMenus(String roleName, RoleMenuDto roleMenuDto) {
+
+        // 清除已有的的菜单
+        sysRoleMenuMapper.deleteByRoleId(roleMenuDto.getRoleId());
+        // 插入新菜单
+        for(SysRoleMenu record:roleMenuDto.getRoleMenus()) {
+            sysRoleMenuMapper.insert(record);
         }
         return 1;
     }
-
 
 }

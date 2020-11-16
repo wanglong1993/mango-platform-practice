@@ -38,8 +38,10 @@ public class JwtAuthenticationToken extends UsernamePasswordAuthenticationToken 
         return token;
     }
 
-    public void setToken(String token) {
+    public JwtAuthenticationToken setToken(String token) {
         this.token = token;
+
+        return this;
     }
 
     public static long getSerialversionuid() {

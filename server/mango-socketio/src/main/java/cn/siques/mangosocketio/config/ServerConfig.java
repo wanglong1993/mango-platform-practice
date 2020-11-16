@@ -18,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class ServerConfig {
 
 
+    // 验证token是否过期
     @Bean
     public SocketIOServer server(WsConfig wsConfig){
         com.corundumstudio.socketio.Configuration config = new com.corundumstudio.socketio.Configuration();
@@ -27,9 +28,12 @@ public class ServerConfig {
             @Override
             public boolean isAuthorized(HandshakeData data) {
                 String token = data.getSingleUrlParam("token");
-
-                String usernameFromToken = JwtTokenUtils.getUsernameFromToken(token);
-                return StrUtil.isNotBlank(usernameFromToken);
+                Boolean tokenExpired = JwtTokenUtils.isTokenExpired(token);
+                if(!tokenExpired){
+                    String usernameFromToken = JwtTokenUtils.getUsernameFromToken(token);
+                    return StrUtil.isNotBlank(usernameFromToken);
+                }
+                return  false;
             }
         });
 

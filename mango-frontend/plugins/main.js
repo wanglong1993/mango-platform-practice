@@ -6,6 +6,8 @@ import Router from 'vue-router'
 import dayjs from 'dayjs'
 import VueAMap from 'vue-amap'
 
+import './util/confrim'
+
 Vue.use(VueAMap)
 VueAMap.initAMapApiLoader({
   key: '20bc75bcb6199e0a85986de691a4e5d6',

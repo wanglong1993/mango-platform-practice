@@ -75,15 +75,16 @@ spring:
 #            - StripPrefix=1
     nacos:
       discovery:
-        server-addr: 106.54.247.224:8848
+        server-addr: 139.198.189.114:8848
+        namespace: 5642eb84-60d0-42f3-83d7-1fb41c965cf2
     sentinel:
       transport:
-        dashboard: 106.54.247.224:8849 # sentinel面板的启动端口
+        dashboard: 139.198.189.114:8858 # sentinel面板的启动端口
         port: 8719  #默认8719，假如被占用了会自动从8719开始依次+1扫描。直至找到未被占用的端口
       datasource: #添加Nacos数据源配置
         flow:
           nacos:
-            server-addr: 106.54.247.224:8848  # sentinel面板端口
+            server-addr: 139.198.189.114:8848
             dataId: ${spring.application.name}-flow-rules
             groupId: SENTINEL_GROUP  # nacos配置组
             # 规则类型，取值见：

@@ -7,6 +7,7 @@ import cn.siques.mangocommon.Page.PageResult;
 import cn.siques.mangocommon.dto.JsonData;
 
 import cn.siques.mangosound.entity.dto.SearchPage;
+import cn.siques.mangosound.mapper.SysSoundfileMapper;
 import com.aliyun.oss.model.OSSObject;
 
 import cn.siques.mangosound.entity.SysSoundfile;

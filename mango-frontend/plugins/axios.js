@@ -15,7 +15,7 @@ export default ({ app, store, route, redirect }) => {
     const newUrl = config.baseURL.replace('*', config.prefix)
     config.baseURL = newUrl
     //设置token
-    if (store.state.Auth) {
+    if (store.state.Auth && store.state.Auth.token) {
       config.headers.Authorization = store.state.Auth.token || ''
     }
   })
@@ -25,7 +25,7 @@ export default ({ app, store, route, redirect }) => {
     //   if (res.headers.refreshtoken) {
     //     Cookie.set('token', res.headers.refreshtoken)
     //   }
-    if (res.data.code == 401) {
+    if (res.data.code == 403) {
       redirect('/sys/login')
       app.$auth.logout()
     }
@@ -41,6 +41,7 @@ export default ({ app, store, route, redirect }) => {
           type: 'info',
           showClose: true,
         })
+        store.state.auth.loggedIn = false
         redirect('/sys/login')
       case 500:
         redirect('/sys/500')

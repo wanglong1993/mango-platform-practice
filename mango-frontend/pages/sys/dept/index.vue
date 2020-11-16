@@ -1,8 +1,17 @@
 <template>
   <div class="bg-white h-100">
     <el-container class="pt-3 px-3">
-      <el-aside width="200px" class="pr-2" style="border-right:1px solid  #ececec;">
-        <avue-tree ref="tree" :option="treeOption" :data="treeData" @node-click="nodeClick"></avue-tree>
+      <el-aside
+        width="200px"
+        class="pr-2"
+        style="border-right: 1px solid #ececec"
+      >
+        <avue-tree
+          ref="tree"
+          :option="treeOption"
+          :data="treeData"
+          @node-click="nodeClick"
+        ></avue-tree>
       </el-aside>
       <el-main>
         <avue-crud
@@ -26,7 +35,9 @@
           </template>
 
           <template slot="orderNum" slot-scope="scope">
-            <el-input v-model="scope.row.orderNum" placeholder="请输入内容">{{scope.row.orderNum}}</el-input>
+            <el-input v-model="scope.row.orderNum" placeholder="请输入内容">{{
+              scope.row.orderNum
+            }}</el-input>
           </template>
         </avue-crud>
       </el-main>
@@ -48,9 +59,9 @@ export default class sysDept extends Vue {
   treeData: any = []
   // 权限控制
   permission = {
-    delBtn: '',
-    addBtn: '',
-    menu: '',
+    delBtn: false,
+    addBtn: false,
+    menu: false,
   }
 
   //########### 弹出窗口选项
@@ -214,7 +225,7 @@ export default class sysDept extends Vue {
 
   async rowSave(form: any, done: any, loading: any) {
     if (form.parentId !== null) {
-      form.deptTree = form.parentId.toString()
+      form.parentIds = form.parentId.toString()
       form.parentId = form.parentId[form.parentId.length - 1]
     }
     await this.http.post('/pri/dept/save', form, {

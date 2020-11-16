@@ -50,6 +50,7 @@ public class SysSoundfileServiceImpl extends ServiceImpl<SysSoundfileMapper, Sys
         String reaPath= file.getPath()+"/"+file.getName()+file.getExt();
         OSSObject ossObject = ossConfig.getOssObject(reaPath);
 
+
         return  ossObject;
     }
 

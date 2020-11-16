@@ -15,7 +15,7 @@
     <description>Demo project for Spring Boot</description>
 
     <properties>
-        <docker.repostory>registry.cn-hangzhou.aliyuncs.com</docker.repostory>
+        <docker.repository>registry.cn-hangzhou.aliyuncs.com</docker.repository>
         <java.version>1.8</java.version>
         <docker.image.prefix>mango-sound</docker.image.prefix>
     </properties>
@@ -27,11 +27,6 @@
         </dependency>
 
 
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-launcher</artifactId>
-            <scope>test</scope>
-        </dependency>
 
 
 
@@ -42,10 +37,7 @@
         </dependency>
 
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
+
 
         <dependency>
             <groupId>log4j</groupId>
@@ -55,27 +47,30 @@
         </dependency>
 
 
+
         <!--        服务注册与发现-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-        <!--        服务配置-->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-alibaba-nacos-config</artifactId>-->
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>com.google.guava</groupId>-->
-<!--                    <artifactId>guava</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-<!--        </dependency>-->
-        <!--        服务监控-->
+
+
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-nacos-config</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
+        <!--        服务监控-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-actuator</artifactId>-->
+<!--        </dependency>-->
 
 
         <!--        服务接口文档-->
@@ -87,11 +82,11 @@
 
 
 
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.5.4</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.mybatis</groupId>-->
+<!--            <artifactId>mybatis</artifactId>-->
+<!--            <version>3.5.4</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
@@ -101,11 +96,11 @@
 
 
         <!--        服务配置-->
-        <dependency>
-            <groupId>tk.mybatis</groupId>
-            <artifactId>mapper-spring-boot-starter</artifactId>
-            <version>2.0.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>tk.mybatis</groupId>-->
+<!--            <artifactId>mapper-spring-boot-starter</artifactId>-->
+<!--            <version>2.0.0</version>-->
+<!--        </dependency>-->
 
 
         <dependency>
@@ -116,11 +111,11 @@
         </dependency>
 
 
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>1.1.0.Final</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>javax.validation</groupId>-->
+<!--            <artifactId>validation-api</artifactId>-->
+<!--            <version>1.1.0.Final</version>-->
+<!--        </dependency>-->
 
 
         <dependency>
@@ -154,6 +149,8 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <!--        服务配置-->
+
 
 
 
@@ -161,7 +158,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <!--spring cloud Hoxton.SR1-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -169,6 +165,8 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
@@ -176,6 +174,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -211,7 +210,8 @@
                     <baseImage>java</baseImage>
                     <workdir>/ROOT</workdir>
                     <cmd>["java", "-version"]</cmd>
-                    <entryPoint>["java", "-jar", "${project.build.finalName}.jar"]</entryPoint>
+                    <entryPoint>["java", "-jar", "${project.build.finalName}.jar","--spring.profiles.active=prod"]</entryPoint>
+
                     <resources>
                         <resource>
                             <targetPath>/ROOT</targetPath>
@@ -221,8 +221,8 @@
                     </resources>
                     <serverId>docker-aliyun</serverId>
 
-                    <registryUrl>${docker.repostory}</registryUrl>
-                    <!--                    <pushImage>true</pushImage>-->
+                    <registryUrl>${docker.repository}</registryUrl>
+                    <pushImage>true</pushImage>
                 </configuration>
                 <executions>
                     <execution>
@@ -257,6 +257,7 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
 

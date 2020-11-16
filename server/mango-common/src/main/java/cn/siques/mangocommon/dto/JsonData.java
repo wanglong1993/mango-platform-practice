@@ -21,7 +21,7 @@ public class JsonData implements Serializable {
 
     // 失败，传入描述信息
     public static JsonData buildError(String msg) {
-        return new JsonData(401, null, msg);
+        return new JsonData(405, null, msg);
     }
 
     // 失败，传入描述信息,状态码

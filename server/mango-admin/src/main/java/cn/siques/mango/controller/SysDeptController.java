@@ -58,8 +58,7 @@ public class SysDeptController {
     @PreAuthorize("hasAuthority('sys:dept:edit')")
     @PostMapping(value = "/save")
     public JsonData save(@RequestBody SysDept sysDept){
-        int save = sysDeptService.save(sysDept);
-        return JsonData.buildSuccess(save);
+        return JsonData.buildSuccess(sysDeptService.save(sysDept));
     }
 
 }

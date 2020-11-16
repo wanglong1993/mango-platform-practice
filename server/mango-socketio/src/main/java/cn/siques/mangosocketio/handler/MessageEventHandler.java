@@ -2,6 +2,7 @@ package cn.siques.mangosocketio.handler;
 
 import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.ObjectUtil;
+import cn.siques.mangocommon.dto.JsonData;
 import cn.siques.mangocommon.utils.JwtTokenUtils;
 import cn.siques.mangosocketio.config.DbTemplate;
 import cn.siques.mangosocketio.config.Event;
@@ -101,6 +102,7 @@ public class MessageEventHandler {
         if (inGroup) {
             log.info("群号 {} 收到来自 {} 的群聊消息：{}", data.getGroupId(), data.getFromUid(), data.getMessage());
             sendToGroup(data);
+            request.sendAckData(JsonData.buildSuccess("发送成功"));
         } else {
             request.sendAckData("请先加群！");
         }

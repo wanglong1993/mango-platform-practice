@@ -29,7 +29,7 @@
             :option="option"
           >
             <template slot-scope="{ type, size, row }" slot="menu">
-              <Crudbutton
+              <button-dialog
                 icon="el-icon-check"
                 :size="size"
                 :type="type"
@@ -38,7 +38,7 @@
                 @click="initData(row)"
                 @submit="submit(row)"
                 :title="'生成代码'"
-              ></Crudbutton>
+              ></button-dialog>
             </template>
           </avue-crud>
         </div>
@@ -71,7 +71,7 @@ export default class genTable extends Vue {
   @Watch('dbUrl')
   async isUrlChanged(newval: any, oldval: any) {
     if (newval != oldval) {
-      this.loading =true
+      this.loading = true
       const { data } = await this.http.post(
         '/pri/codeGen/changeSource',
         { url: newval },
@@ -100,6 +100,7 @@ export default class genTable extends Vue {
   permission = {
     delBtn: false,
     addBtn: false,
+    editBtn: false,
     menu: true,
   }
 

@@ -1,6 +1,8 @@
 package cn.siques.mangotask.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
 import cn.siques.mangocommon.Page.PageRequest;
+import cn.siques.mangotask.config.Desc;
 import cn.siques.mangotask.entity.JobAndTrigger;
 import cn.siques.mangotask.entity.JobForm;
 import cn.siques.mangotask.job.base.BaseJob;
@@ -11,6 +13,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +57,18 @@ public class JobServiceImpl implements JobService {
 
         Map<String, BaseJob> beansOfType = applicationContext.getBeansOfType(BaseJob.class);
 
-        List<JobForm> collect = beansOfType.entrySet().stream().map((stringBaseJobEntry ->
-           new JobForm().setJobClassName(  stringBaseJobEntry.getValue().getClass().getName())
+        List<JobForm> collect = beansOfType.entrySet().stream().map((baseJobEntry ->
+        {
+            JobForm jobForm = new JobForm().setJobClassName(baseJobEntry.getValue().getClass().getName());
+            Desc annotation = baseJobEntry.getValue().getClass().getAnnotation(Desc.class);
+            if(!ObjectUtil.isNull(annotation)){
+                jobForm.setAlias(annotation.value());
+            }else{
+                jobForm.setAlias(jobForm.getJobClassName());
+            }
+            return  jobForm;
+        }
+
         )).collect(Collectors.toList());
 
         return collect;
@@ -74,7 +87,7 @@ public class JobServiceImpl implements JobService {
         scheduler.start();
 
         // 构建Job信息
-        JobDetail jobDetail = JobBuilder.newJob(JobUtil.getClass(form.getJobClassName()).getClass()).withIdentity(form.getJobClassName(), form.getJobGroupName()).build();
+        JobDetail jobDetail = JobBuilder.newJob(JobUtil.getClass(form.getJobClassName()).getClass()).withIdentity(form.getJobClassName(), form.getJobGroupName()).withDescription(form.getAlias()).build();
 
         // Cron表达式调度构建器(即任务执行的时间)
         CronScheduleBuilder cron = CronScheduleBuilder.cronSchedule(form.getCronExpression());
@@ -125,6 +138,17 @@ public class JobServiceImpl implements JobService {
     public void resumeJob(JobForm form) throws SchedulerException {
         scheduler.resumeJob(JobKey.jobKey(form.getJobClassName(), form.getJobGroupName()));
     }
+
+
+
+//    @SneakyThrows
+//    public void gettimesTriggered(JobForm form){
+//
+//        TriggerKey triggerKey = TriggerKey.triggerKey(form.getJobClassName(), form.getJobGroupName());
+//        JobKey jobKey = new JobKey(form.getJobClassName(),form.getJobGroupName());
+//        List<? extends Trigger> triggersOfJob = scheduler.getTriggersOfJob(jobKey);
+//        triggersOfJob.get(0).getNextFireTime()
+//    }
 
     /**
      * 重新配置定时任务

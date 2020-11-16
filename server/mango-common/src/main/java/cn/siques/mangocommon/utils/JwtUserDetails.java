@@ -8,7 +8,6 @@ import java.util.Collection;
 
 /**
  * 安全用户模型
- * @author Louis
  * @date Jan 14, 2019
  */
 public class JwtUserDetails implements UserDetails {
@@ -36,7 +35,7 @@ public class JwtUserDetails implements UserDetails {
         return username;
     }
 
-    @JsonIgnore
+     
     @Override
     public String getPassword() {
         return password;
@@ -51,25 +50,25 @@ public class JwtUserDetails implements UserDetails {
         return authorities;
     }
 
-    @JsonIgnore
+     
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
-    @JsonIgnore
+     
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
-    @JsonIgnore
+     
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
-    @JsonIgnore
+     
     @Override
     public boolean isEnabled() {
         return true;

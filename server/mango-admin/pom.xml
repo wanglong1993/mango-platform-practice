@@ -12,10 +12,10 @@
     <artifactId>mango-admin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mango-admin</name>
-    <description>用户管理模块</description>
+    <description>管理模块</description>
 
     <properties>
-        <docker.repostory>registry.cn-hangzhou.aliyuncs.com</docker.repostory>
+        <docker.repository>registry.cn-hangzhou.aliyuncs.com</docker.repository>
         <java.version>1.8</java.version>
         <docker.image.prefix>mango-admin</docker.image.prefix>
     </properties>
@@ -35,10 +35,21 @@
 
 
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.3.2</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security.oauth.boot</groupId>
+            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+            <version>2.2.2.RELEASE</version>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>com.baomidou</groupId>-->
+<!--            <artifactId>mybatis-plus-boot-starter</artifactId>-->
+<!--            <version>3.3.2</version>-->
+<!--        </dependency>-->
 
 
         <!--        <dependency>-->
@@ -150,11 +161,19 @@
 <!--            <optional>true</optional>-->
 <!--        </dependency>-->
 
+
         <dependency>
             <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.1.6</version>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.10</version>
         </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
 
         <dependency>
             <groupId>log4j</groupId>
@@ -205,10 +224,16 @@
         </dependency>
 
 
+<!--        属性配置-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
+        </dependency>
+<!-- rpc调用 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
 
 
@@ -276,8 +301,9 @@
                     </resources>
                     <serverId>docker-aliyun</serverId>
 
-                    <registryUrl>${docker.repostory}</registryUrl>
-<!--                    <pushImage>true</pushImage>-->
+                    <registryUrl>${docker.repository}</registryUrl>
+
+                    <pushImage>true</pushImage>
                 </configuration>
                <executions>
                    <execution>

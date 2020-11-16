@@ -7,6 +7,7 @@ import cn.siques.mangocore.entity.SysRole;
 import cn.siques.mangocore.entity.SysUser;
 import cn.siques.mangocore.entity.SysUserRole;
 import cn.siques.mangocore.service.CrudService;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 import java.util.Set;
@@ -14,9 +15,11 @@ import java.util.Set;
 /**
  * CrudService已经有findpage方法
  */
-public interface SysUserService extends CrudService<SysUser> {
+public interface SysUserService extends IService<SysUser> {
     List<SysUser> findAll();
 
+
+    PageResult findPage(PageRequest pageRequest);
 
     /**
      * 根据用户名查找用户

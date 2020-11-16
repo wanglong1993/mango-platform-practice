@@ -6,9 +6,9 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 106.54.247.224:8848 #配置Nacos地址
+        server-addr: 139.198.189.114:8848 #配置Nacos地址
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/quartz?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false
+    url: jdbc:mysql://106.54.247.224:3306/quartz?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false
     username: root
     password: l1itdhjaoiqw32kwqe$5asasd*a21
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -36,6 +36,11 @@ spring:
       org.quartz.jobStore.driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
       # 在调度流程的第一步，也就是拉取待即将触发的triggers时，是上锁的状态，即不会同时存在多个线程拉取到相同的trigger的情况，也就避免的重复调度的危险。参考：https://segmentfault.com/a/1190000015492260
       org.quartz.jobStore.acquireTriggersWithinLock: true
+  redis:
+    database: 0
+    port: 6379
+    password: heshenghao
+    host: 106.54.247.224
 logging:
   level:
     com.xkcoding: debug

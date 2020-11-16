@@ -10,18 +10,19 @@ import cn.siques.mangocore.entity.SysLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class SysLogServiceImpl implements SysLogService {
-    @Autowired
+    @Resource
     private SysLogMapper sysLogMapper;
     @Override
     public int save(SysLog record) {
         if(record.getId()==null ||record.getId()==0){
-            return sysLogMapper.insertSelective(record);
+            return sysLogMapper.insert(record);
         }
-        return sysLogMapper.updateByPrimaryKeySelective(record);
+        return sysLogMapper.updateByPrimaryKey(record);
     }
 
     @Override

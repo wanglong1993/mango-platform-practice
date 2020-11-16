@@ -7,16 +7,20 @@
     <artifactId>mango-pom</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mango-pom</name>
-    <description>Demo project for Spring Boot</description>
+    <description>打包中心</description>
     <packaging>pom</packaging>
 
     <modules>
-        <module>../mango-admin</module>
-        <module>../mango-menu</module>
-        <module>../mango-gateway</module>
-        <module>../mango-nacos</module>
-        <module>../mango-core</module>
         <module>../mango-common</module>
+        <module>../mango-core</module>
+        <module>../mango-gateway</module>
+        <module>../mango-admin</module>
+        <module>../mango-task</module>
+        <module>../mango-sound</module>
+<!--        <module>../mango-menu</module>-->
+
+<!--        <module>../mango-nacos</module>-->
+
     </modules>
 
 

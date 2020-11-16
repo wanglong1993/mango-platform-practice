@@ -13,8 +13,8 @@
       <span class="custom-tree-node" slot-scope="{ node, data }">
         <span>{{ node.label }}</span>
         <span>
-          <el-button type="text" size="mini">{{data.url}}</el-button>
-          <el-button type="text" size="mini">{{data.perms}}</el-button>
+          <el-button type="text" size="mini">{{ data.url }}</el-button>
+          <el-button type="text" size="mini">{{ data.perms }}</el-button>
         </span>
       </span>
     </el-tree>
@@ -25,7 +25,7 @@ import { Vue, Component, Watch, Prop } from 'nuxt-property-decorator'
 @Component({
   components: {},
 })
-export default class Roledialog extends Vue {
+export default class MenuTree extends Vue {
   form: any = {}
   data = []
   http = Vue.prototype.$http
@@ -46,7 +46,7 @@ export default class Roledialog extends Vue {
   }
 }
 </script>
-<style lang="scss" >
+<style lang="scss">
 .custom-tree-node {
   flex: 1;
   display: flex;

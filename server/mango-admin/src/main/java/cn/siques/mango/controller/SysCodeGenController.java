@@ -13,6 +13,8 @@ import cn.siques.mangocommon.dto.JsonData;
 import cn.siques.mangocore.entity.gen.GenConfig;
 import io.swagger.annotations.Api;
 import lombok.SneakyThrows;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
@@ -25,11 +27,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/sys/v1/pri/codeGen")
 public class SysCodeGenController {
+    private   Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     SysCodeGenService sysCodeGenService;
 
     @PostMapping("findPage")
     public JsonData findPage(@RequestBody PageRequest pageRequest){
+        logger.info(sysCodeGenService.findPage(pageRequest).getContent().toString());
         PageResult page = sysCodeGenService.findPage(pageRequest);
         return  JsonData.buildSuccess(page);
     }
@@ -52,6 +57,7 @@ public class SysCodeGenController {
 
     @GetMapping("dblist")
     public JsonData queryDbList(){
+        logger.info(sysCodeGenService.queryDbList().toString());
       return JsonData.buildSuccess(sysCodeGenService.queryDbList());
     }
 
