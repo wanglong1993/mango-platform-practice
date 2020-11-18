@@ -3,16 +3,14 @@ package cn.siques.mango.service.impl;
 
 import cn.siques.mango.controller.dto.RoleMenuDto;
 import cn.siques.mango.service.SysRoleService;
-import cn.siques.mangocommon.Page.PageRequest;
-import cn.siques.mangocommon.Page.PageResult;
-import cn.siques.mangocommon.constant.SysConstants;
+import cn.siques.constant.SysConstants;
 
-import cn.siques.mangocore.dao.SysMenuMapper;
-import cn.siques.mangocore.dao.SysRoleMapper;
-import cn.siques.mangocore.dao.SysRoleMenuMapper;
-import cn.siques.mangocore.entity.SysRole;
+import cn.siques.mango.dao.SysMenuMapper;
+import cn.siques.mango.dao.SysRoleMapper;
+import cn.siques.mango.dao.SysRoleMenuMapper;
+import cn.siques.mango.entity.SysRole;
 
-import cn.siques.mangocore.entity.SysRoleMenu;
+import cn.siques.mango.entity.SysRoleMenu;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.cache.annotation.CacheEvict;

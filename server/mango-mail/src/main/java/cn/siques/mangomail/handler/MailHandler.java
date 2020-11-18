@@ -2,13 +2,12 @@ package cn.siques.mangomail.handler;
 
 
 
-import cn.siques.mangocommon.dto.MailDto;
+import cn.siques.dto.MailDto;
 
 import cn.siques.mangomail.service.MailService;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;

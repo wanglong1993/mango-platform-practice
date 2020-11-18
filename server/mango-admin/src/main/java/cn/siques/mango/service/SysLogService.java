@@ -1,7 +1,12 @@
 package cn.siques.mango.service;
 
-import cn.siques.mangocore.entity.SysLog;
-import cn.siques.mangocore.service.CrudService;
+import cn.siques.Page.PageRequest;
+import cn.siques.Page.PageResult;
+import cn.siques.mango.entity.SysLog;
+import com.baomidou.mybatisplus.extension.service.IService;
 
-public interface SysLogService extends CrudService<SysLog> {
+
+public interface SysLogService extends IService<SysLog> {
+
+    PageResult findPage(PageRequest pageRequest);
 }

@@ -2,17 +2,15 @@ package cn.siques.mango.controller;
 
 import cn.siques.mango.service.SysMenuService;
 
-import cn.siques.mangocommon.dto.JsonData;
-import cn.siques.mangocommon.utils.SecurityUtils;
-import cn.siques.mangocore.entity.SysMenu;
+import cn.siques.dto.JsonData;
+import cn.siques.utils.SecurityUtils;
+import cn.siques.mango.entity.SysMenu;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

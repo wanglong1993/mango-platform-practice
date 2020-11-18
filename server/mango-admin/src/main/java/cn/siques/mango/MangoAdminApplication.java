@@ -20,7 +20,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @RefreshScope
 @EnableCaching
 //@EnableAspectJAutoProxy
-@MapperScan({"cn.siques.mangocore.dao","cn.siques.mango.mapper"})
+@MapperScan({"cn.siques.mango.dao"})
 public class MangoAdminApplication {
 
     public static void main(String[] args) {

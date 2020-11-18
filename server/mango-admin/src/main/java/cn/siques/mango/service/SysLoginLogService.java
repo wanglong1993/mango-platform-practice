@@ -1,12 +1,15 @@
 package cn.siques.mango.service;
 
-import cn.siques.mangocore.entity.SysLoginLog;
-import cn.siques.mangocore.service.CrudService;
-import org.springframework.stereotype.Service;
+import cn.siques.Page.PageRequest;
+import cn.siques.Page.PageResult;
+import cn.siques.mango.entity.SysLoginLog;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 
-public interface SysLoginLogService extends CrudService<SysLoginLog> {
+
+public interface SysLoginLogService extends IService<SysLoginLog> {
     void writeLoginLog(String username, String ipAddr);
 
     void loginOutLog(String username, String ipAddr);
+    PageResult findPage(PageRequest pageRequest);
 }

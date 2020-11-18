@@ -2,9 +2,7 @@ package cn.siques.mango.controller;
 
 
 
-import cn.siques.mangocommon.dto.MailDto;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageProperties;
+import cn.siques.dto.MailDto;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

@@ -2,8 +2,8 @@ package cn.siques.mangooauth.config;
 
 
 
-import cn.siques.mangocommon.utils.GrantedAuthorityImpl;
-import cn.siques.mangocommon.utils.JwtUserDetails;
+import cn.siques.utils.GrantedAuthorityImpl;
+import cn.siques.utils.JwtUserDetails;
 import cn.siques.mangooauth.entity.SysUser;
 import cn.siques.mangooauth.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * 数据库操作

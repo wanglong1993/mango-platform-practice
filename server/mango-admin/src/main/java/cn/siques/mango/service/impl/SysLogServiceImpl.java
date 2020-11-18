@@ -2,43 +2,20 @@ package cn.siques.mango.service.impl;
 
 import cn.siques.mango.service.SysLogService;
 
-import cn.siques.mangocommon.Page.MybatisPageHelper;
-import cn.siques.mangocommon.Page.PageRequest;
-import cn.siques.mangocommon.Page.PageResult;
-import cn.siques.mangocore.dao.SysLogMapper;
-import cn.siques.mangocore.entity.SysLog;
-import org.springframework.beans.factory.annotation.Autowired;
+import cn.siques.Page.MybatisPageHelper;
+import cn.siques.Page.PageRequest;
+import cn.siques.Page.PageResult;
+import cn.siques.mango.dao.SysLogMapper;
+import cn.siques.mango.entity.SysLog;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @Service
-public class SysLogServiceImpl implements SysLogService {
+public class SysLogServiceImpl extends ServiceImpl<SysLogMapper,SysLog> implements SysLogService {
     @Resource
     private SysLogMapper sysLogMapper;
-    @Override
-    public int save(SysLog record) {
-        if(record.getId()==null ||record.getId()==0){
-            return sysLogMapper.insert(record);
-        }
-        return sysLogMapper.updateByPrimaryKey(record);
-    }
-
-    @Override
-    public int delete(SysLog record) {
-        return 0;
-    }
-
-    @Override
-    public int delete(List<SysLog> records) {
-        return 0;
-    }
-
-    @Override
-    public SysLog findById(Long id) {
-        return null;
-    }
 
     @Override
     public PageResult findPage(PageRequest pageRequest) {

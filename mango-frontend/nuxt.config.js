@@ -86,6 +86,7 @@ export default {
     '@/plugins/main',
     '@/plugins/directive',
     '@/plugins/lang/index.js',
+    { src: '@/plugins/mixin.js', ssr: false },
     // '@/plugins/localStorage.js',
     // '@/plugins/config/website.js',
   ],

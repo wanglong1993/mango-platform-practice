@@ -1,27 +1,26 @@
 package cn.siques.mango.controller;
 
-import cn.hutool.core.io.IoUtil;
-;
-import cn.hutool.db.Entity;
+
+
 import cn.siques.mango.controller.dto.DbConfig;
 import cn.siques.mango.service.SysCodeGenService;
 
 import cn.siques.mango.utils.DbUtil;
-import cn.siques.mangocommon.Page.PageRequest;
-import cn.siques.mangocommon.Page.PageResult;
-import cn.siques.mangocommon.dto.JsonData;
-import cn.siques.mangocore.entity.gen.GenConfig;
+import cn.siques.Page.PageRequest;
+import cn.siques.Page.PageResult;
+import cn.siques.dto.JsonData;
+import cn.siques.mango.entity.gen.GenConfig;
 import io.swagger.annotations.Api;
-import lombok.SneakyThrows;
+
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.spring.web.json.Json;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 @Api(value="代码生成器接口")
 @RestController
@@ -42,7 +41,7 @@ public class SysCodeGenController {
     @Autowired
     DbUtil dbUtil;
 
-    @SneakyThrows
+
     @PostMapping("generate")
     public void generate(@RequestBody GenConfig genConfig, HttpServletResponse response){
         byte[] data = sysCodeGenService.generatorCode(genConfig);

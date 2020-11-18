@@ -1,10 +1,10 @@
 package cn.siques.mango.service;
 
 
-import cn.siques.mangocommon.Page.PageRequest;
-import cn.siques.mangocommon.Page.PageResult;
+import cn.siques.Page.PageRequest;
+import cn.siques.Page.PageResult;
 import com.baomidou.mybatisplus.extension.service.IService;
-import cn.siques.mangocore.entity.SysDictData;
+import cn.siques.mango.entity.SysDictData;
 
 import java.util.List;
 

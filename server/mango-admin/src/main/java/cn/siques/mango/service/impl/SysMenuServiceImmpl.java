@@ -1,13 +1,10 @@
 package cn.siques.mango.service.impl;
 
 import cn.siques.mango.service.SysMenuService;
-import cn.siques.mangocommon.Page.PageRequest;
-import cn.siques.mangocommon.Page.PageResult;
-import cn.siques.mangocommon.constant.SysConstants;
-import cn.siques.mangocore.dao.SysMenuMapper;
-import cn.siques.mangocore.entity.SysMenu;
+import cn.siques.constant.SysConstants;
+import cn.siques.mango.dao.SysMenuMapper;
+import cn.siques.mango.entity.SysMenu;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,8 +1,7 @@
 package cn.siques.mango.controller;
 
 
-import cn.siques.mangocommon.dto.JsonData;
-import org.springframework.security.core.Authentication;
+import cn.siques.dto.JsonData;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;

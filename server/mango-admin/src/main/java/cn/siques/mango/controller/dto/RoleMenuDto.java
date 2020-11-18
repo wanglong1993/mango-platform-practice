@@ -1,11 +1,9 @@
 package cn.siques.mango.controller.dto;
 
-import cn.siques.mangocore.entity.SysRoleMenu;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import cn.siques.mango.entity.SysRoleMenu;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author : heshenghao

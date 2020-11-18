@@ -1,19 +1,16 @@
 package cn.siques.mango.service.impl;
 
 import cn.siques.mango.service.SysDictTypeService;
-import cn.siques.mangocommon.Page.MybatisPageHelper;
-import cn.siques.mangocommon.Page.PageRequest;
-import cn.siques.mangocommon.Page.PageResult;
-import cn.siques.mangocore.dao.SysDictTypeMapper;
-import cn.siques.mangocore.entity.SysDictData;
-import cn.siques.mangocore.entity.SysDictType;
+import cn.siques.Page.MybatisPageHelper;
+import cn.siques.Page.PageRequest;
+import cn.siques.Page.PageResult;
+import cn.siques.mango.dao.SysDictTypeMapper;
+import cn.siques.mango.entity.SysDictType;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * <p>

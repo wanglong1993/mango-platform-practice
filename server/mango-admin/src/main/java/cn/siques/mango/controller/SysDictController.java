@@ -1,10 +1,10 @@
 package cn.siques.mango.controller;
 
-import cn.siques.mango.annotation.SaveDate;
 
-import cn.siques.mangocommon.Page.PageRequest;
-import cn.siques.mangocommon.dto.JsonData;
-import cn.siques.mangocore.entity.SysDict;
+
+import cn.siques.Page.PageRequest;
+import cn.siques.dto.JsonData;
+import cn.siques.mango.entity.SysDict;
 import cn.siques.mango.service.SysDictService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class SysDictController {
     @PreAuthorize("hasAuthority('sys:dict:delete')")
     @PostMapping("delete")
     public JsonData delete(@RequestBody List<SysDict> records){
-        return JsonData.buildSuccess(sysDictService.delete(records));
+        return JsonData.buildSuccess(sysDictService.removeByIds(records));
     }
 
     @PreAuthorize("hasAuthority('sys:dict:view')")

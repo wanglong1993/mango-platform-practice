@@ -2,7 +2,7 @@ package cn.siques.mangotask.job;
 
 
 import cn.hutool.core.date.DateUtil;
-import cn.siques.mangocommon.dto.MailDto;
+import cn.siques.dto.MailDto;
 import cn.siques.mangotask.config.Desc;
 import cn.siques.mangotask.entity.JobForm;
 import cn.siques.mangotask.job.base.BaseJob;

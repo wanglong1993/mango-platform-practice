@@ -1,0 +1,6 @@
+[APP_NAME_IS_UNDEFINED:172.20.10.3:0000] 2020-11-18 09:36:19.727 INFO 2056 [] [background-preinit] o.h.validator.internal.util.Version      HV000001: Hibernate Validator 6.0.20.Final
+[APP_NAME_IS_UNDEFINED:172.20.10.3:0000] 2020-11-18 09:36:30.399 INFO 20868 [] [background-preinit] o.h.validator.internal.util.Version      HV000001: Hibernate Validator 6.0.20.Final
+[APP_NAME_IS_UNDEFINED:0.0.0.0:0000] 2020-11-18 09:37:00.148 INFO 11532 [] [background-preinit] o.h.validator.internal.util.Version      HV000001: Hibernate Validator 6.0.20.Final
+[APP_NAME_IS_UNDEFINED:172.20.10.3:0000] 2020-11-18 23:17:52.564 INFO 11824 [] [background-preinit] o.h.validator.internal.util.Version      HV000001: Hibernate Validator 6.0.20.Final
+[APP_NAME_IS_UNDEFINED:172.20.10.3:0000] 2020-11-18 23:26:07.770 INFO 21620 [] [background-preinit] o.h.validator.internal.util.Version      HV000001: Hibernate Validator 6.0.20.Final
+[APP_NAME_IS_UNDEFINED:172.20.10.3:0000] 2020-11-18 23:27:47.937 INFO 24476 [] [background-preinit] o.h.validator.internal.util.Version      HV000001: Hibernate Validator 6.0.20.Final

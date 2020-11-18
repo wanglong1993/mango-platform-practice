@@ -4,10 +4,10 @@ import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.db.Page;
-import cn.siques.mangocommon.Page.PageRequest;
-import cn.siques.mangocommon.dto.JsonData;
+import cn.siques.Page.PageRequest;
+import cn.siques.dto.JsonData;
 
-import cn.siques.mangocommon.dto.MailDto;
+import cn.siques.dto.MailDto;
 import cn.siques.mangotask.entity.JobAndTrigger;
 import cn.siques.mangotask.entity.JobForm;
 import cn.siques.mangotask.service.JobService;
@@ -17,13 +17,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

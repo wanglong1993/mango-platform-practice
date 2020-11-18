@@ -1,13 +1,10 @@
 package cn.siques.mango.service;
 
 
-import cn.siques.mangocommon.Page.PageRequest;
-import cn.siques.mangocommon.Page.PageResult;
-import cn.siques.mangocore.entity.SysDictData;
+import cn.siques.Page.PageRequest;
+import cn.siques.Page.PageResult;
 import com.baomidou.mybatisplus.extension.service.IService;
-import cn.siques.mangocore.entity.SysDictType;
-
-import java.util.List;
+import cn.siques.mango.entity.SysDictType;
 
 /**
  * <p>

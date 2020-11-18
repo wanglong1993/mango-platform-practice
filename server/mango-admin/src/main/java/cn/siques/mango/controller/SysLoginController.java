@@ -8,35 +8,26 @@ import cn.siques.mango.service.SysLoginLogService;
 
 import cn.siques.mango.controller.dto.LoginDto;
 
-import cn.siques.mangocommon.Page.PageRequest;
-import cn.siques.mangocommon.Page.PageResult;
-import cn.siques.mangocommon.dto.JsonData;
-import cn.siques.mangocommon.utils.*;
-import cn.siques.mangocore.entity.SysUser;
+import cn.siques.Page.PageRequest;
+import cn.siques.Page.PageResult;
+import cn.siques.dto.JsonData;
+import cn.siques.utils.*;
+import cn.siques.mango.entity.SysUser;
 import cn.siques.mango.service.SysUserService;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
-import jdk.nashorn.internal.runtime.regexp.JoniRegExp;
-import org.apache.commons.compress.utils.IOUtils;
+
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.http.*;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
-import org.springframework.security.oauth2.provider.OAuth2Request;
-import org.springframework.security.oauth2.provider.OAuth2RequestFactory;
-import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import springfox.documentation.service.OAuth;
-import sun.misc.BASE64Encoder;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -44,8 +35,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -105,7 +94,7 @@ public class SysLoginController {
         } catch (SecurityException e) {
             throw new SecurityException(HttpStatus.UNAUTHORIZED.toString());
         }
-        sysLoginLogService.loginOutLog(username, IPUtils.getIpAddr(request));
+//        sysLoginLogService.loginOutLog(username, IPUtils.getIpAddr(request));
         return JsonData.buildSuccess(1);
     }
 
@@ -146,9 +135,9 @@ public class SysLoginController {
 //      JwtAuthenticationToken token =  SecurityUtils.login(request,username,password,authenticationManager);
         System.out.println(password);
         String accessToken = getAccessToken(username, password);
-            
 
-        JwtAuthenticationToken token = new JwtAuthenticationToken(username, "").setToken("Bearer "+accessToken);
+
+        JwtAuthenticationToken token = new JwtAuthenticationToken (username, "").setToken("Bearer "+accessToken);
         List userInfo = getUserInfo(accessToken);
 
 

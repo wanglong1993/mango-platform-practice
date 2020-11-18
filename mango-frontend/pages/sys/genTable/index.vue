@@ -116,13 +116,13 @@ export default class genTable extends Vue {
       {
         label: '表名',
 
-        prop: 'tablename',
+        prop: 'tableName',
       },
 
       {
         label: '描述',
 
-        prop: 'tablecomment',
+        prop: 'tableComment',
       },
       {
         label: '引擎',
@@ -130,7 +130,7 @@ export default class genTable extends Vue {
       },
       {
         label: '创建时间',
-        prop: 'createtime',
+        prop: 'createTime',
       },
     ],
   }
@@ -141,13 +141,13 @@ export default class genTable extends Vue {
         label: '表名',
         disabled: true,
         autocomplete: 'on',
-        prop: 'tablename',
+        prop: 'tableName',
       },
-      {
-        label: '作者',
-        autocomplete: 'on',
-        prop: 'author',
-      },
+      // {
+      //   label: '作者',
+      //   autocomplete: 'on',
+      //   prop: 'author',
+      // },
       {
         label: '描述',
         autocomplete: 'on',
@@ -191,14 +191,14 @@ export default class genTable extends Vue {
   }
 
   async submit() {
-    const data = { tableName: this.form.tablename, path: this.form.path }
+    const data = { tableName: this.form.tableName, path: this.form.path }
     const res = await this.http.post('pri/codeGen/generate', data, {
       prefix: 'admin',
       responseType: 'arraybuffer',
     })
 
     let blob: any = new Blob([res.data], { type: 'application/zip' })
-    let filename = this.form.tablename + '.zip'
+    let filename = this.form.tableName + '.zip'
     let link = document.createElement('a')
     link.href = URL.createObjectURL(blob)
     link.download = filename

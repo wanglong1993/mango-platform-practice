@@ -1,7 +1,7 @@
 package cn.siques.mangotask.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
-import cn.siques.mangocommon.Page.PageRequest;
+import cn.siques.Page.PageRequest;
 import cn.siques.mangotask.config.Desc;
 import cn.siques.mangotask.entity.JobAndTrigger;
 import cn.siques.mangotask.entity.JobForm;
@@ -9,25 +9,17 @@ import cn.siques.mangotask.job.base.BaseJob;
 import cn.siques.mangotask.mapper.JobMapper;
 import cn.siques.mangotask.service.JobService;
 import cn.siques.mangotask.util.JobUtil;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.ContextLoader;
-import org.springframework.web.context.WebApplicationContext;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**

@@ -3,21 +3,18 @@ package cn.siques.mango.service.impl;
 import cn.siques.mango.annotation.SaveDate;
 import cn.siques.mango.service.SysDeptService;
 
-import cn.siques.mangocommon.Page.MybatisPageHelper;
-import cn.siques.mangocommon.Page.PageRequest;
-import cn.siques.mangocommon.Page.PageResult;
-import cn.siques.mangocommon.utils.SecurityUtils;
-import cn.siques.mangocore.dao.SysDeptMapper;
-import cn.siques.mangocore.entity.SysDept;
+import cn.siques.Page.MybatisPageHelper;
+import cn.siques.Page.PageRequest;
+import cn.siques.Page.PageResult;
+import cn.siques.mango.dao.SysDeptMapper;
+import cn.siques.mango.entity.SysDept;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service

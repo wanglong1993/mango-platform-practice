@@ -1,10 +1,7 @@
 package cn.siques.mango.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;

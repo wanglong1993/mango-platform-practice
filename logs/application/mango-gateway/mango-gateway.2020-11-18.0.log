@@ -1,0 +1,1029 @@
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:31.320 ERROR 20868 [] [main] c.a.cloud.nacos.NacosConfigProperties    create config service error!properties=NacosConfigProperties{serverAddr='null', encode='null', group='DEFAULT_GROUP', prefix='null', fileExtension='properties', timeout=3000, endpoint='null', namespace='null', accessKey='null', secretKey='null', contextPath='null', clusterName='null', name='null', sharedDataids='null', refreshableDataids='null', extConfig=null},e=,
+
+com.alibaba.nacos.api.exception.NacosException: java.lang.reflect.InvocationTargetException
+	at com.alibaba.nacos.api.config.ConfigFactory.createConfigService(ConfigFactory.java:45) ~[nacos-api-1.1.1.jar:na]
+	at com.alibaba.nacos.api.NacosFactory.createConfigService(NacosFactory.java:43) ~[nacos-api-1.1.1.jar:na]
+	at com.alibaba.cloud.nacos.NacosConfigProperties.configServiceInstance(NacosConfigProperties.java:346) ~[spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at com.alibaba.cloud.nacos.client.NacosPropertySourceLocator.locate(NacosPropertySourceLocator.java:63) [spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cloud.bootstrap.config.PropertySourceLocator.locateCollection(PropertySourceLocator.java:52) [spring-cloud-context-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+	at org.springframework.cloud.bootstrap.config.PropertySourceLocator.locateCollection(PropertySourceLocator.java:47) [spring-cloud-context-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+	at org.springframework.cloud.bootstrap.config.PropertySourceBootstrapConfiguration.initialize(PropertySourceBootstrapConfiguration.java:98) [spring-cloud-context-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+	at org.springframework.boot.SpringApplication.applyInitializers(SpringApplication.java:626) [spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.prepareContext(SpringApplication.java:370) [spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:314) [spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) [spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at cn.central.gateway.SiquesGatewayApplication.main(SiquesGatewayApplication.java:14) [classes/:na]
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_241]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_241]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:1.8.0_241]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[na:1.8.0_241]
+	at com.alibaba.nacos.api.config.ConfigFactory.createConfigService(ConfigFactory.java:42) ~[nacos-api-1.1.1.jar:na]
+	... 12 common frames omitted
+Caused by: com.alibaba.nacos.api.exception.NacosException: endpoint is blank
+	at com.alibaba.nacos.client.config.impl.ServerListManager.<init>(ServerListManager.java:154) ~[nacos-client-1.1.1.jar:na]
+	at com.alibaba.nacos.client.config.http.ServerHttpAgent.<init>(ServerHttpAgent.java:244) ~[nacos-client-1.1.1.jar:na]
+	at com.alibaba.nacos.client.config.NacosConfigService.<init>(NacosConfigService.java:83) ~[nacos-client-1.1.1.jar:na]
+	... 17 common frames omitted
+
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:31.320 WARN 20868 [] [main] c.a.c.n.c.NacosPropertySourceLocator     no instance of config service found, can't load config from nacos
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:31.321 INFO 20868 [] [main] c.c.gateway.SiquesGatewayApplication     The following profiles are active: dev
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:31.691 INFO 20868 [] [main] o.s.cloud.context.scope.GenericScope     BeanFactory id=618eaf1f-d4a5-31c5-977c-a38de85fd7fa
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:31.817 INFO 20868 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'org.hibernate.validator.internal.constraintvalidators.bv.notempty.NotEmptyValidatorForCharSequence' of type [org.hibernate.validator.internal.constraintvalidators.bv.notempty.NotEmptyValidatorForCharSequence] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:31.879 INFO 20868 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'org.hibernate.validator.internal.constraintvalidators.bv.NotNullValidator' of type [org.hibernate.validator.internal.constraintvalidators.bv.NotNullValidator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:31.903 INFO 20868 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'spring.cloud.sentinel-com.alibaba.cloud.sentinel.SentinelProperties' of type [com.alibaba.cloud.sentinel.SentinelProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:31.936 INFO 20868 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'com.alibaba.cloud.sentinel.custom.SentinelAutoConfiguration' of type [com.alibaba.cloud.sentinel.custom.SentinelAutoConfiguration$$EnhancerBySpringCGLIB$$1d08f9a1] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:31.941 INFO 20868 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:31.942 INFO 20868 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactiveLoadBalancerConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactiveLoadBalancerConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:31.945 INFO 20868 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'deferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:32.758 INFO 20868 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [After]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:32.758 INFO 20868 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Before]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:32.758 INFO 20868 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Between]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:32.758 INFO 20868 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Cookie]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:32.758 INFO 20868 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Header]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:32.758 INFO 20868 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Host]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:32.758 INFO 20868 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Method]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:32.758 INFO 20868 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Path]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:32.758 INFO 20868 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Query]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:32.758 INFO 20868 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [ReadBodyPredicateFactory]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:32.758 INFO 20868 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [RemoteAddr]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:32.758 INFO 20868 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Weight]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:32.758 INFO 20868 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [CloudFoundryRouteService]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:32.786 WARN 20868 [] [main] c.n.c.sources.URLConfigurationSource     No URLs will be polled as dynamic configuration sources.
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:32.786 INFO 20868 [] [main] c.n.c.sources.URLConfigurationSource     To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:32.789 WARN 20868 [] [main] c.n.c.sources.URLConfigurationSource     No URLs will be polled as dynamic configuration sources.
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:32.789 INFO 20868 [] [main] c.n.c.sources.URLConfigurationSource     To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:34.434 INFO 20868 [] [main] c.a.c.s.SentinelWebFluxAutoConfiguration [Sentinel Starter] register Sentinel SentinelWebFluxFilter
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:34.449 ERROR 20868 [] [main] c.a.cloud.nacos.NacosConfigProperties    create config service error!properties=NacosConfigProperties{serverAddr='null', encode='null', group='DEFAULT_GROUP', prefix='null', fileExtension='properties', timeout=3000, endpoint='null', namespace='null', accessKey='null', secretKey='null', contextPath='null', clusterName='null', name='null', sharedDataids='null', refreshableDataids='null', extConfig=null},e=,
+
+com.alibaba.nacos.api.exception.NacosException: java.lang.reflect.InvocationTargetException
+	at com.alibaba.nacos.api.config.ConfigFactory.createConfigService(ConfigFactory.java:45) ~[nacos-api-1.1.1.jar:na]
+	at com.alibaba.nacos.api.NacosFactory.createConfigService(NacosFactory.java:43) ~[nacos-api-1.1.1.jar:na]
+	at com.alibaba.cloud.nacos.NacosConfigProperties.configServiceInstance(NacosConfigProperties.java:346) ~[spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at com.alibaba.cloud.nacos.NacosConfigAutoConfiguration.nacosContextRefresher(NacosConfigAutoConfiguration.java:64) [spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at com.alibaba.cloud.nacos.NacosConfigAutoConfiguration$$EnhancerBySpringCGLIB$$21a739ac.CGLIB$nacosContextRefresher$3(<generated>) [spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at com.alibaba.cloud.nacos.NacosConfigAutoConfiguration$$EnhancerBySpringCGLIB$$21a739ac$$FastClassBySpringCGLIB$$228f9c73.invoke(<generated>) [spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244) [spring-core-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331) [spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at com.alibaba.cloud.nacos.NacosConfigAutoConfiguration$$EnhancerBySpringCGLIB$$21a739ac.nacosContextRefresher(<generated>) [spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_241]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_241]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_241]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_241]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:650) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:635) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1336) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1176) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:556) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:897) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:879) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:551) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.refresh(ReactiveWebServerApplicationContext.java:66) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:747) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at cn.central.gateway.SiquesGatewayApplication.main(SiquesGatewayApplication.java:14) ~[classes/:na]
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_241]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_241]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:1.8.0_241]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[na:1.8.0_241]
+	at com.alibaba.nacos.api.config.ConfigFactory.createConfigService(ConfigFactory.java:42) ~[nacos-api-1.1.1.jar:na]
+	... 33 common frames omitted
+Caused by: com.alibaba.nacos.api.exception.NacosException: endpoint is blank
+	at com.alibaba.nacos.client.config.impl.ServerListManager.<init>(ServerListManager.java:154) ~[nacos-client-1.1.1.jar:na]
+	at com.alibaba.nacos.client.config.http.ServerHttpAgent.<init>(ServerHttpAgent.java:244) ~[nacos-client-1.1.1.jar:na]
+	at com.alibaba.nacos.client.config.NacosConfigService.<init>(NacosConfigService.java:83) ~[nacos-client-1.1.1.jar:na]
+	... 38 common frames omitted
+
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:34.466 INFO 20868 [] [main] o.s.s.c.ThreadPoolTaskScheduler          Initializing ExecutorService
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:35.251 WARN 20868 [] [main] c.a.c.s.d.converter.SentinelConverter    converter can not convert rules because source is empty
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:35.850 INFO 20868 [] [main] o.s.b.web.embedded.netty.NettyWebServer  Netty started on port(s): 9001
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:37.200 INFO 20868 [] [main] c.a.c.n.registry.NacosServiceRegistry    nacos registry, mango-gateway 172.20.10.3:9001 register finished
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:36:37.208 INFO 20868 [] [main] c.c.gateway.SiquesGatewayApplication     Started SiquesGatewayApplication in 7.803 seconds (JVM running for 8.866)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:37:29.522 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:37:30.251 INFO 20868 [] [reactor-http-nio-2] c.netflix.config.ChainedDynamicProperty  Flipping property: mango-admin.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:37:30.265 INFO 20868 [] [reactor-http-nio-2] c.netflix.loadbalancer.BaseLoadBalancer  Client: mango-admin instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=mango-admin,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:37:30.271 INFO 20868 [] [reactor-http-nio-2] c.n.l.DynamicServerListLoadBalancer      Using serverListUpdater PollingServerListUpdater
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:37:30.780 INFO 20868 [] [reactor-http-nio-2] c.netflix.config.ChainedDynamicProperty  Flipping property: mango-admin.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:37:30.781 INFO 20868 [] [reactor-http-nio-2] c.n.l.DynamicServerListLoadBalancer      DynamicServerListLoadBalancer for client mango-admin initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=mango-admin,current list of Servers=[172.20.10.3:8083],Load balancer stats=Zone stats: {unknown=[Zone:unknown;	Instance count:1;	Active connections count: 0;	Circuit breaker tripped count: 0;	Active connections per server: 0.0;]
+},Server stats: [[Server:172.20.10.3:8083;	Zone:UNKNOWN;	Total Requests:0;	Successive connection failure:0;	Total blackout seconds:0;	Last connection made:Thu Jan 01 08:00:00 CST 1970;	First connection made: Thu Jan 01 08:00:00 CST 1970;	Active Connections:0;	total failure count in last (1000) msecs:0;	average resp time:0.0;	90 percentile resp time:0.0;	95 percentile resp time:0.0;	min resp time:0.0;	max resp time:0.0;	stddev resp time:0.0]
+]}ServerList:com.alibaba.cloud.nacos.ribbon.NacosServerList@631db455
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:37:31.276 INFO 20868 [] [PollingServerListUpdater-0] c.netflix.config.ChainedDynamicProperty  Flipping property: mango-admin.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:37:35.303 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 09:37:39.638 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:00:14.106 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:01:58.717 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:02:06.563 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:02:06.569 DEBUG 20868 [] [reactor-http-nio-8] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:02:07.664 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:02:07.665 DEBUG 20868 [] [reactor-http-nio-8] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:02:07.706 DEBUG 20868 [] [reactor-http-nio-8] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:02:08.739 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:03:12.711 DEBUG 20868 [] [reactor-http-nio-8] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:03:12.711 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:03:15.306 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:03:15.675 DEBUG 20868 [] [reactor-http-nio-8] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:03:26.973 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:03:29.638 DEBUG 20868 [] [reactor-http-nio-8] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:03:30.906 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:03:32.880 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:03:34.398 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:03:38.421 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:03:41.341 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:03:41.391 DEBUG 20868 [] [reactor-http-nio-8] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:03:42.298 DEBUG 20868 [] [reactor-http-nio-8] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:04:03.927 DEBUG 20868 [] [reactor-http-nio-8] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:04:06.999 DEBUG 20868 [] [reactor-http-nio-8] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:04:09.996 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:04:16.365 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:04:19.869 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:04:28.622 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:04:42.547 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:05:04.117 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:05:05.611 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:05:08.094 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:05:08.098 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:05:09.326 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:05:09.326 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:05:09.389 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:05:14.682 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:16:31.141 DEBUG 20868 [] [reactor-http-nio-8] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:16:31.141 DEBUG 20868 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:16:31.718 DEBUG 20868 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:38:39.709 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:38:39.709 DEBUG 20868 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:38:39.886 DEBUG 20868 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:38:40.535 DEBUG 20868 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:38:41.483 DEBUG 20868 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:38:41.484 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:38:41.577 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:53:37.956 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:53:37.958 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:53:38.027 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:53:38.124 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:53:38.984 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:53:40.099 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:53:40.099 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:53:43.066 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:53:43.506 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:53:55.500 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:53:56.701 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:53:56.704 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:53:58.926 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:53:58.929 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:54:03.049 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:54:03.049 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:54:03.196 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:54:06.689 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:54:06.691 DEBUG 20868 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:54:11.529 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:54:11.529 DEBUG 20868 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:54:11.678 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:54:15.855 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:54:15.856 DEBUG 20868 [] [reactor-http-nio-8] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:54:18.980 DEBUG 20868 [] [reactor-http-nio-8] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 10:54:21.528 DEBUG 20868 [] [reactor-http-nio-8] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 11:09:06.519 DEBUG 20868 [] [reactor-http-nio-10] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 11:09:06.694 DEBUG 20868 [] [reactor-http-nio-10] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 11:09:07.890 DEBUG 20868 [] [reactor-http-nio-10] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 11:09:09.115 DEBUG 20868 [] [reactor-http-nio-10] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 11:09:09.115 DEBUG 20868 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 11:09:09.292 DEBUG 20868 [] [reactor-http-nio-10] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 11:53:19.896 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 11:53:19.896 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 11:53:19.975 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 11:53:20.078 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 11:53:21.840 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 11:53:21.840 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 11:53:23.002 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 11:53:24.089 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:04:25.581 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:04:25.748 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:04:26.514 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:04:27.107 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:04:27.110 DEBUG 20868 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:04:28.071 DEBUG 20868 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:04:28.072 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:04:28.158 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:10:59.384 DEBUG 20868 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:10:59.384 DEBUG 20868 [] [reactor-http-nio-10] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:10:59.475 DEBUG 20868 [] [reactor-http-nio-10] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:10:59.569 DEBUG 20868 [] [reactor-http-nio-10] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:11:00.653 DEBUG 20868 [] [reactor-http-nio-10] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:11:00.954 DEBUG 20868 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:11:00.955 DEBUG 20868 [] [reactor-http-nio-10] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:11:01.599 DEBUG 20868 [] [reactor-http-nio-10] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:18:13.718 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:18:13.875 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:18:14.946 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:18:15.970 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:18:15.975 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:18:17.049 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:18:17.049 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:18:17.118 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:25:18.900 DEBUG 20868 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:25:18.900 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:25:18.975 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:25:19.091 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:25:20.055 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:25:20.580 DEBUG 20868 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:25:20.580 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:25:21.330 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:43:51.923 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:43:52.091 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 12:43:53.173 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 13:10:10.114 DEBUG 20868 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 13:10:10.263 DEBUG 20868 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 13:10:23.329 DEBUG 20868 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 13:10:25.430 DEBUG 20868 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 13:10:25.433 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 13:10:25.637 DEBUG 20868 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 13:10:26.373 DEBUG 20868 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 13:10:26.373 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 14:38:07.856 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 14:38:07.856 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 14:38:07.917 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 14:38:08.032 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 14:38:09.469 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 14:38:09.469 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 14:38:21.037 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 14:38:46.511 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 14:53:21.194 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 14:53:21.331 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 14:53:29.116 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 14:53:30.374 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 14:53:30.377 DEBUG 20868 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 14:53:30.587 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 14:57:32.767 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 14:57:32.769 DEBUG 20868 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 14:57:32.898 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 14:57:32.907 DEBUG 20868 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:09:03.301 DEBUG 20868 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:09:03.301 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:29:50.187 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:29:50.367 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:29:56.355 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:29:56.359 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:29:56.438 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:29:56.556 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:33:06.107 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:33:12.438 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:33:12.618 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:33:25.552 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:33:25.554 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:33:26.512 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:34:53.136 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:34:53.716 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:34:56.750 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:34:57.942 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:34:57.944 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:36:47.255 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:36:47.256 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:36:47.414 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 15:36:48.289 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:02:59.830 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:03:00.009 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:09:56.871 DEBUG 20868 [] [reactor-http-nio-8] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:09:57.039 DEBUG 20868 [] [reactor-http-nio-8] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:10:05.410 DEBUG 20868 [] [reactor-http-nio-8] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:10:06.338 DEBUG 20868 [] [reactor-http-nio-8] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:10:06.342 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:10:07.647 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:10:07.647 DEBUG 20868 [] [reactor-http-nio-8] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:10:07.733 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:17:16.224 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:17:16.224 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:17:16.299 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:17:16.398 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:17:17.570 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:21:52.594 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:21:53.809 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:21:53.810 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:36:22.966 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:36:23.140 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:36:24.475 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:36:24.485 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:36:24.664 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:36:40.557 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:36:40.559 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:36:40.631 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:36:40.731 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:36:42.882 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:36:42.882 DEBUG 20868 [] [reactor-http-nio-4] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 16:37:44.669 DEBUG 20868 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:36:07.109 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:36:15.902 DEBUG 20868 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:36:22.133 DEBUG 20868 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:37:42.483 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:37:49.915 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:37:51.126 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:37:53.538 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:37:53.540 DEBUG 20868 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:40:46.263 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:40:46.408 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:40:50.699 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:40:51.934 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:48:45.528 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:48:47.081 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:48:47.990 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:48:48.713 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:51:47.380 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:52:10.062 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:52:11.219 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:53:28.874 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:53:29.418 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:53:33.416 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:53:33.604 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:53:45.696 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:53:45.798 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:53:50.121 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:53:50.302 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:54:14.339 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:54:14.383 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:54:21.000 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:54:21.038 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:56:32.791 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:56:33.306 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:56:38.965 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:56:39.140 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:56:54.097 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:56:54.101 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:56:54.148 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:57:02.736 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:57:02.738 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:57:17.262 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:58:06.204 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:58:06.205 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:58:06.371 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:58:07.421 WARN 20868 [] [reactor-http-nio-1] r.netty.http.client.HttpClientConnect    [id: 0xfb6e22dd, L:/172.20.10.3:64674 - R:/172.20.10.3:8083] The connection observed an error
+
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method) ~[na:1.8.0_241]
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43) ~[na:1.8.0_241]
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223) ~[na:1.8.0_241]
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192) ~[na:1.8.0_241]
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:380) ~[na:1.8.0_241]
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:253) ~[netty-buffer-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1133) ~[netty-buffer-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:350) ~[netty-transport-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151) ~[netty-transport-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:714) [netty-transport-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:650) [netty-transport-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:576) [netty-transport-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:493) [netty-transport-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) [netty-common-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [netty-common-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-common-4.1.52.Final.jar:4.1.52.Final]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_241]
+
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:58:07.563 ERROR 20868 [] [reactor-http-nio-1] a.w.r.e.AbstractErrorWebExceptionHandler [5d700d9e-452]  500 Server Error for HTTP POST "/admin/api/sys/v1/pri/codeGen/findPage"
+
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method) ~[na:1.8.0_241]
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	|_ checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	|_ checkpoint ⇢ com.alibaba.csp.sentinel.adapter.spring.webflux.SentinelWebFluxFilter [DefaultWebFilterChain]
+	|_ checkpoint ⇢ HTTP POST "/admin/api/sys/v1/pri/codeGen/findPage" [ExceptionHandlingWebHandler]
+Stack trace:
+		at sun.nio.ch.SocketDispatcher.read0(Native Method) ~[na:1.8.0_241]
+		at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43) ~[na:1.8.0_241]
+		at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223) ~[na:1.8.0_241]
+		at sun.nio.ch.IOUtil.read(IOUtil.java:192) ~[na:1.8.0_241]
+		at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:380) ~[na:1.8.0_241]
+		at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:253) ~[netty-buffer-4.1.52.Final.jar:4.1.52.Final]
+		at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1133) ~[netty-buffer-4.1.52.Final.jar:4.1.52.Final]
+		at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:350) ~[netty-transport-4.1.52.Final.jar:4.1.52.Final]
+		at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151) ~[netty-transport-4.1.52.Final.jar:4.1.52.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:714) ~[netty-transport-4.1.52.Final.jar:4.1.52.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:650) ~[netty-transport-4.1.52.Final.jar:4.1.52.Final]
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:576) ~[netty-transport-4.1.52.Final.jar:4.1.52.Final]
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:493) ~[netty-transport-4.1.52.Final.jar:4.1.52.Final]
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) ~[netty-common-4.1.52.Final.jar:4.1.52.Final]
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.1.52.Final.jar:4.1.52.Final]
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.1.52.Final.jar:4.1.52.Final]
+		at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_241]
+
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:58:09.528 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:58:09.529 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:58:11.534 ERROR 20868 [] [reactor-http-nio-1] a.w.r.e.AbstractErrorWebExceptionHandler [5d700d9e-457]  500 Server Error for HTTP POST "/admin/api/sys/v1/pri/codeGen/findPage"
+
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: /172.20.10.3:8083
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	|_ checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	|_ checkpoint ⇢ com.alibaba.csp.sentinel.adapter.spring.webflux.SentinelWebFluxFilter [DefaultWebFilterChain]
+	|_ checkpoint ⇢ HTTP POST "/admin/api/sys/v1/pri/codeGen/findPage" [ExceptionHandlingWebHandler]
+Stack trace:
+Caused by: java.net.ConnectException: Connection refused: no further information
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method) ~[na:1.8.0_241]
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717) ~[na:1.8.0_241]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:330) ~[netty-transport-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:334) ~[netty-transport-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:702) ~[netty-transport-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:650) ~[netty-transport-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:576) ~[netty-transport-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:493) ~[netty-transport-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) ~[netty-common-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.1.52.Final.jar:4.1.52.Final]
+	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_241]
+
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:58:11.538 ERROR 20868 [] [reactor-http-nio-2] a.w.r.e.AbstractErrorWebExceptionHandler [e563826d-458]  500 Server Error for HTTP GET "/admin/api/sys/v1/pri/codeGen/dblist"
+
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: /172.20.10.3:8083
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	|_ checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	|_ checkpoint ⇢ com.alibaba.csp.sentinel.adapter.spring.webflux.SentinelWebFluxFilter [DefaultWebFilterChain]
+	|_ checkpoint ⇢ HTTP GET "/admin/api/sys/v1/pri/codeGen/dblist" [ExceptionHandlingWebHandler]
+Stack trace:
+Caused by: java.net.ConnectException: Connection refused: no further information
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method) ~[na:1.8.0_241]
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717) ~[na:1.8.0_241]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:330) ~[netty-transport-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:334) ~[netty-transport-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:702) ~[netty-transport-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:650) ~[netty-transport-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:576) ~[netty-transport-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:493) ~[netty-transport-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) ~[netty-common-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.1.52.Final.jar:4.1.52.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.1.52.Final.jar:4.1.52.Final]
+	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_241]
+
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:59:29.911 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:59:30.741 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:59:30.744 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:59:34.475 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:59:36.152 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:59:38.372 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 17:59:58.063 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:00:00.907 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:00:03.856 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:00:05.514 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:00:09.401 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:00:23.987 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:00:27.287 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:01:48.502 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:01:48.504 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:01:48.663 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:01:54.010 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:01:54.830 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:01:55.615 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:01:56.494 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:01:57.188 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:02:21.818 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:02:21.820 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:02:21.985 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:02:24.199 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:02:51.826 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:03:46.104 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:03:59.653 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:04:00.276 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:04:19.542 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:04:21.016 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:04:21.018 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:04:21.157 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:04:23.539 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:04:23.823 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:04:24.613 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:04:32.186 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:04:34.396 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:04:35.366 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:04:38.334 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:04:39.044 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:04:46.855 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:04:46.855 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:04:52.676 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:04:52.677 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:04:53.982 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:04:53.982 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:04:54.042 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:04:55.945 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 18:04:56.142 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:37:47.572 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.17.43.193&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:37:47.574 DEBUG 20868 [] [reactor-http-nio-10] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.17.43.193&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:37:47.703 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.17.43.193&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:38:30.953 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:38:30.957 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:38:31.107 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:38:33.749 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:38:33.750 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:38:33.876 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:39:51.318 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:40:41.959 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:40:41.961 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:40:42.863 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:40:50.871 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:42:11.316 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:50:48.523 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:50:48.524 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:50:48.694 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:50:50.078 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:50:50.217 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:50:50.974 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:50:51.720 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:50:53.632 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:50:54.419 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:50:58.895 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:50:59.879 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:51:53.427 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:51:53.428 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:51:53.600 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:51:57.219 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:51:58.141 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:52:09.804 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:52:09.805 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:52:09.960 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:52:11.541 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:52:12.671 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 21:52:15.170 DEBUG 20868 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:00:34.014 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:00:34.014 DEBUG 20868 [] [reactor-http-nio-10] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:00:34.161 DEBUG 20868 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:01:02.658 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:01:03.858 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:01:08.701 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:04:34.289 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:06:41.777 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:07:51.079 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:07:51.082 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:07:51.253 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:07:54.347 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:08:01.889 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:11:26.889 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:11:26.890 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:11:27.059 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:11:30.253 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:11:30.255 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:11:30.429 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:11:40.466 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:11:40.468 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:11:40.629 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:11:44.949 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:11:44.957 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:11:45.695 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:11:55.169 DEBUG 20868 [] [reactor-http-nio-12] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:11:55.172 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:11:55.319 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:11:57.749 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:12:02.202 DEBUG 20868 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:15:02.950 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:15:06.830 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:15:06.832 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:15:07.361 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:15:38.726 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:15:39.223 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:15:58.127 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:15:58.130 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:15:58.182 INFO 20868 [] [reactor-http-nio-2] c.netflix.config.ChainedDynamicProperty  Flipping property: mango-task.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:15:58.185 INFO 20868 [] [reactor-http-nio-2] c.netflix.loadbalancer.BaseLoadBalancer  Client: mango-task instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=mango-task,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:15:58.187 INFO 20868 [] [reactor-http-nio-2] c.n.l.DynamicServerListLoadBalancer      Using serverListUpdater PollingServerListUpdater
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:15:58.394 INFO 20868 [] [reactor-http-nio-2] c.n.l.DynamicServerListLoadBalancer      DynamicServerListLoadBalancer for client mango-task initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=mango-task,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:com.alibaba.cloud.nacos.ribbon.NacosServerList@4813f644
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:15:59.076 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:15:59.076 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:16:20.761 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:16:20.762 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:16:20.931 DEBUG 20868 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:16:24.571 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:49:57.704 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:49:59.593 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 22:50:20.388 DEBUG 20868 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:08:45.308 DEBUG 20868 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:08:45.555 DEBUG 20868 [] [reactor-http-nio-8] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:09:01.340 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:10:06.788 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:12:53.267 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:13:43.460 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:13:51.430 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:14:06.179 DEBUG 20868 [] [reactor-http-nio-9] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:44.144 DEBUG 20868 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=UNKNOWN&operatingSystem=UNKNOWN
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:53.468 ERROR 11824 [] [main] c.a.cloud.nacos.NacosConfigProperties    create config service error!properties=NacosConfigProperties{serverAddr='null', encode='null', group='DEFAULT_GROUP', prefix='null', fileExtension='properties', timeout=3000, endpoint='null', namespace='null', accessKey='null', secretKey='null', contextPath='null', clusterName='null', name='null', sharedDataids='null', refreshableDataids='null', extConfig=null},e=,
+
+com.alibaba.nacos.api.exception.NacosException: java.lang.reflect.InvocationTargetException
+	at com.alibaba.nacos.api.config.ConfigFactory.createConfigService(ConfigFactory.java:45) ~[nacos-api-1.1.1.jar:na]
+	at com.alibaba.nacos.api.NacosFactory.createConfigService(NacosFactory.java:43) ~[nacos-api-1.1.1.jar:na]
+	at com.alibaba.cloud.nacos.NacosConfigProperties.configServiceInstance(NacosConfigProperties.java:346) ~[spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at com.alibaba.cloud.nacos.client.NacosPropertySourceLocator.locate(NacosPropertySourceLocator.java:63) [spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cloud.bootstrap.config.PropertySourceLocator.locateCollection(PropertySourceLocator.java:52) [spring-cloud-context-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+	at org.springframework.cloud.bootstrap.config.PropertySourceLocator.locateCollection(PropertySourceLocator.java:47) [spring-cloud-context-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+	at org.springframework.cloud.bootstrap.config.PropertySourceBootstrapConfiguration.initialize(PropertySourceBootstrapConfiguration.java:98) [spring-cloud-context-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+	at org.springframework.boot.SpringApplication.applyInitializers(SpringApplication.java:626) [spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.prepareContext(SpringApplication.java:370) [spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:314) [spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) [spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at cn.central.gateway.SiquesGatewayApplication.main(SiquesGatewayApplication.java:14) [classes/:na]
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_241]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_241]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:1.8.0_241]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[na:1.8.0_241]
+	at com.alibaba.nacos.api.config.ConfigFactory.createConfigService(ConfigFactory.java:42) ~[nacos-api-1.1.1.jar:na]
+	... 12 common frames omitted
+Caused by: com.alibaba.nacos.api.exception.NacosException: endpoint is blank
+	at com.alibaba.nacos.client.config.impl.ServerListManager.<init>(ServerListManager.java:154) ~[nacos-client-1.1.1.jar:na]
+	at com.alibaba.nacos.client.config.http.ServerHttpAgent.<init>(ServerHttpAgent.java:244) ~[nacos-client-1.1.1.jar:na]
+	at com.alibaba.nacos.client.config.NacosConfigService.<init>(NacosConfigService.java:83) ~[nacos-client-1.1.1.jar:na]
+	... 17 common frames omitted
+
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:53.468 WARN 11824 [] [main] c.a.c.n.c.NacosPropertySourceLocator     no instance of config service found, can't load config from nacos
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:53.470 INFO 11824 [] [main] c.c.gateway.SiquesGatewayApplication     The following profiles are active: dev
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:53.843 INFO 11824 [] [main] o.s.cloud.context.scope.GenericScope     BeanFactory id=618eaf1f-d4a5-31c5-977c-a38de85fd7fa
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:53.969 INFO 11824 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'org.hibernate.validator.internal.constraintvalidators.bv.notempty.NotEmptyValidatorForCharSequence' of type [org.hibernate.validator.internal.constraintvalidators.bv.notempty.NotEmptyValidatorForCharSequence] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.032 INFO 11824 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'org.hibernate.validator.internal.constraintvalidators.bv.NotNullValidator' of type [org.hibernate.validator.internal.constraintvalidators.bv.NotNullValidator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.054 INFO 11824 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'spring.cloud.sentinel-com.alibaba.cloud.sentinel.SentinelProperties' of type [com.alibaba.cloud.sentinel.SentinelProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.088 INFO 11824 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'com.alibaba.cloud.sentinel.custom.SentinelAutoConfiguration' of type [com.alibaba.cloud.sentinel.custom.SentinelAutoConfiguration$$EnhancerBySpringCGLIB$$1d08f9a1] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.092 INFO 11824 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.093 INFO 11824 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactiveLoadBalancerConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactiveLoadBalancerConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.096 INFO 11824 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'deferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.913 INFO 11824 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [After]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.913 INFO 11824 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Before]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.913 INFO 11824 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Between]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.913 INFO 11824 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Cookie]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.913 INFO 11824 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Header]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.913 INFO 11824 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Host]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.913 INFO 11824 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Method]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.913 INFO 11824 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Path]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.913 INFO 11824 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Query]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.913 INFO 11824 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [ReadBodyPredicateFactory]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.914 INFO 11824 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [RemoteAddr]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.914 INFO 11824 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Weight]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.914 INFO 11824 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [CloudFoundryRouteService]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.942 WARN 11824 [] [main] c.n.c.sources.URLConfigurationSource     No URLs will be polled as dynamic configuration sources.
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.942 INFO 11824 [] [main] c.n.c.sources.URLConfigurationSource     To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.945 WARN 11824 [] [main] c.n.c.sources.URLConfigurationSource     No URLs will be polled as dynamic configuration sources.
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:54.945 INFO 11824 [] [main] c.n.c.sources.URLConfigurationSource     To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:57.036 INFO 11824 [] [main] c.a.c.s.SentinelWebFluxAutoConfiguration [Sentinel Starter] register Sentinel SentinelWebFluxFilter
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:57.072 ERROR 11824 [] [main] c.a.cloud.nacos.NacosConfigProperties    create config service error!properties=NacosConfigProperties{serverAddr='null', encode='null', group='DEFAULT_GROUP', prefix='null', fileExtension='properties', timeout=3000, endpoint='null', namespace='null', accessKey='null', secretKey='null', contextPath='null', clusterName='null', name='null', sharedDataids='null', refreshableDataids='null', extConfig=null},e=,
+
+com.alibaba.nacos.api.exception.NacosException: java.lang.reflect.InvocationTargetException
+	at com.alibaba.nacos.api.config.ConfigFactory.createConfigService(ConfigFactory.java:45) ~[nacos-api-1.1.1.jar:na]
+	at com.alibaba.nacos.api.NacosFactory.createConfigService(NacosFactory.java:43) ~[nacos-api-1.1.1.jar:na]
+	at com.alibaba.cloud.nacos.NacosConfigProperties.configServiceInstance(NacosConfigProperties.java:346) ~[spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at com.alibaba.cloud.nacos.NacosConfigAutoConfiguration.nacosContextRefresher(NacosConfigAutoConfiguration.java:64) [spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at com.alibaba.cloud.nacos.NacosConfigAutoConfiguration$$EnhancerBySpringCGLIB$$21a739ac.CGLIB$nacosContextRefresher$2(<generated>) [spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at com.alibaba.cloud.nacos.NacosConfigAutoConfiguration$$EnhancerBySpringCGLIB$$21a739ac$$FastClassBySpringCGLIB$$228f9c73.invoke(<generated>) [spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244) [spring-core-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331) [spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at com.alibaba.cloud.nacos.NacosConfigAutoConfiguration$$EnhancerBySpringCGLIB$$21a739ac.nacosContextRefresher(<generated>) [spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_241]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_241]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_241]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_241]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:650) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:635) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1336) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1176) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:556) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:897) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:879) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:551) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.refresh(ReactiveWebServerApplicationContext.java:66) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:747) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at cn.central.gateway.SiquesGatewayApplication.main(SiquesGatewayApplication.java:14) ~[classes/:na]
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_241]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_241]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:1.8.0_241]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[na:1.8.0_241]
+	at com.alibaba.nacos.api.config.ConfigFactory.createConfigService(ConfigFactory.java:42) ~[nacos-api-1.1.1.jar:na]
+	... 33 common frames omitted
+Caused by: com.alibaba.nacos.api.exception.NacosException: endpoint is blank
+	at com.alibaba.nacos.client.config.impl.ServerListManager.<init>(ServerListManager.java:154) ~[nacos-client-1.1.1.jar:na]
+	at com.alibaba.nacos.client.config.http.ServerHttpAgent.<init>(ServerHttpAgent.java:244) ~[nacos-client-1.1.1.jar:na]
+	at com.alibaba.nacos.client.config.NacosConfigService.<init>(NacosConfigService.java:83) ~[nacos-client-1.1.1.jar:na]
+	... 38 common frames omitted
+
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:57.101 INFO 11824 [] [main] o.s.s.c.ThreadPoolTaskScheduler          Initializing ExecutorService
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:58.231 WARN 11824 [] [main] c.a.c.s.d.converter.SentinelConverter    converter can not convert rules because source is empty
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:17:59.024 INFO 11824 [] [main] o.s.b.web.embedded.netty.NettyWebServer  Netty started on port(s): 9001
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:18:00.499 INFO 11824 [] [main] c.a.c.n.registry.NacosServiceRegistry    nacos registry, mango-gateway 172.20.10.3:9001 register finished
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:18:00.508 INFO 11824 [] [main] c.c.gateway.SiquesGatewayApplication     Started SiquesGatewayApplication in 8.998 seconds (JVM running for 9.986)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:18:58.260 DEBUG 11824 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=UNKNOWN&operatingSystem=UNKNOWN
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:18:58.918 INFO 11824 [] [reactor-http-nio-3] c.netflix.config.ChainedDynamicProperty  Flipping property: mango-admin.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:18:58.929 INFO 11824 [] [reactor-http-nio-3] c.netflix.loadbalancer.BaseLoadBalancer  Client: mango-admin instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=mango-admin,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:18:58.933 INFO 11824 [] [reactor-http-nio-3] c.n.l.DynamicServerListLoadBalancer      Using serverListUpdater PollingServerListUpdater
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:18:59.105 INFO 11824 [] [reactor-http-nio-3] c.netflix.config.ChainedDynamicProperty  Flipping property: mango-admin.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:18:59.106 INFO 11824 [] [reactor-http-nio-3] c.n.l.DynamicServerListLoadBalancer      DynamicServerListLoadBalancer for client mango-admin initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=mango-admin,current list of Servers=[172.20.10.3:8083],Load balancer stats=Zone stats: {unknown=[Zone:unknown;	Instance count:1;	Active connections count: 0;	Circuit breaker tripped count: 0;	Active connections per server: 0.0;]
+},Server stats: [[Server:172.20.10.3:8083;	Zone:UNKNOWN;	Total Requests:0;	Successive connection failure:0;	Total blackout seconds:0;	Last connection made:Thu Jan 01 08:00:00 CST 1970;	First connection made: Thu Jan 01 08:00:00 CST 1970;	Active Connections:0;	total failure count in last (1000) msecs:0;	average resp time:0.0;	90 percentile resp time:0.0;	95 percentile resp time:0.0;	min resp time:0.0;	max resp time:0.0;	stddev resp time:0.0]
+]}ServerList:com.alibaba.cloud.nacos.ribbon.NacosServerList@6a62e79b
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:18:59.936 INFO 11824 [] [PollingServerListUpdater-0] c.netflix.config.ChainedDynamicProperty  Flipping property: mango-admin.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:19:13.780 DEBUG 11824 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=UNKNOWN&operatingSystem=UNKNOWN
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:19:26.540 DEBUG 11824 [] [reactor-http-nio-3] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=UNKNOWN&operatingSystem=UNKNOWN
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:19:37.555 DEBUG 11824 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:20:26.077 DEBUG 11824 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:22:13.860 DEBUG 11824 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:22:21.057 DEBUG 11824 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:08.760 ERROR 21620 [] [main] c.a.cloud.nacos.NacosConfigProperties    create config service error!properties=NacosConfigProperties{serverAddr='null', encode='null', group='DEFAULT_GROUP', prefix='null', fileExtension='properties', timeout=3000, endpoint='null', namespace='null', accessKey='null', secretKey='null', contextPath='null', clusterName='null', name='null', sharedDataids='null', refreshableDataids='null', extConfig=null},e=,
+
+com.alibaba.nacos.api.exception.NacosException: java.lang.reflect.InvocationTargetException
+	at com.alibaba.nacos.api.config.ConfigFactory.createConfigService(ConfigFactory.java:45) ~[nacos-api-1.1.1.jar:na]
+	at com.alibaba.nacos.api.NacosFactory.createConfigService(NacosFactory.java:43) ~[nacos-api-1.1.1.jar:na]
+	at com.alibaba.cloud.nacos.NacosConfigProperties.configServiceInstance(NacosConfigProperties.java:346) ~[spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at com.alibaba.cloud.nacos.client.NacosPropertySourceLocator.locate(NacosPropertySourceLocator.java:63) [spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cloud.bootstrap.config.PropertySourceLocator.locateCollection(PropertySourceLocator.java:52) [spring-cloud-context-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+	at org.springframework.cloud.bootstrap.config.PropertySourceLocator.locateCollection(PropertySourceLocator.java:47) [spring-cloud-context-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+	at org.springframework.cloud.bootstrap.config.PropertySourceBootstrapConfiguration.initialize(PropertySourceBootstrapConfiguration.java:98) [spring-cloud-context-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+	at org.springframework.boot.SpringApplication.applyInitializers(SpringApplication.java:626) [spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.prepareContext(SpringApplication.java:370) [spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:314) [spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) [spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at cn.central.gateway.SiquesGatewayApplication.main(SiquesGatewayApplication.java:14) [classes/:na]
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_241]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_241]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:1.8.0_241]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[na:1.8.0_241]
+	at com.alibaba.nacos.api.config.ConfigFactory.createConfigService(ConfigFactory.java:42) ~[nacos-api-1.1.1.jar:na]
+	... 12 common frames omitted
+Caused by: com.alibaba.nacos.api.exception.NacosException: endpoint is blank
+	at com.alibaba.nacos.client.config.impl.ServerListManager.<init>(ServerListManager.java:154) ~[nacos-client-1.1.1.jar:na]
+	at com.alibaba.nacos.client.config.http.ServerHttpAgent.<init>(ServerHttpAgent.java:244) ~[nacos-client-1.1.1.jar:na]
+	at com.alibaba.nacos.client.config.NacosConfigService.<init>(NacosConfigService.java:83) ~[nacos-client-1.1.1.jar:na]
+	... 17 common frames omitted
+
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:08.760 WARN 21620 [] [main] c.a.c.n.c.NacosPropertySourceLocator     no instance of config service found, can't load config from nacos
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:08.762 INFO 21620 [] [main] c.c.gateway.SiquesGatewayApplication     The following profiles are active: dev
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:09.150 INFO 21620 [] [main] o.s.cloud.context.scope.GenericScope     BeanFactory id=618eaf1f-d4a5-31c5-977c-a38de85fd7fa
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:09.297 INFO 21620 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'org.hibernate.validator.internal.constraintvalidators.bv.notempty.NotEmptyValidatorForCharSequence' of type [org.hibernate.validator.internal.constraintvalidators.bv.notempty.NotEmptyValidatorForCharSequence] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:09.384 INFO 21620 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'org.hibernate.validator.internal.constraintvalidators.bv.NotNullValidator' of type [org.hibernate.validator.internal.constraintvalidators.bv.NotNullValidator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:09.416 INFO 21620 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'spring.cloud.sentinel-com.alibaba.cloud.sentinel.SentinelProperties' of type [com.alibaba.cloud.sentinel.SentinelProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:09.455 INFO 21620 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'com.alibaba.cloud.sentinel.custom.SentinelAutoConfiguration' of type [com.alibaba.cloud.sentinel.custom.SentinelAutoConfiguration$$EnhancerBySpringCGLIB$$1d08f9a1] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:09.462 INFO 21620 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:09.463 INFO 21620 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactiveLoadBalancerConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactiveLoadBalancerConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:09.468 INFO 21620 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'deferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:10.350 INFO 21620 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [After]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:10.350 INFO 21620 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Before]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:10.350 INFO 21620 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Between]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:10.350 INFO 21620 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Cookie]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:10.350 INFO 21620 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Header]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:10.350 INFO 21620 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Host]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:10.350 INFO 21620 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Method]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:10.351 INFO 21620 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Path]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:10.351 INFO 21620 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Query]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:10.351 INFO 21620 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [ReadBodyPredicateFactory]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:10.351 INFO 21620 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [RemoteAddr]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:10.351 INFO 21620 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Weight]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:10.351 INFO 21620 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [CloudFoundryRouteService]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:10.378 WARN 21620 [] [main] c.n.c.sources.URLConfigurationSource     No URLs will be polled as dynamic configuration sources.
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:10.378 INFO 21620 [] [main] c.n.c.sources.URLConfigurationSource     To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:10.381 WARN 21620 [] [main] c.n.c.sources.URLConfigurationSource     No URLs will be polled as dynamic configuration sources.
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:10.381 INFO 21620 [] [main] c.n.c.sources.URLConfigurationSource     To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:12.025 INFO 21620 [] [main] c.a.c.s.SentinelWebFluxAutoConfiguration [Sentinel Starter] register Sentinel SentinelWebFluxFilter
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:12.040 ERROR 21620 [] [main] c.a.cloud.nacos.NacosConfigProperties    create config service error!properties=NacosConfigProperties{serverAddr='null', encode='null', group='DEFAULT_GROUP', prefix='null', fileExtension='properties', timeout=3000, endpoint='null', namespace='null', accessKey='null', secretKey='null', contextPath='null', clusterName='null', name='null', sharedDataids='null', refreshableDataids='null', extConfig=null},e=,
+
+com.alibaba.nacos.api.exception.NacosException: java.lang.reflect.InvocationTargetException
+	at com.alibaba.nacos.api.config.ConfigFactory.createConfigService(ConfigFactory.java:45) ~[nacos-api-1.1.1.jar:na]
+	at com.alibaba.nacos.api.NacosFactory.createConfigService(NacosFactory.java:43) ~[nacos-api-1.1.1.jar:na]
+	at com.alibaba.cloud.nacos.NacosConfigProperties.configServiceInstance(NacosConfigProperties.java:346) ~[spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at com.alibaba.cloud.nacos.NacosConfigAutoConfiguration.nacosContextRefresher(NacosConfigAutoConfiguration.java:64) [spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at com.alibaba.cloud.nacos.NacosConfigAutoConfiguration$$EnhancerBySpringCGLIB$$21a739ac.CGLIB$nacosContextRefresher$3(<generated>) [spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at com.alibaba.cloud.nacos.NacosConfigAutoConfiguration$$EnhancerBySpringCGLIB$$21a739ac$$FastClassBySpringCGLIB$$228f9c73.invoke(<generated>) [spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244) [spring-core-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331) [spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at com.alibaba.cloud.nacos.NacosConfigAutoConfiguration$$EnhancerBySpringCGLIB$$21a739ac.nacosContextRefresher(<generated>) [spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_241]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_241]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_241]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_241]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:650) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:635) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1336) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1176) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:556) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:897) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:879) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:551) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.refresh(ReactiveWebServerApplicationContext.java:66) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:747) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at cn.central.gateway.SiquesGatewayApplication.main(SiquesGatewayApplication.java:14) ~[classes/:na]
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_241]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_241]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:1.8.0_241]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[na:1.8.0_241]
+	at com.alibaba.nacos.api.config.ConfigFactory.createConfigService(ConfigFactory.java:42) ~[nacos-api-1.1.1.jar:na]
+	... 33 common frames omitted
+Caused by: com.alibaba.nacos.api.exception.NacosException: endpoint is blank
+	at com.alibaba.nacos.client.config.impl.ServerListManager.<init>(ServerListManager.java:154) ~[nacos-client-1.1.1.jar:na]
+	at com.alibaba.nacos.client.config.http.ServerHttpAgent.<init>(ServerHttpAgent.java:244) ~[nacos-client-1.1.1.jar:na]
+	at com.alibaba.nacos.client.config.NacosConfigService.<init>(NacosConfigService.java:83) ~[nacos-client-1.1.1.jar:na]
+	... 38 common frames omitted
+
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:12.057 INFO 21620 [] [main] o.s.s.c.ThreadPoolTaskScheduler          Initializing ExecutorService
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:12.906 WARN 21620 [] [main] c.a.c.s.d.converter.SentinelConverter    converter can not convert rules because source is empty
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:13.505 INFO 21620 [] [main] o.s.b.web.embedded.netty.NettyWebServer  Netty started on port(s): 9001
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:14.826 INFO 21620 [] [main] c.a.c.n.registry.NacosServiceRegistry    nacos registry, mango-gateway 172.20.10.3:9001 register finished
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:14.835 INFO 21620 [] [main] c.c.gateway.SiquesGatewayApplication     Started SiquesGatewayApplication in 8.179 seconds (JVM running for 9.148)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:49.369 DEBUG 21620 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:50.002 INFO 21620 [] [reactor-http-nio-2] c.netflix.config.ChainedDynamicProperty  Flipping property: mango-admin.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:50.012 INFO 21620 [] [reactor-http-nio-2] c.netflix.loadbalancer.BaseLoadBalancer  Client: mango-admin instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=mango-admin,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:50.017 INFO 21620 [] [reactor-http-nio-2] c.n.l.DynamicServerListLoadBalancer      Using serverListUpdater PollingServerListUpdater
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:50.216 INFO 21620 [] [reactor-http-nio-2] c.netflix.config.ChainedDynamicProperty  Flipping property: mango-admin.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:50.217 INFO 21620 [] [reactor-http-nio-2] c.n.l.DynamicServerListLoadBalancer      DynamicServerListLoadBalancer for client mango-admin initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=mango-admin,current list of Servers=[172.20.10.3:8083],Load balancer stats=Zone stats: {unknown=[Zone:unknown;	Instance count:1;	Active connections count: 0;	Circuit breaker tripped count: 0;	Active connections per server: 0.0;]
+},Server stats: [[Server:172.20.10.3:8083;	Zone:UNKNOWN;	Total Requests:0;	Successive connection failure:0;	Total blackout seconds:0;	Last connection made:Thu Jan 01 08:00:00 CST 1970;	First connection made: Thu Jan 01 08:00:00 CST 1970;	Active Connections:0;	total failure count in last (1000) msecs:0;	average resp time:0.0;	90 percentile resp time:0.0;	95 percentile resp time:0.0;	min resp time:0.0;	max resp time:0.0;	stddev resp time:0.0]
+]}ServerList:com.alibaba.cloud.nacos.ribbon.NacosServerList@67a927a0
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:26:51.021 INFO 21620 [] [PollingServerListUpdater-0] c.netflix.config.ChainedDynamicProperty  Flipping property: mango-admin.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:01.658 DEBUG 21620 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:06.006 DEBUG 21620 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:12.980 DEBUG 21620 [] [reactor-http-nio-2] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:12.983 DEBUG 21620 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:48.881 ERROR 24476 [] [main] c.a.cloud.nacos.NacosConfigProperties    create config service error!properties=NacosConfigProperties{serverAddr='null', encode='null', group='DEFAULT_GROUP', prefix='null', fileExtension='properties', timeout=3000, endpoint='null', namespace='null', accessKey='null', secretKey='null', contextPath='null', clusterName='null', name='null', sharedDataids='null', refreshableDataids='null', extConfig=null},e=,
+
+com.alibaba.nacos.api.exception.NacosException: java.lang.reflect.InvocationTargetException
+	at com.alibaba.nacos.api.config.ConfigFactory.createConfigService(ConfigFactory.java:45) ~[nacos-api-1.1.1.jar:na]
+	at com.alibaba.nacos.api.NacosFactory.createConfigService(NacosFactory.java:43) ~[nacos-api-1.1.1.jar:na]
+	at com.alibaba.cloud.nacos.NacosConfigProperties.configServiceInstance(NacosConfigProperties.java:346) ~[spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at com.alibaba.cloud.nacos.client.NacosPropertySourceLocator.locate(NacosPropertySourceLocator.java:63) [spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cloud.bootstrap.config.PropertySourceLocator.locateCollection(PropertySourceLocator.java:52) [spring-cloud-context-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+	at org.springframework.cloud.bootstrap.config.PropertySourceLocator.locateCollection(PropertySourceLocator.java:47) [spring-cloud-context-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+	at org.springframework.cloud.bootstrap.config.PropertySourceBootstrapConfiguration.initialize(PropertySourceBootstrapConfiguration.java:98) [spring-cloud-context-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+	at org.springframework.boot.SpringApplication.applyInitializers(SpringApplication.java:626) [spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.prepareContext(SpringApplication.java:370) [spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:314) [spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) [spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at cn.central.gateway.SiquesGatewayApplication.main(SiquesGatewayApplication.java:14) [classes/:na]
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_241]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_241]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:1.8.0_241]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[na:1.8.0_241]
+	at com.alibaba.nacos.api.config.ConfigFactory.createConfigService(ConfigFactory.java:42) ~[nacos-api-1.1.1.jar:na]
+	... 12 common frames omitted
+Caused by: com.alibaba.nacos.api.exception.NacosException: endpoint is blank
+	at com.alibaba.nacos.client.config.impl.ServerListManager.<init>(ServerListManager.java:154) ~[nacos-client-1.1.1.jar:na]
+	at com.alibaba.nacos.client.config.http.ServerHttpAgent.<init>(ServerHttpAgent.java:244) ~[nacos-client-1.1.1.jar:na]
+	at com.alibaba.nacos.client.config.NacosConfigService.<init>(NacosConfigService.java:83) ~[nacos-client-1.1.1.jar:na]
+	... 17 common frames omitted
+
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:48.881 WARN 24476 [] [main] c.a.c.n.c.NacosPropertySourceLocator     no instance of config service found, can't load config from nacos
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:48.883 INFO 24476 [] [main] c.c.gateway.SiquesGatewayApplication     The following profiles are active: dev
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:49.280 INFO 24476 [] [main] o.s.cloud.context.scope.GenericScope     BeanFactory id=618eaf1f-d4a5-31c5-977c-a38de85fd7fa
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:49.414 INFO 24476 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'org.hibernate.validator.internal.constraintvalidators.bv.notempty.NotEmptyValidatorForCharSequence' of type [org.hibernate.validator.internal.constraintvalidators.bv.notempty.NotEmptyValidatorForCharSequence] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:49.480 INFO 24476 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'org.hibernate.validator.internal.constraintvalidators.bv.NotNullValidator' of type [org.hibernate.validator.internal.constraintvalidators.bv.NotNullValidator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:49.503 INFO 24476 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'spring.cloud.sentinel-com.alibaba.cloud.sentinel.SentinelProperties' of type [com.alibaba.cloud.sentinel.SentinelProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:49.538 INFO 24476 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'com.alibaba.cloud.sentinel.custom.SentinelAutoConfiguration' of type [com.alibaba.cloud.sentinel.custom.SentinelAutoConfiguration$$EnhancerBySpringCGLIB$$ff354045] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:49.543 INFO 24476 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:49.544 INFO 24476 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactiveLoadBalancerConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactiveLoadBalancerConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:49.546 INFO 24476 [] [main] trationDelegate$BeanPostProcessorChecker Bean 'deferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:50.438 INFO 24476 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [After]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:50.438 INFO 24476 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Before]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:50.438 INFO 24476 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Between]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:50.438 INFO 24476 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Cookie]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:50.438 INFO 24476 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Header]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:50.439 INFO 24476 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Host]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:50.439 INFO 24476 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Method]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:50.439 INFO 24476 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Path]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:50.439 INFO 24476 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Query]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:50.439 INFO 24476 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [ReadBodyPredicateFactory]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:50.439 INFO 24476 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [RemoteAddr]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:50.439 INFO 24476 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [Weight]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:50.439 INFO 24476 [] [main] o.s.c.g.r.RouteDefinitionRouteLocator    Loaded RoutePredicateFactory [CloudFoundryRouteService]
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:50.477 WARN 24476 [] [main] c.n.c.sources.URLConfigurationSource     No URLs will be polled as dynamic configuration sources.
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:50.477 INFO 24476 [] [main] c.n.c.sources.URLConfigurationSource     To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:50.480 WARN 24476 [] [main] c.n.c.sources.URLConfigurationSource     No URLs will be polled as dynamic configuration sources.
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:50.481 INFO 24476 [] [main] c.n.c.sources.URLConfigurationSource     To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:52.984 INFO 24476 [] [main] c.a.c.s.SentinelWebFluxAutoConfiguration [Sentinel Starter] register Sentinel SentinelWebFluxFilter
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:53.005 ERROR 24476 [] [main] c.a.cloud.nacos.NacosConfigProperties    create config service error!properties=NacosConfigProperties{serverAddr='null', encode='null', group='DEFAULT_GROUP', prefix='null', fileExtension='properties', timeout=3000, endpoint='null', namespace='null', accessKey='null', secretKey='null', contextPath='null', clusterName='null', name='null', sharedDataids='null', refreshableDataids='null', extConfig=null},e=,
+
+com.alibaba.nacos.api.exception.NacosException: java.lang.reflect.InvocationTargetException
+	at com.alibaba.nacos.api.config.ConfigFactory.createConfigService(ConfigFactory.java:45) ~[nacos-api-1.1.1.jar:na]
+	at com.alibaba.nacos.api.NacosFactory.createConfigService(NacosFactory.java:43) ~[nacos-api-1.1.1.jar:na]
+	at com.alibaba.cloud.nacos.NacosConfigProperties.configServiceInstance(NacosConfigProperties.java:346) ~[spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at com.alibaba.cloud.nacos.NacosConfigAutoConfiguration.nacosContextRefresher(NacosConfigAutoConfiguration.java:64) [spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at com.alibaba.cloud.nacos.NacosConfigAutoConfiguration$$EnhancerBySpringCGLIB$$3d38050.CGLIB$nacosContextRefresher$2(<generated>) [spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at com.alibaba.cloud.nacos.NacosConfigAutoConfiguration$$EnhancerBySpringCGLIB$$3d38050$$FastClassBySpringCGLIB$$276a341f.invoke(<generated>) [spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244) [spring-core-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331) [spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at com.alibaba.cloud.nacos.NacosConfigAutoConfiguration$$EnhancerBySpringCGLIB$$3d38050.nacosContextRefresher(<generated>) [spring-cloud-alibaba-nacos-config-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_241]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_241]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_241]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_241]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:650) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:635) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1336) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1176) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:556) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) [spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:897) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:879) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:551) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.refresh(ReactiveWebServerApplicationContext.java:66) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:747) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) ~[spring-boot-2.2.10.RELEASE.jar:2.2.10.RELEASE]
+	at cn.central.gateway.SiquesGatewayApplication.main(SiquesGatewayApplication.java:14) ~[classes/:na]
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_241]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_241]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:1.8.0_241]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[na:1.8.0_241]
+	at com.alibaba.nacos.api.config.ConfigFactory.createConfigService(ConfigFactory.java:42) ~[nacos-api-1.1.1.jar:na]
+	... 33 common frames omitted
+Caused by: com.alibaba.nacos.api.exception.NacosException: endpoint is blank
+	at com.alibaba.nacos.client.config.impl.ServerListManager.<init>(ServerListManager.java:154) ~[nacos-client-1.1.1.jar:na]
+	at com.alibaba.nacos.client.config.http.ServerHttpAgent.<init>(ServerHttpAgent.java:244) ~[nacos-client-1.1.1.jar:na]
+	at com.alibaba.nacos.client.config.NacosConfigService.<init>(NacosConfigService.java:83) ~[nacos-client-1.1.1.jar:na]
+	... 38 common frames omitted
+
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:53.028 INFO 24476 [] [main] o.s.s.c.ThreadPoolTaskScheduler          Initializing ExecutorService
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:53.972 WARN 24476 [] [main] c.a.c.s.d.converter.SentinelConverter    converter can not convert rules because source is empty
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:54.616 INFO 24476 [] [main] o.s.b.web.embedded.netty.NettyWebServer  Netty started on port(s): 9001
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:55.989 INFO 24476 [] [main] c.a.c.n.registry.NacosServiceRegistry    nacos registry, mango-gateway 172.20.10.3:9001 register finished
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:27:55.998 INFO 24476 [] [main] c.c.gateway.SiquesGatewayApplication     Started SiquesGatewayApplication in 9.251 seconds (JVM running for 10.349)
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:28:49.341 DEBUG 24476 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:28:49.341 DEBUG 24476 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:28:49.342 DEBUG 24476 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:28:50.024 INFO 24476 [] [reactor-http-nio-6] c.netflix.config.ChainedDynamicProperty  Flipping property: mango-admin.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:28:50.035 INFO 24476 [] [reactor-http-nio-6] c.netflix.loadbalancer.BaseLoadBalancer  Client: mango-admin instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=mango-admin,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:28:50.040 INFO 24476 [] [reactor-http-nio-6] c.n.l.DynamicServerListLoadBalancer      Using serverListUpdater PollingServerListUpdater
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:28:50.228 INFO 24476 [] [reactor-http-nio-6] c.netflix.config.ChainedDynamicProperty  Flipping property: mango-admin.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:28:50.230 INFO 24476 [] [reactor-http-nio-6] c.n.l.DynamicServerListLoadBalancer      DynamicServerListLoadBalancer for client mango-admin initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=mango-admin,current list of Servers=[172.20.10.3:8083],Load balancer stats=Zone stats: {unknown=[Zone:unknown;	Instance count:1;	Active connections count: 0;	Circuit breaker tripped count: 0;	Active connections per server: 0.0;]
+},Server stats: [[Server:172.20.10.3:8083;	Zone:UNKNOWN;	Total Requests:0;	Successive connection failure:0;	Total blackout seconds:0;	Last connection made:Thu Jan 01 08:00:00 CST 1970;	First connection made: Thu Jan 01 08:00:00 CST 1970;	Active Connections:0;	total failure count in last (1000) msecs:0;	average resp time:0.0;	90 percentile resp time:0.0;	95 percentile resp time:0.0;	min resp time:0.0;	max resp time:0.0;	stddev resp time:0.0]
+]}ServerList:com.alibaba.cloud.nacos.ribbon.NacosServerList@579b29d5
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:28:50.472 DEBUG 24476 [] [reactor-http-nio-6] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:28:51.042 INFO 24476 [] [PollingServerListUpdater-0] c.netflix.config.ChainedDynamicProperty  Flipping property: mango-admin.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:28:57.288 DEBUG 24476 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:28:57.864 DEBUG 24476 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:29:01.395 DEBUG 24476 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:29:01.397 DEBUG 24476 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:29:01.481 DEBUG 24476 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:29:01.582 DEBUG 24476 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:29:11.339 DEBUG 24476 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:29:13.677 DEBUG 24476 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:29:14.112 DEBUG 24476 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:31:38.171 DEBUG 24476 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:31:38.332 DEBUG 24476 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:32:36.808 DEBUG 24476 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:32:36.969 DEBUG 24476 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:32:42.467 DEBUG 24476 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:32:47.842 DEBUG 24476 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:32:47.846 DEBUG 24476 [] [reactor-http-nio-5] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:35:59.025 DEBUG 24476 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:35:59.185 DEBUG 24476 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:37:51.085 DEBUG 24476 [] [reactor-http-nio-7] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:37:51.238 DEBUG 24476 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:39:21.535 DEBUG 24476 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:39:21.677 DEBUG 24476 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:39:44.965 DEBUG 24476 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:39:48.579 DEBUG 24476 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:39:48.746 DEBUG 24476 [] [reactor-http-nio-11] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:46:03.074 DEBUG 24476 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:46:03.226 DEBUG 24476 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:47:19.843 DEBUG 24476 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:47:20.002 DEBUG 24476 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:47:57.616 DEBUG 24476 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:48:08.372 DEBUG 24476 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:48:08.537 DEBUG 24476 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:49:18.617 DEBUG 24476 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:49:18.784 DEBUG 24476 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:51:39.928 DEBUG 24476 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:51:40.096 DEBUG 24476 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:53:37.936 DEBUG 24476 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:53:38.101 DEBUG 24476 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:54:32.246 DEBUG 24476 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:54:32.408 DEBUG 24476 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:55:29.500 DEBUG 24476 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10
+[mango-gateway:172.20.10.3:9001] 2020-11-18 23:55:29.664 DEBUG 24476 [] [reactor-http-nio-1] cn.central.log.monitor.PointUtil         1|request-statistics|ip=172.20.10.3&browser=CHROME&operatingSystem=WINDOWS_10

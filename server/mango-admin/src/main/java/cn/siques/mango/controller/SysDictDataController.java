@@ -1,13 +1,13 @@
 package cn.siques.mango.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import cn.siques.mangocommon.dto.JsonData;
+import cn.siques.dto.JsonData;
 
-import cn.siques.mangocommon.Page.PageRequest;
-import cn.siques.mangocommon.Page.PageResult;
-import cn.siques.mangocore.entity.SysDictData;
+import cn.siques.Page.PageRequest;
+import cn.siques.Page.PageResult;
+import cn.siques.mango.entity.SysDictData;
 import cn.siques.mango.service.SysDictDataService;
-import lombok.AllArgsConstructor;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;

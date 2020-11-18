@@ -1,16 +1,14 @@
 package cn.siques.mango.aspect;
 
 import cn.siques.mango.service.SysLogService;
-import cn.siques.mangocommon.utils.SecurityUtils;
-import cn.siques.mangocore.entity.SysLog;
+import cn.siques.utils.SecurityUtils;
+import cn.siques.mango.entity.SysLog;
 
 import com.alibaba.fastjson.JSONObject;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;

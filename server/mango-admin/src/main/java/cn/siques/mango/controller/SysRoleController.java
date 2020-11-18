@@ -4,26 +4,17 @@ import cn.siques.mango.config.RedisUtils;
 import cn.siques.mango.controller.dto.RoleMenuDto;
 import cn.siques.mango.service.SysRoleService;
 import cn.siques.mango.service.SysUserService;
-import cn.siques.mangocommon.constant.SysConstants;
-import cn.siques.mangocommon.dto.JsonData;
-import cn.siques.mangocore.dao.SysRoleMapper;
-import cn.siques.mangocore.entity.SysRole;
-import cn.siques.mangocore.entity.SysRoleMenu;
+import cn.siques.constant.SysConstants;
+import cn.siques.dto.JsonData;
+import cn.siques.mango.dao.SysRoleMapper;
+import cn.siques.mango.entity.SysRole;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @RestController
 @Api(tags = {"角色管理接口"})

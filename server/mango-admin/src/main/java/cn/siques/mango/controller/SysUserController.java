@@ -1,25 +1,21 @@
 package cn.siques.mango.controller;
 
 import cn.siques.mango.controller.dto.UserRoleDto;
-import cn.siques.mangocommon.Page.PageRequest;
-import cn.siques.mangocommon.Page.PageResult;
-import cn.siques.mangocommon.constant.SysConstants;
+import cn.siques.Page.PageRequest;
+import cn.siques.Page.PageResult;
+import cn.siques.constant.SysConstants;
 
-import cn.siques.mangocommon.dto.JsonData;
-import cn.siques.mangocommon.utils.PasswordEncoder;
-import cn.siques.mangocommon.utils.PasswordUtils;
-import cn.siques.mangocommon.utils.SecurityUtils;
-import cn.siques.mangocore.entity.SysRole;
-import cn.siques.mangocore.entity.SysUser;
+import cn.siques.dto.JsonData;
+import cn.siques.mango.entity.SysRole;
+import cn.siques.mango.entity.SysUser;
 import cn.siques.mango.service.SysUserService;
-import cn.siques.mangocore.entity.SysUserRole;
+import cn.siques.mango.entity.SysUserRole;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.spring.web.json.Json;
 
 import javax.annotation.security.RolesAllowed;
 import java.util.*;

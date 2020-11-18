@@ -1,12 +1,11 @@
 package cn.siques.mango.service;
 
 
-import cn.siques.mangocommon.Page.PageRequest;
-import cn.siques.mangocommon.Page.PageResult;
-import cn.siques.mangocore.entity.SysRole;
-import cn.siques.mangocore.entity.SysUser;
-import cn.siques.mangocore.entity.SysUserRole;
-import cn.siques.mangocore.service.CrudService;
+import cn.siques.Page.PageRequest;
+import cn.siques.Page.PageResult;
+import cn.siques.mango.entity.SysRole;
+import cn.siques.mango.entity.SysUser;
+import cn.siques.mango.entity.SysUserRole;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;

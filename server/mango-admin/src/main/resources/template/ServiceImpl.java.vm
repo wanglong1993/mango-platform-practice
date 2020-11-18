@@ -1,9 +1,8 @@
 package ${package}.${moduleName}.service.impl;
 
-import cn.siques.mangocommon.Page.MybatisPageHelper;
-import cn.siques.mangocommon.Page.PageRequest;
-import cn.siques.mangocommon.Page.PageResult;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import cn.siques.Page.MybatisPageHelper;
+import cn.siques.Page.PageRequest;
+import cn.siques.Page.PageResult;
 import ${package}.${moduleName}.entity.${className};
 import ${package}.${moduleName}.mapper.${className}Mapper;
 import ${package}.${moduleName}.service.${className}Service;

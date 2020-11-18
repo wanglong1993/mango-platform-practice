@@ -12,5 +12,6 @@ declare module 'vue/types/vue' {
     $auth: any
     $i18n1: any
     $nuxtSocket: any
+    mixConfirm: any
   }
 }

@@ -1,7 +1,6 @@
 package cn.siques.mango.service;
 
-import cn.siques.mangocore.entity.SysMenu;
-import cn.siques.mangocore.service.CrudService;
+import cn.siques.mango.entity.SysMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package cn.siques.mangotask.service.feign;
 
-import cn.siques.mangocommon.dto.MailDto;
+import cn.siques.dto.MailDto;
 import org.springframework.stereotype.Component;
 
 @Component

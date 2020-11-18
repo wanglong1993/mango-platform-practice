@@ -1,10 +1,8 @@
 package cn.siques.mangotask.service.feign;
-import cn.siques.mangocommon.dto.MailDto;
+import cn.siques.dto.MailDto;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Component
 @FeignClient(value = "mango-admin", fallback=RemoteHystrix.class)
