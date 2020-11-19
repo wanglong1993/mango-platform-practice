@@ -10,15 +10,22 @@
             :cell-style="cellStyle"
             :permission="permission"
             @search-change="searchChange"
-            @on-load="search == true ? searchChange() : onLoad()"
+            @on-load="onLoad()"
             @refresh-change="rowRefresh"
             @row-update="rowUpdate"
             @row-save="rowSave"
             @row-del="rowDel"
+            :search.sync="search"
             :before-open="beforeOpen"
             :data="tableData"
             :option="option"
           >
+            <template slot="statuSearch">
+              <el-select v-model="search.statu" placeholder="请选择状态">
+                <el-option label="成功" value="1"></el-option>
+                <el-option label="失败" value="0"></el-option>
+              </el-select>
+            </template>
             <template slot="menuLeft">
               <el-button type="primary" size="mini" @click="openMap">{{
                 $t('mango.sound.openMap')
@@ -143,6 +150,7 @@ export default class index extends Vue {
     height: '60vh',
     dialogClickModal: false,
     index: true,
+    // 初始是否显示搜索栏
     searchShow: false,
     // sortable: true,
     // selection: true,
@@ -216,7 +224,7 @@ export default class index extends Vue {
         label: '原始链接',
         overHidden: true,
         prop: 'url',
-        // type: 'url',
+
         addDisplay: false,
       },
       {
@@ -230,6 +238,8 @@ export default class index extends Vue {
         filterMethod: function (value: any, row: any, column: any) {
           return row.statu === value
         },
+        search: true,
+        searchslot: true,
         viewDisplay: false,
         addDisplay: false,
         editDisplay: false,
@@ -293,43 +303,8 @@ export default class index extends Vue {
       },
     ],
   }
-  search = false
-  params = {}
-  async searchChange(params: any, done: any) {
-    this.loading = true
-    this.search = true
-    if (params) {
-      this.params = params
 
-      this.page.currentPage = 1
-    }
-    const crud: any = this.$refs.crud
-    crud.$refs.headerSearch.searchShow = false
-    params ? params : (params = this.params)
-
-    const { data } = await this.http.post(
-      'pri/sysSoundfile/search',
-      {
-        pageRequest: {
-          pageNum: this.page.currentPage,
-          pageSize: this.page.pageSize,
-          params: {},
-        },
-        sysSoundfile: {
-          name: params.name,
-          classification: params.classification,
-        },
-      },
-      { prefix: 'sound' }
-    )
-
-    setTimeout(() => {
-      done ? done() : ''
-    }, 500)
-
-    this.handleResult(data)
-  }
-
+  //行样式
   cellStyle({ row, column, rowIndex, columnIndex }: any) {
     if (columnIndex == 9) {
       if (row.statu === 0) {
@@ -454,23 +429,53 @@ export default class index extends Vue {
   // }
 
   rowRefresh() {
+    this.isSearch = false
     this.onLoad()
   }
   mounted() {
     setTimeout(() => {
+      // 权限管理
       this.checkAuth()
     }, 500)
   }
 
+  isSearch = false
+  search: any = {}
+
+  async searchChange(params: any, done: any) {
+    this.isSearch = true
+    this.page.currentPage = 1
+    const crud: any = this.$refs.crud
+    crud.$refs.headerSearch.searchShow = false
+
+    setTimeout(() => {
+      done()
+    }, 500)
+
+    this.onLoad()
+  }
+
   async onLoad() {
     this.loading = true
+    let sysSoundfile = null
+    if (this.isSearch) {
+      sysSoundfile = {
+        name: this.search.name == '' ? null : this.search.name,
+        classification:
+          this.search.classification == '' ? null : this.search.classification,
+        statu: this.search.statu == '' ? null : this.search.statu,
+      }
+    }
 
     const { data } = await this.http.post(
       'pri/sysSoundfile/findPage',
       {
-        pageNum: this.page.currentPage,
-        pageSize: this.page.pageSize,
-        params: {},
+        pageRequest: {
+          pageNum: this.page.currentPage,
+          pageSize: this.page.pageSize,
+          params: {},
+        },
+        sysSoundfile,
       },
       { prefix: 'sound' }
     )

@@ -4,6 +4,8 @@ target/
 !**/src/main/**
 !**/src/test/**
 
+/server/apache-skywalking-apm-bin-es7/
+/microservices-platform/apache-skywalking-apm-bin-es7/
 ### STS ###
 .apt_generated
 .classpath
@@ -13,6 +15,7 @@ target/
 .springBeans
 .sts4-cache
 .jar
+logs/
 
 ### IntelliJ IDEA ###
 .idea

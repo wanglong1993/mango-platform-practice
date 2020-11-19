@@ -15,39 +15,41 @@ export default ({ app, store, route, redirect }) => {
     const newUrl = config.baseURL.replace('*', config.prefix)
     config.baseURL = newUrl
     //设置token
-    if (store.state.Auth) {
+    if (store.state.Auth && store.state.Auth.token) {
       config.headers.Authorization = store.state.Auth.token || ''
     }
   })
 
-  // 返回回调
+  // code返回回调
   axios.onResponse((res) => {
     //   if (res.headers.refreshtoken) {
     //     Cookie.set('token', res.headers.refreshtoken)
     //   }
-    // if (res.data.code == 402) {
-    //   redirect('/sys/login')
-    // }
+    if (res.data.code == 403) {
+      redirect('/sys/login')
+      app.$auth.logout()
+    }
   })
 
-  // 错误回调
+  // 内部错误回调
   axios.onError((error) => {
-    console.log(error)
-    // switch (error.response.status) {
-    //   case 403:
-    //     Vue.prototype.$message({
-    //       message: '未授权',
-    //       type: 'info',
-    //       showClose: true,
-    //     })
-    //     redirect('/sys/login')
-    //   case 500:
-    //     redirect('/sys/500')
-    //     break
-    //   case 404:
-    //     redirect('/sys/404')
-    //     break
-    // }
+    console.log(error.response)
+    switch (error.response.status) {
+      case 403:
+        Vue.prototype.$message({
+          message: '未授权',
+          type: 'info',
+          showClose: true,
+        })
+        store.state.auth.loggedIn = false
+        redirect('/sys/login')
+      case 500:
+        redirect('/sys/500')
+        break
+      case 404:
+        redirect('/sys/404')
+        break
+    }
   })
   Vue.prototype.$http = axios
 }

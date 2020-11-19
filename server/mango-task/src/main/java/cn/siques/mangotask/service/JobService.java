@@ -1,6 +1,6 @@
 package cn.siques.mangotask.service;
 
-import cn.siques.mangocommon.Page.PageRequest;
+import cn.siques.Page.PageRequest;
 import cn.siques.mangotask.entity.JobAndTrigger;
 import cn.siques.mangotask.entity.JobForm;
 import com.github.pagehelper.PageInfo;

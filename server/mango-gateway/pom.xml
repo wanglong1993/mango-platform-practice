@@ -148,7 +148,7 @@
                     <baseImage>java</baseImage>
                     <workdir>/ROOT</workdir>
                     <cmd>["java", "-version"]</cmd>
-                    <entryPoint>["java", "-jar", "${project.build.finalName}.jar"]</entryPoint>
+                    <entryPoint>["java", "-jar", "${project.build.finalName}.jar","--spring.profiles.active=prod"]</entryPoint>
 
                     <resources>
                         <resource>

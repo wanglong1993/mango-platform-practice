@@ -1,19 +1,16 @@
 package cn.siques.mango.controller;
 
 import cn.siques.mango.service.SysDeptService;
-import cn.siques.mangocommon.Page.PageRequest;
-import cn.siques.mangocommon.Page.PageResult;
-import cn.siques.mangocommon.dto.JsonData;
+import cn.siques.Page.PageRequest;
+import cn.siques.Page.PageResult;
+import cn.siques.dto.JsonData;
 
-import cn.siques.mangocore.entity.SysDept;
+import cn.siques.mango.entity.SysDept;
 
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.spring.web.json.Json;
-
-import java.util.Map;
 
 @Api(value="机构管理接口")
 @RestController
@@ -58,8 +55,7 @@ public class SysDeptController {
     @PreAuthorize("hasAuthority('sys:dept:edit')")
     @PostMapping(value = "/save")
     public JsonData save(@RequestBody SysDept sysDept){
-        int save = sysDeptService.save(sysDept);
-        return JsonData.buildSuccess(save);
+        return JsonData.buildSuccess(sysDeptService.save(sysDept));
     }
 
 }

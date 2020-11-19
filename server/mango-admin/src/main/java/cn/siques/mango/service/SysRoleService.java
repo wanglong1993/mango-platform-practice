@@ -1,15 +1,14 @@
 package cn.siques.mango.service;
 
-import cn.siques.mangocore.entity.SysMenu;
-import cn.siques.mangocore.entity.SysRole;
-import cn.siques.mangocore.entity.SysRoleMenu;
+import cn.siques.mango.controller.dto.RoleMenuDto;
+import cn.siques.mango.entity.SysRole;
 import cn.siques.mangocore.service.CrudService;
+import com.baomidou.mybatisplus.extension.service.IService;
 
-import java.util.Collection;
 import java.util.List;
 
 
-public interface SysRoleService extends CrudService<SysRole> {
+public interface SysRoleService extends IService<SysRole> {
 
     List<SysRole>  findAll();
 
@@ -17,5 +16,7 @@ public interface SysRoleService extends CrudService<SysRole> {
 
     List<SysRole> findByName(String name);
 
-    int saveRoleMenus(List<SysRoleMenu> records);
+    int saveRoleMenus(String name, RoleMenuDto roleMenuDto);
+
+
 }

@@ -7,30 +7,42 @@
         :table-loading="loading"
         :data="tableData"
         :option="option"
+        @row-update="rowUpdate"
       >
+        <template slot-scope="scope" slot="delFlag">
+          <el-switch
+            :active-value="0"
+            :inactive-value="1"
+            @change="delFlagChange(scope.row)"
+            v-model="scope.row.delFlag"
+            active-color="#13ce66"
+            inactive-color="#ff4949"
+          >
+          </el-switch>
+        </template>
         <template slot-scope="scope" slot="menu">
-          <Crudbutton
+          <button-dialog
             icon="el-icon-check"
             size="mini"
             type="text"
             :data="form"
             :option="crudOption"
             @click="initData(scope.row)"
-            @submit="submit"
+            @submit="submit(scope.row)"
             :title="'授权菜单'"
           >
             <template v-slot:extendField>
               <MenuTree ref="tree"></MenuTree>
             </template>
-          </Crudbutton>
+          </button-dialog>
         </template>
 
-        <template slot="delFlagForm" slot-scope="scope">
+        <!-- <template slot="delFlagForm" slot-scope="scope">
           <el-radio-group v-model="scope.row.delFlag">
             <el-radio :label="1">禁用</el-radio>
             <el-radio :label="0">正常</el-radio>
           </el-radio-group>
-        </template>
+        </template> -->
       </avue-crud>
     </el-container>
   </div>
@@ -53,6 +65,7 @@ export default class sysRole extends Vue {
     // delBtn: false,
     // addBtn: false,
     // menu: false,
+    switch: false,
   }
   crudOption = {
     column: [
@@ -69,20 +82,24 @@ export default class sysRole extends Vue {
     ],
   }
 
-  async submit() {
+  async submit(row: any) {
     this.loading = true
     const ref: any = this.$refs.tree
-    let data: any = []
+    let roleMenus: Array<Object> = []
     ref.$refs.tree.getCheckedNodes(false, true).map((e: any) => {
-      data.push({
-        roleId: this.form.id,
+      roleMenus.push({
+        roleId: row.id,
         menuId: e.id,
       })
     })
 
-    const res = await this.http.post(`/pri/role/saveRoleMenus`, data, {
-      prefix: 'admin',
-    })
+    const res = await this.http.post(
+      `/pri/role/saveRoleMenus`,
+      { roleMenus, roleId: row.id },
+      {
+        prefix: 'admin',
+      }
+    )
 
     setTimeout(() => {
       this.loading = false
@@ -97,9 +114,26 @@ export default class sysRole extends Vue {
     }, 500)
   }
 
-  async initData(obj: any) {
-    this.form = obj
-    const res = await this.http.get(`/pri/role/findRoleMenus/${obj.id}`, {
+  async delFlagChange(row: any) {
+    const res = await this.http.post(
+      '/pri/role/save',
+      {
+        id: row.id,
+        delFlag: row.delFlag,
+      },
+      {
+        prefix: 'admin',
+      }
+    )
+
+    console.log(res.data)
+  }
+
+  async rowUpdate(form: any, index: any, done: any, loading: any) {}
+
+  async initData(row: any) {
+    this.form = row
+    const res = await this.http.get(`/pri/role/findRoleMenus/${row.id}`, {
       prefix: 'admin',
     })
 
@@ -173,10 +207,12 @@ export default class sysRole extends Vue {
           { label: '禁用', value: 1 },
           { label: '正常', value: 0 },
         ],
-        formslot: true,
+        // formslot: true,
         labelslot: true,
         value: 1,
+        slot: true,
         addDisplay: false,
+        editDisplay: false,
         // slot: true,
       },
     ],
@@ -185,22 +221,6 @@ export default class sysRole extends Vue {
   cellStyle({ row, column, rowIndex, columnIndex }: any) {
     if (columnIndex == 2) {
       if (row.remark !== '超级管理员') {
-        return {
-          color: 'green',
-          fontWeight: 'bold',
-          fontSize: '20',
-        }
-      } else {
-        return {
-          color: 'red',
-          fontWeight: 'bold',
-          fontSize: '20',
-        }
-      }
-    }
-
-    if (columnIndex == 5) {
-      if (row.delFlag == 0) {
         return {
           color: 'green',
           fontWeight: 'bold',

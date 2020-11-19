@@ -14,12 +14,12 @@
         :data="tableData"
       >
         <template slot="icon" slot-scope="scope">
-          <i :class="scope.row.icon" style="font-size:24px"></i>
+          <i :class="scope.row.icon" style="font-size: 24px"></i>
         </template>
 
         <template slot="iconForm" slot-scope="scope">
           <avue-input-icon
-            :disabled="scope.row.type==2"
+            :disabled="scope.row.type == 2"
             v-model="scope.row.icon"
             placeholder="请选择图标"
             :icon-list="iconList"
@@ -27,15 +27,25 @@
         </template>
 
         <template slot="permsForm" slot-scope="scope">
-          <el-input :disabled="scope.row.type!=2" v-model="scope.row.perms" placeholder></el-input>
+          <el-input
+            :disabled="scope.row.type != 2"
+            v-model="scope.row.perms"
+            placeholder
+          ></el-input>
         </template>
 
         <template slot="urlForm" slot-scope="scope">
-          <el-input :disabled="scope.row.type!=1" v-model="scope.row.url"></el-input>
+          <el-input
+            :disabled="scope.row.type != 1"
+            v-model="scope.row.url"
+          ></el-input>
         </template>
 
         <template slot="typeForm" slot-scope="scope">
-          <el-radio-group @change="radioChange(scope.row)" v-model="scope.row.type">
+          <el-radio-group
+            @change="radioChange(scope.row)"
+            v-model="scope.row.type"
+          >
             <el-radio :label="0">父菜单</el-radio>
             <el-radio :label="1">菜单</el-radio>
             <el-radio :label="2">权限</el-radio>
@@ -44,7 +54,7 @@
 
         <template slot="parentIdForm" slot-scope="scope">
           <el-cascader
-            :disabled="scope.row.type==0"
+            :disabled="scope.row.type == 0"
             v-model="scope.row.parentId"
             collapse-tags
             :props="casProps"
@@ -53,30 +63,54 @@
           ></el-cascader>
         </template>
 
-        <template slot-scope="{size,type,row}" slot="menu">
-          <el-button :size="size" :type="type" @click="initData(row)">新增下级菜单</el-button>
+        <template slot-scope="{ size, type, row }" slot="menu">
+          <el-button :size="size" :type="type" @click="initData(row)"
+            >新增下级菜单</el-button
+          >
         </template>
       </avue-crud>
 
       <!-- 自己的弹窗 -->
-      <Cruddialog ref="dialog" :data="form" :option="crudOption" @submit="submit" :title="'新增下级菜单'">
+      <crud-dialog
+        ref="dialog"
+        :data="form"
+        :option="crudOption"
+        @submit="submit"
+        :title="'新增下级菜单'"
+      >
         <template slot="urlForm" slot-scope="scope">
           <el-input
-            :disabled="scope.row.type!=1"
+            :disabled="scope.row.type != 1"
             v-model="scope.row.url"
-            placeholder="链接形式：/sys/***"
-          ></el-input>
+            placeholder="链接形式：***"
+          >
+            <template slot="prepend">/sys/</template></el-input
+          >
         </template>
 
         <template slot="typeForm" slot-scope="scope">
-          <el-radio-group @change="radioChange(scope.row)" v-model="scope.row.type">
+          <el-radio-group
+            @change="radioChange(scope.row)"
+            v-model="scope.row.type"
+          >
             <el-radio :label="1">菜单</el-radio>
             <el-radio :label="2">权限</el-radio>
           </el-radio-group>
         </template>
 
+        <template slot="nameForm" slot-scope="scope">
+          <el-autocomplete
+            class="h-100"
+            v-model="scope.row.name"
+            :fetch-suggestions="querySearch"
+            placeholder="请输入内容"
+            :trigger-on-focus="true"
+          ></el-autocomplete>
+        </template>
+
         <template slot="parentNameForm" slot-scope="scope">
           <el-cascader
+            class="h-100"
             v-model="scope.row.parentId"
             collapse-tags
             :props="casProps"
@@ -86,7 +120,7 @@
 
         <template slot="iconForm" slot-scope="scope">
           <avue-input-icon
-            :disabled="scope.row.type==2"
+            :disabled="scope.row.type == 2"
             v-model="scope.row.icon"
             placeholder="请选择图标"
             :icon-list="iconList"
@@ -94,14 +128,19 @@
         </template>
 
         <template slot="permsForm" slot-scope="scope">
-          <el-input :disabled="scope.row.type!=2" v-model="scope.row.perms" placeholder></el-input>
+          <el-input
+            :disabled="scope.row.type != 2"
+            v-model="scope.row.perms"
+            placeholder
+          ></el-input>
         </template>
-      </Cruddialog>
+      </crud-dialog>
     </el-container>
   </div>
 </template>
 <script lang="ts">
 import config from '~/plugins/config/website.js'
+import { confirm } from '~/plugins/util/confrim'
 import { Vue, Component, Watch } from 'nuxt-property-decorator'
 @Component({
   components: {},
@@ -145,6 +184,23 @@ export default class MenuIndex extends Vue {
     // multiple: true,
   }
 
+  operation = [{ value: '查看' }, { value: '编辑' }, { value: '新增' }]
+
+  querySearch(queryString: any, cb: any) {
+    var operation = this.operation
+    var results = queryString
+      ? operation.filter(this.createFilter(queryString))
+      : operation
+    // 调用 callback 返回建议列表的数据
+    cb(results)
+  }
+
+  createFilter(queryString: any) {
+    return (e: any) => {
+      return e.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
+    }
+  }
+
   radioChange(row: any) {
     this.formType = row.type
 
@@ -157,14 +213,15 @@ export default class MenuIndex extends Vue {
     row.perms = ''
   }
 
-  initData(obj: any) {
-    console.log(obj)
+  initData(row: any) {
+    console.log(row)
     const ref: any = this.$refs.dialog
     ref.logVisible = true
     let dto = {
-      type: obj.type == 0 ? 1 : obj.type,
-      parentId: obj.id,
+      type: row.type == 0 ? 1 : row.type,
+      parentId: row.id,
       orderNum: 30,
+      parentIds: row.parentIds + row.id + ',',
       url: '',
       perms: '',
     }
@@ -240,6 +297,7 @@ export default class MenuIndex extends Vue {
             trigger: 'blur',
           },
         ],
+        formslot: true,
         label: '菜单名称',
         prop: 'name',
       },
@@ -399,31 +457,19 @@ export default class MenuIndex extends Vue {
   }
 
   rowDel(form: any, index: any) {
-    this.$confirm('此操作将删除' + form.name + ', 是否继续?', '提示', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
-      type: 'warning',
-    })
-      .then(async () => {
+    confirm(
+      this,
+      async () => {
         let data: any = []
         data.push(form)
         const res = await this.http.post('/pri/menu/delete', data, {
           prefix: 'admin',
         })
-
+      },
+      () => {
         this.fetchMenu()
-
-        this.$message({
-          type: 'success',
-          message: '删除成功!',
-        })
-      })
-      .catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消删除',
-        })
-      })
+      }
+    )
   }
 
   async rowUpdate(form: any, index: any, done: any, loading: any) {

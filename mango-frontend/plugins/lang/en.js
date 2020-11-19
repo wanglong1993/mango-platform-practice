@@ -13,6 +13,11 @@ export default {
     team: 'Team ranking',
     project: 'Project access',
     count: 'Item number',
+    dict: {
+      menu: {
+        data: 'dict',
+      },
+    },
     user: {
       menu: {
         auth: 'auth',

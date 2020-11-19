@@ -2,9 +2,7 @@ package cn.siques.mango.controller;
 
 
 
-import cn.siques.mangocommon.dto.MailDto;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageProperties;
+import cn.siques.dto.MailDto;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,6 +20,7 @@ public class SysMailController {
     @PostMapping("send")
     @PreAuthorize("hasAuthority('sys:mail:send')")
     public void sendMail(@RequestBody MailDto mailDto){
+        System.out.println(mailDto);
 //        MessageProperties messageProperties = new MessageProperties();
 //        messageProperties.setContentType("application/json");
 //        Message message = new Message(mailDto.toString().getBytes(), messageProperties);

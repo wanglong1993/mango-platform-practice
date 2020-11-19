@@ -1,6 +1,12 @@
 <template>
   <div class="amqp-wrap h-100">
-    <el-amap class="amap-box" vid="map" :zoom="zoom" :center="center" :events="events">
+    <el-amap
+      class="amap-box"
+      vid="map"
+      :zoom="zoom"
+      :center="center"
+      :events="events"
+    >
       <!-- <el-amap-marker vid="marker" :position="center" :label="label"></el-amap-marker> -->
       <el-amap-marker
         v-for="(marker, index) in markers"
@@ -32,12 +38,12 @@
         <!-- <el-row>
         <el-col :span="24">-->
         <div
-          style="background-color: #20222a;"
+          style="background-color: #20222a"
           class="pl-4 d-flex flex-column ai-left jc-center h-100"
         >
           <div class="d-flex">
             <el-image
-              style="width: 120px; height: 120px;"
+              style="width: 120px; height: 120px"
               :src="target.cover"
               :preview-src-list="[target.cover]"
             ></el-image>
@@ -45,7 +51,9 @@
               <div class="fs-6">{{ target.name }}</div>
               <div class="pt-2 fs-3">{{ target.description }}</div>
               <div class="pt-2 fs-3">分类: {{ target.classification }}</div>
-              <div class="pt-2 fs-3" v-if="target.distrition != ''">来自：{{ target.distrition }}</div>
+              <div class="pt-2 fs-3" v-if="target.distrition != ''">
+                来自：{{ target.distrition }}
+              </div>
             </div>
           </div>
           <vue-plyr>
@@ -60,7 +68,7 @@
     </el-amap>
   </div>
 </template>
-<script lang="ts">
+<script>
 import { Vue, Component } from 'nuxt-property-decorator'
 import { AMapManager, lazyAMapApiLoaderInstance } from 'vue-amap'
 import config from '~/plugins/config/website.js'
@@ -74,7 +82,7 @@ export default class index extends Vue {
   target = {}
   direction = 'btt'
   markers = []
-  markerRefs: any = []
+  markerRefs = []
   self = this
   lng = 0
   lat = 0
@@ -89,19 +97,19 @@ export default class index extends Vue {
     init: this.init1,
   }
 
-  markerClick(row: any) {
+  markerClick(row) {
     console.log(row)
     this.drawer = true
     this.target = row
   }
-  handleClose(done: any) {
+  handleClose(done) {
     this.$confirm('确认关闭？')
       .then((_) => {
         done()
       })
       .catch((_) => {})
   }
-  init1(o: any) {
+  init1(o) {
     setTimeout(() => {
       let cluster = new AMap.MarkerClusterer(o, this.markerRefs, {
         gridSize: 80,
@@ -112,17 +120,17 @@ export default class index extends Vue {
   center = [121.406051, 31.179695]
 
   created() {
-    this.Myinit()
+    this.mapInit()
   }
-  async Myinit() {
+  async mapInit() {
     const { data } = await this.http.get('pri/sysSoundfile/findAll', {
       prefix: 'sound',
     })
-    data.data.filter((e: any) => {
+    data.data.filter((e) => {
       if (e.location != null) {
         const res = e.location.split(',')
-        let t: any = []
-        let distrition: any = ''
+        let t = []
+        let distrition = ''
         for (let index = 0; index < res.length; index++) {
           if (index != 2) {
             t.push(parseFloat(res[index]))
@@ -147,11 +155,11 @@ export default class index extends Vue {
     // console.log(data.data)
     this.markers = data.data
   }
-  init(o: any) {
+  init(o) {
     this.markerRefs.push(o)
   }
 
-  _renderCluserMarker(context: any) {
+  _renderCluserMarker(context) {
     const count = this.markers.length
 
     let factor = Math.pow(context.count / count, 1 / 18)

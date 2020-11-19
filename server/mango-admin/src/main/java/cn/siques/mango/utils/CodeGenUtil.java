@@ -8,9 +8,9 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.db.Entity;
 import cn.hutool.setting.dialect.Props;
 //import cn.siques.mangocommon.constant.GenConstants;
-import cn.siques.mangocore.entity.gen.ColumnEntity;
-import cn.siques.mangocore.entity.gen.GenConfig;
-import cn.siques.mangocore.entity.gen.TableEntity;
+import cn.siques.mango.entity.gen.ColumnEntity;
+import cn.siques.mango.entity.gen.GenConfig;
+import cn.siques.mango.entity.gen.TableEntity;
 import com.google.common.collect.Lists;
 
 import lombok.experimental.UtilityClass;

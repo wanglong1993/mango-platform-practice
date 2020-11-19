@@ -15,7 +15,13 @@
             :permission="permission"
             :data="tableData"
             :option="option"
-          ></avue-crud>
+          >
+            <template slot-scope="{ type, size }" slot="menu">
+              <el-button icon="el-icon-scissors" :size="size" :type="type"
+                >踢出用户</el-button
+              >
+            </template>
+          </avue-crud>
         </div>
       </el-main>
     </el-container>
@@ -44,7 +50,8 @@ export default class sysRole extends Vue {
   permission = {
     delBtn: false,
     addBtn: false,
-    menu: false,
+    menu: true,
+    editBtn: false,
   }
 
   option = {

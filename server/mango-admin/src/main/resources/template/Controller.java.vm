@@ -1,12 +1,10 @@
 package ${package}.${moduleName}.controller;
 
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.beans.factory.annotation.Autowired;
-import cn.siques.mangocommon.dto.JsonData;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import cn.siques.mangocommon.entity.JsonData;
-import cn.siques.mangocommon.Page.PageRequest;
-import cn.siques.mangocommon.Page.PageResult;
+import cn.siques.dto.JsonData;
+
+import cn.siques.Page.PageRequest;
+import cn.siques.Page.PageResult;
 import ${package}.${moduleName}.entity.${className};
 import ${package}.${moduleName}.service.${className}Service;
 import lombok.AllArgsConstructor;

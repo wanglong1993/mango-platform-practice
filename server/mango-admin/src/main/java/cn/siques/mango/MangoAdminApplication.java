@@ -3,8 +3,10 @@ package cn.siques.mango;
 
 import cn.siques.mango.config.DbProperty;
 import com.spring4all.swagger.EnableSwagger2Doc;
+//import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import tk.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -18,7 +20,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @RefreshScope
 @EnableCaching
 //@EnableAspectJAutoProxy
-@MapperScan({"cn.siques.mangocore.dao","cn.siques.mango.mapper"})
+@MapperScan({"cn.siques.mango.dao"})
 public class MangoAdminApplication {
 
     public static void main(String[] args) {

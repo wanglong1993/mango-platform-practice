@@ -1,52 +1,26 @@
 package cn.siques.mango.service.impl;
 
-import cn.siques.mangocommon.Page.MybatisPageHelper;
-import cn.siques.mangocommon.Page.PageRequest;
-import cn.siques.mangocommon.Page.PageResult;
-import cn.siques.mangocore.dao.SysDictMapper;
-import cn.siques.mangocore.entity.SysDict;
-import cn.siques.mangocore.entity.SysDictKey;
 import cn.siques.mango.service.SysDictService;
+import cn.siques.Page.MybatisPageHelper;
+import cn.siques.Page.PageRequest;
+import cn.siques.Page.PageResult;
+import cn.siques.mango.dao.SysDictMapper;
+import cn.siques.mango.entity.SysDict;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class SysDictServiceImpl implements SysDictService {
-    @Autowired
+public class SysDictServiceImpl extends ServiceImpl<SysDictMapper,SysDict> implements SysDictService {
+    @Resource
     private SysDictMapper sysDictMapper;
 
 
-
-    @Override
-    public int save(SysDict record) {
-        if(record.getId()==null || record.getId()==0){
-            return sysDictMapper.insertSelective(record);
-        }
-       return sysDictMapper.updateByPrimaryKeySelective(record);
-    }
-
-    @Override
-    public int delete(SysDict record) {
-      return sysDictMapper.deleteByPrimaryKey(record);
-    }
-
-    @Override
-    public int delete(List<SysDict> records) {
-        for (SysDict d:records
-             ) {
-            sysDictMapper.deleteByPrimaryKey(d);
-        }
-        return 1;
-    }
-
-    @Override
     public SysDict findById(Long id) {
-        SysDictKey sysDictKey = new SysDictKey();
-        sysDictKey.setId(id);
-        return sysDictMapper.selectByPrimaryKey(sysDictKey);
+        return sysDictMapper.selectById(id);
     }
 
     /**

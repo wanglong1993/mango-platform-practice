@@ -17,7 +17,7 @@ export default {
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
    */
-  target: 'static',
+  target: 'server',
   /*
    ** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
@@ -83,9 +83,10 @@ export default {
   },
   plugins: [
     '@/plugins/axios',
-    '@/plugins/element-ui',
+    '@/plugins/main',
     '@/plugins/directive',
     '@/plugins/lang/index.js',
+    { src: '@/plugins/mixin.js', ssr: false },
     // '@/plugins/localStorage.js',
     // '@/plugins/config/website.js',
   ],
@@ -106,9 +107,19 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/auth',
+    'nuxt-socket-io',
     // Doc: https://github.com/nuxt/content
     '@nuxt/content',
   ],
+  io: {
+    // module options
+    sockets: [
+      {
+        name: 'main',
+        url: 'http://localhost:8091',
+      },
+    ],
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options

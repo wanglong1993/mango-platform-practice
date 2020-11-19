@@ -5,14 +5,14 @@
 const BASE_URL =
   process.env.NODE_ENV !== 'production'
     ? 'http://localhost:'
-    : 'http://106.54.247.224:'
+    : 'http://139.198.189.114:'
 export default {
   RTMQ_SERVICE: 'ws://106.54.247.224:15674/ws',
   MONITOR_SERVICE: BASE_URL + '8090',
   DRUID_SERVICE: BASE_URL + '8083/druid/index.html',
-  RTBOARD_SERVICE: BASE_URL + '15672',
+  RTBOARD_SERVICE: 'http://106.54.247.224:15672',
   SWAGGER_SERVICE: BASE_URL + '9001/swagger-ui.html',
-  SENTINEL_SERVICE: BASE_URL + '8849',
+  SENTINEL_SERVICE: BASE_URL + '8858',
   NACOS_SERVICE: BASE_URL + '8848/nacos',
   API_URL: BASE_URL + '9001/*/api/sys/v1/',
   LOGIN_URL: BASE_URL + '9001/admin/api/sys/v1/pub/login',

@@ -4,7 +4,7 @@
       <el-aside
         width="200px"
         class="pr-2"
-        style="border-right: 1px solid #ececec;"
+        style="border-right: 1px solid #ececec"
       >
         <avue-tree
           ref="tree"
@@ -33,6 +33,19 @@
               >自定义提交</el-button
             >
           </template>
+
+          <template slot-scope="scope" slot="status">
+            <el-switch
+              :active-value="1"
+              :inactive-value="0"
+              @change="delFlagChange(scope.row)"
+              v-model="scope.row.status"
+              active-color="#13ce66"
+              inactive-color="#ff4949"
+            >
+            </el-switch>
+          </template>
+
           <!-- <template slot="search" slot-scope="{row,size}">
             <el-input placeholder="自定义输入框" :size="size" style="width:200px" v-model="search.slot"></el-input>
           </template>-->
@@ -75,7 +88,7 @@
             slot-scope="scope"
             slot="menu"
           >
-            <Crudbutton
+            <button-dialog
               class="pl-1"
               icon="el-icon-check"
               size="mini"
@@ -97,7 +110,7 @@
                   :option="roleOption"
                 ></avue-crud>
               </template>
-            </Crudbutton>
+            </button-dialog>
             <el-dropdown @command="handleCommand">
               <span class="el-dropdown-link">
                 <i class="el-icon-arrow-down el-icon--right"></i>
@@ -111,8 +124,6 @@
           </template>
         </avue-crud>
       </el-main>
-
-      <template></template>
     </el-container>
   </div>
 </template>
@@ -311,6 +322,7 @@ export default class sysUser extends Vue {
         formslot: true,
         labelslot: true,
         value: 1,
+        slot: true,
         addDisplay: false,
         dicData: [
           { label: '禁用', value: 0 },
@@ -461,23 +473,31 @@ export default class sysUser extends Vue {
     }
   }
 
+  async delFlagChange(row: any) {
+    await this.http.post(
+      'pri/user/save',
+      { id: row.id, status: row.status },
+      { prefix: 'admin' }
+    )
+  }
+
   //################### 封装的弹窗按钮的弹出数据初始化
   async initData(obj: any) {
     this.roleLoading = true
     this.form = obj
 
-    const { data } = await this.http.get('pri/user/findUserRoles/' + obj.id, {
-      prefix: 'admin',
-    })
-    let array: any = []
-    data.data.forEach((el: any) => {
-      let ind = this.roleData.findIndex((e: any) => e.name === el.name)
-      if (ind !== -1) {
-        array.push(this.roleData[ind])
-      }
-    })
-    // 初始选中按钮
-    this.toggleSelection(array)
+    // const { data } = await this.http.get('pri/user/findUserRoles/' + obj.id, {
+    //   prefix: 'admin',
+    // })
+    // let array: any = []
+    // data.data.forEach((el: any) => {
+    //   let ind = this.roleData.findIndex((e: any) => e.name === el.name)
+    //   if (ind !== -1) {
+    //     array.push(this.roleData[ind])
+    //   }
+    // })
+    // // 初始选中按钮
+    // this.toggleSelection(array)
   }
 
   //################### 封装的弹窗按钮的属性

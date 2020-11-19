@@ -37,6 +37,8 @@ export const state = () => ({
   closingPage: '',
   primaryColor: '',
   themeColor: '#20222A',
+  socketName: '',
+  socketMsg: [],
 })
 
 export const mutations = {
@@ -94,6 +96,18 @@ export const mutations = {
   deleteAll(state) {
     state.Auth.token = null
   },
+  logOut(state) {
+    state.auth.loggedIn = false
+  },
+  SET_SOCKET_NAME(state, name) {
+    state.socketName = name
+  },
+  PUSH_MSG(state, el) {
+    if (state.socketMsg.length > 20) {
+      state.socketMsg.splice(0, 2)
+    }
+    state.socketMsg.push(el)
+  },
 }
 
 export const getters = {}
@@ -102,7 +116,7 @@ export const actions = {
   async checkAuth({ state }, permission) {
     console.log(state)
     const statu = await state.Auth.permissions.findIndex(
-      (e) => e.authority === permission
+      (e) => e === permission
     )
 
     console.log(statu)

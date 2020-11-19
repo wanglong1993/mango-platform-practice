@@ -13,6 +13,11 @@ export default {
     team: '团队内排名',
     project: '项目访问',
     count: '项目数',
+    dict: {
+      menu: {
+        data: '数据字典',
+      },
+    },
     user: {
       menu: {
         auth: '授权',

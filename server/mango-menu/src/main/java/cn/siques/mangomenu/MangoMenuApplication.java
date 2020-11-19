@@ -7,13 +7,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import tk.mybatis.spring.annotation.MapperScan;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
+@EnableResourceServer
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableSwagger2Doc
-@EnableCaching
-@MapperScan("cn.siques.mangocore.dao")
 public class MangoMenuApplication {
 
     public static void main(String[] args) {

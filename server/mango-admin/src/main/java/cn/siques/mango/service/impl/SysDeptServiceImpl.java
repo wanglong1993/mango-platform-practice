@@ -3,50 +3,25 @@ package cn.siques.mango.service.impl;
 import cn.siques.mango.annotation.SaveDate;
 import cn.siques.mango.service.SysDeptService;
 
-import cn.siques.mangocommon.Page.MybatisPageHelper;
-import cn.siques.mangocommon.Page.PageRequest;
-import cn.siques.mangocommon.Page.PageResult;
-import cn.siques.mangocommon.utils.SecurityUtils;
-import cn.siques.mangocore.dao.SysDeptMapper;
-import cn.siques.mangocore.entity.SysDept;
+import cn.siques.Page.MybatisPageHelper;
+import cn.siques.Page.PageRequest;
+import cn.siques.Page.PageResult;
+import cn.siques.mango.dao.SysDeptMapper;
+import cn.siques.mango.entity.SysDept;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
-public class SysDeptServiceImpl implements SysDeptService {
-    @Autowired
+public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper,SysDept> implements SysDeptService {
+    @Resource
     SysDeptMapper sysDeptMapper;
 
-
-    @Override
-    @SaveDate(SysDept.class)
-    public int save(SysDept record) {
-        record.setCreateBy(SecurityUtils.getUsername());
-        record.setCreateTime(new Date());
-        int insert = sysDeptMapper.insert(record);
-        return insert;
-    }
-
-    @Override
-    public int delete(SysDept record) {
-        return 0;
-    }
-
-    @Override
-    public int delete(List<SysDept> records) {
-        return 0;
-    }
-
-    @Override
-    public SysDept findById(Long id) {
-        return null;
-    }
 
     @Override
     public PageResult findPage(PageRequest pageRequest) {
