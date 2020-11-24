@@ -1,11 +1,13 @@
 package cn.central.controller;
 
 
-
 import cn.central.common.Page.PageRequest;
-import cn.central.common.dto.JsonData;
+import cn.central.common.model.Result;
 import cn.central.entity.SysDict;
 import cn.central.service.SysDictService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -13,15 +15,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/sys/v1/pri/dict")
+@RequestMapping("/api/v1/pri/dict")
+@Api(description = "SysUserController", tags = {"字典接口"})
 public class SysDictController {
     @Autowired
     private SysDictService sysDictService;
 
-    @PreAuthorize("hasAuthority('sys:dict:add') AND hasAnyAuthority('sys:dict:edit')")
+    @PreAuthorize("@el.check('sys:dict:add') AND @el.check('sys:dict:edit')")
     @PostMapping("save")
-    public JsonData save(@RequestBody SysDict sysDict){
-        return JsonData.buildSuccess(sysDictService.save(sysDict));
+    public Result save(@RequestBody SysDict sysDict){
+        return Result.succeed(sysDictService.save(sysDict));
     }
 
     /**
@@ -29,22 +32,23 @@ public class SysDictController {
      * @param records
      * @return
      */
-    @PreAuthorize("hasAuthority('sys:dict:delete')")
+    @PreAuthorize("@el.check('sys:dict:delete')")
     @PostMapping("delete")
-    public JsonData delete(@RequestBody List<SysDict> records){
-        return JsonData.buildSuccess(sysDictService.removeByIds(records));
+    public Result delete(@RequestBody List<SysDict> records){
+        return Result.succeed(sysDictService.removeByIds(records));
     }
 
-    @PreAuthorize("hasAuthority('sys:dict:view')")
+    @PreAuthorize("@el.check('sys:dict:view')")
     @PostMapping("findPage")
-    public JsonData findPage(@RequestBody PageRequest pageRequest){
-        return JsonData.buildSuccess(sysDictService.findPage(pageRequest));
+    public Result findPage(@RequestBody PageRequest page){
+        Page<SysDict> detailsPage = new Page<>(page.getPageNum(), page.getPageSize());
+        return Result.succeed(sysDictService.page(detailsPage));
 
     }
 
-    @PreAuthorize("hasAuthority('sys:dict:view')")
+    @PreAuthorize("@el.check('sys:dict:view')")
     @GetMapping("findByLabel")
-    public JsonData findByLabel(@RequestParam String label){
-        return JsonData.buildSuccess(sysDictService.findByLabel(label));
+    public Result findByLabel(@RequestParam String label){
+        return Result.succeed(sysDictService.list(new QueryWrapper<SysDict>().eq("label",label)));
     }
 }

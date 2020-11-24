@@ -26,10 +26,5 @@ import java.util.List;
 @Repository
 public interface SysDictDataMapper extends BaseMapper<SysDictData> {
 
-    /**
-   * 分页查询
-   * @return
-   */
-    @Select({"select * from sys_dict_data"})
-    List<SysDictData> findPage();
+
 }

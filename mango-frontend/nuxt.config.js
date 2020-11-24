@@ -34,18 +34,17 @@ export default {
       },
     ],
     script: [
-      {
-        src:
-          'https://webapi.amap.com/maps?v=1.4.11&key=20bc75bcb6199e0a85986de691a4e5d6&plugin=AMap.PlaceSearch',
-      },
-      {
-        src:
-          'https://webapi.amap.com/maps?v=1.4.15&key=20bc75bcb6199e0a85986de691a4e5d6&plugin=AMap.MarkerClusterer',
-      },
-
-      {
-        src: 'https://webapi.amap.com/ui/1.0/main.js?v=1.0.11',
-      },
+      // {
+      //   src:
+      //     'https://webapi.amap.com/maps?v=1.4.11&key=20bc75bcb6199e0a85986de691a4e5d6&plugin=AMap.PlaceSearch',
+      // },
+      // {
+      //   src:
+      //     'https://webapi.amap.com/maps?v=1.4.15&key=20bc75bcb6199e0a85986de691a4e5d6&plugin=AMap.MarkerClusterer',
+      // },
+      // {
+      //   src: 'https://webapi.amap.com/ui/1.0/main.js?v=1.0.11',
+      // },
       // {
       //   src: 'https://cdn.staticfile.org/Sortable/1.10.0-rc2/Sortable.min.js',
       // },

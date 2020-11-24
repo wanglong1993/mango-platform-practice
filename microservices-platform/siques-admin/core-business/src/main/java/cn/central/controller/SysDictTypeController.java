@@ -3,12 +3,16 @@ package cn.central.controller;
 
 import cn.central.common.Page.PageRequest;
 import cn.central.common.Page.PageResult;
-import cn.central.common.dto.JsonData;
+
+import cn.central.common.model.Result;
 import cn.central.common.utils.SecurityUtils;
+import cn.central.entity.SysClientDetails;
 import cn.central.entity.SysDictData;
 import cn.central.entity.SysDictType;
 import cn.central.service.SysDictDataService;
 import cn.central.service.SysDictTypeService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.sun.org.apache.regexp.internal.RE;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -33,7 +37,7 @@ import java.util.List;
  * @modified: Shenghao.He
  */
 @RestController
-@RequestMapping("/api/sys/v1/pri/sysDictType")
+@RequestMapping("/api/v1/pri/sysDictType")
 @Api(description = "SysDictTypeController", tags = {"字典类型接口"})
 public class SysDictTypeController {
 
@@ -45,28 +49,23 @@ public class SysDictTypeController {
 
     /**
    * 分页查询字典类型表
-   * @param pageRequest
+   * @param page
    * @return
    */
     @PostMapping("findPage")
     @ApiOperation(value = "分页查询字典类型表", notes = "分页查询字典类型表")
-    public JsonData listSysRoleMenu(@RequestBody PageRequest pageRequest) {
-        PageResult page = sysDictTypeService.findPage(pageRequest);
-        return JsonData.buildSuccess(page);
+    public Result listSysRoleMenu(@RequestBody PageRequest page) {
+        Page<SysDictType> detailsPage = new Page<>(page.getPageNum(), page.getPageSize());
+        return Result.succeed(sysDictTypeService.page(detailsPage));
     }
 
     @PostMapping("findKeyByType")
     @ApiOperation(value = "根据字典类型查字典树", notes = "根据字典型查字典树")
-    public JsonData listKeyByType(@RequestBody SysDictType sysDictType) {
-//        System.out.println(sysDictType);
-//        QueryWrapper<SysDictData> wrapper = new QueryWrapper<>();
-//        wrapper.eq("dict_type",sysDictType.getDictType());
-//
-//        List<SysDictData> list = sysDictDataService.list(wrapper);
+    public Result listKeyByType(@RequestBody SysDictType sysDictType) {
 
         List<SysDictData> list =  sysDictDataService.listKeyByType(sysDictType.getDictType());
 
-        return JsonData.buildSuccess(list);
+        return Result.succeed(list);
     }
 
     /**
@@ -79,8 +78,8 @@ public class SysDictTypeController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "主键id", required = true)
     })
-    public JsonData getSysDictType(@PathVariable("id") String id){
-      return  JsonData.buildSuccess(sysDictTypeService.getById(id));
+    public Result getSysDictType(@PathVariable("id") String id){
+      return  Result.succeed(sysDictTypeService.getById(id));
     }
 
     /**
@@ -88,12 +87,12 @@ public class SysDictTypeController {
      * @param sysDictType 字典类型表
      * @return JsonData
      */
-    @PreAuthorize("hasAuthority('sys:dict:add')")
+    @PreAuthorize("@el.check('sys:dict:add')")
     @PostMapping
     @ApiOperation(value = "新增字典类型表", notes = "新增字典类型表")
-    public JsonData saveSysDictType(@RequestBody SysDictType sysDictType){
+    public Result saveSysDictType(@RequestBody SysDictType sysDictType){
                 sysDictType.setCreateBy(SecurityUtils.getUsername());
-      return  JsonData.buildSuccess(sysDictTypeService.save(sysDictType));
+      return  Result.succeed(sysDictTypeService.save(sysDictType));
     }
 
     /**
@@ -107,8 +106,8 @@ public class SysDictTypeController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "主键id", required = true)
     })
-    public JsonData updateSysDictType(@PathVariable String id, @RequestBody SysDictType sysDictType){
-      return  JsonData.buildSuccess(sysDictTypeService.updateById(sysDictType));
+    public Result updateSysDictType(@PathVariable String id, @RequestBody SysDictType sysDictType){
+      return  Result.succeed(sysDictTypeService.updateById(sysDictType));
     }
 
     /**
@@ -121,8 +120,8 @@ public class SysDictTypeController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "主键id", required = true)
     })
-    public JsonData deleteSysDictType(@PathVariable String id){
-      return  JsonData.buildSuccess(sysDictTypeService.removeById(id));
+    public Result deleteSysDictType(@PathVariable String id){
+      return  Result.succeed(sysDictTypeService.removeById(id));
     }
 
 }

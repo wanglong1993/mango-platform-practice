@@ -7,14 +7,17 @@
         :table-loading="loading"
         :data="tableData"
         :option="option"
+        @row-save="rowSave"
+        @row-del="rowDel"
         @row-update="rowUpdate"
+        @refresh-change="rowRefresh"
       >
-        <template slot-scope="scope" slot="delFlag">
+        <template slot-scope="scope" slot="status">
           <el-switch
             :active-value="0"
             :inactive-value="1"
-            @change="delFlagChange(scope.row)"
-            v-model="scope.row.delFlag"
+            @change="statusChange(scope.row)"
+            v-model="scope.row.status"
             active-color="#13ce66"
             inactive-color="#ff4949"
           >
@@ -37,8 +40,8 @@
           </button-dialog>
         </template>
 
-        <!-- <template slot="delFlagForm" slot-scope="scope">
-          <el-radio-group v-model="scope.row.delFlag">
+        <!-- <template slot="statusForm" slot-scope="scope">
+          <el-radio-group v-model="scope.row.status">
             <el-radio :label="1">禁用</el-radio>
             <el-radio :label="0">正常</el-radio>
           </el-radio-group>
@@ -71,12 +74,12 @@ export default class sysRole extends Vue {
     column: [
       {
         label: '角色编号',
-        prop: 'name',
+        prop: 'roleCode',
         disabled: true,
       },
       {
         label: '角色名称',
-        prop: 'remark',
+        prop: 'roleName',
         disabled: true,
       },
     ],
@@ -97,7 +100,7 @@ export default class sysRole extends Vue {
       `/pri/role/saveRoleMenus`,
       { roleMenus, roleId: row.id },
       {
-        prefix: 'admin',
+        prefix: 'core',
       }
     )
 
@@ -114,32 +117,53 @@ export default class sysRole extends Vue {
     }, 500)
   }
 
-  async delFlagChange(row: any) {
+  async statusChange(row: any) {
     const res = await this.http.post(
-      '/pri/role/save',
+      '/pri/role',
       {
         id: row.id,
-        delFlag: row.delFlag,
+        roleCode: row.roleCode,
+        status: row.status,
       },
       {
-        prefix: 'admin',
+        prefix: 'core',
       }
     )
 
     console.log(res.data)
   }
 
-  async rowUpdate(form: any, index: any, done: any, loading: any) {}
+  async rowSave(form: any, index: any, done: any, loading: any) {
+    const res = await this.http.post('/pri/role', form, { prefix: 'core' })
+    setTimeout(() => {
+      done(form)
+    }, 300)
+    this.fetchRoleList()
+  }
+
+  async rowUpdate(form: any, index: any, done: any, loading: any) {
+    this.rowSave(form, index, done, loading)
+  }
+
+  rowRefresh() {
+    this.fetchRoleList()
+  }
+
+  async rowDel(form: any, index: any, done: any, loading: any) {
+    this.mixConfirm(async () => {
+      await this.http.delete(`/pri/role/${form.id}`, { prefix: 'core' })
+    }, this.fetchRoleList)
+  }
 
   async initData(row: any) {
     this.form = row
     const res = await this.http.get(`/pri/role/findRoleMenus/${row.id}`, {
-      prefix: 'admin',
+      prefix: 'core',
     })
 
     setTimeout(() => {
       let checkedKeys: any = []
-      res.data.data.sysMenuList.map((e: any) => {
+      res.data.datas.sysMenuList.map((e: any) => {
         if (e.type == 2) {
           checkedKeys.push(e)
         }
@@ -173,7 +197,7 @@ export default class sysRole extends Vue {
         ],
         label: '角色编码',
         editDisabled: true,
-        prop: 'name',
+        prop: 'roleCode',
       },
       {
         rules: [
@@ -185,7 +209,13 @@ export default class sysRole extends Vue {
         ],
         label: '角色名称',
 
-        prop: 'remark',
+        prop: 'roleName',
+      },
+      {
+        label: '排序',
+
+        prop: 'roleSort',
+        value: 30,
       },
       {
         label: '创建时间',
@@ -202,14 +232,14 @@ export default class sysRole extends Vue {
 
       {
         label: '角色状态',
-        prop: 'delFlag',
+        prop: 'status',
         dicData: [
           { label: '禁用', value: 1 },
           { label: '正常', value: 0 },
         ],
         // formslot: true,
         labelslot: true,
-        value: 1,
+        value: 0,
         slot: true,
         addDisplay: false,
         editDisplay: false,
@@ -220,7 +250,7 @@ export default class sysRole extends Vue {
 
   cellStyle({ row, column, rowIndex, columnIndex }: any) {
     if (columnIndex == 2) {
-      if (row.remark !== '超级管理员') {
+      if (row.roleCode !== 'corpAdmin') {
         return {
           color: 'green',
           fontWeight: 'bold',
@@ -242,11 +272,11 @@ export default class sysRole extends Vue {
 
   async fetchRoleList() {
     this.loading = true
-    const res = await this.http.get('pri/role/findAll', { prefix: 'admin' })
+    const res = await this.http.get('pri/role', { prefix: 'core' })
 
     setTimeout(() => {
       this.loading = false
-      this.tableData = res.data.data
+      this.tableData = res.data.datas
     }, 500)
   }
 }

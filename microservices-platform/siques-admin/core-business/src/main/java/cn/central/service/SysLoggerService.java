@@ -20,5 +20,4 @@ import cn.central.entity.SysLogger;
  */
 public interface SysLoggerService extends IService<SysLogger> {
 
-    PageResult findPage(PageRequest pageRequest);
 }

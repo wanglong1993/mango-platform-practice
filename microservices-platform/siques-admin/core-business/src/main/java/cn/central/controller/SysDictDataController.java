@@ -1,10 +1,12 @@
 package cn.central.controller;
 
 import cn.central.common.Page.PageRequest;
-import cn.central.common.Page.PageResult;
-import cn.central.common.dto.JsonData;
+
+import cn.central.common.model.Result;
+import cn.central.entity.SysClientDetails;
 import cn.central.entity.SysDictData;
 import cn.central.service.SysDictDataService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -29,7 +31,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/sys/v1/pri/sysDictData")
+@RequestMapping("/api/v1/pri/sysDictData")
 @Api(description = "SysDictDataController", tags = {"字典数据接口"})
 public class SysDictDataController {
 
@@ -39,14 +41,14 @@ public class SysDictDataController {
 
     /**
    * 分页查询字典数据表
-   * @param pageRequest
+   * @param page
    * @return
    */
     @PostMapping("findPage")
     @ApiOperation(value = "分页查询字典数据表", notes = "分页查询字典数据表")
-    public JsonData listSysRoleMenu(@RequestBody PageRequest pageRequest) {
-        PageResult page = sysDictDataService.findPage(pageRequest);
-        return JsonData.buildSuccess(page);
+    public Result listSysRoleMenu(@RequestBody PageRequest page) {
+        Page<SysDictData> detailsPage = new Page<>(page.getPageNum(), page.getPageSize());
+        return Result.succeed(sysDictDataService.page(detailsPage));
     }
 
 
@@ -60,8 +62,8 @@ public class SysDictDataController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "dictCode", value = "主键id", required = true)
     })
-    public JsonData getSysDictData(@PathVariable("dictCode") String dictCode){
-      return  JsonData.buildSuccess(sysDictDataService.getById(dictCode));
+    public Result getSysDictData(@PathVariable("dictCode") String dictCode){
+      return  Result.succeed(sysDictDataService.getById(dictCode));
     }
 
     /**
@@ -69,11 +71,11 @@ public class SysDictDataController {
      * @param sysDictData 字典数据表
      * @return JsonData
      */
-    @PreAuthorize("hasAuthority('sys:dict:add')")
+    @PreAuthorize("@el.check('sys:dict:add')")
     @PostMapping
     @ApiOperation(value = "新增字典数据表", notes = "新增字典数据表")
-    public JsonData saveSysDictData(@RequestBody SysDictData sysDictData){
-      return  JsonData.buildSuccess(sysDictDataService.save(sysDictData));
+    public Result saveSysDictData(@RequestBody SysDictData sysDictData){
+      return  Result.succeed(sysDictDataService.save(sysDictData));
     }
 
     /**
@@ -87,8 +89,8 @@ public class SysDictDataController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "dictCode", value = "主键id", required = true)
     })
-    public JsonData updateSysDictData(@PathVariable String dictCode, @RequestBody SysDictData sysDictData){
-      return  JsonData.buildSuccess(sysDictDataService.updateById(sysDictData));
+    public Result updateSysDictData(@PathVariable String dictCode, @RequestBody SysDictData sysDictData){
+      return  Result.succeed(sysDictDataService.updateById(sysDictData));
     }
 
     /**
@@ -101,8 +103,8 @@ public class SysDictDataController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "dictCode", value = "主键id", required = true)
     })
-    public JsonData deleteSysDictData(@PathVariable String dictCode){
-      return  JsonData.buildSuccess(sysDictDataService.removeById(dictCode));
+    public Result deleteSysDictData(@PathVariable String dictCode){
+      return  Result.succeed(sysDictDataService.removeById(dictCode));
     }
 
 }

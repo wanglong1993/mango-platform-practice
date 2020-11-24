@@ -45,29 +45,29 @@ export default class index extends Vue {
     background: true,
   }
 
-  // async checkAuth() {
-  //     this.permission.delBtn = await this.$store.dispatch(
-  //       'checkAuth',
-  //        'sys::edit'
-  //      )
-  //     this.permission.addBtn = await this.$store.dispatch(
-  //         'checkAuth',
-  //         'sys:',${pathName},':add'
-  //     )
-  //             this.permission.menu = await this.$store.dispatch(
-  //         'checkAuth',
-  //         'sys:',${pathName},':edit'
-  //     )
-  // }
+  async checkAuth() {
+    this.permission.delBtn = await this.$store.dispatch(
+      'checkAuth',
+      'sys:app:delete'
+    )
+    this.permission.addBtn = await this.$store.dispatch(
+      'checkAuth',
+      'sys:app:add'
+    )
+    this.permission.menu = await this.$store.dispatch(
+      'checkAuth',
+      'sys:app:edit'
+    )
+  }
 
   permission = {
-    delBtn: true,
-    addBtn: true,
-    menu: true,
+    delBtn: false,
+    addBtn: false,
+    menu: false,
   }
 
   mounted() {
-    // this.checkAuth()
+    this.checkAuth()
   }
 
   option = {
@@ -80,7 +80,7 @@ export default class index extends Vue {
     dialogDrag: true,
     column: [
       {
-        label: '授权令牌有效时间',
+        label: '令牌时效',
         prop: 'accessTokenValiditySeconds',
       },
 
@@ -101,21 +101,21 @@ export default class index extends Vue {
         prop: 'redirectUrl',
       },
       {
-        label: '刷新令牌有效时间',
+        label: '刷新时间',
         prop: 'refreshTokenValiditySeconds',
       },
-      {
-        label: '资源服务器名称',
-        prop: 'resourceIds',
-      },
-      {
-        label: '授权域',
-        prop: 'scopes',
-      },
-      {
-        label: '授权信息',
-        prop: 'authorizations',
-      },
+      // {
+      //   label: '资源服务器名称',
+      //   prop: 'resourceIds',
+      // },
+      // {
+      //   label: '授权域',
+      //   prop: 'scopes',
+      // },
+      // {
+      //   label: '授权信息',
+      //   prop: 'authorizations',
+      // },
       {
         label: '自动授权请求域',
         prop: 'autoApproveScopes',
@@ -124,15 +124,15 @@ export default class index extends Vue {
   }
 
   async rowSave(form: any, done: any, loading: any) {
-    const res = await this.http.post('pri/sysClientDetails/save', form, {
-      prefix: 'admin',
+    const res = await this.http.post('pri/sysClientDetails/', form, {
+      prefix: 'core',
     })
     done(form)
   }
 
   async rowUpdate(form: any, index: any, done: any, loading: any) {
     const res = await this.http.put('pri/sysClientDetails/' + form.id, form, {
-      prefix: 'admin',
+      prefix: 'core',
     })
 
     done(form)
@@ -142,7 +142,7 @@ export default class index extends Vue {
   async rowDel(form: any, index: any) {
     this.mixConfirm(async () => {
       await this.http.delete('pri/sysClientDetails/' + form.id, {
-        prefix: 'admin',
+        prefix: 'core',
       })
     })
   }
@@ -157,13 +157,13 @@ export default class index extends Vue {
         pageSize: this.page.pageSize,
         params: {},
       },
-      { prefix: 'admin' }
+      { prefix: 'core' }
     )
-    this.page.total = data.data.totalSize
+    this.page.total = data.datas.total
 
     setTimeout(() => {
       this.loading = false
-      this.tableData = data.data.content
+      this.tableData = data.datas.records
     }, 500)
   }
 

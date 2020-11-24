@@ -2,10 +2,12 @@ package cn.central.controller;
 
 import cn.central.common.Page.PageRequest;
 import cn.central.common.Page.PageResult;
-import cn.central.common.dto.JsonData;
 
+
+import cn.central.common.model.Result;
 import cn.central.entity.SysClientDetails;
 import cn.central.service.SysClientDetailsService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -29,7 +31,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/sys/v1/pri/sysClientDetails")
+@RequestMapping("/api/v1/pri/sysClientDetails")
 @Api(description = "SysClientDetailsController", tags = {"客户端接口"})
 public class SysClientDetailsController {
 
@@ -39,13 +41,14 @@ public class SysClientDetailsController {
 
     /**
    * 分页查询
-   * @param pageRequest
+   * @param page
    * @return
    */
     @PostMapping("findPage")
     @ApiOperation(value = "分页查询", notes = "分页查询")
-    public JsonData listSysRoleMenu(@RequestBody PageRequest pageRequest) {
-        return JsonData.buildSuccess(sysClientDetailsService.findPage(pageRequest));
+    public Result listSysRoleMenu(@RequestBody PageRequest page) {
+        Page<SysClientDetails> detailsPage = new Page<>(page.getPageNum(), page.getPageSize());
+        return Result.succeed(sysClientDetailsService.page(detailsPage));
     }
 
 
@@ -59,8 +62,8 @@ public class SysClientDetailsController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "主键id", required = true)
     })
-    public JsonData getSysClientDetails(@PathVariable("id") Long id){
-      return  JsonData.buildSuccess(sysClientDetailsService.getById(id));
+    public Result getSysClientDetails(@PathVariable("id") Long id){
+      return  Result.succeed(sysClientDetailsService.getById(id));
     }
 
     /**
@@ -70,8 +73,8 @@ public class SysClientDetailsController {
      */
     @PostMapping
     @ApiOperation(value = "新增", notes = "新增")
-    public JsonData saveSysClientDetails(@RequestBody SysClientDetails sysClientDetails){
-      return  JsonData.buildSuccess(sysClientDetailsService.save(sysClientDetails));
+    public Result saveSysClientDetails(@RequestBody SysClientDetails sysClientDetails){
+      return  Result.succeed(sysClientDetailsService.save(sysClientDetails));
     }
 
     /**
@@ -85,8 +88,8 @@ public class SysClientDetailsController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "主键id", required = true)
     })
-    public JsonData updateSysClientDetails(@PathVariable Long id, @RequestBody SysClientDetails sysClientDetails){
-      return  JsonData.buildSuccess(sysClientDetailsService.updateById(sysClientDetails));
+    public Result updateSysClientDetails(@PathVariable("id") Long id, @RequestBody SysClientDetails sysClientDetails){
+      return  Result.succeed(sysClientDetailsService.updateById(sysClientDetails));
     }
 
     /**
@@ -99,8 +102,8 @@ public class SysClientDetailsController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "主键id", required = true)
     })
-    public JsonData deleteSysClientDetails(@PathVariable Long id){
-      return  JsonData.buildSuccess(sysClientDetailsService.removeById(id));
+    public Result deleteSysClientDetails(@PathVariable("id") Long id){
+      return  Result.succeed(sysClientDetailsService.removeById(id));
     }
 
 }

@@ -11,8 +11,8 @@ import java.util.List;
 
 @Data
 @Validated
-@ConfigurationProperties(prefix="spring")
+@ConfigurationProperties("spring")
 public class DbProperty {
-   @NotNull
+    /**多数据源地址**/
    private List<DbConfig> multiplesource;
 }

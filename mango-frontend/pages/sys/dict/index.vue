@@ -168,7 +168,7 @@ export default class sysRole extends Vue {
         {
           dictType: this.form.dictType,
         },
-        { prefix: 'admin' }
+        { prefix: 'core' }
       )
       setTimeout(() => {
         this.subData = data.data
@@ -347,7 +347,7 @@ export default class sysRole extends Vue {
         pageSize: this.page.pageSize,
         params: {},
       },
-      { prefix: 'admin' }
+      { prefix: 'core' }
     )
     this.page.total = data.data.totalSize
 
@@ -365,7 +365,7 @@ export default class sysRole extends Vue {
 
     console.log(form)
     const res = await this.http.post('pri/sysDictType', form, {
-      prefix: 'admin',
+      prefix: 'core',
     })
     console.log(res.data)
   }
@@ -380,7 +380,7 @@ export default class sysRole extends Vue {
       form.deptId = form.sysDept.deptList[form.sysDept.deptList.length - 1]
     }
 
-    const res = await this.http.post('pri/user/save', form, { prefix: 'admin' })
+    const res = await this.http.post('pri/user/save', form, { prefix: 'core' })
   }
 }
 </script>

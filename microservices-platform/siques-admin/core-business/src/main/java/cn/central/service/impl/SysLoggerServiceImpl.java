@@ -1,11 +1,6 @@
 package cn.central.service.impl;
 
-import cn.central.common.Page.MybatisPageHelper;
-import cn.central.common.Page.PageRequest;
-import cn.central.common.Page.PageResult;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-
-
 import cn.central.entity.SysLogger;
 import cn.central.dao.SysLoggerMapper;
 import cn.central.service.SysLoggerService;
@@ -28,13 +23,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysLoggerServiceImpl extends ServiceImpl<SysLoggerMapper, SysLogger> implements SysLoggerService {
 
-
     @Autowired
     SysLoggerMapper sysLoggerMapper;
 
-    @Override
-    public PageResult findPage(PageRequest pageRequest) {
-        PageResult page = MybatisPageHelper.findPage(pageRequest, sysLoggerMapper);
-        return page;
-    }
 }

@@ -27,10 +27,5 @@ import java.util.List;
 @Repository
 public interface SysDictTypeMapper extends BaseMapper<SysDictType> {
 
-    /**
-   * 分页查询
-   * @return
-   */
-    @Select({"select * from sys_dict_type"})
-    List<SysDictType> findPage();
+
 }

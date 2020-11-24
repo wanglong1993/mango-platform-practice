@@ -2,7 +2,7 @@ server:
   port: 9001
 spring:
   application:
-    name: mango-gateway
+    name: siques-gateway
   cloud:
     gateway:
       #添加跨域的配置
@@ -17,30 +17,19 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: admin_route   #路由id 没有固定规则但要求唯一，配合服务名
+        - id: core_business   #路由id 没有固定规则但要求唯一，配合服务名
           #          uri: http://localhost:8001 # 匹配提供服务的路由地址
-          uri: lb://mango-admin
+          uri: lb://core-business
           predicates:
-            - Path=/admin/api/sys/v1/**    #断言，路径相匹配进行路由
+            - Path=/core/api/v1/**    #断言，路径相匹配进行路由
           filters:
             - StripPrefix=1
-            - AddRequestHeader=X-Request-Id, heshenghao #过滤器工厂会在匹配的请求头上加上一对请求头,名称为X-Request-Id值为heshenghao
-        - id: mango_sound   #路由id 没有固定规则但要求唯一，配合服务名
-          #          uri: http://localhost:8001 # 匹配提供服务的路由地址
-          uri: lb://mango-sound
+        - id: search_center  #路由id 没有固定规则但要求唯一，配合服务名
+          uri: lb://search-center
           predicates:
-            - Path=/sound/api/sys/v1/**    #断言，路径相匹配进行路由
+            - Path=/search/api/v1/**    #断言，路径相匹配进行路由
           filters:
             - StripPrefix=1
-            - AddRequestHeader=X-Request-Id, heshenghao #过滤器工厂会在匹配的请求头上加上一对请求头,名称为X-Request-Id值为heshenghao
-        - id: mango_processing   #路由id 没有固定规则但要求唯一，配合服务名
-            #          uri: http://localhost:8001 # 匹配提供服务的路由地址
-          uri: lb://mango-processing
-          predicates:
-            - Path=/processing/api/sys/v1/**
-          filters:
-            - StripPrefix=1
-            - AddRequestHeader=X-Request-Id, heshenghao
         - id: mango_task  #路由id 没有固定规则但要求唯一，配合服务名
             #          uri: http://localhost:8001 # 匹配提供服务的路由地址
           uri: lb://mango-task
@@ -48,31 +37,18 @@ spring:
             - Path=/task/api/sys/v1/**
           filters:
             - StripPrefix=1
-            - AddRequestHeader=X-Request-Id, heshenghao
-        - id: ${service.admin}
-          uri: lb://${service.admin}
+        - id: ${service.core}
+          uri: lb://${service.core}
           predicates:
-            - Path=/${service.admin}/**
+            - Path=/${service.core}/**
           filters:
             - StripPrefix=1
-        - id: ${service.sound}
-          uri: lb://${service.sound}
+        - id: ${service.search}
+          uri: lb://${service.search}
           predicates:
-            - Path=/${service.sound}/**
+            - Path=/${service.search}/**
           filters:
             - StripPrefix=1
-#        - id: ${service.processing}
-#          uri: lb://${service.processing}
-#          predicates:
-#            - Path=/${service.processing}/**
-#          filters:
-#            - StripPrefix=1
-#        - id: ${service.task}
-#          uri: lb://${service.task}
-#          predicates:
-#            - Path=/${service.task}/**
-#          filters:
-#            - StripPrefix=1
     nacos:
       discovery:
         server-addr: 139.198.189.114:8848
@@ -84,6 +60,7 @@ spring:
       datasource: #添加Nacos数据源配置
         flow:
           nacos:
+            namespace: 5642eb84-60d0-42f3-83d7-1fb41c965cf2
             server-addr: 139.198.189.114:8848
             dataId: ${spring.application.name}-flow-rules
             groupId: SENTINEL_GROUP  # nacos配置组
@@ -94,8 +71,8 @@ spring:
 # 需要配置的微服务名字
 
 service:
-  admin: mango-admin
-  sound: mango-sound
+  core: core-business
+  search: search-center
   processing: mango-processing
   task: mango-task
 

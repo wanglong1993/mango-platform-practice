@@ -1,7 +1,8 @@
 package cn.central.oauth.dao;
 
 
-import cn.central.oauth.entity.SysRole;
+
+import cn.central.common.model.SysRole;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 

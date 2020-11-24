@@ -1,11 +1,22 @@
 package cn.central.common.Page;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 分页返回结果
  */
-public class PageResult {
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class PageResult<T> implements Serializable {
+    private static final long serialVersionUID = -275582248840135389L;
     /**
      * 当前页码
      */
@@ -20,7 +31,10 @@ public class PageResult {
      * 记录总量
      */
     private long totalSize;
-
+    /**
+     * 是否成功：0 成功、1 失败
+     */
+    private int code;
     /**
      * 页码总数
      */
@@ -29,45 +43,7 @@ public class PageResult {
     /**
      * 分页数据
      */
-    private List<?> content;
+    private List<T> content;
 
-    public int getPageNum() {
-        return pageNum;
-    }
 
-    public void setPageNum(int pageNum) {
-        this.pageNum = pageNum;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public long getTotalSize() {
-        return totalSize;
-    }
-
-    public void setTotalSize(long totalSize) {
-        this.totalSize = totalSize;
-    }
-
-    public int getTotalPages() {
-        return totalPages;
-    }
-
-    public void setTotalPages(int totalPages) {
-        this.totalPages = totalPages;
-    }
-
-    public List<?> getContent() {
-        return content;
-    }
-
-    public void setContent(List<?> content) {
-        this.content = content;
-    }
 }

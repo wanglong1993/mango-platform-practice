@@ -1,9 +1,7 @@
 package cn.central.service.impl;
 
 
-import cn.central.common.Page.MybatisPageHelper;
-import cn.central.common.Page.PageRequest;
-import cn.central.common.Page.PageResult;
+
 import cn.central.dao.SysClientDetailsDao;
 import cn.central.entity.SysClientDetails;
 import cn.central.service.SysClientDetailsService;
@@ -76,14 +74,6 @@ public class SysClientDetailsServiceImpl extends ServiceImpl<SysClientDetailsDao
         SysClientDetailsDao.deleteById(clientId);
     }
 
-    @Override
-    public List<SysClientDetails> findAll() {
-        return SysClientDetailsDao.findAll();
-    }
 
-    @Override
-    public PageResult findPage(PageRequest pageRequest) {
-        return MybatisPageHelper.findPage(pageRequest,SysClientDetailsDao);
-    }
 
 }

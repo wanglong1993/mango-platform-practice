@@ -27,11 +27,8 @@ public class OauthResourceServerConfig extends ResourceServerConfigurerAdapter {
     private final ResourceServerProperties resourceServerProperties;
     private final TokenStore tokenStore;
 
-
-
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-
             resources.tokenStore(tokenStore)
                     .resourceId(resourceServerProperties.getResourceId());
     }
@@ -49,7 +46,7 @@ public class OauthResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/actuator/**").permitAll()
                 .antMatchers("/v2/api-docs/**").permitAll()
                 // 允许public下的可访问
-                .antMatchers("/api/sys/v1/pub/**").permitAll()
+                .antMatchers("/api/v1/pub/**").permitAll()
                 .anyRequest().authenticated();
 //                .and().sessionManagement()
 //                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) ;

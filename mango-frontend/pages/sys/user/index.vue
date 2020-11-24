@@ -23,6 +23,7 @@
           :data="tableData"
           :option="option"
           @refresh-change="rowRefresh"
+          @row-del="rowDel"
           @row-update="rowUpdate"
           @search-change="searchChange"
           @row-save="rowSave"
@@ -50,17 +51,17 @@
             <el-input placeholder="自定义输入框" :size="size" style="width:200px" v-model="search.slot"></el-input>
           </template>-->
           <!-- TODO 有问题 -->
-          <template slot-scope="scope" slot="sysDeptForm">
+          <template slot-scope="scope" slot="sysOfficeForm">
             <el-cascader
-              v-if="scope.row.sysDept"
-              v-model="scope.row.sysDept.deptList"
+              v-if="scope.row.sysOffice"
+              v-model="scope.row.sysOffice.officeList"
               :props="casProps"
               :options="treeData"
               clearable
             ></el-cascader>
             <el-cascader
               v-else
-              v-model="scope.row.deptTree"
+              v-model="scope.row.officeTree"
               :props="casProps"
               :options="treeData"
               clearable
@@ -80,8 +81,8 @@
             </el-radio-group>
           </template>
 
-          <template slot="sysDept" slot-scope="scope">
-            {{ scope.row.sysDept ? scope.row.sysDept.name : '' }}
+          <template slot="sysOffice" slot-scope="scope">
+            {{ scope.row.sysOffice ? scope.row.sysOffice.name : '' }}
           </template>
           <template
             v-if="!(scope.row.name === 'admin')"
@@ -96,7 +97,7 @@
               :data="form"
               :option="crudOption"
               @click="initData(scope.row)"
-              @submit="submit"
+              @submit="submit(scope.row)"
               :title="$t('mango.user.menu.auth')"
             >
               <!-- 具名插槽 -->
@@ -157,11 +158,11 @@ export default class sysUser extends Vue {
       // { label: '上级菜单', prop: 'parentMe' },
       {
         label: '角色名称',
-        prop: 'remark',
+        prop: 'roleName',
       },
       {
         label: '角色编码',
-        prop: 'name',
+        prop: 'roleCode',
       },
     ],
   }
@@ -169,14 +170,14 @@ export default class sysUser extends Vue {
   crudOption = {
     column: [
       {
-        label: '姓名',
-        prop: 'name',
+        label: '用户名',
+        prop: 'loginCode',
         placeholder: '请输入姓名',
         disabled: true,
       },
       {
         label: '昵称',
-        prop: 'nickName',
+        prop: 'userName',
         disabled: true,
       },
     ],
@@ -184,10 +185,10 @@ export default class sysUser extends Vue {
   //########### 表格按钮权限
 
   async checkAuth() {
-    // this.permission.delBtn = await this.$store.dispatch(
-    //   'checkAuth',
-    //   'sys:user:edit'
-    // )
+    this.permission.delBtn = await this.$store.dispatch(
+      'checkAuth',
+      'sys:user:delete'
+    )
     this.permission.addBtn = await this.$store.dispatch(
       'checkAuth',
       'sys:user:add'
@@ -231,8 +232,21 @@ export default class sysUser extends Vue {
             trigger: 'blur',
           },
         ],
+        label: '用户编码',
+        prop: 'userCode',
+        editDisplay: false,
+      },
+      {
+        rules: [
+          {
+            required: true,
+            message: '',
+            trigger: 'blur',
+          },
+        ],
         label: '登陆账号',
-        prop: 'name',
+        prop: 'loginCode',
+        value: 'user',
         searchSpan: 8,
         search: true,
         searchRules: [
@@ -268,7 +282,7 @@ export default class sysUser extends Vue {
           },
         ],
         label: '用户昵称',
-        prop: 'nickName',
+        prop: 'userName',
       },
       {
         label: '手机号',
@@ -283,21 +297,6 @@ export default class sysUser extends Vue {
             trigger: 'blur',
           },
         ],
-      },
-      {
-        // rules: [
-        //   {
-        //     required: true,
-        //     message: '',
-        //     trigger: 'blur',
-        //   },
-        // ],
-        formslot: true,
-        labelslot: true,
-        // errorslot: true,
-        label: '归属机构',
-        prop: 'sysDept',
-        slot: true,
       },
       {
         label: '邮箱',
@@ -336,13 +335,13 @@ export default class sysUser extends Vue {
   treeOption = {
     defaultExpandAll: true,
     props: {
-      label: 'name',
+      label: 'officeName',
     },
     formOption: {
       labelWidth: 100,
       column: [
         {
-          label: 'name',
+          label: 'officeName',
           prop: 'label',
         },
       ],
@@ -352,7 +351,7 @@ export default class sysUser extends Vue {
   //########### 级联选择器属性
   casProps = {
     value: 'id',
-    label: 'name',
+    label: 'officeName',
     checkStrictly: true,
     expandTrigger: 'hover',
   }
@@ -372,25 +371,26 @@ export default class sysUser extends Vue {
     pageSize: 10,
     pageSizes: [5, 10, 20],
     layout: 'total, sizes,prev, pager, next, jumper',
-    background: false,
+    background: true,
   }
   // 请求方法变更
 
   //########### 生命周期初始化
+
   mounted() {
     this.init()
     this.checkAuth()
   }
   async init() {
-    const { data } = await this.http.get('/pri/role/findAll', {
-      prefix: 'admin',
+    const { data } = await this.http.get('/pri/role/', {
+      prefix: 'core',
     })
-    this.roleData = data.data
+    this.roleData = data.datas
 
-    const { data: data1 } = await this.http.get('/pri/dept/findDeptTree', {
-      prefix: 'admin',
+    const res = await this.http.get('/pri/office/findOfficeTree', {
+      prefix: 'core',
     })
-    this.treeData = data1.data
+    this.treeData = res.data.datas
   }
   //########### 方法
 
@@ -398,7 +398,7 @@ export default class sysUser extends Vue {
     this.$confirm(
       `${this.$t(
         this.i18Pre + 'resetPass.contentPre'
-      )}<strong style="color:red;"> <i>${row.name}</i> </strong>${this.$t(
+      )}<strong style="color:red;"> <i>${row.userName}</i> </strong>${this.$t(
         this.i18Pre + 'resetPass.contentPro'
       )}`,
       `${this.$t(this.i18Pre + 'resetPass.title')}`,
@@ -409,42 +409,49 @@ export default class sysUser extends Vue {
         dangerouslyUseHTMLString: true,
       }
     )
-      .then(() => {})
+      .then(async () => {
+        await this.http.put(
+          `pri/user/password/${row.id}`,
+          {},
+          { prefix: 'core' }
+        )
+      })
       .catch(() => {})
   }
 
   async rowSave(form: any, done: any, loading: any) {
-    setTimeout(() => {
-      done(form)
-    }, 500)
     // 如果机构树存在要转化下格式
-    if (form.deptTree) {
-      form.deptId = form.deptTree[form.deptTree.length - 1]
-      form.deptTree = form.deptTree.toString()
-    }
+    // if (form.officeTree) {
+    //   form.officeId = form.officeTree[form.officeTree.length - 1]
+    //   form.officeTree = form.officeTree.toString()
+    // }
 
-    const res = await this.http.post('pri/user/save', form, { prefix: 'admin' })
+    const res = await this.http.post('pri/user', form, { prefix: 'core' })
+    done(form)
   }
 
   async rowUpdate(form: any, index: any, done: any, loading: any) {
-    setTimeout(() => {
-      done(form)
-      this.onLoad()
-    }, 500)
-    if (form.sysDept.deptList !== null) {
-      form.deptTree = form.sysDept.deptList.toString()
-      form.deptId = form.sysDept.deptList[form.sysDept.deptList.length - 1]
-    }
+    const res = await this.http.post('pri/user', form, { prefix: 'core' })
+    done(form)
+    this.onLoad()
+  }
 
-    const res = await this.http.post('pri/user/save', form, { prefix: 'admin' })
+  async rowDel(form: any, index: any, done: any, loading: any) {
+    this.mixConfirm(async () => {
+      await this.http.delete(`pri/user/${form.id}`, { prefix: 'core' })
+      done(form)
+    }, this.onLoad)
+  }
+
+  $refs!: {
+    roleList: HTMLFormElement
   }
 
   toggleSelection(val?: any) {
-    const ref: any = this.$refs.roleList
-    ref.toggleSelection()
+    this.$refs.roleList.toggleSelection()
     setTimeout(() => {
       if (val) {
-        ref.toggleSelection(val)
+        this.$refs.roleList.toggleSelection(val)
         this.roleLoading = false
       }
     }, 500)
@@ -456,8 +463,8 @@ export default class sysUser extends Vue {
   }
 
   cellStyle({ row, column, rowIndex, columnIndex }: any) {
-    if (columnIndex == 8) {
-      if (row.statu === 0) {
+    if (columnIndex == 1) {
+      if (row.userCode === 'corpAdmin') {
         return {
           color: 'red',
           fontWeight: 'bold',
@@ -475,9 +482,9 @@ export default class sysUser extends Vue {
 
   async delFlagChange(row: any) {
     await this.http.post(
-      'pri/user/save',
+      'pri/user',
       { id: row.id, status: row.status },
-      { prefix: 'admin' }
+      { prefix: 'core' }
     )
   }
 
@@ -486,18 +493,18 @@ export default class sysUser extends Vue {
     this.roleLoading = true
     this.form = obj
 
-    // const { data } = await this.http.get('pri/user/findUserRoles/' + obj.id, {
-    //   prefix: 'admin',
-    // })
-    // let array: any = []
-    // data.data.forEach((el: any) => {
-    //   let ind = this.roleData.findIndex((e: any) => e.name === el.name)
-    //   if (ind !== -1) {
-    //     array.push(this.roleData[ind])
-    //   }
-    // })
-    // // 初始选中按钮
-    // this.toggleSelection(array)
+    const { data } = await this.http.get('pri/user/findUserRoles/' + obj.id, {
+      prefix: 'core',
+    })
+    let array: any = []
+    data.datas.forEach((el: any) => {
+      let ind = this.roleData.findIndex((e: any) => e.roleName === el.roleName)
+      if (ind !== -1) {
+        array.push(this.roleData[ind])
+      }
+    })
+    // 初始选中按钮
+    this.toggleSelection(array)
   }
 
   //################### 封装的弹窗按钮的属性
@@ -511,16 +518,16 @@ export default class sysUser extends Vue {
 
     let data: any = []
     if (this.id) {
-      data = await this.findDeptUser(this.id)
+      data = await this.findOfficeUser(this.id)
     } else {
       data = await this.findUser()
     }
 
-    this.page.total = data.data.totalSize
+    this.page.total = data.datas.total
 
     setTimeout(() => {
       this.loading = false
-      this.tableData = data.data.content
+      this.tableData = data.datas.records
     }, 200)
   }
 
@@ -532,26 +539,26 @@ export default class sysUser extends Vue {
         pageSize: this.page.pageSize,
         params: {},
       },
-      { prefix: 'admin' }
+      { prefix: 'core' }
     )
 
     return data
   }
 
-  async findDeptUser(id: any) {
+  async findOfficeUser(id: any) {
     const { data } = await this.http.post(
-      'pri/user/findDeptUser/' + id,
+      'pri/user/findOfficeUser/' + id,
       {
         pageNum: this.page.currentPage,
         pageSize: this.page.pageSize,
         params: {},
       },
-      { prefix: 'admin' }
+      { prefix: 'core' }
     )
     return data
   }
   // 角色授权表单提交
-  async submit() {
+  async submit(row: any) {
     const data: any = []
     this.multipleSelection.forEach((e: any) => {
       data.push({
@@ -559,17 +566,9 @@ export default class sysUser extends Vue {
         userId: this.form.id,
       })
     })
-    const res = await this.http.post('/pri/user/saveRole', data, {
-      prefix: 'admin',
+    const res = await this.http.post(`/pri/user/saveRole/${row.id}`, data, {
+      prefix: 'core',
     })
-    if (res.data.code === 200) {
-      this.$notify({
-        title: '',
-        message: '保存成功',
-        position: 'bottom-right',
-        type: 'success',
-      })
-    }
   }
 
   searchSubmit(row: any) {}

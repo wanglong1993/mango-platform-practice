@@ -1,26 +1,28 @@
 package cn.central.controller;
 
-import cn.central.common.Page.PageRequest;
-import cn.central.common.Page.PageResult;
-import cn.central.common.dto.JsonData;
 
-import cn.central.common.utils.*;
-import cn.central.config.OauthResourceTokenConfig;
-import cn.central.config.RedisUtils;
+import cn.central.common.config.OauthResourceTokenConfig;
+import cn.central.common.constant.AdminConstants;
+import cn.central.common.model.Result;
+import cn.central.common.model.SysUser;
+import cn.central.common.utils.JwtAuthenticationToken;
 import cn.central.controller.dto.LoginDto;
-import cn.central.controller.dto.RegisterDto;
-import cn.central.entity.SysUser;
 import cn.central.log.annotation.AuditLog;
 import cn.central.log.monitor.PointUtil;
-import cn.central.service.SysLoginLogService;
+import cn.central.service.SysMenuService;
 import cn.central.service.SysUserService;
+import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
-
+import io.swagger.annotations.Api;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.LinkedMultiValueMap;
@@ -36,9 +38,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController()
-@RequestMapping("/api/sys/v1/pub/")
+@RequestMapping("/api/v1/pub/")
+@Api(description = "SysLoginController", tags = {"认证相关结构"})
 public class SysLoginController {
     @Autowired
     private Producer producer;
@@ -46,108 +50,64 @@ public class SysLoginController {
     @Autowired
     private SysUserService sysUserService;
 
-
     @Autowired
-    private SysLoginLogService sysLoginLogService;
-
-    @Value("${server.port}")
-    private String port;
-    @GetMapping("test")
-    public JsonData test(){
-        return JsonData.buildSuccess(port);
-
-    }
-    @Autowired
-    public RedisUtils<String,String> redisUtils;
-
+    private SysMenuService sysMenuService;
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
 
 
 
-    @PostMapping("/online")
-    public JsonData onLine(@RequestBody PageRequest pageRequest){
-        PageResult page = sysLoginLogService.findPage(pageRequest);
-        return JsonData.buildSuccess(page);
-    }
-
-
-    @PostMapping("/register")
-    public JsonData register(@RequestBody RegisterDto registerDto){
-        String account = registerDto.getAccount();
-        String password = registerDto.getPassword();
-        SysUser sysUser = new SysUser();
-        sysUser.setName(account);
-        sysUser.setPassword(passwordEncoder.encode(password));
-
-        boolean save = sysUserService.save(sysUser);
-        return JsonData.buildSuccess(save);
-    }
-
-
     @GetMapping("/logout")
-    public JsonData logout(HttpServletRequest request){
-        String username = SecurityUtils.getUsername();
-        try {
-            redisUtils.deleteKey(username);
-        } catch (SecurityException e) {
-            throw new SecurityException(HttpStatus.UNAUTHORIZED.toString());
-        }
-//        sysLoginLogService.loginOutLog(username, IPUtils.getIpAddr(request));
-        return JsonData.buildSuccess(1);
+    public Result logout(HttpServletRequest request){
+
+        return Result.succeed(1);
     }
 
 
     @PostMapping("/login")
-    @AuditLog(operation = "'用户登录：'+ #loginDto.getAccount()")
-    public JsonData login(@RequestBody LoginDto loginDto, HttpServletRequest request){
-        String username = loginDto.getAccount();
+    @AuditLog(operation = "'用户登录：'+ #loginDto.getLoginCode()")
+    public Result login(@RequestBody LoginDto loginDto, HttpServletRequest request){
+        String loginCode = loginDto.getLoginCode();
         String password = loginDto.getPassword();
         String captcha = loginDto.getCaptcha();
         // 获取之前保存的验证码，与前台传来的验证码进行匹配
-        Object attribute = request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
-        if(attribute==null){
-            return JsonData.buildError("验证码已失效");
+        String attribute = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        if(StrUtil.isEmpty(attribute)){
+            return Result.failed("验证码已失效");
         }
 
         if(!captcha.equals(attribute)){
-            return JsonData.buildError("验证码错误");
+            return Result.failed("验证码错误");
         }
         // 用户信息
-        SysUser user = sysUserService.findByName(username);
+
+        SysUser user = sysUserService.getOne(new QueryWrapper<SysUser>().eq("login_code",loginCode));
         if(user ==null){
-            return JsonData.buildError("账号不存在");
+            return Result.failed("账号不存在");
         }
 
         if(!passwordEncoder.matches(password,user.getPassword())){
 
-            return JsonData.buildError("密码不正确");
+            return Result.failed("密码不正确");
         }
 
         if(user.getStatus()==0){
-            return JsonData.buildError("账号已锁定，请联系管理员");
+            return Result.failed("账号已锁定，请联系管理员");
         }
         // 把当前验证码舍弃
         request.getSession().setAttribute(Constants.KAPTCHA_SESSION_KEY,"");
 
-        // 系统登陆认证
-        // token存入
-//      JwtAuthenticationToken token =  SecurityUtils.login(request,username,password,authenticationManager);
-        System.out.println(password);
+        String accessToken = getAccessToken(loginCode, password);
 
-        String accessToken = getAccessToken(username, password);
 
-        System.out.println(accessToken);
-        JwtAuthenticationToken token = new JwtAuthenticationToken (username, "").setToken("Bearer "+accessToken);
-        List userInfo = getUserInfo(accessToken);
+        JwtAuthenticationToken token = new JwtAuthenticationToken (loginCode, "").setToken("Bearer "+accessToken);
+        List userInfo = getUserInfo(user.getUserCode());
 
-        PointUtil.info(user.getId().toString(), "user_login", "username="+user.getName()+"&mobile="+user.getMobile()+"&role="+user.getUserRoles());
+        PointUtil.info(user.getUserCode(), "user_login", "username="+user.getUserName()+"&mobile="+user.getMobile()+"&login_code="+user.getLoginCode());
 
         token.setPermissions(userInfo);
-//        redisUtils.setKey(token.getPrincipal().toString(),token.getToken());
-//        sysLoginLogService.writeLoginLog(username, IPUtils.getIpAddr(request));
 
-        return JsonData.buildSuccess(token);
+        return Result.succeed(token);
     }
 
     @Autowired
@@ -160,7 +120,7 @@ public class SysLoginController {
     @Value("${security.oauth2.client.user-info-uri}")
     private String userInfoUri;
     /**
-     * 不使用授权码
+     * 账号密码模式
      * @return
      */
     public String getAccessToken(String username,String password)   {
@@ -186,14 +146,16 @@ public class SysLoginController {
 
     /**
      * 获取用户权限信息
-     * @param accessToken
+     * @param userCode
      * @return
      */
-    public List  getUserInfo(String accessToken){
-        RestTemplate restTemplate = new RestTemplate();
-        Map result = restTemplate.getForObject(userInfoUri+"?access_token="+accessToken,Map.class);
-        List<String> list = (List) result.get("authorities");
-        return list;
+    public List  getUserInfo(String userCode){
+        if(userCode.equals(AdminConstants.ADMIN)){
+            return sysMenuService.list().stream()
+                    .filter(sysMenu -> sysMenu.getPerms() != null && !"".equals(sysMenu.getPerms()))
+                    .map(sysMenu -> sysMenu.getPerms()).collect(Collectors.toList());
+        }
+      return sysUserService.findPermission(userCode).stream().collect(Collectors.toList());
     }
 
     /**
@@ -211,7 +173,6 @@ public class SysLoginController {
         response.setHeader("Cache-Control","no-store, no-cache");
         response.setContentType("image/jpeg");
 
-//        response.setHeader("Access-Control-allow-credentials","true");
         //生成验证
         String text = producer.createText();
         BufferedImage image = producer.createImage(text);

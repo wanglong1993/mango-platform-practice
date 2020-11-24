@@ -1,18 +1,18 @@
 package cn.central.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import cn.central.common.Page.PageRequest;
-import cn.central.common.Page.PageResult;
-import cn.central.common.dto.JsonData;
+import cn.central.common.model.Result;
 import cn.central.entity.SysLogger;
 import cn.central.service.SysLoggerService;
-import lombok.AllArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -29,7 +29,7 @@ import io.swagger.annotations.ApiImplicitParams;
  */
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/sys/v1/pri/sysLogger")
+@RequestMapping("/api/v1/pri/sysLogger")
 @Api(description = "SysLoggerController", tags = {"日志接口"})
 public class SysLoggerController {
 
@@ -39,15 +39,15 @@ public class SysLoggerController {
 
     /**
    * 分页查询
-   * @param pageRequest
+   * @param page
    * @return
    */
     @PostMapping("findPage")
     @ApiOperation(value = "分页查询", notes = "分页查询")
     @PreAuthorize("hasAuthority('sys:logger:view')")
-    public JsonData listSysRoleMenu(@RequestBody PageRequest pageRequest) {
-        PageResult page = sysLoggerService.findPage(pageRequest);
-        return JsonData.buildSuccess(page);
+    public Result<Page<SysLogger>> listSysRoleMenu(@RequestBody PageRequest page) {
+        Page<SysLogger> detailsPage = new Page<>(page.getPageNum(), page.getPageSize());
+        return Result.succeed(sysLoggerService.page(detailsPage));
     }
 
 
@@ -61,9 +61,9 @@ public class SysLoggerController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "主键id", required = true)
     })
-    @PreAuthorize("hasAuthority('sys:logger:view')")
-    public JsonData getSysLogger(@PathVariable("id") Integer id){
-      return  JsonData.buildSuccess(sysLoggerService.getById(id));
+    @PreAuthorize("@el.check('sys:logger:view')")
+    public Result getSysLogger(@PathVariable("id") Integer id){
+      return  Result.succeed(sysLoggerService.getById(id));
     }
 
     /**
@@ -73,9 +73,9 @@ public class SysLoggerController {
      */
     @PostMapping
     @ApiOperation(value = "新增", notes = "新增")
-    @PreAuthorize("hasAuthority('sys:logger:add')")
-    public JsonData saveSysLogger(@RequestBody SysLogger sysLogger){
-      return  JsonData.buildSuccess(sysLoggerService.save(sysLogger));
+    @PreAuthorize("@el.check('sys:logger:add')")
+    public Result saveSysLogger(@RequestBody SysLogger sysLogger){
+      return  Result.succeed(sysLoggerService.save(sysLogger));
     }
 
     /**
@@ -89,9 +89,9 @@ public class SysLoggerController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "主键id", required = true)
     })
-    @PreAuthorize("hasAuthority('sys:logger:edit')")
-    public JsonData updateSysLogger(@PathVariable Integer id, @RequestBody SysLogger sysLogger){
-      return  JsonData.buildSuccess(sysLoggerService.updateById(sysLogger));
+    @PreAuthorize("@el.check('sys:logger:edit')")
+    public Result updateSysLogger(@PathVariable Integer id, @RequestBody SysLogger sysLogger){
+      return  Result.succeed(sysLoggerService.updateById(sysLogger));
     }
 
     /**
@@ -104,9 +104,9 @@ public class SysLoggerController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "主键id", required = true)
     })
-    @PreAuthorize("hasAuthority('sys:logger:delete')")
-    public JsonData deleteSysLogger(@PathVariable Integer id){
-      return  JsonData.buildSuccess(sysLoggerService.removeById(id));
+    @PreAuthorize("@el.check('sys:logger:delete')")
+    public Result deleteSysLogger(@PathVariable Integer id){
+      return  Result.succeed(sysLoggerService.removeById(id));
     }
 
 }

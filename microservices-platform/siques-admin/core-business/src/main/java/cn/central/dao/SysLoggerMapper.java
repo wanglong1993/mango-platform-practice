@@ -22,10 +22,5 @@ import cn.central.entity.SysLogger;
 @Component
 public interface SysLoggerMapper extends BaseMapper<SysLogger> {
 
-    /**
-   * 分页查询
-   * @return
-   */
-    @Select({"select * from sys_logger"})
-    List<SysLogger> findPage();
+
 }

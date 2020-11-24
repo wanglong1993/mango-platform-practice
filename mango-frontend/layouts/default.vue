@@ -139,12 +139,12 @@ export default class MenuLayOut extends Vue {
     this.loading = true
 
     const res = await this.http.get('/pri/menu/findNavTree', {
-      prefix: 'admin',
+      prefix: 'core',
     })
 
     setTimeout(() => {
       this.loading = false
-      this.menus = res.data.data
+      this.menus = res.data.datas
     }, 500)
   }
 

@@ -3,7 +3,6 @@ package cn.central.dao;
 
 
 import cn.central.entity.SysClientDetails;
-import cn.central.entity.SysDept;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -29,8 +28,6 @@ public interface SysClientDetailsDao extends BaseMapper<SysClientDetails> {
     Optional<SysClientDetails> findFirstByClientId(String clientId);
 
 
-    @Select("select * from sys_client_details")
-    List<SysClientDetails> findAll();
 
 
     @Select({"select * from sys_client_details"})

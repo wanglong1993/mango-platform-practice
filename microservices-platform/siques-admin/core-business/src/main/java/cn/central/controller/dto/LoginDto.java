@@ -1,31 +1,11 @@
 package cn.central.controller.dto;
 
+import lombok.Data;
+
+@Data
 public class LoginDto {
-    private String account;
+
+    private String loginCode;
     private String password;
     private String captcha;
-
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getCaptcha() {
-        return captcha;
-    }
-
-    public void setCaptcha(String captcha) {
-        this.captcha = captcha;
-    }
 }

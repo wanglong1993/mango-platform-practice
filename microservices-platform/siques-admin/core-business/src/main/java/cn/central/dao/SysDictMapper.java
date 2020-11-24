@@ -13,14 +13,6 @@ import java.util.List;
 @Repository
 public interface SysDictMapper  extends BaseMapper<SysDict> {
 
-
-    /**
-     * 分页查询
-     * @return
-     */
-    @Select({"select * from sys_dict"})
-    List<SysDict> findPage();
-
     /**
      * 根据标签名称查询
      * @param label

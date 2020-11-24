@@ -10,13 +10,4 @@ import java.util.List;
 
 public interface SysDictService extends IService<SysDict> {
 
-    /**
-     * 根据名称查询
-     * @param label
-     * @return
-     */
-        List<SysDict> findByLabel(String label);
-
-    PageResult findPage(PageRequest pageRequest);
-
 }

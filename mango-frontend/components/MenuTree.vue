@@ -40,9 +40,9 @@ export default class MenuTree extends Vue {
 
   async init() {
     const res = await this.http.get('/pri/menu/findMenuTree', {
-      prefix: 'admin',
+      prefix: 'core',
     })
-    this.data = res.data.data
+    this.data = res.data.datas
   }
 }
 </script>

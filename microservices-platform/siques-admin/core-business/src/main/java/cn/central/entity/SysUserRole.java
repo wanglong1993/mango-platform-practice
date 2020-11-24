@@ -20,27 +20,12 @@ public class SysUserRole extends Model<SysUserRole> {
     @ApiModelProperty(value = "编号")
     private Long id;
 
-
     private Long userId;
 
 
     private Long roleId;
 
-
-    private String createBy;
-
-
-    private Date createTime;
-
-
-    private String lastUpdateBy;
-
-
-    private Date lastUpdateTime;
-
-
     private String remarks;
-
 
     public SysUserRole(long userId, long roleId) {
         this.userId=userId;

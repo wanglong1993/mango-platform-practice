@@ -64,14 +64,5 @@ public interface SysClientDetailsService extends IService<SysClientDetails> {
      */
     void removeClientDetails(String clientId) throws NoSuchClientException;
 
-    /**
-     * 查询所有
-     *
-     * @return 结果
-     */
-    List<SysClientDetails> findAll();
 
-
-
-    PageResult findPage(PageRequest pageRequest);
 }

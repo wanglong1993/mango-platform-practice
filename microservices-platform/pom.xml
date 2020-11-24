@@ -11,6 +11,11 @@
         <module>siques-common</module>
         <module>siques-gateway</module>
         <module>siques-oauth</module>
+        <module>siques-monitor</module>
+        <module>siques-config</module>
+
+
+
     </modules>
     <packaging>pom</packaging>
 
@@ -20,14 +25,14 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>8</java.version>
-        <spring-cloud-alibaba-dependencies.version>2.1.0.RELEASE</spring-cloud-alibaba-dependencies.version>
+        <spring-cloud-alibaba-dependencies.version>2.2.3.RELEASE</spring-cloud-alibaba-dependencies.version>
         <spring-boot-dependencies.version>2.2.10.RELEASE</spring-boot-dependencies.version>
         <spring-cloud-dependencies.version>Hoxton.SR8</spring-cloud-dependencies.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <swagger.version>1.9.0.RELEASE</swagger.version>
 
         <jjwt.version>0.9.1</jjwt.version>
-        <druid-starter>1.1.22</druid-starter>
+        <druid-starter>1.1.17</druid-starter>
         <jasypt.version>1.14</jasypt.version>
         <sharding-sphere.version>3.1.0</sharding-sphere.version>
         <security-oauth2.version>2.3.8.RELEASE</security-oauth2.version>
@@ -112,18 +117,14 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.zlt</groupId>
-                <artifactId>zlt-redis-spring-boot-starter</artifactId>
+                <groupId>cn.siques</groupId>
+                <artifactId>siques-redis-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
             <dependency>
-                <groupId>com.zlt</groupId>
-                <artifactId>zlt-swagger2-spring-boot-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zlt</groupId>
-                <artifactId>zlt-ribbon-spring-boot-starter</artifactId>
+                <groupId>cn.siques</groupId>
+                <artifactId>siques-ribbon-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -132,23 +133,24 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.zlt</groupId>
-                <artifactId>zlt-sentinel-spring-boot-starter</artifactId>
+                <groupId>cn.siques</groupId>
+                <artifactId>siques-sentinel-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.zlt</groupId>
-                <artifactId>zlt-config</artifactId>
+                <groupId>cn.siques</groupId>
+                <artifactId>siques-config</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>cn.siques</groupId>
                 <artifactId>common-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.zlt</groupId>
-                <artifactId>zlt-elasticsearch-spring-boot-starter</artifactId>
+                <groupId>cn.siques</groupId>
+                <artifactId>siques-elasticsearch-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -282,7 +284,7 @@
                 <version>${fastdfs-client.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.zlt</groupId>
+                <groupId>cn.siques</groupId>
                 <artifactId>search-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -388,16 +390,16 @@
         </pluginManagement>
     </build>
 
-    <repositories>
-        <repository>
-            <id>aliyun-repos</id>
-            <url>https://maven.aliyun.com/repository/public</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-    <distributionManagement>
+<!--    <repositories>-->
+<!--        <repository>-->
+<!--            <id>aliyun-repos</id>-->
+<!--            <url>https://maven.aliyun.com/repository/public</url>-->
+<!--            <snapshots>-->
+<!--                <enabled>false</enabled>-->
+<!--            </snapshots>-->
+<!--        </repository>-->
+<!--    </repositories>-->
+<!--    <distributionManagement>-->
 <!--        <repository>-->
 <!--            <id>releases</id>-->
 <!--            <name>releases Repository</name>-->
@@ -409,7 +411,7 @@
 <!--            <url>http://192.168.28.138:8081/repository/maven-snapshots/</url>-->
 <!--            <uniqueVersion>true</uniqueVersion>-->
 <!--        </snapshotRepository>-->
-    </distributionManagement>
+<!--    </distributionManagement>-->
 
 
 

@@ -6,9 +6,10 @@ package cn.central.oauth.service.impl;
  */
 
 
+import cn.central.common.model.SysUser;
 import cn.central.oauth.dao.SysMenuDao;
 import cn.central.oauth.dao.SysUserDao;
-import cn.central.oauth.entity.SysUser;
+
 import cn.central.oauth.service.SysUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUser> impleme
     SysMenuDao sysMenuDao;
 
     @Override
-    public SysUser findUserByName(String username) {
-        SysUser sysUser = sysUserDao.findUserByName(username).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
-        if(sysUser.getName().equals("admin")) sysUser.setMenus(sysMenuDao.findAllMenus());
-        return sysUser;
+    public SysUser findUserByLoginCode(String loginCode) {
+        return  sysUserDao.findUserByLoginCode(loginCode).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
     }
 
 }

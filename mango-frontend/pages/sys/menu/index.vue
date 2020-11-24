@@ -230,7 +230,7 @@ export default class MenuIndex extends Vue {
 
   async submit() {
     const res = await this.http.post('/pri/menu/save', this.form, {
-      prefix: 'admin',
+      prefix: 'core',
     })
 
     setTimeout(() => {
@@ -432,23 +432,20 @@ export default class MenuIndex extends Vue {
   async fetchMenu() {
     this.loading = true
     const res = await this.http.get('/pri/menu/findMenuTree', {
-      prefix: 'admin',
+      prefix: 'core',
     })
     setTimeout(() => {
       this.loading = false
-      this.tableData = res.data.data
-      this.treeData = res.data.data
+      this.tableData = res.data.datas
+      this.treeData = res.data.datas
     }, 300)
   }
 
   async rowSave(form: any, done: any, loading: any) {
     const res = await this.http.post('/pri/menu/save', form, {
-      prefix: 'admin',
+      prefix: 'core',
     })
-    setTimeout(() => {
-      done(form)
-    }, 300)
-
+    done(form)
     this.fetchMenu()
   }
 
@@ -457,24 +454,16 @@ export default class MenuIndex extends Vue {
   }
 
   rowDel(form: any, index: any) {
-    confirm(
-      this,
-      async () => {
-        let data: any = []
-        data.push(form)
-        const res = await this.http.post('/pri/menu/delete', data, {
-          prefix: 'admin',
-        })
-      },
-      () => {
-        this.fetchMenu()
-      }
-    )
+    this.mixConfirm(async () => {
+      const res = await this.http.delete(`/pri/menu/${form.id}`, {
+        prefix: 'core',
+      })
+    }, this.fetchMenu)
   }
 
   async rowUpdate(form: any, index: any, done: any, loading: any) {
     const res = await this.http.post('/pri/menu/save', form, {
-      prefix: 'admin',
+      prefix: 'core',
     })
     setTimeout(() => {
       done(form)

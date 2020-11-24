@@ -65,7 +65,7 @@ export default class genTable extends Vue {
     pageSize: 10,
     pageSizes: [5, 10, 20],
     layout: 'total, sizes,prev, pager, next, jumper',
-    background: false,
+    background: true,
   }
 
   @Watch('dbUrl')
@@ -75,14 +75,14 @@ export default class genTable extends Vue {
       const { data } = await this.http.post(
         '/pri/codeGen/changeSource',
         { url: newval },
-        { prefix: 'admin' }
+        { prefix: 'core' }
       )
 
-      this.page.total = data.data.totalSize
+      this.page.total = data.datas.totalSize
 
       setTimeout(() => {
         this.loading = false
-        this.tableData = data.data.content
+        this.tableData = data.datas.content
       }, 100)
     }
   }
@@ -92,9 +92,9 @@ export default class genTable extends Vue {
   }
 
   async getDbList() {
-    const res = await this.http.get('/pri/codeGen/dblist', { prefix: 'admin' })
+    const res = await this.http.get('/pri/codeGen/dblist', { prefix: 'core' })
 
-    this.dbList = res.data.data
+    this.dbList = res.data.datas
   }
 
   permission = {
@@ -193,7 +193,7 @@ export default class genTable extends Vue {
   async submit() {
     const data = { tableName: this.form.tableName, path: this.form.path }
     const res = await this.http.post('pri/codeGen/generate', data, {
-      prefix: 'admin',
+      prefix: 'core',
       responseType: 'arraybuffer',
     })
 
@@ -224,13 +224,13 @@ export default class genTable extends Vue {
         pageSize: this.page.pageSize,
         params: {},
       },
-      { prefix: 'admin' }
+      { prefix: 'core' }
     )
-    this.page.total = data.data.totalSize
+    this.page.total = data.datas.totalSize
 
     setTimeout(() => {
       this.loading = false
-      this.tableData = data.data.content
+      this.tableData = data.datas.content
     }, 100)
   }
 }

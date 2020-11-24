@@ -1,7 +1,6 @@
 package cn.central.service.impl;
 
 
-import cn.central.common.Page.MybatisPageHelper;
 import cn.central.common.Page.PageRequest;
 import cn.central.common.Page.PageResult;
 import cn.central.dao.SysDictTypeMapper;
@@ -28,17 +27,6 @@ import javax.annotation.Resource;
 @Service
 public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDictType> implements SysDictTypeService {
 
-
-    @Resource
-    SysDictTypeMapper sysDictTypeMapper;
-
-
-
-    @Override
-    public PageResult findPage(PageRequest pageRequest) {
-        PageResult page = MybatisPageHelper.findPage(pageRequest, sysDictTypeMapper);
-        return page;
-    }
 
 
 }

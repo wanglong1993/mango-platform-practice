@@ -5,7 +5,7 @@ security:
     resource:
       token-info-uri: http://localhost:8984/oauth/check_token
       jwt:
-        key-alias: siquesWeb
+        key-alias: webApp
         # 如果没有此项会去请求授权服务器获取
         key-value: |
           -----BEGIN PUBLIC KEY-----
@@ -20,20 +20,22 @@ security:
         key-uri: http://localhost:8984/oauth/token_key
       id: test
     client:
-      client-id: siquesAdmin
+      client-id: webApp
       client-secret: 123456
       access-token-uri: http://localhost:8984/oauth/token
       user-info-uri: http://localhost:8984/oauth/user
       scope: READ
 spring:
-  rabbitmq:
-    host: 106.54.247.224
-    username: admin
-    password: heshenghao
-    port: 5672
-    virtual-host: my_vhost
-    #    解决消息到达中心之前出现问题的情况
-    publisher-confirm-type: simple
+  main:
+    banner-mode: off
+  #  rabbitmq:
+#    host: 106.54.247.224
+#    username: admin
+#    password: heshenghao
+#    port: 5672
+#    virtual-host: my_vhost
+#    #    解决消息到达中心之前出现问题的情况
+#    publisher-confirm-type: simple
   cloud:
     nacos:
       discovery:
@@ -43,7 +45,7 @@ spring:
     name: druidSource
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/mango?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://106.54.247.224:3306/siques?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: l1itdhjaoiqw32kwqe$5asasd*a21
     druid:
@@ -77,8 +79,6 @@ spring:
       # 配置DruidStatViewServlet
       stat-view-servlet:
         url-pattern: "/druid/*"
-        # IP白名单(没有配置或者为空，则允许所有访问)
-        allow: 127.0.0.1,192.168.163.1
         # IP黑名单 (存在共同时，deny优先于allow)
         deny: 192.168.1.73
         #  禁用HTML页面上的“Reset All”功能
@@ -87,7 +87,10 @@ spring:
         login-username: admin
         # 登录密码
         login-password: 123456
-  multiplesource:
+        enabled: true
+        # IP白名单(没有配置或者为空，则允许所有访问)
+        allow: ""
+  multiple-source:
     - url: jdbc:mysql://106.54.247.224:3306/mango-sound?useUnicode=true&characterEncoding=utf-8&useSSL=false
       username: root
       password: l1itdhjaoiqw32kwqe$5asasd*a21
@@ -107,7 +110,7 @@ spring:
   #        url: "http://localhost:8090"
 
   application:
-    name: mango-admin
+    name: core-business
   redis:
     host: 106.54.247.224
     port: 6379
@@ -119,7 +122,7 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
-  mapper-locations: classpath:mapper*/*.xml
+#  mapper-locations: classpath:mapper*/*.xml
   type-aliases-package: cn.central.entity
   global-config:
     banner: false
@@ -138,9 +141,12 @@ swagger:
   #  配置扫描swagger包
   base-package: cn.central.controller
 
+# 开启审计日志
 siques:
   audit-log:
     enabled: true
+  trace:
+    enable: true
 #    log-type: db
 #    datasource:
 #      driver-class-name: com.mysql.cj.jdbc.Driver

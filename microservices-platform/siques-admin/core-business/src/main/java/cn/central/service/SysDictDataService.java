@@ -24,7 +24,6 @@ import java.util.List;
  */
 public interface SysDictDataService extends IService<SysDictData> {
 
-    PageResult findPage(PageRequest pageRequest);
 
     List<SysDictData> listKeyByType(String dictType);
 }

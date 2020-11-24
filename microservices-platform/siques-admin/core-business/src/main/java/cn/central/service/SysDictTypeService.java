@@ -22,6 +22,4 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface SysDictTypeService extends IService<SysDictType> {
 
-    PageResult findPage(PageRequest pageRequest);
-
 }

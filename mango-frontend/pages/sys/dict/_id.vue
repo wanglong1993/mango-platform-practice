@@ -74,7 +74,7 @@ export default class Name extends Vue {
         pageSize: this.page.pageSize,
         params: {},
       },
-      { prefix: 'admin' }
+      { prefix: 'core' }
     )
     this.page.total = data.data.totalSize
     this.tableData = data.data.content

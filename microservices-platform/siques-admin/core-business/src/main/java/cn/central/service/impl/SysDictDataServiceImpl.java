@@ -1,9 +1,7 @@
 package cn.central.service.impl;
 
 
-import cn.central.common.Page.MybatisPageHelper;
-import cn.central.common.Page.PageRequest;
-import cn.central.common.Page.PageResult;
+
 import cn.central.dao.SysDictDataMapper;
 import cn.central.entity.SysDictData;
 import cn.central.service.SysDictDataService;
@@ -35,11 +33,7 @@ public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDi
     @Resource
     SysDictDataMapper sysDictDataMapper;
 
-    @Override
-    public PageResult findPage(PageRequest pageRequest) {
-        PageResult page = MybatisPageHelper.findPage(pageRequest, sysDictDataMapper);
-        return page;
-    }
+
 
     @Override
     //todo

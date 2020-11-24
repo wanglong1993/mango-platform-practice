@@ -1,7 +1,8 @@
 package cn.central.oauth.service;
 
 
-import cn.central.oauth.entity.SysUser;
+
+import cn.central.common.model.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -16,5 +17,5 @@ public interface SysUserService  extends IService<SysUser> {
      * @param username
      * @return
      */
-    SysUser findUserByName(String username);
+    SysUser findUserByLoginCode(String username);
 }

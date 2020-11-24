@@ -20,6 +20,10 @@
         <module>common-core</module>
         <module>siques-log-spring-boot-starter</module>
         <module>siques-common-spring-boot-starter</module>
+        <module>siques-elasticsearch-spring-boot-starter</module>
+        <module>siques-ribbon-spring-boot-starter</module>
+        <module>siques-sentinel-spring-boot-starter</module>
+        <module>siques-redis-spring-boot-starter</module>
     </modules>
 
 </project>

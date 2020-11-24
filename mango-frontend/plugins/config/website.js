@@ -14,12 +14,11 @@ export default {
   SWAGGER_SERVICE: BASE_URL + '9001/swagger-ui.html',
   SENTINEL_SERVICE: BASE_URL + '8858',
   NACOS_SERVICE: BASE_URL + '8848/nacos',
-  API_URL: BASE_URL + '9001/*/api/sys/v1/',
-  LOGIN_URL: BASE_URL + '9001/admin/api/sys/v1/pub/login',
-  LOGOUT_URL: BASE_URL + '9001/admin/api/sys/v1/pub/logout',
-  CAPTCHA_SERVICE: BASE_URL + '9001/admin/api/sys/v1/pub/captcha.jpg',
-  SOUND_FILE_PLAY_URL:
-    BASE_URL + '9001/sound/api/sys/v1/pri/sysSoundfile/play/',
+  API_URL: BASE_URL + '9001/*/api/v1/',
+  LOGIN_URL: BASE_URL + '9001/core/api/v1/pub/login',
+  LOGOUT_URL: BASE_URL + '9001/core/api/v1/pub/logout',
+  CAPTCHA_SERVICE: BASE_URL + '9001/core/api/v1/pub/captcha.jpg',
+  SOUND_FILE_PLAY_URL: BASE_URL + '9001/sound/api/v1/pri/sysSoundfile/play/',
   title: '',
   logo: 'A',
   key: 'state', //配置主键,目前用于存储

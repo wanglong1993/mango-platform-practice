@@ -43,7 +43,6 @@ public class SysCodeGenServiceImpl implements SysCodeGenService {
        PageHelper.startPage(page.getPageNum(),page.getPageSize());
 
        Db db = new Db(dataSource);
-
        String paramSql = StrUtil.EMPTY;
        String sql = String.format(TABLE_SQL_TEMPLATE,paramSql);
        String countSql = String.format(COUNT_SQL_TEMPLATE, sql);
@@ -51,7 +50,6 @@ public class SysCodeGenServiceImpl implements SysCodeGenService {
        BigDecimal count = (BigDecimal) db.queryNumber(countSql);
 
        dataSource.close();
-
        PageResult pageResult = new PageResult();
        pageResult.setPageNum(page.getPageNum());
        pageResult.setPageSize(page.getPageSize());
@@ -63,7 +61,6 @@ public class SysCodeGenServiceImpl implements SysCodeGenService {
 
     @Override
     public List<DbConfig> queryDbList() {
-
         return   dbUtill.getDbList();
     }
 

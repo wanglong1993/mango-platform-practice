@@ -1,14 +1,16 @@
 package cn.central.service.impl;
 
 
-import cn.central.common.constant.SysConstants;
+import cn.central.common.constant.AdminConstants;
+import cn.central.common.model.SysRole;
 import cn.central.controller.dto.RoleMenuDto;
 import cn.central.dao.SysMenuMapper;
 import cn.central.dao.SysRoleMapper;
 import cn.central.dao.SysRoleMenuMapper;
-import cn.central.entity.SysRole;
+
 import cn.central.entity.SysRoleMenu;
 import cn.central.service.SysRoleService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
@@ -29,19 +31,12 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Resource
     SysRoleMenuMapper sysRoleMenuMapper;
 
-
-    @Override
-    public List<SysRole> findAll() {
-       List<SysRole> sysRoles =  sysRoleMapper.findAll();
-        return sysRoles;
-    }
-
     @Override
     public SysRole findRoleMenus(Long roleId) {
         SysRole sysRole = sysRoleMapper.selectById(roleId);
-        if(SysConstants.ADMIN.equalsIgnoreCase(sysRole.getName())) {
+        if(AdminConstants.ADMIN.equalsIgnoreCase(sysRole.getRoleCode())) {
             // 如果是超级管理员，返回全部的权限
-            sysRole.setSysMenuList(sysMenuMapper.findAll());
+            sysRole.setSysMenuList(sysMenuMapper.selectList(new QueryWrapper<>()));
             return sysRole;
         }
         sysRole.setSysMenuList(sysMenuMapper.findRoleMenus(roleId));
@@ -49,9 +44,8 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     }
 
     @Override
-    public List<SysRole> findByName(String name) {
-        List<SysRole> sysRoles = sysRoleMapper.findByName(name);
-        return sysRoles;
+    public SysRole findByRoleCode(String roleCode) {
+        return sysRoleMapper.findByRoleCode(roleCode);
     }
 
     /**

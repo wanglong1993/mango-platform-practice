@@ -3,7 +3,7 @@ package ${package}.${moduleName}.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import cn.central.common.Page.PageRequest;
 import cn.central.common.Page.PageResult;
-import cn.central.common.dto.JsonData;
+import cn.central.common.model.Result;
 import ${package}.${moduleName}.entity.${className};
 import ${package}.${moduleName}.service.${className}Service;
 import lombok.AllArgsConstructor;
@@ -28,7 +28,7 @@ import io.swagger.annotations.ApiImplicitParams;
  */
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/sys/v1/pri/${pathName}")
+@RequestMapping("/api/v1/pri/${pathName}")
 @Api(description = "${className}Controller", tags = {"${comments}"})
 public class ${className}Controller {
 

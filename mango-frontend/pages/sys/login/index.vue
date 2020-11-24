@@ -10,15 +10,15 @@
             <p>Sign in to continue</p>
             <div class="lowin-group">
               <label>
-                account
+                loginCode
                 <a href="#" class="login-back-link">Sign in?</a>
               </label>
-              <el-form-item prop="account">
+              <el-form-item prop="loginCode">
                 <el-input
-                  v-model="loginForm.account"
+                  v-model="loginForm.loginCode"
                   type="account"
                   autocomplete="account"
-                  name="account"
+                  name="loginCode"
                 />
               </el-form-item>
             </div>
@@ -39,7 +39,11 @@
             <div class="lowin-group password-group">
               <label>Captcha</label>
               <el-form-item prop="captcha">
-                <el-input v-model="loginForm.captcha" type="captcha" name="captcha" />
+                <el-input
+                  v-model="loginForm.captcha"
+                  type="captcha"
+                  name="captcha"
+                />
               </el-form-item>
               <img
                 v-if="isRefresh"
@@ -49,7 +53,9 @@
               />
             </div>
 
-            <el-button @click="userLogin" class="lowin-btn login-btn">Sign In</el-button>
+            <el-button @click="login" class="lowin-btn login-btn"
+              >Sign In</el-button
+            >
 
             <div class="text-foot"></div>
           </el-form>
@@ -77,10 +83,10 @@ export default class login extends Vue {
   loading = false
   http = Vue.prototype.$http
 
-  loginForm = { account: '', password: '', captcha: '' }
+  loginForm = { loginCode: '', password: '', captcha: '' }
 
   rules = {
-    account: [
+    loginCode: [
       { required: true, message: '请输入用户名', trigger: 'blur' },
       { min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur' },
       {
@@ -150,7 +156,7 @@ export default class login extends Vue {
     }, 300)
   }
 
-  userLogin() {
+  login() {
     this.loading = true
     const ref: any = this.$refs.loginForm
 
@@ -163,15 +169,15 @@ export default class login extends Vue {
           this.loading = false
         }, 500)
 
-        if (res.data.code == 200) {
+        if (res.data.resp_code == 0) {
           // 设置token
-          this.$store.commit('storeAuth', res.data.data)
+          this.$store.commit('storeAuth', res.data.datas)
 
           this.$router.push('/')
         } else {
           this.$notify({
             title: '',
-            message: res.data.msg,
+            message: res.data.resp_msg,
             position: 'top-right',
             type: 'error',
           })

@@ -32,24 +32,6 @@ export default ({ app, store, route, redirect }) => {
   })
 
   // 内部错误回调
-  axios.onError((error) => {
-    console.log(error.response)
-    switch (error.response.status) {
-      case 403:
-        Vue.prototype.$message({
-          message: '未授权',
-          type: 'info',
-          showClose: true,
-        })
-        store.state.auth.loggedIn = false
-        redirect('/sys/login')
-      case 500:
-        redirect('/sys/500')
-        break
-      case 404:
-        redirect('/sys/404')
-        break
-    }
-  })
+  axios.onError((error) => {})
   Vue.prototype.$http = axios
 }

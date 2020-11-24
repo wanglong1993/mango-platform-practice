@@ -9,12 +9,13 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @TableName("sys_role_menu")
 @ApiModel(description = "角色菜单表")
-public class SysRoleMenu extends Model<SysRoleMenu> {
+public class SysRoleMenu extends Model<SysRoleMenu> implements Serializable {
 
     @TableId(type = IdType.ASSIGN_ID)
     @ApiModelProperty(value = "编号")
@@ -27,15 +28,4 @@ public class SysRoleMenu extends Model<SysRoleMenu> {
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long menuId;
 
-
-    private String createBy;
-
-
-    private Date createTime;
-
-
-    private String lastUpdateBy;
-
-
-    private Date lastUpdateTime;
 }
